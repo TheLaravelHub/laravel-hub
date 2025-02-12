@@ -1,0 +1,44 @@
+# Ignore Node.js dependencies
+node_modules
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Ignore build files
+dist
+build
+public/storage
+storage
+bootstrap/cache
+
+# Ignore Laravel-specific folders
+vendor
+.env
+.env.example
+
+# Ignore Vite & TypeScript build outputs
+.vite
+tsconfig.tsbuildinfo
+
+# Ignore logs & IDE settings
+*.log
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+
+# Ignore Prettier cache files
+.prettiercache
+
+# Ignore compiled Blade templates
+storage/framework/views/*.php
+
+# Ignore Blade cache
+bootstrap/cache/*.php
+
+# Ignore GitHub Actions workflow files
+.github/**/*.yml
+
+# Ignore formatted files
+*.min.js
+*.min.css

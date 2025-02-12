@@ -1,0 +1,32 @@
+{
+    "plugins": ["prettier-plugin-blade", "prettier-plugin-tailwindcss"],
+    "overrides": [
+        {
+            "files": "*.blade.php",
+            "options": {
+                "parser": "blade"
+            }
+        },
+        {
+            "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+            "options": {
+                "parser": "typescript",
+                "singleQuote": true,
+                "semi": false,
+                "trailingComma": "all",
+                "jsxSingleQuote": false,
+                "bracketSpacing": true,
+                "arrowParens": "always"
+            }
+        }
+    ],
+    "tailwindConfig": "./tailwind.config.js",
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "all",
+    "singleAttributePerLine": true,
+    "bracketSpacing": true,
+    "jsxSingleQuote": false,
+    "arrowParens": "always",
+    "endOfLine": "lf"
+}
