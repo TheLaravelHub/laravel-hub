@@ -15,6 +15,7 @@ Welcome to **Indxs**, an open-source platform that helps developers discover and
 ---
 
 ## 📚 Table of Contents
+
 - [About Indxs](#-about-indxs)
 - [Getting Started](#-getting-started)
 - [Installation](#-installation)
@@ -36,6 +37,7 @@ Welcome to **Indxs**, an open-source platform that helps developers discover and
 ✅ Review and improve package listings.
 
 Built using:
+
 - **Laravel** (Backend API)
 - **Inertia.js** (Bridging Laravel & React)
 - **React.js** (Frontend UI)
@@ -51,7 +53,9 @@ We are currently focusing on **PHP & Laravel packages**, with plans to expand to
 Follow these steps to set up **Indxs** on your local machine.
 
 ### Prerequisites
+
 Make sure you have the following installed:
+
 - **PHP 8.2+**
 - **Composer**
 - **Node.js 18+ & npm**
@@ -63,6 +67,7 @@ Make sure you have the following installed:
 ## 🛠 Installation
 
 ### 1️⃣ Clone the repository
+
 ```sh
 git clone https://github.com/Indxs/indxs.git
 cd indxs
@@ -99,6 +104,7 @@ composer run dev
 ---
 
 ## 🎯 Usage
+
 Once the project is running, open your browser and visit:
 
 ```plaintext
@@ -110,6 +116,7 @@ You can start exploring packages, submitting new ones, and contributing to the p
 ---
 
 ## 🤝 How to Contribute
+
 We love community contributions! To contribute:
 
 1️⃣ Fork the repository
@@ -121,6 +128,7 @@ We love community contributions! To contribute:
 ---
 
 ## 🔐 Security & Issues
+
 If you find a security vulnerability, do not open a public issue. Instead, please report it to:
 
 📧 [indxs.dev@gmail.com](mailto:indxs.dev@gmail.com)
@@ -136,6 +144,7 @@ This project is open-source under the MIT License. Feel free to use and modify i
 ---
 
 ## 💬 Community & Support
+
 Join the Indxs community to stay updated:
 
 GitHub Discussions: [Join here](https://github.com/Indxs/indxs/discussions)
@@ -145,6 +154,7 @@ Email: [indxs.dev@gmail.com](mailto:indxs.dev@gmail.com)
 ---
 
 ## ⭐ Show Your Support
+
 If you find this project useful:
 
 - Give us a ⭐ Star on GitHub!
