@@ -56,7 +56,7 @@ Follow these steps to set up **Indxs** on your local machine.
 
 Make sure you have the following installed:
 
-- **PHP 8.2+**
+- **PHP 8.4+**
 - **Composer**
 - **Node.js 18+ & npm**
 - **MySQL or PostgreSQL**
