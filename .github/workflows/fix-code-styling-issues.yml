@@ -1,0 +1,53 @@
+name: Fix Code Styling Issues
+
+on:
+  push:
+    paths:
+      - '**.php'
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+      - '**.json'
+      - '**.css'
+      - '**.scss'
+      - '**.blade.php'
+      - '**.md'
+
+permissions:
+  contents: write
+
+jobs:
+  format-code:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      # ✅ PHP Code Formatting (Laravel Pint)
+      - name: Fix PHP code style issues with Laravel Pint
+        uses: aglipanci/laravel-pint-action@2.5
+
+      # ✅ Set up Node.js for JavaScript/TypeScript/Blade formatting
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # ✅ Install dependencies (Prettier plugins)
+      - name: Install frontend dependencies
+        run: npm ci
+
+      # ✅ Run Prettier to fix formatting issues
+      - name: Fix formatting with Prettier
+        run: npm run format
+
+      # ✅ Commit changes if any modifications were made
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Fix code styling issues (PHP & JS/TS/Blade)"
