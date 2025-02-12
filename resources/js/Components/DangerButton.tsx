@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react'
 
 export default function DangerButton({
     className = '',
@@ -18,5 +18,5 @@ export default function DangerButton({
         >
             {children}
         </button>
-    );
+    )
 }

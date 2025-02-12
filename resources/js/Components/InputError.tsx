@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react'
 
 export default function InputError({
     message,
@@ -12,5 +12,5 @@ export default function InputError({
         >
             {message}
         </p>
-    ) : null;
+    ) : null
 }
