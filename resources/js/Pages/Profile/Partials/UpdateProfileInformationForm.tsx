@@ -1,10 +1,10 @@
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import PrimaryButton from '@/Components/PrimaryButton'
-import TextInput from '@/Components/TextInput'
+import InputError from '@/components/input-error'
 import { Transition } from '@headlessui/react'
 import { Link, useForm, usePage } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -46,21 +46,16 @@ export default function UpdateProfileInformation({
                 className="mt-6 space-y-6"
             >
                 <div>
-                    <InputLabel
-                        htmlFor="name"
-                        value="Name"
-                    />
+                    <Label htmlFor="name">Name</Label>
 
-                    <TextInput
+                    <Input
                         id="name"
                         className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
-                        isFocused
                         autoComplete="name"
                     />
-
                     <InputError
                         className="mt-2"
                         message={errors.name}
@@ -68,19 +63,16 @@ export default function UpdateProfileInformation({
                 </div>
 
                 <div>
-                    <InputLabel
-                        htmlFor="email"
-                        value="Email"
-                    />
+                    <Label htmlFor="name">Email</Label>
 
-                    <TextInput
+                    <Input
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
-                        autoComplete="username"
+                        autoComplete="email"
                     />
 
                     <InputError
@@ -113,7 +105,12 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Button
+                        type="submit"
+                        disabled={processing}
+                    >
+                        Update
+                    </Button>
 
                     <Transition
                         show={recentlySuccessful}

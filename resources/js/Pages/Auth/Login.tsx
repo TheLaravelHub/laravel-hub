@@ -1,8 +1,8 @@
-import Checkbox from '@/Components/Checkbox'
-import InputError from '@/Components/InputError'
-import InputLabel from '@/Components/InputLabel'
-import PrimaryButton from '@/Components/PrimaryButton'
-import TextInput from '@/Components/TextInput'
+import Checkbox from '@/components/checkbox'
+import InputError from '@/components/input-error'
+import InputLabel from '@/components/input-label'
+import PrimaryButton from '@/components/primary-button'
+import TextInput from '@/components/text-input'
 import GuestLayout from '@/Layouts/GuestLayout'
 import { Head, Link, useForm } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
@@ -90,10 +90,7 @@ export default function Login({
                             name="remember"
                             checked={data.remember}
                             onChange={(e) =>
-                                setData(
-                                    'remember',
-                                    (e.target.checked || false) as false,
-                                )
+                                setData('remember', e.target.checked)
                             }
                         />
                         <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
