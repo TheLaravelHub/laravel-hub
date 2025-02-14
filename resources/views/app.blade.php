@@ -35,7 +35,7 @@
         @inertia
 
         <script>
-            window.asset = (path) => `{{ asset('${path}') }}`;
+            window.asset = (path) => `{{ asset('${path}') }}`
         </script>
     </body>
 </html>

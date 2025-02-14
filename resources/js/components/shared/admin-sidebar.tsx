@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-    BookOpen,
-    Bot,
-    Gauge,
-    Settings2,
-    SquareTerminal,
-} from 'lucide-react'
+import { BookOpen, Bot, Gauge, Settings2, SquareTerminal } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import {
@@ -18,7 +12,7 @@ import {
     SidebarMenuItem,
     SidebarRail,
 } from '@/components/ui/sidebar'
-import {Link, usePage} from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { NavAdmin } from '@/components/nav-admin'
 
 // This is sample data.
@@ -135,9 +129,18 @@ export function AdminSidebar({
                             size="lg"
                             asChild
                         >
-                            <Link href={route('homepage')} target="_blank">
+                            <Link
+                                href={route('homepage')}
+                                target="_blank"
+                            >
                                 <div className="flex flex-col gap-0.5 leading-none">
-                                    <img className="w-3/4" src={asset('assets/images/Indxs-logo.png')} alt=""/>
+                                    <img
+                                        className="w-3/4"
+                                        src={asset(
+                                            'assets/images/Indxs-logo.png',
+                                        )}
+                                        alt=""
+                                    />
                                 </div>
                             </Link>
                         </SidebarMenuButton>
