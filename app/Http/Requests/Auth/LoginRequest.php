@@ -50,8 +50,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-
-        if(Auth::user()->status !== Status::ACTIVE->value) {
+        if (Auth::user()->status !== Status::ACTIVE->value) {
             Auth::logout();
             throw ValidationException::withMessages([
                 'email' => 'This account is suspended. Please contact the administrator.',

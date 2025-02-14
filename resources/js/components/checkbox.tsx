@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react'
 
 export default function Checkbox({
     className = '',
@@ -13,5 +13,5 @@ export default function Checkbox({
                 className
             }
         />
-    );
+    )
 }

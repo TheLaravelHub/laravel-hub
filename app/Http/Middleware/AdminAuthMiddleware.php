@@ -15,7 +15,7 @@ class AdminAuthMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth()->guard('admin')->check()) {
+        if (! auth()->guard('admin')->check()) {
             return redirect()->route('admin.login')->with('error', 'Please log in as an admin.');
         }
 

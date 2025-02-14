@@ -1,18 +1,18 @@
-import InputError from '@/components/input-error';
-import InputLabel from '@/components/input-label';
-import PrimaryButton from '@/components/primary-button';
-import TextInput from '@/components/text-input';
-import { Transition } from '@headlessui/react';
-import { useForm } from '@inertiajs/react';
-import { FormEventHandler, useRef } from 'react';
+import InputError from '@/components/input-error'
+import InputLabel from '@/components/input-label'
+import PrimaryButton from '@/components/primary-button'
+import TextInput from '@/components/text-input'
+import { Transition } from '@headlessui/react'
+import { useForm } from '@inertiajs/react'
+import { FormEventHandler, useRef } from 'react'
 
 export default function UpdatePasswordForm({
     className = '',
 }: {
-    className?: string;
+    className?: string
 }) {
-    const passwordInput = useRef<HTMLInputElement>(null);
-    const currentPasswordInput = useRef<HTMLInputElement>(null);
+    const passwordInput = useRef<HTMLInputElement>(null)
+    const currentPasswordInput = useRef<HTMLInputElement>(null)
 
     const {
         data,
@@ -26,27 +26,27 @@ export default function UpdatePasswordForm({
         current_password: '',
         password: '',
         password_confirmation: '',
-    });
+    })
 
     const updatePassword: FormEventHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         put(route('admin.password.update'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
                 if (errors.password) {
-                    reset('password', 'password_confirmation');
-                    passwordInput.current?.focus();
+                    reset('password', 'password_confirmation')
+                    passwordInput.current?.focus()
                 }
 
                 if (errors.current_password) {
-                    reset('current_password');
-                    currentPasswordInput.current?.focus();
+                    reset('current_password')
+                    currentPasswordInput.current?.focus()
                 }
             },
-        });
-    };
+        })
+    }
 
     return (
         <section className={className}>
@@ -61,7 +61,10 @@ export default function UpdatePasswordForm({
                 </p>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
+            <form
+                onSubmit={updatePassword}
+                className="mt-6 space-y-6"
+            >
                 <div>
                     <InputLabel
                         htmlFor="current_password"
@@ -87,7 +90,10 @@ export default function UpdatePasswordForm({
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value="New Password" />
+                    <InputLabel
+                        htmlFor="password"
+                        value="New Password"
+                    />
 
                     <TextInput
                         id="password"
@@ -99,7 +105,10 @@ export default function UpdatePasswordForm({
                         autoComplete="new-password"
                     />
 
-                    <InputError message={errors.password} className="mt-2" />
+                    <InputError
+                        message={errors.password}
+                        className="mt-2"
+                    />
                 </div>
 
                 <div>
@@ -142,5 +151,5 @@ export default function UpdatePasswordForm({
                 </div>
             </form>
         </section>
-    );
+    )
 }

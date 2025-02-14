@@ -1,33 +1,33 @@
-import InputError from '@/components/input-error';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
-import {Input} from "@/components/ui/input";
-import {Label} from "@/components/ui/label";
-import {Button} from "@/components/ui/button";
+import InputError from '@/components/input-error'
+import { Transition } from '@headlessui/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
+import { FormEventHandler } from 'react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Button } from '@/components/ui/button'
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className = '',
 }: {
-    mustVerifyEmail: boolean;
-    status?: string;
-    className?: string;
+    mustVerifyEmail: boolean
+    status?: string
+    className?: string
 }) {
-    const user = usePage().props.auth.user;
+    const user = usePage().props.auth.user
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             name: user.name,
             email: user.email,
-        });
+        })
 
     const submit: FormEventHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        patch(route('profile.update'));
-    };
+        patch(route('profile.update'))
+    }
 
     return (
         <section className={className}>
@@ -41,7 +41,10 @@ export default function UpdateProfileInformation({
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form
+                onSubmit={submit}
+                className="mt-6 space-y-6"
+            >
                 <div>
                     <Label htmlFor="name">Name</Label>
 
@@ -53,7 +56,10 @@ export default function UpdateProfileInformation({
                         required
                         autoComplete="name"
                     />
-                    <InputError className="mt-2" message={errors.name} />
+                    <InputError
+                        className="mt-2"
+                        message={errors.name}
+                    />
                 </div>
 
                 <div>
@@ -69,7 +75,10 @@ export default function UpdateProfileInformation({
                         autoComplete="email"
                     />
 
-                    <InputError className="mt-2" message={errors.email} />
+                    <InputError
+                        className="mt-2"
+                        message={errors.email}
+                    />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
@@ -96,7 +105,12 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <Button type="submit" disabled={processing}>Update</Button>
+                    <Button
+                        type="submit"
+                        disabled={processing}
+                    >
+                        Update
+                    </Button>
 
                     <Transition
                         show={recentlySuccessful}
@@ -112,5 +126,5 @@ export default function UpdateProfileInformation({
                 </div>
             </form>
         </section>
-    );
+    )
 }

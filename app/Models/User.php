@@ -11,10 +11,12 @@ use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class User extends Authenticatable
 {
+    use HasActiveScope;
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
-
-    use Notifiable, HasActiveScope, SoftDeletes;
+    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

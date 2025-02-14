@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
     BadgeCheck,
@@ -7,12 +7,9 @@ import {
     CreditCard,
     LogOut,
     Sparkles,
-} from "lucide-react"
+} from 'lucide-react'
 
-import {
-    Avatar,
-    AvatarFallback,
-} from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -21,26 +18,22 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from '@/components/ui/dropdown-menu'
 import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
     useSidebar,
-} from "@/components/ui/sidebar"
-import {Admin} from "@/types";
-import {Link, useForm} from "@inertiajs/react";
+} from '@/components/ui/sidebar'
+import { Admin } from '@/types'
+import { Link, useForm } from '@inertiajs/react'
 
-export function NavAdmin({
-                            admin,
-                        }: {
-    admin: Admin
-}) {
-    const {isMobile} = useSidebar()
-    const form = useForm();
+export function NavAdmin({ admin }: { admin: Admin }) {
+    const { isMobile } = useSidebar()
+    const form = useForm()
 
     const handleLogout = () => {
-        form.post(route('admin.logout'));
+        form.post(route('admin.logout'))
     }
 
     return (
@@ -54,19 +47,24 @@ export function NavAdmin({
                         >
                             <Avatar className="h-8 w-8 rounded-lg">
                                 {/*<AvatarImage src={admin.avatar} alt={admin.name} />*/}
-                                <AvatarFallback
-                                    className="rounded-lg">{admin.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                                <AvatarFallback className="rounded-lg">
+                                    {admin.name.slice(0, 2).toUpperCase()}
+                                </AvatarFallback>
                             </Avatar>
                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-semibold">{admin.name}</span>
-                                <span className="truncate text-xs">{admin.email}</span>
+                                <span className="truncate font-semibold">
+                                    {admin.name}
+                                </span>
+                                <span className="truncate text-xs">
+                                    {admin.email}
+                                </span>
                             </div>
-                            <ChevronsUpDown className="ml-auto size-4"/>
+                            <ChevronsUpDown className="ml-auto size-4" />
                         </SidebarMenuButton>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent
                         className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-                        side={isMobile ? "bottom" : "right"}
+                        side={isMobile ? 'bottom' : 'right'}
                         align="end"
                         sideOffset={4}
                     >
@@ -74,44 +72,50 @@ export function NavAdmin({
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
                                     {/*<AvatarImage src={admin.avatar} alt={admin.name} />*/}
-                                    <AvatarFallback
-                                        className="rounded-lg">{admin.name.slice(0, 2).toUpperCase()}</AvatarFallback>
+                                    <AvatarFallback className="rounded-lg">
+                                        {admin.name.slice(0, 2).toUpperCase()}
+                                    </AvatarFallback>
                                 </Avatar>
                                 <div className="grid flex-1 text-left text-sm leading-tight">
-                                    <span className="truncate font-semibold">{admin.name}</span>
-                                    <span className="truncate text-xs">{admin.email}</span>
+                                    <span className="truncate font-semibold">
+                                        {admin.name}
+                                    </span>
+                                    <span className="truncate text-xs">
+                                        {admin.email}
+                                    </span>
                                 </div>
                             </div>
                         </DropdownMenuLabel>
-                        <DropdownMenuSeparator/>
+                        <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
-                                <Sparkles/>
+                                <Sparkles />
                                 Upgrade to Pro
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
-                        <DropdownMenuSeparator/>
+                        <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
-                                <Link href={route('admin.profile.edit')} className="flex items-center gap-2">
-                                    <BadgeCheck/>
+                                <Link
+                                    href={route('admin.profile.edit')}
+                                    className="flex items-center gap-2"
+                                >
+                                    <BadgeCheck />
                                     Account
                                 </Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <CreditCard/>
+                                <CreditCard />
                                 Billing
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <Bell/>
+                                <Bell />
                                 Notifications
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
-                        <DropdownMenuSeparator/>
-                        <DropdownMenuItem
-                            onClick={handleLogout}
-                        >
-                            <LogOut/>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={handleLogout}>
+                            <LogOut />
                             Log out
                         </DropdownMenuItem>
                     </DropdownMenuContent>

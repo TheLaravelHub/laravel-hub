@@ -21,7 +21,6 @@ Route::middleware('guest:admin')->group(function () {
     Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset.update');
 });
 
-
 // Protected routes for admins
 Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::post('logout', [LoginController::class, 'destroy'])->name('logout');

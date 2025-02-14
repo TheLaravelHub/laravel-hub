@@ -1,33 +1,33 @@
-import InputError from '@/components/input-error';
-import InputLabel from '@/components/input-label';
-import PrimaryButton from '@/components/primary-button';
-import TextInput from '@/components/text-input';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import InputError from '@/components/input-error'
+import InputLabel from '@/components/input-label'
+import PrimaryButton from '@/components/primary-button'
+import TextInput from '@/components/text-input'
+import { Transition } from '@headlessui/react'
+import { Link, useForm, usePage } from '@inertiajs/react'
+import { FormEventHandler } from 'react'
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
     className = '',
 }: {
-    mustVerifyEmail: boolean;
-    status?: string;
-    className?: string;
+    mustVerifyEmail: boolean
+    status?: string
+    className?: string
 }) {
-    const admin = usePage().props.auth.admin;
+    const admin = usePage().props.auth.admin
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             name: admin.name,
             email: admin.email,
-        });
+        })
 
     const submit: FormEventHandler = (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
-        patch(route('admin.profile.update'));
-    };
+        patch(route('admin.profile.update'))
+    }
 
     return (
         <section className={className}>
@@ -41,9 +41,15 @@ export default function UpdateProfileInformation({
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form
+                onSubmit={submit}
+                className="mt-6 space-y-6"
+            >
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel
+                        htmlFor="name"
+                        value="Name"
+                    />
 
                     <TextInput
                         id="name"
@@ -55,11 +61,17 @@ export default function UpdateProfileInformation({
                         autoComplete="name"
                     />
 
-                    <InputError className="mt-2" message={errors.name} />
+                    <InputError
+                        className="mt-2"
+                        message={errors.name}
+                    />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel
+                        htmlFor="email"
+                        value="Email"
+                    />
 
                     <TextInput
                         id="email"
@@ -71,7 +83,10 @@ export default function UpdateProfileInformation({
                         autoComplete="username"
                     />
 
-                    <InputError className="mt-2" message={errors.email} />
+                    <InputError
+                        className="mt-2"
+                        message={errors.email}
+                    />
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -91,5 +106,5 @@ export default function UpdateProfileInformation({
                 </div>
             </form>
         </section>
-    );
+    )
 }
