@@ -19,6 +19,12 @@
             rel="stylesheet"
         />
 
+        <!-- Favicon -->
+        <link
+            rel="icon"
+            href="{{ asset('assets/images/favicon.ico') }}"
+        />
+
         <!-- Scripts -->
         @routes
         @viteReactRefresh
@@ -27,5 +33,9 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
+
+        <script>
+            window.asset = (path) => `{{ asset('${path}') }}`;
+        </script>
     </body>
 </html>
