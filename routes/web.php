@@ -14,7 +14,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('homepage');
 
 Route::middleware('auth', EnsureAuthenticatedUserIsActive::class)->group(function () {
     Route::get('/dashboard', DashboardController::class)->middleware(['verified'])->name('dashboard');
