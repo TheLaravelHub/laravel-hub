@@ -17,7 +17,7 @@ import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
 import { useImageUpload } from '@/hooks/use-image-upload'
-import {ColorPicker} from "@/components/ui/color-picker";
+import { ColorPicker } from '@/components/ui/color-picker'
 
 const Index = () => {
     const { slugify } = useSlugify()
@@ -143,7 +143,7 @@ const Index = () => {
                                                 </Label>
                                                 <ColorPicker
                                                     onChange={(v) => {
-                                                        setData('color_code', v);
+                                                        setData('color_code', v)
                                                     }}
                                                     value={data.color_code}
                                                 />

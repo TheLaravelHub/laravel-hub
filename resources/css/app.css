@@ -122,7 +122,7 @@
 
 @layer utilities {
     .btn {
-        @apply px-10 rounded-full outline-none font-semibold text-white hover:shadow-2xl hover:translate-y-[-5px] transition-all duration-300 ease-in-out;
+        @apply rounded-full px-10 font-semibold text-white outline-none transition-all duration-300 ease-in-out hover:translate-y-[-5px] hover:shadow-2xl;
     }
 
     .btn-primary {

@@ -19,6 +19,7 @@ class IndexController extends Controller
     public function index()
     {
         $indexes = Index::query()->withoutActive()->paginate(2);
+
         return Inertia::render('Admin/Index/Index', [
             'indexes' => IndexResource::collection($indexes),
         ]);
@@ -50,8 +51,9 @@ class IndexController extends Controller
                 ->with('message', 'Index created successfully');
         } catch (\Exception $e) {
             // Delete media uploaded if an error occurs
-            if (isset($index))
+            if (isset($index)) {
                 $index->getFirstMedia('icon')->delete();
+            }
             DB::rollBack();
             throw $e;
         }
@@ -87,6 +89,7 @@ class IndexController extends Controller
     public function destroy(Index $index)
     {
         $index->delete();
+
         return redirect()
             ->route('admin.indexes.index')
             ->with('message', 'Index deleted successfully');

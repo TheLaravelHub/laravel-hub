@@ -18,14 +18,14 @@ export interface Admin {
 }
 
 export type Index = {
-    id: number;
-    name: string;
-    description: string;
-    slug: string;
-    icon: string;
-    status: 'active' | 'inactive';
-    created_at: string;
-    updated_at: string;
+    id: number
+    name: string
+    description: string
+    slug: string
+    icon: string
+    status: 'active' | 'inactive'
+    created_at: string
+    updated_at: string
 }
 
 export type PageProps<

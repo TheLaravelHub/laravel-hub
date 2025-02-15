@@ -14,13 +14,13 @@ class ToggleStatusController extends Controller
      */
     public function __invoke(Request $request, string $model)
     {
-        $modelClass = 'App\\Models\\' . ucfirst($model);
-        if (!class_exists($modelClass)) {
+        $modelClass = 'App\\Models\\'.ucfirst($model);
+        if (! class_exists($modelClass)) {
             throw new NotFoundHttpException('Model not found');
         }
 
         $modelInstance = $modelClass::withoutActive()->find($request->id);
-        if (!$modelInstance) {
+        if (! $modelInstance) {
             throw new NotFoundHttpException('Instance not found');
         }
 

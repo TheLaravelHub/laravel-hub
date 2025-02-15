@@ -21,7 +21,7 @@ class CreateIndexRequest extends FormRequest
             'slug' => ['required', 'string', 'max:255', 'unique:indexes,slug'],
             'icon' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'color_code' => ['nullable', 'string', 'max:255'],
-            'status' => ['required', 'in:' . implode(',', array_column(Status::cases(), 'value'))],
+            'status' => ['required', 'in:'.implode(',', array_column(Status::cases(), 'value'))],
         ];
     }
 

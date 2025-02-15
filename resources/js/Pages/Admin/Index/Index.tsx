@@ -117,41 +117,78 @@ const Index = ({ indexes }: IndexProps) => {
                                         {/* Previous Button */}
                                         <PaginationItem>
                                             {indexes.meta.links[0].url ? (
-                                                <PaginationPrevious href={indexes.meta.links[0].url} />
+                                                <PaginationPrevious
+                                                    href={
+                                                        indexes.meta.links[0]
+                                                            .url
+                                                    }
+                                                />
                                             ) : (
-                                                <span className="cursor-not-allowed opacity-50 px-4 py-2">← Prev</span>
+                                                <span className="cursor-not-allowed px-4 py-2 opacity-50">
+                                                    ← Prev
+                                                </span>
                                             )}
                                         </PaginationItem>
 
                                         {/* Page Numbers */}
-                                        {indexes.meta.links.map((link, index) => {
-                                            if (index === 0 || index === indexes.meta.links.length - 1) return null; // Skip first & last (Prev/Next)
+                                        {indexes.meta.links.map(
+                                            (link, index) => {
+                                                if (
+                                                    index === 0 ||
+                                                    index ===
+                                                        indexes.meta.links
+                                                            .length -
+                                                            1
+                                                )
+                                                    return null // Skip first & last (Prev/Next)
 
-                                            if (link.label === "...") {
+                                                if (link.label === '...') {
+                                                    return (
+                                                        <PaginationItem
+                                                            key={index}
+                                                        >
+                                                            <PaginationEllipsis />
+                                                        </PaginationItem>
+                                                    )
+                                                }
+
                                                 return (
                                                     <PaginationItem key={index}>
-                                                        <PaginationEllipsis />
+                                                        <PaginationLink
+                                                            href={
+                                                                link.url || '#'
+                                                            }
+                                                            className={
+                                                                link.active
+                                                                    ? 'bg-primary font-bold text-white'
+                                                                    : ''
+                                                            }
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: link.label,
+                                                            }} // Render page numbers
+                                                        />
                                                     </PaginationItem>
-                                                );
-                                            }
-
-                                            return (
-                                                <PaginationItem key={index}>
-                                                    <PaginationLink
-                                                        href={link.url || "#"}
-                                                        className={link.active ? "bg-primary text-white font-bold" : ""}
-                                                        dangerouslySetInnerHTML={{ __html: link.label }} // Render page numbers
-                                                    />
-                                                </PaginationItem>
-                                            );
-                                        })}
+                                                )
+                                            },
+                                        )}
 
                                         {/* Next Button */}
                                         <PaginationItem>
-                                            {indexes.meta.links[indexes.meta.links.length - 1].url ? (
-                                                <PaginationNext href={indexes.meta.links[indexes.meta.links.length - 1].url} />
+                                            {indexes.meta.links[
+                                                indexes.meta.links.length - 1
+                                            ].url ? (
+                                                <PaginationNext
+                                                    href={
+                                                        indexes.meta.links[
+                                                            indexes.meta.links
+                                                                .length - 1
+                                                        ].url
+                                                    }
+                                                />
                                             ) : (
-                                                <span className="cursor-not-allowed opacity-50 px-4 py-2">Next →</span>
+                                                <span className="cursor-not-allowed px-4 py-2 opacity-50">
+                                                    Next →
+                                                </span>
                                             )}
                                         </PaginationItem>
                                     </PaginationContent>
