@@ -34,10 +34,20 @@ const data = {
         },
         {
             title: 'Indexes',
-            url: route('admin.indexes.index'),
+            url: '#',
             mainRoute: 'admin.indexes',
             icon: BookAIcon,
             isActive: route().current('admin.indexes.index'),
+            items: [
+                {
+                    title: 'Indexes',
+                    url: route('admin.indexes.index'),
+                },
+                {
+                    title: 'Trash',
+                    url: '#',
+                },
+            ],
         },
         {
             title: 'Playground',
