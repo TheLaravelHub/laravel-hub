@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react'
-import {Fragment, PropsWithChildren, useEffect} from 'react'
+import { Fragment, PropsWithChildren, useEffect } from 'react'
 import { BreadcrumbType } from '@/types'
 import { ThemeProvider } from '@/components/theme-provider'
 import {
@@ -18,20 +18,22 @@ import {
 } from '@/components/ui/breadcrumb'
 import { ModeToggle } from '@/components/mode-toggle'
 import { AdminSidebar } from '@/components/shared/admin-sidebar'
-import {Toaster} from "@/components/ui/sonner";
-import {toast} from "sonner";
+import { Toaster } from '@/components/ui/sonner'
+import { toast } from 'sonner'
 
 export default function Authenticated({
     breadcrumbs,
     children,
 }: PropsWithChildren<{ breadcrumbs?: BreadcrumbType[] }>) {
-    const { flash } = usePage().props as unknown as { flash: { message?: string } };
+    const { flash } = usePage().props as unknown as {
+        flash: { message?: string }
+    }
 
     useEffect(() => {
         if (flash.message) {
-            toast(flash.message);
+            toast(flash.message)
         }
-    }, [flash]);
+    }, [flash])
 
     return (
         <ThemeProvider

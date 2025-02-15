@@ -1,5 +1,12 @@
 import * as React from 'react'
-import {BookAIcon, BookOpen, Bot, Gauge, Settings2, SquareTerminal} from 'lucide-react'
+import {
+    BookAIcon,
+    BookOpen,
+    Bot,
+    Gauge,
+    Settings2,
+    SquareTerminal,
+} from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import {

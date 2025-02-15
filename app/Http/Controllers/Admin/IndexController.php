@@ -46,8 +46,9 @@ class IndexController extends Controller
                 ->with('message', 'Index created successfully');
         } catch (\Exception $e) {
             // Delete media uploaded if an error occurs
-            if (isset($index))
+            if (isset($index)) {
                 $index->getFirstMedia('icon')->delete();
+            }
             DB::rollBack();
             throw $e;
         }

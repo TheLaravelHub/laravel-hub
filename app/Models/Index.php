@@ -11,7 +11,9 @@ use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Index extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, HasActiveScope;
+    use HasActiveScope;
+    use InteractsWithMedia;
+    use SoftDeletes;
 
     protected $table = 'indexes';
 
