@@ -25,7 +25,7 @@ export function NavMain({
     items: {
         title: string
         url: string
-        route?: string
+        mainRoute?: string
         icon?: LucideIcon
         isActive?: boolean
         items?: {
@@ -92,7 +92,11 @@ export function NavMain({
                                 <SidebarMenuButton
                                     tooltip={item.title}
                                     isActive={
-                                        route().current(item.route as string) ??
+                                        route().current(item.mainRoute as string) ||
+                                        route().current(`${item.mainRoute}.index` as string) ||
+                                        route().current(`${item.mainRoute}.create` as string) ||
+                                        route().current(`${item.mainRoute}.show` as string) ||
+                                        route().current(`${item.mainRoute}.edit` as string) ||
                                         false
                                     }
                                 >

@@ -78,5 +78,5 @@ export default {
         },
     },
 
-    plugins: [forms, require('tailwindcss-animate')],
+    plugins: [require('daisyui'), forms, require('tailwindcss-animate')],
 }
