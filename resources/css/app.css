@@ -119,3 +119,17 @@
         @apply bg-background text-foreground;
     }
 }
+
+@layer utilities {
+    .btn {
+        @apply px-10 rounded-full outline-none font-semibold text-white hover:shadow-2xl hover:translate-y-[-5px] transition-all duration-300 ease-in-out;
+    }
+
+    .btn-primary {
+        @apply btn bg-gradient-to-bl from-primary to-secondary;
+    }
+
+    .bg-gradient {
+        @apply bg-gradient-to-br from-primary to-secondary;
+    }
+}

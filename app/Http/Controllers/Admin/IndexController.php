@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateIndexRequest;
+use App\Http\Resources\Admin\IndexResource;
 use App\Models\Index;
 use DB;
 use Illuminate\Http\Request;
@@ -17,7 +18,10 @@ class IndexController extends Controller
      */
     public function index()
     {
-        //
+        $indexes = Index::query()->withoutActive()->paginate(2);
+        return Inertia::render('Admin/Index/Index', [
+            'indexes' => IndexResource::collection($indexes),
+        ]);
     }
 
     /**
@@ -37,7 +41,7 @@ class IndexController extends Controller
         try {
             $index = Index::create($request->safe()->merge(['status' => $request->get('status', Status::INACTIVE)])->all());
             $index->addMediaFromRequest('icon')
-                ->toMediaCollection('icon');
+                ->toMediaCollection();
 
             DB::commit();
 
@@ -80,8 +84,11 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Index $index)
     {
-        //
+        $index->delete();
+        return redirect()
+            ->route('admin.indexes.index')
+            ->with('message', 'Index deleted successfully');
     }
 }
