@@ -1,5 +1,5 @@
-import { Link, usePage } from '@inertiajs/react'
-import {Fragment, PropsWithChildren, ReactNode, useEffect, useState} from 'react'
+import { usePage } from '@inertiajs/react'
+import {Fragment, PropsWithChildren, useEffect} from 'react'
 import { BreadcrumbType } from '@/types'
 import { ThemeProvider } from '@/components/theme-provider'
 import {
@@ -7,7 +7,6 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/components/shared/app-sidebar'
 import { Separator } from '@/components/ui/separator'
 import {
     Breadcrumb,
