@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ToggleStatusController;
 use App\Http\Middleware\AdminAuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,6 @@ Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::resource('indexes', IndexController::class);
+
+    Route::put('toggle-status/{model}', ToggleStatusController::class)->name('toggle-status');
 });
