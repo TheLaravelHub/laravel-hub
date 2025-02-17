@@ -5,7 +5,7 @@ import { TableCell, TableRow } from '@/components/ui/table'
 import Image from '@/components/image'
 import { Switch } from '@/components/ui/switch'
 import moment from 'moment/moment'
-import { FilePenLine, Trash2 } from 'lucide-react'
+import {Eye, FilePenLine, Trash2} from 'lucide-react'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -73,6 +73,13 @@ const IndexRow = ({ index }: { index: IndexType }) => {
                 <TableCell>{moment(index.created_at).fromNow()}</TableCell>
                 <TableCell className="text-right">
                     <div className="jusify-end flex items-center gap-2">
+                        <Link
+                            className="rounded-full bg-green-700 px-3 py-2 text-white"
+                            href={route('admin.indexes.show', index.id)}
+                            title="Edit index"
+                        >
+                            <Eye className="w-4" />
+                        </Link>
                         <Link
                             className="rounded-full bg-primary px-3 py-2 text-white"
                             href={route('admin.indexes.edit', index.id)}

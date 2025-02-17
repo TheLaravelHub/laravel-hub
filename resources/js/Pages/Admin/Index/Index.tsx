@@ -1,16 +1,6 @@
 import { Head, Link } from '@inertiajs/react'
 import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout'
 import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from '@/components/ui/pagination'
-
-import {
     Table,
     TableBody,
     TableCell,
@@ -28,11 +18,12 @@ import {
 import { Index as IndexType } from '@/types'
 import { PlusCircleIcon } from 'lucide-react'
 import IndexRow from '@/Pages/Admin/Index/components/index-row'
+import Paginator from "@/components/paginator";
 
 type LinkType = {
     active: boolean
     label: string
-    url: string | undefined
+    url: string | null
 }
 
 interface IndexProps {
@@ -110,90 +101,8 @@ const Index = ({ indexes }: IndexProps) => {
                         </CardContent>
 
                         <CardFooter>
-                            {/* Pagination using ShadCN */}
-                            {indexes.meta.links.length > 3 && (
-                                <Pagination className="mt-6 flex justify-center">
-                                    <PaginationContent>
-                                        {/* Previous Button */}
-                                        <PaginationItem>
-                                            {indexes.meta.links[0].url ? (
-                                                <PaginationPrevious
-                                                    href={
-                                                        indexes.meta.links[0]
-                                                            .url
-                                                    }
-                                                />
-                                            ) : (
-                                                <span className="cursor-not-allowed px-4 py-2 opacity-50">
-                                                    ← Prev
-                                                </span>
-                                            )}
-                                        </PaginationItem>
-
-                                        {/* Page Numbers */}
-                                        {indexes.meta.links.map(
-                                            (link, index) => {
-                                                if (
-                                                    index === 0 ||
-                                                    index ===
-                                                        indexes.meta.links
-                                                            .length -
-                                                            1
-                                                )
-                                                    return null // Skip first & last (Prev/Next)
-
-                                                if (link.label === '...') {
-                                                    return (
-                                                        <PaginationItem
-                                                            key={index}
-                                                        >
-                                                            <PaginationEllipsis />
-                                                        </PaginationItem>
-                                                    )
-                                                }
-
-                                                return (
-                                                    <PaginationItem key={index}>
-                                                        <PaginationLink
-                                                            href={
-                                                                link.url || '#'
-                                                            }
-                                                            className={
-                                                                link.active
-                                                                    ? 'bg-primary font-bold text-white'
-                                                                    : ''
-                                                            }
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: link.label,
-                                                            }} // Render page numbers
-                                                        />
-                                                    </PaginationItem>
-                                                )
-                                            },
-                                        )}
-
-                                        {/* Next Button */}
-                                        <PaginationItem>
-                                            {indexes.meta.links[
-                                                indexes.meta.links.length - 1
-                                            ].url ? (
-                                                <PaginationNext
-                                                    href={
-                                                        indexes.meta.links[
-                                                            indexes.meta.links
-                                                                .length - 1
-                                                        ].url
-                                                    }
-                                                />
-                                            ) : (
-                                                <span className="cursor-not-allowed px-4 py-2 opacity-50">
-                                                    Next →
-                                                </span>
-                                            )}
-                                        </PaginationItem>
-                                    </PaginationContent>
-                                </Pagination>
-                            )}
+                            {/* Reusable Paginator Component */}
+                            <Paginator links={indexes.meta.links} />
                         </CardFooter>
                     </Card>
                 </div>

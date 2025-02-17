@@ -18,7 +18,7 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $indexes = Index::query()->withoutActive()->paginate(2);
+        $indexes = Index::query()->paginate(12);
 
         return Inertia::render('Admin/Index/Index', [
             'indexes' => IndexResource::collection($indexes),
@@ -62,9 +62,11 @@ class IndexController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Index $index)
     {
-        //
+        return Inertia::render('Admin/Index/Show', [
+            'index' => new IndexResource($index),
+        ]);
     }
 
     /**
