@@ -96,11 +96,9 @@ export function NavMain({
                                                     <SidebarMenuSubButton
                                                         asChild
                                                     >
-                                                        <a href={subItem.url}>
-                                                            <span>
-                                                                {subItem.title}
-                                                            </span>
-                                                        </a>
+                                                        <span>
+                                                            {subItem.title}
+                                                        </span>
                                                     </SidebarMenuSubButton>
                                                 </Link>
                                             </SidebarMenuSubItem>
