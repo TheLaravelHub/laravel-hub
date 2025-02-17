@@ -23,6 +23,7 @@ export type Index = {
     description: string
     slug: string
     icon: string
+    color_code: string
     status: 'active' | 'inactive'
     created_at: string
     updated_at: string

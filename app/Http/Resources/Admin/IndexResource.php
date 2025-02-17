@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class IndexResource extends JsonResource
 {
+    public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *
@@ -20,7 +22,8 @@ class IndexResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'icon' => $this->getFirstMediaUrl(),
-            'status' => $this->status->value,
+            'color_code' => $this->color_code,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
