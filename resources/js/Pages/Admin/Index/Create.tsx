@@ -19,7 +19,7 @@ import Image from '@/components/image'
 import { useImageUpload } from '@/hooks/use-image-upload'
 import { ColorPicker } from '@/components/ui/color-picker'
 
-const Index = () => {
+const Create = () => {
     const { slugify } = useSlugify()
     const { post, data, setData, processing, errors, reset } = useForm<{
         name: string
@@ -233,4 +233,4 @@ const Index = () => {
     )
 }
 
-export default Index
+export default Create
