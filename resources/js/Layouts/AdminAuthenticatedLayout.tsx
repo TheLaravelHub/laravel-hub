@@ -1,17 +1,5 @@
-import ApplicationLogo from '@/components/application-logo'
-import Dropdown from '@/components/dropdown'
-import NavLink from '@/components/nav-link'
-import ResponsiveNavLink from '@/components/responsive-nav-link'
-import { Link, usePage } from '@inertiajs/react'
-import { Fragment, PropsWithChildren, ReactNode, useState } from 'react'
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from '@/components/ui/sheet'
+import { usePage } from '@inertiajs/react'
+import { Fragment, PropsWithChildren, useEffect } from 'react'
 import { BreadcrumbType } from '@/types'
 import { ThemeProvider } from '@/components/theme-provider'
 import {
@@ -19,7 +7,6 @@ import {
     SidebarProvider,
     SidebarTrigger,
 } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/components/shared/app-sidebar'
 import { Separator } from '@/components/ui/separator'
 import {
     Breadcrumb,
@@ -31,11 +18,23 @@ import {
 } from '@/components/ui/breadcrumb'
 import { ModeToggle } from '@/components/mode-toggle'
 import { AdminSidebar } from '@/components/shared/admin-sidebar'
+import { Toaster } from '@/components/ui/sonner'
+import { toast } from 'sonner'
 
 export default function Authenticated({
     breadcrumbs,
     children,
 }: PropsWithChildren<{ breadcrumbs?: BreadcrumbType[] }>) {
+    const { flash } = usePage().props as unknown as {
+        flash: { message?: string }
+    }
+
+    useEffect(() => {
+        if (flash.message) {
+            toast(flash.message)
+        }
+    }, [flash])
+
     return (
         <ThemeProvider
             defaultTheme="dark"
@@ -56,7 +55,7 @@ export default function Authenticated({
                                     <BreadcrumbList>
                                         <BreadcrumbItem className="hidden md:block">
                                             <BreadcrumbLink
-                                                href={route('dashboard')}
+                                                href={route('admin.dashboard')}
                                             >
                                                 Dashboard
                                             </BreadcrumbLink>
@@ -87,6 +86,7 @@ export default function Authenticated({
                     </div>
 
                     {children}
+                    <Toaster position="bottom-center" />
                 </SidebarInset>
             </SidebarProvider>
         </ThemeProvider>

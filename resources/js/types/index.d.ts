@@ -17,6 +17,18 @@ export interface Admin {
     email: string
 }
 
+export type Index = {
+    id: number
+    name: string
+    description: string
+    slug: string
+    icon: string
+    color_code: string
+    status: 'active' | 'inactive'
+    created_at: string
+    updated_at: string
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {

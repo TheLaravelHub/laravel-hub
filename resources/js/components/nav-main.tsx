@@ -19,13 +19,25 @@ import {
 } from '@/components/ui/sidebar'
 import { Link, router } from '@inertiajs/react'
 
+type ItemProps = {
+    title: string
+    url: string
+    mainRoute?: string
+    icon?: LucideIcon
+    isActive?: boolean
+    items?: {
+        title: string
+        url: string
+    }[]
+}
+
 export function NavMain({
     items,
 }: {
     items: {
         title: string
         url: string
-        route?: string
+        mainRoute?: string
         icon?: LucideIcon
         isActive?: boolean
         items?: {
@@ -34,6 +46,17 @@ export function NavMain({
         }[]
     }[]
 }) {
+    const isCurrent = (item: ItemProps) => {
+        return (
+            route().current(item.mainRoute as string) ||
+            route().current(`${item.mainRoute}.index` as string) ||
+            route().current(`${item.mainRoute}.create` as string) ||
+            route().current(`${item.mainRoute}.show` as string) ||
+            route().current(`${item.mainRoute}.edit` as string) ||
+            false
+        )
+    }
+
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -56,7 +79,7 @@ export function NavMain({
                                 >
                                     <SidebarMenuButton
                                         tooltip={item.title}
-                                        isActive={item.isActive}
+                                        isActive={isCurrent(item)}
                                     >
                                         {item.icon && <item.icon />}
                                         <span>{item.title}</span>
@@ -73,11 +96,9 @@ export function NavMain({
                                                     <SidebarMenuSubButton
                                                         asChild
                                                     >
-                                                        <a href={subItem.url}>
-                                                            <span>
-                                                                {subItem.title}
-                                                            </span>
-                                                        </a>
+                                                        <span>
+                                                            {subItem.title}
+                                                        </span>
                                                     </SidebarMenuSubButton>
                                                 </Link>
                                             </SidebarMenuSubItem>
@@ -91,10 +112,7 @@ export function NavMain({
                             <Link href={item.url}>
                                 <SidebarMenuButton
                                     tooltip={item.title}
-                                    isActive={
-                                        route().current(item.route as string) ??
-                                        false
-                                    }
+                                    isActive={isCurrent(item)}
                                 >
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>

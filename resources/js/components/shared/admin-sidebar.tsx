@@ -1,5 +1,12 @@
 import * as React from 'react'
-import { BookOpen, Bot, Gauge, Settings2, SquareTerminal } from 'lucide-react'
+import {
+    BookAIcon,
+    BookOpen,
+    Bot,
+    Gauge,
+    Settings2,
+    SquareTerminal,
+} from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import {
@@ -20,10 +27,27 @@ const data = {
     navMain: [
         {
             title: 'Dashboard',
-            url: route('dashboard'),
-            route: 'dashboard',
+            url: route('admin.dashboard'),
+            mainRoute: 'admin.dashboard',
             icon: Gauge,
-            isActive: route().current('dashboard'),
+            isActive: route().current('admin.dashboard'),
+        },
+        {
+            title: 'Indexes',
+            url: '#',
+            mainRoute: 'admin.indexes',
+            icon: BookAIcon,
+            isActive: route().current('admin.indexes.index'),
+            items: [
+                {
+                    title: 'Indexes',
+                    url: route('admin.indexes.index'),
+                },
+                {
+                    title: 'Trash',
+                    url: '#',
+                },
+            ],
         },
         {
             title: 'Playground',
