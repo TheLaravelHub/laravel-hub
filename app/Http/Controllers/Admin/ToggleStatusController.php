@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Thefeqy\ModelStatus\Enums\Status;
+use Thefeqy\ModelStatus\Status;
 
 class ToggleStatusController extends Controller
 {
@@ -19,12 +19,12 @@ class ToggleStatusController extends Controller
             throw new NotFoundHttpException('Model not found');
         }
 
-        $modelInstance = $modelClass::withoutActive()->find($request->id);
+        $modelInstance = $modelClass::find($request->id);
         if (! $modelInstance) {
             throw new NotFoundHttpException('Instance not found');
         }
 
-        $modelInstance->status = $modelInstance->status === Status::ACTIVE ? Status::INACTIVE : Status::ACTIVE;
+        $modelInstance->status = $modelInstance->status === Status::active() ? Status::inactive() : Status::active();
         $modelInstance->save();
 
         return redirect()

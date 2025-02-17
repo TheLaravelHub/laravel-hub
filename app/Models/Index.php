@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Thefeqy\ModelStatus\Enums\Status;
+use Thefeqy\ModelStatus\Status;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Index extends Model implements HasMedia
@@ -22,7 +22,7 @@ class Index extends Model implements HasMedia
     protected function casts()
     {
         return [
-            'status' => Status::class,
+//            'status' => Status::class,
         ];
     }
 }
