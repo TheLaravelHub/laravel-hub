@@ -23,12 +23,14 @@ const Create = () => {
     const { slugify } = useSlugify()
     const { post, data, setData, processing, errors, reset } = useForm<{
         name: string
+        slug: string
         description: string
         color_code: string | null
         active: boolean
         icon: File | null
     }>({
         name: '',
+        slug: '',
         description: '',
         color_code: null,
         active: true,
@@ -105,6 +107,9 @@ const Create = () => {
                                                     placeholder="Slug"
                                                     value={slugify(data.name)}
                                                     disabled={true}
+                                                />
+                                                <InputError
+                                                    message={errors.slug}
                                                 />
                                             </div>
                                             <div className="flex flex-col gap-1">
