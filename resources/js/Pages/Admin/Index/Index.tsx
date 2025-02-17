@@ -18,7 +18,7 @@ import {
 import { Index as IndexType } from '@/types'
 import { PlusCircleIcon } from 'lucide-react'
 import IndexRow from '@/Pages/Admin/Index/components/index-row'
-import Paginator from "@/components/paginator";
+import Paginator from '@/components/paginator'
 
 type LinkType = {
     active: boolean

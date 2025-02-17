@@ -18,7 +18,7 @@ class UpdateIndexRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'slug' => ['required', 'string', 'max:255', 'unique:indexes,slug,' . $this->route('index')->id],
+            'slug' => ['required', 'string', 'max:255', 'unique:indexes,slug,'.$this->route('index')->id],
             'icon' => ['nullable', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'color_code' => ['nullable', 'string', 'max:255'],
             'status' => ['required', 'in:'.implode(',', array_column(Status::cases(), 'value'))],

@@ -6,8 +6,8 @@ import {
     PaginationNext,
     PaginationEllipsis,
     PaginationLink,
-} from "@/components/ui/pagination"
-import { router } from "@inertiajs/react"
+} from '@/components/ui/pagination'
+import { router } from '@inertiajs/react'
 
 interface PaginatorProps {
     links: {
@@ -40,7 +40,9 @@ export default function Paginator({ links }: PaginatorProps) {
                             }}
                         />
                     ) : (
-                        <span className="cursor-not-allowed px-4 py-2 opacity-50">← Prev</span>
+                        <span className="cursor-not-allowed px-4 py-2 opacity-50">
+                            ← Prev
+                        </span>
                     )}
                 </PaginationItem>
 
@@ -48,7 +50,7 @@ export default function Paginator({ links }: PaginatorProps) {
                 {links.map((link, index) => {
                     if (index === 0 || index === links.length - 1) return null // Skip first & last (Prev/Next)
 
-                    if (link.label === "...") {
+                    if (link.label === '...') {
                         return (
                             <PaginationItem key={index}>
                                 <PaginationEllipsis />
@@ -64,7 +66,11 @@ export default function Paginator({ links }: PaginatorProps) {
                                     e.preventDefault()
                                     handlePageChange(link.url)
                                 }}
-                                className={link.active ? "bg-primary font-bold text-white" : ""}
+                                className={
+                                    link.active
+                                        ? 'bg-primary font-bold text-white'
+                                        : ''
+                                }
                                 dangerouslySetInnerHTML={{ __html: link.label }} // Render page numbers correctly
                             />
                         </PaginationItem>
@@ -82,7 +88,9 @@ export default function Paginator({ links }: PaginatorProps) {
                             }}
                         />
                     ) : (
-                        <span className="cursor-not-allowed px-4 py-2 opacity-50">Next →</span>
+                        <span className="cursor-not-allowed px-4 py-2 opacity-50">
+                            Next →
+                        </span>
                     )}
                 </PaginationItem>
             </PaginationContent>

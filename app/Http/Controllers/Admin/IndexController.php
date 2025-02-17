@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\UpdateIndexRequest;
 use App\Http\Resources\Admin\IndexResource;
 use App\Models\Index;
 use DB;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Thefeqy\ModelStatus\Enums\Status;
 

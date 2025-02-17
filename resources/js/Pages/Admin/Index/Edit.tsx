@@ -18,31 +18,32 @@ import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
 import { useImageUpload } from '@/hooks/use-image-upload'
 import { ColorPicker } from '@/components/ui/color-picker'
-import {Index} from "@/types";
+import { Index } from '@/types'
 
 interface EditIndexProps {
     index: Index
 }
 
-const Edit = ({index}: EditIndexProps) => {
+const Edit = ({ index }: EditIndexProps) => {
     const { slugify } = useSlugify()
-    const { post, data, setData, processing, errors, isDirty, reset } = useForm<{
-        name: string
-        slug: string
-        description: string
-        color_code: string | null
-        active: boolean
-        icon: File | null ,
-        _method: 'PUT'
-    }>({
-        name: index.name,
-        slug: index.slug,
-        description: index.description,
-        color_code: index.color_code,
-        active: index.status === 'active',
-        icon: null,
-        _method: 'PUT',
-    })
+    const { post, data, setData, processing, errors, isDirty, reset } =
+        useForm<{
+            name: string
+            slug: string
+            description: string
+            color_code: string | null
+            active: boolean
+            icon: File | null
+            _method: 'PUT'
+        }>({
+            name: index.name,
+            slug: index.slug,
+            description: index.description,
+            color_code: index.color_code,
+            active: index.status === 'active',
+            icon: null,
+            _method: 'PUT',
+        })
 
     const { preview, handleImageUpload } = useImageUpload(index.icon, setData)
 
@@ -218,7 +219,9 @@ const Edit = ({index}: EditIndexProps) => {
                                         <CardFooter className="flex justify-start gap-4">
                                             {/*Reset button*/}
                                             <Button
-                                                disabled={!isDirty || processing}
+                                                disabled={
+                                                    !isDirty || processing
+                                                }
                                                 type="button"
                                                 onClick={() => reset()}
                                                 className="my-3 bg-green-600"
@@ -226,7 +229,9 @@ const Edit = ({index}: EditIndexProps) => {
                                                 Reset
                                             </Button>
                                             <Button
-                                                disabled={!isDirty || processing}
+                                                disabled={
+                                                    !isDirty || processing
+                                                }
                                                 type="submit"
                                                 className="my-3"
                                             >

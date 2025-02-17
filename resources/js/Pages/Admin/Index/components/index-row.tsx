@@ -5,7 +5,7 @@ import { TableCell, TableRow } from '@/components/ui/table'
 import Image from '@/components/image'
 import { Switch } from '@/components/ui/switch'
 import moment from 'moment/moment'
-import {Eye, FilePenLine, Trash2} from 'lucide-react'
+import { Eye, FilePenLine, Trash2 } from 'lucide-react'
 import {
     AlertDialog,
     AlertDialogAction,
