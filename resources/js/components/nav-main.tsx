@@ -48,7 +48,10 @@ export function NavMain({
 }) {
     const isCurrent = (item: ItemProps) => {
         return (
-            route().current()?.toString().includes(item.mainRoute as string) ||
+            route()
+                .current()
+                ?.toString()
+                .includes(item.mainRoute as string) ||
             route().current(item.mainRoute as string) ||
             route().current(`${item.mainRoute}.index` as string) ||
             route().current(`${item.mainRoute}.create` as string) ||

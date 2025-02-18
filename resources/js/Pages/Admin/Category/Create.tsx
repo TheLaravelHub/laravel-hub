@@ -18,7 +18,7 @@ import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
 import { ColorPicker } from '@/components/ui/color-picker'
 
-const Create = ({baseRoute}: {baseRoute: string}) => {
+const Create = ({ baseRoute }: { baseRoute: string }) => {
     const { slugify } = useSlugify()
     const { post, data, setData, processing, errors, reset } = useForm<{
         name: string
@@ -60,7 +60,7 @@ const Create = ({baseRoute}: {baseRoute: string}) => {
                     <div className="p-6 text-gray-900 dark:text-gray-100">
                         <form onSubmit={handleCreation}>
                             <div className="grid grid-cols-8 gap-4">
-                                <div className="col-span-8 lg:col-span-6 space-y-6">
+                                <div className="col-span-8 space-y-6 lg:col-span-6">
                                     <Card>
                                         <CardHeader>
                                             <CardTitle>Basic Data</CardTitle>
@@ -142,7 +142,9 @@ const Create = ({baseRoute}: {baseRoute: string}) => {
                                                 <Textarea
                                                     id="meta_description"
                                                     placeholder="Meta Description .."
-                                                    value={data.meta_description}
+                                                    value={
+                                                        data.meta_description
+                                                    }
                                                     onChange={(e) =>
                                                         setData(
                                                             'meta_description',
@@ -151,7 +153,9 @@ const Create = ({baseRoute}: {baseRoute: string}) => {
                                                     }
                                                 />
                                                 <InputError
-                                                    message={errors.meta_description}
+                                                    message={
+                                                        errors.meta_description
+                                                    }
                                                 />
                                             </div>
                                         </CardContent>
@@ -160,9 +164,7 @@ const Create = ({baseRoute}: {baseRoute: string}) => {
                                 <div className="col-span-8 lg:col-span-2">
                                     <Card>
                                         <CardHeader>
-                                            <CardTitle>
-                                                Status
-                                            </CardTitle>
+                                            <CardTitle>Status</CardTitle>
                                         </CardHeader>
                                         <CardContent className="flex flex-col justify-center gap-4">
                                             <div className="flex flex-col gap-1">

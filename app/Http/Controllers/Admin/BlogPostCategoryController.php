@@ -18,7 +18,6 @@ class BlogPostCategoryController extends Controller
 
     /**
      * Display a listing of the resource.
-     * @return Response
      */
     public function index(): Response
     {
@@ -27,13 +26,12 @@ class BlogPostCategoryController extends Controller
         return Inertia::render('Admin/Category/Index', [
             'title' => 'Blog Posts Categories',
             'baseRoute' => $this->baseRoute,
-            'categories' => CategoryResource::collection($categories)
+            'categories' => CategoryResource::collection($categories),
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
-     * @return Response
      */
     public function create(): Response
     {
@@ -42,14 +40,12 @@ class BlogPostCategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param CreateCategoryRequest $request
-     * @return RedirectResponse
      */
     public function store(CreateCategoryRequest $request): RedirectResponse
     {
         Category::create($request->safe()->merge([
             'status' => $request->input('status', Status::inactive()),
-            'category_type' => $request->getCategoryType()
+            'category_type' => $request->getCategoryType(),
         ])->all());
 
         return redirect()
@@ -59,36 +55,32 @@ class BlogPostCategoryController extends Controller
 
     /**
      * Display the specified resource.
-     * @param Category $category
-     * @return Response
      */
     public function show(Category $category): Response
     {
         $category = Category::forBlogPosts()->findOrFail($category->id);
+
         return Inertia::render('Admin/Category/Show', ['baseRoute' => $this->baseRoute, 'category' => new CategoryResource($category)]);
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param Category $category
-     * @return Response
      */
     public function edit(Category $category): Response
     {
         $category = Category::forBlogPosts()->findOrFail($category->id);
+
         return Inertia::render('Admin/Category/Edit', ['baseRoute' => $this->baseRoute, 'category' => new CategoryResource($category)]);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param UpdateCategoryRequest $request
-     * @param Category $category
      */
     public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         $category = Category::forBlogPosts()->findOrFail($category->id);
         $category->update($request->safe()->merge([
-            'status' => $request->input('status', Status::inactive())
+            'status' => $request->input('status', Status::inactive()),
         ])->all());
 
         return redirect()
@@ -98,8 +90,6 @@ class BlogPostCategoryController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param Category $category
-     * @return RedirectResponse
      */
     public function destroy(Category $category): RedirectResponse
     {

@@ -56,7 +56,6 @@ class CreateCategoryRequest extends FormRequest
 
     /**
      * Retrieve category type.
-     * @return string
      */
     public function getCategoryType(): string
     {

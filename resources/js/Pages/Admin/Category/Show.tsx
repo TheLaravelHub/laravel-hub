@@ -1,12 +1,7 @@
 import { Head, Link } from '@inertiajs/react'
 import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-} from '@/components/ui/card'
-import {Category} from '@/types'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Category } from '@/types'
 
 interface ShowCategoryProps {
     baseRoute: string

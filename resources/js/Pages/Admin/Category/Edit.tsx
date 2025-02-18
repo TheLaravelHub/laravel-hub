@@ -15,7 +15,7 @@ import useSlugify from '@/hooks/use-slugify'
 import { Button } from '@/components/ui/button'
 import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
-import {Category} from '@/types'
+import { Category } from '@/types'
 
 interface EditCategoryProps {
     baseRoute: string
@@ -67,7 +67,7 @@ const Edit = ({ baseRoute, category }: EditCategoryProps) => {
                     <div className="p-6 text-gray-900 dark:text-gray-100">
                         <form onSubmit={handleUpdate}>
                             <div className="grid grid-cols-8 gap-4">
-                                <div className="col-span-8 lg:col-span-6 space-y-6">
+                                <div className="col-span-8 space-y-6 lg:col-span-6">
                                     <Card>
                                         <CardHeader>
                                             <CardTitle>Basic Data</CardTitle>
@@ -149,7 +149,9 @@ const Edit = ({ baseRoute, category }: EditCategoryProps) => {
                                                 <Textarea
                                                     id="meta_description"
                                                     placeholder="Meta Description .."
-                                                    value={data.meta_description}
+                                                    value={
+                                                        data.meta_description
+                                                    }
                                                     onChange={(e) =>
                                                         setData(
                                                             'meta_description',
@@ -158,7 +160,9 @@ const Edit = ({ baseRoute, category }: EditCategoryProps) => {
                                                     }
                                                 />
                                                 <InputError
-                                                    message={errors.meta_description}
+                                                    message={
+                                                        errors.meta_description
+                                                    }
                                                 />
                                             </div>
                                         </CardContent>

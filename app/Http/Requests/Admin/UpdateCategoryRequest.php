@@ -37,7 +37,7 @@ class UpdateCategoryRequest extends FormRequest
             ],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:255'],
-            'status' => ['required', 'in:' . Status::active() . ',' . Status::inactive()],
+            'status' => ['required', 'in:'.Status::active().','.Status::inactive()],
         ];
     }
 

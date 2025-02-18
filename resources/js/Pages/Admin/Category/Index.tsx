@@ -39,9 +39,7 @@ const Index = ({ title, baseRoute, categories }: IndexProps) => {
                 <div className="min-h-[100vh] flex-1 md:min-h-min">
                     <Card className="p-6 text-gray-900 dark:text-gray-100">
                         <CardHeader className="w-100 flex flex-row items-center justify-between">
-                            <CardTitle className="text-4xl">
-                                {title}
-                            </CardTitle>
+                            <CardTitle className="text-4xl">{title}</CardTitle>
                             <Link
                                 className="btn-primary"
                                 href={route(`${baseRoute}.create`)}
@@ -60,9 +58,7 @@ const Index = ({ title, baseRoute, categories }: IndexProps) => {
                                         <TableHead>Slug</TableHead>
                                         <TableHead>Status</TableHead>
                                         <TableHead>Created at</TableHead>
-                                        <TableHead>
-                                            Action
-                                        </TableHead>
+                                        <TableHead>Action</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
