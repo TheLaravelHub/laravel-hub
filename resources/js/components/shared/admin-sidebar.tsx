@@ -4,6 +4,8 @@ import {
     BookOpen,
     Bot,
     Gauge,
+    Package,
+    Rss,
     Settings2,
     SquareTerminal,
 } from 'lucide-react'
@@ -43,9 +45,39 @@ const data = {
                     title: 'Indexes',
                     url: route('admin.indexes.index'),
                 },
+            ],
+        },
+        {
+            title: 'Packages',
+            url: '#',
+            mainRoute: 'admin.packages',
+            icon: Package,
+            isActive: route().current('admin.packages.index'),
+            items: [
+                // {
+                //     title: 'Packages',
+                //     url: route('admin.packages.index'),
+                // },
                 {
-                    title: 'Trash',
-                    url: '#',
+                    title: 'Categories',
+                    url: route('admin.packages.categories.index'),
+                },
+            ],
+        },
+        {
+            title: 'Blog Posts',
+            url: '#',
+            mainRoute: 'admin.blog-posts',
+            icon: Rss,
+            isActive: route().current('admin.blog-posts.index'),
+            items: [
+                // {
+                //     title: 'Packages',
+                //     url: route('admin.blog-posts.index'),
+                // },
+                {
+                    title: 'Categories',
+                    url: route('admin.blog-posts.categories.index'),
                 },
             ],
         },
