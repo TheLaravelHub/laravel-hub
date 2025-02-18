@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
+use App\Http\Controllers\Admin\BlogPostCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Admin\PackageCategoryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ToggleStatusController;
 use App\Http\Middleware\AdminAuthMiddleware;
@@ -36,4 +38,16 @@ Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::resource('indexes', IndexController::class);
 
     Route::put('toggle-status/{model}', ToggleStatusController::class)->name('toggle-status');
+
+    Route::prefix('packages')
+        ->as('packages.')
+        ->group(function () {
+            Route::resource('categories', PackageCategoryController::class);
+        });
+
+    Route::prefix('blog-posts')
+        ->as('blog-posts.')
+        ->group(function () {
+            Route::resource('categories', BlogPostCategoryController::class);
+        });
 });

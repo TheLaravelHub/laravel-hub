@@ -29,6 +29,37 @@ export type Index = {
     updated_at: string
 }
 
+export type Category = {
+    id: number
+    name: string
+    slug: string
+    meta_title: string
+    meta_description: string
+    status: 'active' | 'inactive'
+    created_at: string
+    updated_at: string
+}
+
+export type LinkType = {
+    active: boolean
+    label: string
+    url: string | null
+}
+
+export type MetaType = {
+    current_page: number
+    from: number
+    last_page: number
+    links: LinkType[]
+}
+
+export type LinksType = {
+    first: string
+    last: string
+    prev: string
+    next: string
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
