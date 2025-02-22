@@ -13,16 +13,13 @@ trait HasSlug
             $model->slug = $model->generateSlug($model->name);
         });
 
-//        static::updating(function ($model) {
-//            $model->slug = $model->generateSlug($model->name);
-//        });
+        //        static::updating(function ($model) {
+        //            $model->slug = $model->generateSlug($model->name);
+        //        });
     }
 
     /**
      * Generate a unique slug for the model.
-     *
-     * @param  string  $name
-     * @return string
      */
     protected function generateSlug(string $name): string
     {

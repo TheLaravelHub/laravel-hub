@@ -15,7 +15,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card'
-import {LinksType, MetaType, Package} from '@/types'
+import { LinksType, MetaType, Package } from '@/types'
 import { PlusCircleIcon } from 'lucide-react'
 import PackageRow from '@/Pages/Admin/Package/components/package-row'
 import Paginator from '@/components/paginator'
@@ -64,19 +64,21 @@ const Index = ({ packages }: IndexProps) => {
                                         <TableHead>Status</TableHead>
                                         <TableHead>Owner</TableHead>
                                         <TableHead>Created at</TableHead>
-                                        <TableHead>
-                                            Action
-                                        </TableHead>
+                                        <TableHead>Action</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {packages.data.length ? (
-                                        packages.data.map((single_package, key) => (
-                                            <PackageRow
-                                                key={key}
-                                                single_package={single_package}
-                                            />
-                                        ))
+                                        packages.data.map(
+                                            (single_package, key) => (
+                                                <PackageRow
+                                                    key={key}
+                                                    single_package={
+                                                        single_package
+                                                    }
+                                                />
+                                            ),
+                                        )
                                     ) : (
                                         <TableRow>
                                             <TableCell

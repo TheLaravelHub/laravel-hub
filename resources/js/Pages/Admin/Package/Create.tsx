@@ -16,21 +16,21 @@ import { Button } from '@/components/ui/button'
 import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
-import {Target} from "lucide-react";
-import {useState} from "react";
-import axios from "axios";
-import SingleSelect from "@/components/single-select";
-import {SelectOption} from "@/types";
-import MultiSelect from "@/components/multi-select";
+import { Target } from 'lucide-react'
+import { useState } from 'react'
+import axios from 'axios'
+import SingleSelect from '@/components/single-select'
+import { SelectOption } from '@/types'
+import MultiSelect from '@/components/multi-select'
 
 interface CreateProps {
     indexes: SelectOption[]
     categories: SelectOption[]
 }
 
-const Create = ({indexes, categories}: CreateProps) => {
+const Create = ({ indexes, categories }: CreateProps) => {
     const { slugify } = useSlugify()
-    const [isFetching, setIsFetching] = useState<boolean>(false);
+    const [isFetching, setIsFetching] = useState<boolean>(false)
     const { post, data, setData, processing, errors, reset } = useForm<{
         index_id: string | number | null
         category_ids: string[]
@@ -46,7 +46,7 @@ const Create = ({indexes, categories}: CreateProps) => {
         owner_avatar: string
         active: boolean
     }>({
-        index_id: "" as string | null,
+        index_id: '' as string | null,
         category_ids: [],
         repository_url: '',
         name: '',
@@ -63,12 +63,13 @@ const Create = ({indexes, categories}: CreateProps) => {
 
     const getRepositoryData = async () => {
         setIsFetching(true)
-        await axios.get(route('admin.packages.get-repository-data'), {
-            params: {
-                repository_url: data.repository_url
-            }
-        })
-            .then(response => {
+        await axios
+            .get(route('admin.packages.get-repository-data'), {
+                params: {
+                    repository_url: data.repository_url,
+                },
+            })
+            .then((response) => {
                 const data = response.data
 
                 setData('name', data.name)
@@ -82,7 +83,7 @@ const Create = ({indexes, categories}: CreateProps) => {
 
                 setIsFetching(false)
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error)
                 setIsFetching(false)
             })
@@ -101,7 +102,10 @@ const Create = ({indexes, categories}: CreateProps) => {
     return (
         <AdminAuthenticatedLayout
             breadcrumbs={[
-                { title: 'Packages', link: route('admin.packages.packages.index') },
+                {
+                    title: 'Packages',
+                    link: route('admin.packages.packages.index'),
+                },
                 {
                     title: 'Create',
                 },
@@ -119,36 +123,70 @@ const Create = ({indexes, categories}: CreateProps) => {
                                         <CardContent className="flex flex-col justify-center gap-4 py-3">
                                             <div className="flex flex-col gap-1">
                                                 <Label htmlFor="index_id">
-                                                    Index{" "}
-                                                    <span className="text-xl text-red-900" title="Required">
+                                                    Index{' '}
+                                                    <span
+                                                        className="text-xl text-red-900"
+                                                        title="Required"
+                                                    >
                                                         *
                                                     </span>
                                                 </Label>
                                                 <SingleSelect
                                                     options={indexes}
-                                                    value={indexes.find(option => option.value === data.index_id) || null}
-                                                    onChange={(selectedOption) =>
-                                                        setData("index_id", selectedOption?.value ?? null)
+                                                    value={
+                                                        indexes.find(
+                                                            (option) =>
+                                                                option.value ===
+                                                                data.index_id,
+                                                        ) || null
+                                                    }
+                                                    onChange={(
+                                                        selectedOption,
+                                                    ) =>
+                                                        setData(
+                                                            'index_id',
+                                                            selectedOption?.value ??
+                                                                null,
+                                                        )
                                                     }
                                                 />
-                                                <InputError message={errors.index_id} />
+                                                <InputError
+                                                    message={errors.index_id}
+                                                />
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <Label htmlFor="category_ids">
-                                                    Categories {" "}
-                                                    <span className="text-xl text-red-900" title="Required">
+                                                    Categories{' '}
+                                                    <span
+                                                        className="text-xl text-red-900"
+                                                        title="Required"
+                                                    >
                                                         *
                                                     </span>
                                                 </Label>
 
                                                 <MultiSelect
                                                     options={categories}
-                                                    value={categories.filter(option => data.category_ids.includes(option.value.toString()))} // Ensures proper display
-                                                    onChange={(selectedOptions) =>
-                                                        setData("category_ids", selectedOptions.map(option => option.value.toString())) // Converts to string
+                                                    value={categories.filter(
+                                                        (option) =>
+                                                            data.category_ids.includes(
+                                                                option.value.toString(),
+                                                            ),
+                                                    )} // Ensures proper display
+                                                    onChange={
+                                                        (selectedOptions) =>
+                                                            setData(
+                                                                'category_ids',
+                                                                selectedOptions.map(
+                                                                    (option) =>
+                                                                        option.value.toString(),
+                                                                ),
+                                                            ) // Converts to string
                                                     }
                                                 />
-                                                <InputError message={errors.index_id} />
+                                                <InputError
+                                                    message={errors.index_id}
+                                                />
                                             </div>
                                         </CardContent>
                                     </Card>
@@ -158,7 +196,7 @@ const Create = ({indexes, categories}: CreateProps) => {
                                         </CardHeader>
                                         <CardContent className="flex flex-col justify-center gap-4">
                                             <div className="flex flex-col gap-1">
-                                                <div className="flex justify-between items-end gap-2">
+                                                <div className="flex items-end justify-between gap-2">
                                                     <div className="flex-1">
                                                         <Label htmlFor="repository_url">
                                                             Repository URL{' '}
@@ -166,29 +204,39 @@ const Create = ({indexes, categories}: CreateProps) => {
                                                                 className="text-xl text-red-900"
                                                                 title="Required"
                                                             >
-                                                        *
-                                                    </span>
+                                                                *
+                                                            </span>
                                                         </Label>
                                                         <Input
                                                             id="repository_url"
                                                             type="url"
                                                             placeholder="Repository URL"
-                                                            value={data.repository_url}
+                                                            value={
+                                                                data.repository_url
+                                                            }
                                                             onChange={(e) =>
                                                                 setData(
                                                                     'repository_url',
-                                                                    e.target.value,
+                                                                    e.target
+                                                                        .value,
                                                                 )
                                                             }
                                                         />
                                                         <InputError
-                                                            message={errors.repository_url}
+                                                            message={
+                                                                errors.repository_url
+                                                            }
                                                         />
                                                     </div>
                                                     <Button
-                                                        disabled={!data.repository_url || isFetching}
-                                                        type={"button"}
-                                                        onClick={getRepositoryData}
+                                                        disabled={
+                                                            !data.repository_url ||
+                                                            isFetching
+                                                        }
+                                                        type={'button'}
+                                                        onClick={
+                                                            getRepositoryData
+                                                        }
                                                     >
                                                         {isFetching ? (
                                                             <BeatLoader
@@ -199,7 +247,7 @@ const Create = ({indexes, categories}: CreateProps) => {
                                                                 data-testid="loader"
                                                             />
                                                         ) : (
-                                                            <Target/>
+                                                            <Target />
                                                         )}
                                                     </Button>
                                                 </div>
@@ -335,7 +383,9 @@ const Create = ({indexes, categories}: CreateProps) => {
                                                     disabled={true}
                                                     value={data.language}
                                                 />
-                                                <InputError message={errors.language}/>
+                                                <InputError
+                                                    message={errors.language}
+                                                />
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <Label htmlFor="stars">
@@ -347,7 +397,9 @@ const Create = ({indexes, categories}: CreateProps) => {
                                                     disabled={true}
                                                     value={data.stars}
                                                 />
-                                                <InputError message={errors.stars}/>
+                                                <InputError
+                                                    message={errors.stars}
+                                                />
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <Label htmlFor="owner">
@@ -359,15 +411,19 @@ const Create = ({indexes, categories}: CreateProps) => {
                                                     disabled={true}
                                                     value={data.owner}
                                                 />
-                                                <InputError message={errors.owner}/>
+                                                <InputError
+                                                    message={errors.owner}
+                                                />
                                             </div>
                                             {data.owner_avatar && (
                                                 <div className="flex flex-col gap-1">
-                                                        <Image
-                                                            src={data.owner_avatar as string}
-                                                            width={50}
-                                                            height={50}
-                                                        />
+                                                    <Image
+                                                        src={
+                                                            data.owner_avatar as string
+                                                        }
+                                                        width={50}
+                                                        height={50}
+                                                    />
                                                 </div>
                                             )}
 

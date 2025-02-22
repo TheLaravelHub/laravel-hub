@@ -93,6 +93,6 @@ export type PageProps<
 }
 
 export interface SelectOption {
-    value: string | number;
-    label: string;
+    value: string | number
+    label: string
 }

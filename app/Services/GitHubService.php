@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Http;
 
 /**
  * Class GitHubService
- * @package App\Services
  */
 class GitHubService
 {
     /**
      * Fetch repository data from GitHub API
-     *
-     * @param string $repoUrl
-     * @return array|null
      */
     public static function fetchRepositoryData(string $repoUrl): ?array
     {
@@ -29,7 +25,7 @@ class GitHubService
 
         $response = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer ' . env('GITHUB_TOKEN'),
+            'Authorization' => 'Bearer '.env('GITHUB_TOKEN'),
         ])->get($apiUrl);
 
         if ($response->failed()) {

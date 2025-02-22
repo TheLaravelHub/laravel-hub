@@ -16,7 +16,7 @@ class UpdatePackageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'repository_url' => ['required', 'url', 'regex:/github\.com\/([^\/]+)\/([^\/]+)/', 'unique:packages,repository_url,' . $this->route('package')->id],
+            'repository_url' => ['required', 'url', 'regex:/github\.com\/([^\/]+)\/([^\/]+)/', 'unique:packages,repository_url,'.$this->route('package')->id],
             'index_id' => ['required', 'integer', 'exists:indexes,id'],
             'category_ids' => ['required', 'array'],
             'category_ids.*' => [

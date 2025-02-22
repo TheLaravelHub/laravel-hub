@@ -10,7 +10,6 @@ use App\Models\Category;
 use App\Models\Index;
 use App\Models\Package;
 use DB;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Thefeqy\ModelStatus\Status;
 
@@ -22,6 +21,7 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::query()->with(['index', 'categories'])->paginate(12);
+
         return Inertia::render('Admin/Package/Index', [
             'packages' => PackageResource::collection($packages),
         ]);
@@ -34,6 +34,7 @@ class PackageController extends Controller
     {
         $indexes = Index::query()->withActive()->select('name as label', 'id as value')->get();
         $categories = Category::query()->withActive()->select('name as label', 'id as value')->forPackages()->get();
+
         return Inertia::render('Admin/Package/Create', [
             'indexes' => $indexes,
             'categories' => $categories,
@@ -53,6 +54,7 @@ class PackageController extends Controller
             $package->categories()->sync($request->category_ids);
 
             DB::commit();
+
             return redirect()
                 ->route('admin.packages.packages.index')
                 ->with('message', 'Package created successfully');
@@ -68,6 +70,7 @@ class PackageController extends Controller
     public function show(Package $package)
     {
         $package->load(['categories', 'index']);
+
         return Inertia::render('Admin/Package/Show', [
             'package' => new PackageResource($package),
         ]);
@@ -82,6 +85,7 @@ class PackageController extends Controller
 
         $indexes = Index::query()->withActive()->select('name as label', 'id as value')->get();
         $categories = Category::query()->withActive()->select('name as label', 'id as value')->forPackages()->get();
+
         return Inertia::render('Admin/Package/Edit', [
             'package' => new PackageResource($package),
             'indexes' => $indexes,
@@ -99,6 +103,7 @@ class PackageController extends Controller
             $package->update($request->safe()->merge(['status' => $request->active ? Status::active() : Status::inactive()])->all());
             $package->categories()->sync($request->category_ids);
             DB::commit();
+
             return redirect()
                 ->route('admin.packages.packages.index')
                 ->with('message', 'Package updated successfully');
@@ -114,6 +119,7 @@ class PackageController extends Controller
     public function destroy(Package $package)
     {
         $package->delete();
+
         return redirect()
             ->route('admin.packages.packages.index')
             ->with('message', 'Package deleted successfully');

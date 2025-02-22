@@ -1,15 +1,20 @@
-import React from "react";
-import Select from "react-select";
-import {SelectOption} from "@/types";
+import React from 'react'
+import Select from 'react-select'
+import { SelectOption } from '@/types'
 
 interface SingleSelectProps {
-    options: SelectOption[];
-    value: SelectOption | null;
-    onChange: (selectedOption: SelectOption | null) => void;
-    placeholder?: string;
+    options: SelectOption[]
+    value: SelectOption | null
+    onChange: (selectedOption: SelectOption | null) => void
+    placeholder?: string
 }
 
-const SingleSelect: React.FC<SingleSelectProps> = ({ options, value, onChange, placeholder = "Select an option" }) => {
+const SingleSelect: React.FC<SingleSelectProps> = ({
+    options,
+    value,
+    onChange,
+    placeholder = 'Select an option',
+}) => {
     return (
         <Select
             options={options}
@@ -19,7 +24,7 @@ const SingleSelect: React.FC<SingleSelectProps> = ({ options, value, onChange, p
             className="text-gray-900"
             classNamePrefix="react-select"
         />
-    );
-};
+    )
+}
 
-export default SingleSelect;
+export default SingleSelect
