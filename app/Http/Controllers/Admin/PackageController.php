@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreatePackageRequest;
+use App\Http\Requests\Admin\UpdatePackageRequest;
 use App\Http\Resources\Admin\PackageResource;
 use App\Models\Category;
 use App\Models\Index;
@@ -44,7 +45,6 @@ class PackageController extends Controller
      */
     public function store(CreatePackageRequest $request)
     {
-//        dd($request->safe()->merge(['status' => $request->active ? Status::active() : Status::inactive()])->all());
         try {
             DB::beginTransaction();
 
@@ -75,15 +75,34 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        $package->load(['categories:id'])->setAttribute('category_ids', $package->categories->pluck('id'));
+
+        $indexes = Index::query()->withActive()->select('name as label', 'id as value')->get();
+        $categories = Category::query()->withActive()->select('name as label', 'id as value')->forPackages()->get();
+        return Inertia::render('Admin/Package/Edit', [
+            'package' => new PackageResource($package),
+            'indexes' => $indexes,
+            'categories' => $categories,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Package $package)
+    public function update(UpdatePackageRequest $request, Package $package)
     {
-        //
+        try {
+            DB::beginTransaction();
+            $package->update($request->safe()->merge(['status' => $request->active ? Status::active() : Status::inactive()])->all());
+            $package->categories()->sync($request->category_ids);
+            DB::commit();
+            return redirect()
+                ->route('admin.packages.packages.index')
+                ->with('message', 'Package updated successfully');
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
     }
 
     /**

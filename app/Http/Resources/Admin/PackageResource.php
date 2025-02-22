@@ -21,6 +21,7 @@ class PackageResource extends JsonResource
             'index_id' => $this->index_id,
             'index' => new IndexResource($this->whenLoaded('index')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
+            'category_ids' => $this->categories->pluck('id'),
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
