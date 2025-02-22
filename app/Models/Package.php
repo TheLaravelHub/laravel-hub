@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Package extends Model
 {
-    use HasActiveScope, HasSlug;
+    use HasActiveScope, HasSlug, SoftDeletes;
 
     protected $fillable = [
         'index_id', 'name', 'slug', 'description', 'repository_url', 'meta_title', 'meta_description',

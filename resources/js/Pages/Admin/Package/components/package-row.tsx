@@ -44,7 +44,7 @@ const PackageRow = ({ single_package }: { single_package: Package }) => {
         )
     }
 
-    const handleDomainDeletion = () => {
+    const handleDeletion = () => {
         deleteForm.delete(route('admin.packages.packages.destroy', single_package.id), {
             preserveScroll: true,
             onSuccess: () => {
@@ -123,7 +123,7 @@ const PackageRow = ({ single_package }: { single_package: Package }) => {
                         <AlertDialogCancel onClick={closeDeleteDialog}>
                             Cancel
                         </AlertDialogCancel>
-                        <AlertDialogAction onClick={handleDomainDeletion}>
+                        <AlertDialogAction onClick={handleDeletion}>
                             Continue
                         </AlertDialogAction>
                     </AlertDialogFooter>
