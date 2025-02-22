@@ -14,7 +14,7 @@ class GetPackageRepoDataRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'repository_url' => ['required', 'url', 'regex:/github\.com\/([^\/]+)\/([^\/]+)/', 'unique:packages,repository_url'],
+            'repository_url' => ['required', 'url', 'regex:/github\.com\/([^\/]+)\/([^\/]+)/'],
         ];
     }
 }
