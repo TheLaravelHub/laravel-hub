@@ -67,7 +67,10 @@ class PackageController extends Controller
      */
     public function show(Package $package)
     {
-        //
+        $package->load(['categories', 'index']);
+        return Inertia::render('Admin/Package/Show', [
+            'package' => new PackageResource($package),
+        ]);
     }
 
     /**
