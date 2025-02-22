@@ -18,7 +18,7 @@ export interface Admin {
 }
 
 export type Index = {
-    id: number
+    id: number | string
     name: string
     description: string
     slug: string
@@ -35,6 +35,26 @@ export type Category = {
     slug: string
     meta_title: string
     meta_description: string
+    status: 'active' | 'inactive'
+    created_at: string
+    updated_at: string
+}
+
+type Package = {
+    id: number
+    index_id: number
+    index: Index
+    categories: Category[]
+    name: string
+    slug: string
+    description?: string
+    repository_url: string
+    language?: string
+    stars: number
+    forks: number
+    open_issues: number
+    owner?: string
+    owner_avatar?: string
     status: 'active' | 'inactive'
     created_at: string
     updated_at: string
@@ -68,4 +88,14 @@ export type PageProps<
         user: User
     }
     ziggy: Config & { location: string }
+}
+
+export type ComboboxData = {
+    value: string
+    label: string
+}
+
+export interface SelectOption {
+    value: string | number;
+    label: string;
 }

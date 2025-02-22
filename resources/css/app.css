@@ -133,3 +133,14 @@
         @apply bg-gradient-to-br from-primary to-secondary;
     }
 }
+
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+}
