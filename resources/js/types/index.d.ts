@@ -11,6 +11,7 @@ export type BreadcrumbType = {
     title: string
     link?: string
 }
+
 export interface Admin {
     id: number
     name: string
@@ -88,11 +89,6 @@ export type PageProps<
         user: User
     }
     ziggy: Config & { location: string }
-}
-
-export type ComboboxData = {
-    value: string
-    label: string
 }
 
 export interface SelectOption {
