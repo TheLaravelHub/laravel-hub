@@ -46,14 +46,15 @@ type Package = {
     index_id: number
     index: Index
     categories: Category[]
+    category_ids: string[]
     name: string
     slug: string
     description?: string
+    meta_title: string
+    meta_description: string
     repository_url: string
     language?: string
     stars: number
-    forks: number
-    open_issues: number
     owner?: string
     owner_avatar?: string
     status: 'active' | 'inactive'
