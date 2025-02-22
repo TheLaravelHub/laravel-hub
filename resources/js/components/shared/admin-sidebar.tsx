@@ -52,12 +52,12 @@ const data = {
             url: '#',
             mainRoute: 'admin.packages',
             icon: Package,
-            isActive: route().current('admin.packages.index'),
+            isActive: route().current('admin.packages.packages.index'),
             items: [
-                // {
-                //     title: 'Packages',
-                //     url: route('admin.packages.index'),
-                // },
+                {
+                    title: 'Packages',
+                    url: route('admin.packages.packages.index'),
+                },
                 {
                     title: 'Categories',
                     url: route('admin.packages.categories.index'),
