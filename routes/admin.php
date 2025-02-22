@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\BlogPostCategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Admin\PackageCategoryController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ToggleStatusController;
 use App\Http\Middleware\AdminAuthMiddleware;
@@ -42,6 +44,9 @@ Route::middleware(AdminAuthMiddleware::class)->group(function () {
     Route::prefix('packages')
         ->as('packages.')
         ->group(function () {
+            Route::resource('packages', PackageController::class);
+            Route::get('get-repository-data', GetPackageRepoDataController::class)
+                ->name('get-repository-data');
             Route::resource('categories', PackageCategoryController::class);
         });
 

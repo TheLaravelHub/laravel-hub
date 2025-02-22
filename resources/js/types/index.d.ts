@@ -11,6 +11,7 @@ export type BreadcrumbType = {
     title: string
     link?: string
 }
+
 export interface Admin {
     id: number
     name: string
@@ -18,7 +19,7 @@ export interface Admin {
 }
 
 export type Index = {
-    id: number
+    id: number | string
     name: string
     description: string
     slug: string
@@ -35,6 +36,27 @@ export type Category = {
     slug: string
     meta_title: string
     meta_description: string
+    status: 'active' | 'inactive'
+    created_at: string
+    updated_at: string
+}
+
+type Package = {
+    id: number
+    index_id: number
+    index: Index
+    categories: Category[]
+    category_ids: string[]
+    name: string
+    slug: string
+    description?: string
+    meta_title: string
+    meta_description: string
+    repository_url: string
+    language?: string
+    stars: number
+    owner?: string
+    owner_avatar?: string
     status: 'active' | 'inactive'
     created_at: string
     updated_at: string
@@ -68,4 +90,9 @@ export type PageProps<
         user: User
     }
     ziggy: Config & { location: string }
+}
+
+export interface SelectOption {
+    value: string | number
+    label: string
 }
