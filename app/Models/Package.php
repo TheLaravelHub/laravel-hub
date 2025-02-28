@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
+use App\Http\Resources\Admin\CategoryResource;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laravel\Scout\Attributes\SearchUsingFullText;
+use Laravel\Scout\Searchable;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Package extends Model
 {
     use HasActiveScope;
     use HasSlug;
+    use Searchable;
     use SoftDeletes;
 
     protected $fillable = [
@@ -34,5 +38,26 @@ class Package extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_package');
+    }
+
+    public function searchableAs(): string
+    {
+        return 'packages_index';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    #[SearchUsingFullText(['name', 'description', 'owner'])]
+    public function toSearchableArray()
+    {
+        return array_merge(
+            $this->toArray(),
+            [
+                'categories' => CategoryResource::collection($this->categories),
+            ]
+        );
     }
 }

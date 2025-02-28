@@ -1,20 +1,12 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('homepage');
+Route::get('/', HomePageController::class)->name('homepage');
 
 Route::middleware('auth', EnsureAuthenticatedUserIsActive::class)->group(function () {
     Route::get('/dashboard', DashboardController::class)->middleware(['verified'])->name('dashboard');

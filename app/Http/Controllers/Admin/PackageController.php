@@ -53,6 +53,8 @@ class PackageController extends Controller
 
             $package->categories()->sync($request->category_ids);
 
+            $package->get()->searchable();
+
             DB::commit();
 
             return redirect()
@@ -102,6 +104,7 @@ class PackageController extends Controller
             DB::beginTransaction();
             $package->update($request->safe()->merge(['status' => $request->active ? Status::active() : Status::inactive()])->all());
             $package->categories()->sync($request->category_ids);
+            $package->searchable();
             DB::commit();
 
             return redirect()
