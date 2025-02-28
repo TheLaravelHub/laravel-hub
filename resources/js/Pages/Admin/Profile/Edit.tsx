@@ -9,9 +9,7 @@ export default function Edit({
     status,
 }: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
     return (
-        <AdminAuthenticatedLayout
-            breadcrumbs={[{ title: 'Profile'}]}
-        >
+        <AdminAuthenticatedLayout breadcrumbs={[{ title: 'Profile' }]}>
             <Head title="Profile" />
 
             <div className="py-12">
