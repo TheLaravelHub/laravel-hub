@@ -39,4 +39,13 @@ class Category extends Model
     {
         return $query->where('category_type', 'App\Models\BlogPost');
     }
+
+    /**
+     * Relationship: Category belongs to many Packages.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'category_package');
+    }
 }
