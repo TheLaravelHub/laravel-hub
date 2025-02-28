@@ -44,14 +44,16 @@ const Navbar = () => {
                         target={'_blank'}
                         className="flex items-center space-x-2 transition-colors hover:text-primary"
                     >
-                        <Github size={28} /> <span className={'hidden md:block'}>GitHub</span>
+                        <Github size={28} />{' '}
+                        <span className={'hidden md:block'}>GitHub</span>
                     </a>
                     <a
                         href="https://github.com/sponsors/thefeqy"
                         target={'_blank'}
                         className="flex items-center space-x-2 transition-colors hover:text-primary"
                     >
-                        <LifeBuoy size={28} /> <span className={'hidden md:block'}>Support</span>
+                        <LifeBuoy size={28} />{' '}
+                        <span className={'hidden md:block'}>Support</span>
                     </a>
                 </nav>
             </div>
