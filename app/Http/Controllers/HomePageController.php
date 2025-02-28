@@ -23,6 +23,7 @@ class HomePageController extends Controller
         $packages = Package::query()
             ->with('categories')
             ->paginate(24);
+
         return Inertia::render('Index', [
             'categories' => CategoryResource::collection($categories),
             'packages' => PackageResource::collection($packages),

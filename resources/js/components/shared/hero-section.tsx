@@ -1,23 +1,24 @@
-import {Dispatch, SetStateAction, useState} from 'react'
-import {Category, Package} from "@/types";
-import {Input} from "@/components/ui/input";
-import {Search} from "lucide-react";
-import axios from "axios";
+import { Dispatch, SetStateAction, useState } from 'react'
+import { Category, Package } from '@/types'
+import { Input } from '@/components/ui/input'
+import { Search } from 'lucide-react'
+import axios from 'axios'
 
 interface HeroProps {
     categories: Category[]
     setPackagesData: Dispatch<SetStateAction<Package[]>>
 }
 
-const HeroSection = ({categories, setPackagesData}: HeroProps) => {
+const HeroSection = ({ categories, setPackagesData }: HeroProps) => {
     const [search, setSearch] = useState('')
 
     const handleSearch = () => {
-        axios.get(route('search'), { params: { term: search } })
-            .then(response => {
+        axios
+            .get(route('search'), { params: { term: search } })
+            .then((response) => {
                 setPackagesData(response.data)
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error)
             })
     }

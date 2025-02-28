@@ -116,10 +116,10 @@ return [
         'id' => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
         'index-settings' => [
-             'packages' => [
-                 'searchableAttributes' => ['name', 'description', 'owner'],
-                 'attributesForFaceting'=> ['filterOnly(language)'],
-             ],
+            'packages' => [
+                'searchableAttributes' => ['name', 'description', 'owner'],
+                'attributesForFaceting' => ['filterOnly(language)'],
+            ],
         ],
     ],
 

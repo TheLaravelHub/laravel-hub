@@ -3,9 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Thefeqy\ModelStatus\Middleware\EnsureAuthenticatedUserIsActive;
 
 Route::get('/', HomePageController::class)->name('homepage');

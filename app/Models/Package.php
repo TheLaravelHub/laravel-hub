@@ -16,8 +16,8 @@ class Package extends Model
 {
     use HasActiveScope;
     use HasSlug;
-    use SoftDeletes;
     use Searchable;
+    use SoftDeletes;
 
     protected $fillable = [
         'index_id', 'name', 'slug', 'description', 'repository_url', 'meta_title', 'meta_description',

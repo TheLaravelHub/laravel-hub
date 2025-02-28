@@ -42,6 +42,7 @@ class Category extends Model
 
     /**
      * Relationship: Category belongs to many Packages.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function packages()

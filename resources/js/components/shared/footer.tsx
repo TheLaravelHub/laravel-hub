@@ -1,4 +1,4 @@
-import {Github, LifeBuoy} from "lucide-react";
+import { Github, LifeBuoy } from 'lucide-react'
 
 const Footer = () => {
     return (

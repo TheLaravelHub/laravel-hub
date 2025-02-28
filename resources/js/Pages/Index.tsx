@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import {Star} from 'lucide-react'
+import { Star } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
 import { Head } from '@inertiajs/react'
 import { Category, Package as PackageType } from '@/types'
 import { Badge } from '@/components/ui/badge'
-import Image from "@/components/image";
-import HeroSection from "@/components/shared/hero-section";
-import Footer from "@/components/shared/footer";
+import Image from '@/components/image'
+import HeroSection from '@/components/shared/hero-section'
+import Footer from '@/components/shared/footer'
 
 interface IndexProps {
     categories: { data: Category[] }
@@ -25,31 +25,40 @@ export default function Index({ categories, packages }: IndexProps) {
                 <Navbar />
 
                 {/*Hero Section*/}
-                <HeroSection categories={categories.data} setPackagesData={setPackagesData}/>
+                <HeroSection
+                    categories={categories.data}
+                    setPackagesData={setPackagesData}
+                />
 
                 {/* Packages */}
-                <section className="mx-auto grid max-w-8xl grid-cols-1 gap-8 px-6 py-6 md:grid-cols-2">
+                <section className="max-w-8xl mx-auto grid grid-cols-1 gap-8 px-6 py-6 md:grid-cols-2">
                     {packagesData.map((pkg) => (
                         <Card
                             key={pkg.id}
                             className="rounded-2xl border border-border bg-card p-6 shadow-md"
                         >
                             <CardContent className="flex flex-col items-start space-y-4">
-                                <div className="w-full flex items-center justify-between">
+                                <div className="flex w-full items-center justify-between">
                                     <div className="flex items-center space-x-4">
                                         <Image
                                             src={pkg.owner_avatar as string}
                                             alt={pkg.owner}
                                             className="h-16 w-16 rounded-full"
                                         />
-                                        <a href={pkg.repository_url} target={'_blank'}>
+                                        <a
+                                            href={pkg.repository_url}
+                                            target={'_blank'}
+                                        >
                                             <h3 className="ml-4 text-2xl font-semibold text-primary">
                                                 {pkg.name}
                                             </h3>
                                         </a>
                                     </div>
                                     <div className="flex flex-col items-center justify-center space-y-1">
-                                        <Star size={24} className="text-yellow-400"/>
+                                        <Star
+                                            size={24}
+                                            className="text-yellow-400"
+                                        />
                                         <p className="text-center text-muted-foreground">
                                             {pkg.stars}
                                         </p>
@@ -59,7 +68,11 @@ export default function Index({ categories, packages }: IndexProps) {
                                     <p className="mt-2 text-muted-foreground">
                                         {pkg.description.length > 50 ? (
                                             <>
-                                                {pkg.description.substring(0, 50)}...
+                                                {pkg.description.substring(
+                                                    0,
+                                                    50,
+                                                )}
+                                                ...
                                             </>
                                         ) : (
                                             pkg.description
@@ -83,7 +96,7 @@ export default function Index({ categories, packages }: IndexProps) {
                 </section>
 
                 {/* Footer */}
-                <Footer/>
+                <Footer />
             </div>
         </>
     )
