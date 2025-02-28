@@ -2,7 +2,7 @@ import {
     Dispatch,
     SetStateAction,
     useCallback,
-    useEffect,
+    useEffect, useRef,
     useState,
 } from 'react'
 import { Category, Package } from '@/types'
@@ -14,13 +14,16 @@ import lodash from 'lodash'
 interface HeroProps {
     categories: Category[]
     setPackagesData: Dispatch<SetStateAction<Package[]>>
+    packagesRef: React.RefObject<HTMLDivElement>
 }
 
 export default function HeroSection({
     categories,
     setPackagesData,
+    packagesRef,
 }: HeroProps) {
     const [search, setSearch] = useState('')
+    const searchElement = useRef<HTMLInputElement | null>(null)
 
     const fetchResults = useCallback(
         lodash.debounce(async (searchTerm: string) => {
@@ -29,6 +32,14 @@ export default function HeroSection({
                     params: { term: searchTerm },
                 })
                 setPackagesData(response.data)
+
+                if (window.innerWidth < 768 && packagesRef?.current && searchTerm) {
+                    packagesRef.current.scrollIntoView({
+                        behavior: 'smooth',
+                    })
+
+                    searchElement.current?.blur();
+                }
             } catch (error) {
                 console.error(error)
             }
@@ -37,7 +48,9 @@ export default function HeroSection({
     )
 
     useEffect(() => {
-        fetchResults(search)
+        if (search.trim()) {
+            fetchResults(search);
+        }
     }, [search, fetchResults])
 
     return (
@@ -70,6 +83,7 @@ export default function HeroSection({
                     <Input
                         type="text"
                         placeholder="Search packages..."
+                        ref={searchElement}
                         className="h-full w-full !border-none bg-transparent pl-4 text-lg !outline-none !ring-0 hover:!border-none hover:!outline-none hover:!ring-0 focus:!border-none focus:!outline-none focus:!ring-0 active:!ring-0"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
