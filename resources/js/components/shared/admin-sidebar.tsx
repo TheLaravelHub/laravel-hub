@@ -176,6 +176,7 @@ export function AdminSidebar({
     return (
         <Sidebar
             collapsible="offcanvas"
+            variant='inset'
             {...props}
         >
             <SidebarHeader>
