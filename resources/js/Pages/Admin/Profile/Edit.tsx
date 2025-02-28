@@ -10,11 +10,7 @@ export default function Edit({
 }: PageProps<{ mustVerifyEmail: boolean; status?: string }>) {
     return (
         <AdminAuthenticatedLayout
-            header={
-                <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-                    Profile
-                </h2>
-            }
+            breadcrumbs={[{ title: 'Profile'}]}
         >
             <Head title="Profile" />
 
