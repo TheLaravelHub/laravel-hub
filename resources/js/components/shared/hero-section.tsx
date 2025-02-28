@@ -2,7 +2,8 @@ import {
     Dispatch,
     SetStateAction,
     useCallback,
-    useEffect, useRef,
+    useEffect,
+    useRef,
     useState,
 } from 'react'
 import { Category, Package } from '@/types'
@@ -10,6 +11,7 @@ import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import axios from 'axios'
 import lodash from 'lodash'
+import { BeatLoader } from 'react-spinners'
 
 interface HeroProps {
     categories: Category[]
@@ -24,6 +26,7 @@ export default function HeroSection({
 }: HeroProps) {
     const [search, setSearch] = useState('')
     const searchElement = useRef<HTMLInputElement | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     const fetchResults = useCallback(
         lodash.debounce(async (searchTerm: string) => {
@@ -32,15 +35,21 @@ export default function HeroSection({
                     params: { term: searchTerm },
                 })
                 setPackagesData(response.data)
+                setIsLoading(false)
 
-                if (window.innerWidth < 768 && packagesRef?.current && searchTerm) {
+                if (
+                    window.innerWidth < 768 &&
+                    packagesRef?.current &&
+                    searchTerm
+                ) {
                     packagesRef.current.scrollIntoView({
                         behavior: 'smooth',
                     })
 
-                    searchElement.current?.blur();
+                    searchElement.current?.blur()
                 }
             } catch (error) {
+                setIsLoading(false)
                 console.error(error)
             }
         }, 300),
@@ -49,7 +58,8 @@ export default function HeroSection({
 
     useEffect(() => {
         if (search.trim()) {
-            fetchResults(search);
+            setIsLoading(true)
+            fetchResults(search)
         }
     }, [search, fetchResults])
 
@@ -88,6 +98,15 @@ export default function HeroSection({
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
+                    {isLoading && (
+                        <BeatLoader
+                            color="#9c3af5"
+                            loading={true}
+                            size={10}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                    )}
                 </div>
             </div>
         </section>
