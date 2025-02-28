@@ -42,7 +42,7 @@ class Package extends Model
 
     public function searchableAs(): string
     {
-        return 'packages_index';
+        return 'packages_index_'.env('APP_ENV');
     }
 
     /**
