@@ -53,11 +53,6 @@ class Package extends Model
     #[SearchUsingFullText(['name', 'description', 'owner'])]
     public function toSearchableArray()
     {
-        return array_merge(
-            $this->toArray(),
-            [
-                'categories' => CategoryResource::collection($this->categories),
-            ]
-        );
+        return $this->toArray();
     }
 }
