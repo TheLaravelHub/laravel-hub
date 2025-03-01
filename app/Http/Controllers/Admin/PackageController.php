@@ -25,8 +25,11 @@ class PackageController extends Controller
             ->orderByDesc('id')
             ->paginate(12);
 
+        $packagesCount = $packages->count();
+
         return Inertia::render('Admin/Package/Index', [
             'packages' => PackageResource::collection($packages),
+            'packagesCount' => $packagesCount,
         ]);
     }
 
