@@ -1,10 +1,4 @@
-import {
-    Dispatch,
-    SetStateAction,
-    useEffect,
-    useRef,
-    useState
-} from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { Category, Package } from '@/types'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
