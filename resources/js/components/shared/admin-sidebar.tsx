@@ -1,10 +1,5 @@
 import * as React from 'react'
-import {
-    BookAIcon,
-    Gauge,
-    Package,
-    Rss,
-} from 'lucide-react'
+import { BookAIcon, Gauge, Package, Rss } from 'lucide-react'
 
 import { NavMain } from '@/components/nav-main'
 import {
@@ -76,7 +71,7 @@ const data = {
                     url: route('admin.blog-posts.categories.index'),
                 },
             ],
-        }
+        },
     ],
 }
 
