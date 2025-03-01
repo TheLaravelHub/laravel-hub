@@ -32,9 +32,10 @@ interface IndexProps {
         meta: MetaType
         links: LinksType
     }
+    packagesCount: number
 }
 
-const Index = ({ packages }: IndexProps) => {
+const Index = ({ packages, packagesCount }: IndexProps) => {
     return (
         <AdminAuthenticatedLayout breadcrumbs={[{ title: 'Packages' }]}>
             <Head title="Packages" />
@@ -43,7 +44,9 @@ const Index = ({ packages }: IndexProps) => {
                 <div className="min-h-[100vh] flex-1 md:min-h-min">
                     <Card className="p-6 text-gray-900 dark:text-gray-100">
                         <CardHeader className="w-100 flex flex-row items-center justify-between">
-                            <CardTitle className="text-4xl">Packages</CardTitle>
+                            <CardTitle className="text-4xl">
+                                Packages ({packagesCount})
+                            </CardTitle>
                             <Link
                                 className="btn-primary"
                                 href={route('admin.packages.packages.create')}
