@@ -21,7 +21,8 @@ export default function HeroSection({
     const [search, setSearch] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const debounceTimeout = useRef<NodeJS.Timeout | null>(null)
-    const [initialPackages, setInitialPackages] = useState<Package[]>(packagesData)
+    const [initialPackages, setInitialPackages] =
+        useState<Package[]>(packagesData)
 
     useEffect(() => {
         if (search === '') {
