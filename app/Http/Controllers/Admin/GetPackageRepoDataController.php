@@ -14,8 +14,12 @@ class GetPackageRepoDataController extends Controller
      */
     public function __invoke(GetPackageRepoDataRequest $request)
     {
-        $repositoryData = GitHubService::fetchRepositoryData($request->repository_url);
+        try {
+            $repositoryData = GitHubService::fetchRepositoryData($request->repository_url);
 
-        return response()->json($repositoryData);
+            return response()->json($repositoryData);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => $th->getMessage()], 500);
+        }
     }
 }

@@ -31,35 +31,36 @@ interface CreateProps {
 const Create = ({ indexes, categories }: CreateProps) => {
     const { slugify } = useSlugify()
     const [isFetching, setIsFetching] = useState<boolean>(false)
-    const { post, data, setData, processing, errors, reset } = useForm<{
-        index_id: string | number | null
-        category_ids: string[]
-        repository_url: string
-        name: string
-        slug: string
-        description: string
-        meta_title: string
-        meta_description: string
-        language: string
-        stars: number
-        owner: string
-        owner_avatar: string
-        active: boolean
-    }>({
-        index_id: '' as string | null,
-        category_ids: [],
-        repository_url: '',
-        name: '',
-        slug: '',
-        description: '',
-        meta_title: '',
-        meta_description: '',
-        language: '',
-        stars: 0,
-        owner: '',
-        owner_avatar: '',
-        active: true,
-    })
+    const { post, data, setData, processing, errors, setError, reset } =
+        useForm<{
+            index_id: string | number | null
+            category_ids: string[]
+            repository_url: string
+            name: string
+            slug: string
+            description: string
+            meta_title: string
+            meta_description: string
+            language: string
+            stars: number
+            owner: string
+            owner_avatar: string
+            active: boolean
+        }>({
+            index_id: '' as string | null,
+            category_ids: [],
+            repository_url: '',
+            name: '',
+            slug: '',
+            description: '',
+            meta_title: '',
+            meta_description: '',
+            language: '',
+            stars: 0,
+            owner: '',
+            owner_avatar: '',
+            active: true,
+        })
 
     const getRepositoryData = async () => {
         setIsFetching(true)
@@ -71,7 +72,6 @@ const Create = ({ indexes, categories }: CreateProps) => {
             })
             .then((response) => {
                 const data = response.data
-
                 setData('name', data.name)
                 setData('meta_title', data.name)
                 setData('description', data.description)
@@ -85,6 +85,7 @@ const Create = ({ indexes, categories }: CreateProps) => {
             })
             .catch((error) => {
                 console.error(error)
+                setError('repository_url', error.response.data.error)
                 setIsFetching(false)
             })
     }
@@ -222,11 +223,6 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                                 )
                                                             }
                                                         />
-                                                        <InputError
-                                                            message={
-                                                                errors.repository_url
-                                                            }
-                                                        />
                                                     </div>
                                                     <Button
                                                         disabled={
@@ -251,6 +247,12 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                         )}
                                                     </Button>
                                                 </div>
+
+                                                <InputError
+                                                    message={
+                                                        errors.repository_url
+                                                    }
+                                                />
                                             </div>
                                             <div className="flex flex-col gap-1">
                                                 <Label htmlFor="name">
