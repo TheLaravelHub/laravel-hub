@@ -25,31 +25,27 @@ export default function HeroSection({
             clearTimeout(debounceTimeout.current)
         }
 
-        if (search.trim()) {
-            setIsLoading(true)
+        setIsLoading(true)
 
-            debounceTimeout.current = setTimeout(async () => {
-                try {
-                    const response = await axios.get(route('search'), {
-                        params: { term: search },
+        debounceTimeout.current = setTimeout(async () => {
+            try {
+                const response = await axios.get(route('search'), {
+                    params: { term: search },
+                })
+
+                setPackagesData(response.data)
+                setIsLoading(false)
+
+                if (window.innerWidth < 768 && packagesRef?.current) {
+                    packagesRef.current.scrollIntoView({
+                        behavior: 'smooth',
                     })
-
-                    setPackagesData(response.data)
-                    setIsLoading(false)
-
-                    if (window.innerWidth < 768 && packagesRef?.current) {
-                        packagesRef.current.scrollIntoView({
-                            behavior: 'smooth',
-                        })
-                    }
-                } catch (error) {
-                    setIsLoading(false)
-                    console.error(error)
                 }
-            }, 300)
-        } else {
-            setIsLoading(false)
-        }
+            } catch (error) {
+                setIsLoading(false)
+                console.error(error)
+            }
+        }, 300)
 
         return () => {
             if (debounceTimeout.current) clearTimeout(debounceTimeout.current)

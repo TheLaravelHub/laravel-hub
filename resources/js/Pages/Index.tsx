@@ -5,7 +5,6 @@ import Navbar from '@/components/shared/navbar'
 import { Head } from '@inertiajs/react'
 import { Category, Package as PackageType } from '@/types'
 import { Badge } from '@/components/ui/badge'
-import Image from '@/components/image'
 import HeroSection from '@/components/shared/hero-section'
 import Footer from '@/components/shared/footer'
 
@@ -42,10 +41,10 @@ export default function Index({ categories, packages }: IndexProps) {
                             key={pkg.id}
                             className="rounded-2xl border border-border bg-card p-6 shadow-md"
                         >
-                            <CardContent className="flex flex-col items-start space-y-4">
+                            <CardContent className="flex flex-col items-start space-y-4 p-0 md:p-6">
                                 <div className="flex w-full items-center justify-between">
-                                    <div className="flex items-center space-x-4">
-                                        <Image
+                                    <div className="flex items-center">
+                                        <img
                                             src={pkg.owner_avatar as string}
                                             alt={pkg.owner}
                                             className="h-16 w-16 rounded-full"
