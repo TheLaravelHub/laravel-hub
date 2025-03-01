@@ -73,6 +73,9 @@ export type MetaType = {
     from: number
     last_page: number
     links: LinkType[]
+    per_page: number
+    to: number
+    total: number
 }
 
 export type LinksType = {
