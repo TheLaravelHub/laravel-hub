@@ -57,10 +57,8 @@ export default function HeroSection({
     )
 
     useEffect(() => {
-        if (search.trim()) {
-            setIsLoading(true)
-            fetchResults(search)
-        }
+        setIsLoading(true)
+        fetchResults(search)
     }, [search, fetchResults])
 
     return (
