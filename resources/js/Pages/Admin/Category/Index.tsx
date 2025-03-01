@@ -28,9 +28,15 @@ interface IndexProps {
         meta: MetaType
         links: LinksType
     }
+    categoriesCount: number
 }
 
-const Index = ({ title, baseRoute, categories }: IndexProps) => {
+const Index = ({
+    title,
+    baseRoute,
+    categories,
+    categoriesCount,
+}: IndexProps) => {
     return (
         <AdminAuthenticatedLayout breadcrumbs={[{ title }]}>
             <Head title={title} />
@@ -39,7 +45,7 @@ const Index = ({ title, baseRoute, categories }: IndexProps) => {
                 <div className="min-h-[100vh] flex-1 md:min-h-min">
                     <Card className="p-6 text-gray-900 dark:text-gray-100">
                         <CardHeader className="w-100 flex flex-row items-center justify-between">
-                            <CardTitle className="text-4xl">{title}</CardTitle>
+                            <CardTitle className="text-4xl">{`${title} (${categoriesCount})`}</CardTitle>
                             <Link
                                 className="btn-primary"
                                 href={route(`${baseRoute}.create`)}

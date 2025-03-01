@@ -23,10 +23,13 @@ class PackageCategoryController extends Controller
     {
         $categories = Category::forPackages()->paginate(12);
 
+        $categoriesCount = $categories->count();
+
         return Inertia::render('Admin/Category/Index', [
             'title' => 'Package Categories',
             'baseRoute' => $this->baseRoute,
             'categories' => CategoryResource::collection($categories),
+            'categoriesCount' => $categoriesCount,
         ]);
     }
 
