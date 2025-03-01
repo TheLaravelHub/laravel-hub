@@ -7,6 +7,7 @@ import { Category, Package as PackageType } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import HeroSection from '@/components/shared/hero-section'
 import Footer from '@/components/shared/footer'
+import { formatNumber } from '@/lib/utils'
 
 interface IndexProps {
     categories: { data: Category[] }
@@ -64,7 +65,7 @@ export default function Index({ categories, packages }: IndexProps) {
                                             className="text-yellow-400"
                                         />
                                         <p className="text-center text-muted-foreground">
-                                            {pkg.stars}
+                                            {formatNumber(pkg.stars)}
                                         </p>
                                     </div>
                                 </div>
