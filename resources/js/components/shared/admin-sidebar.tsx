@@ -52,7 +52,7 @@ const data = {
                 {
                     title: 'Packages',
                     url: route('admin.packages.packages.index'),
-                }
+                },
             ],
         },
         {

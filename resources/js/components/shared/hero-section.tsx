@@ -23,11 +23,10 @@ export default function HeroSection({
     const debounceTimeout = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
-
-        if(search === '') {
-            setPackagesData(packagesData);
-            setIsLoading(false);
-            return;
+        if (search === '') {
+            setPackagesData(packagesData)
+            setIsLoading(false)
+            return
         }
 
         if (debounceTimeout.current) {
