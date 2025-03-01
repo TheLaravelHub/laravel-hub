@@ -22,13 +22,12 @@ class PackageController extends Controller
     {
         $packages = Package::query()
             ->with(['index', 'categories'])
-            ->orderByDesc('id')
-            ->paginate(12);
+            ->orderByDesc('id');
 
         $packagesCount = $packages->count();
 
         return Inertia::render('Admin/Package/Index', [
-            'packages' => PackageResource::collection($packages),
+            'packages' => PackageResource::collection($packages->paginate(12)),
             'packagesCount' => $packagesCount,
         ]);
     }
