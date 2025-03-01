@@ -7,12 +7,14 @@ import { BeatLoader } from 'react-spinners'
 
 interface HeroProps {
     categories: Category[]
+    packagesData: Package[]
     setPackagesData: Dispatch<SetStateAction<Package[]>>
     packagesRef: React.RefObject<HTMLDivElement>
 }
 
 export default function HeroSection({
     categories,
+    packagesData,
     setPackagesData,
     packagesRef,
 }: HeroProps) {
@@ -21,6 +23,13 @@ export default function HeroSection({
     const debounceTimeout = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
+
+        if(search === '') {
+            setPackagesData(packagesData);
+            setIsLoading(false);
+            return;
+        }
+
         if (debounceTimeout.current) {
             clearTimeout(debounceTimeout.current)
         }
