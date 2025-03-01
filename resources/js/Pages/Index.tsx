@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react'
+import React, { useRef, useState } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Star } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
@@ -16,7 +16,7 @@ interface IndexProps {
 
 export default function Index({ categories, packages }: IndexProps) {
     const [packagesData, setPackagesData] = useState(packages.data)
-    const packagesRef = useRef<HTMLDivElement>(null);
+    const packagesRef = useRef<HTMLDivElement>(null)
 
     return (
         <>
@@ -33,7 +33,10 @@ export default function Index({ categories, packages }: IndexProps) {
                 />
 
                 {/* Packages */}
-                <section ref={packagesRef} className="max-w-8xl mx-auto grid grid-cols-1 gap-8 px-6 py-6 md:grid-cols-2">
+                <section
+                    ref={packagesRef}
+                    className="max-w-8xl mx-auto grid grid-cols-1 gap-8 px-6 py-6 md:grid-cols-2"
+                >
                     {packagesData.map((pkg) => (
                         <Card
                             key={pkg.id}
