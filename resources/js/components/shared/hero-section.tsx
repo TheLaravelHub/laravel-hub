@@ -27,39 +27,44 @@ export default function HeroSection({
     const [search, setSearch] = useState('')
     const searchElement = useRef<HTMLInputElement | null>(null)
     const [isLoading, setIsLoading] = useState(false)
-
-    const fetchResults = useCallback(
-        lodash.debounce(async (searchTerm: string) => {
-            try {
-                const response = await axios.get(route('search'), {
-                    params: { term: searchTerm },
-                })
-                setPackagesData(response.data)
-                setIsLoading(false)
-
-                if (
-                    window.innerWidth < 768 &&
-                    packagesRef?.current &&
-                    searchTerm
-                ) {
-                    packagesRef.current.scrollIntoView({
-                        behavior: 'smooth',
-                    })
-
-                    searchElement.current?.blur()
-                }
-            } catch (error) {
-                setIsLoading(false)
-                console.error(error)
-            }
-        }, 300),
-        [],
-    )
+    const debounceTimeout = useRef<NodeJS.Timeout | null>(null)
 
     useEffect(() => {
-        setIsLoading(true)
-        fetchResults(search)
-    }, [search, fetchResults])
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current)
+        }
+
+        if (search.trim()) {
+            setIsLoading(true)
+
+            debounceTimeout.current = setTimeout(async () => {
+                try {
+                    const response = await axios.get(route('search'), {
+                        params: { term: search },
+                    })
+
+                    setPackagesData(response.data)
+                    setIsLoading(false)
+
+                    if (window.innerWidth < 768 && packagesRef?.current) {
+                        packagesRef.current.scrollIntoView({
+                            behavior: 'smooth',
+                        })
+                        searchElement.current?.blur()
+                    }
+                } catch (error) {
+                    setIsLoading(false)
+                    console.error(error)
+                }
+            }, 300)
+        } else {
+            setIsLoading(false)
+        }
+
+        return () => {
+            if (debounceTimeout.current) clearTimeout(debounceTimeout.current)
+        }
+    }, [search])
 
     return (
         <section className="bg-muted/50 py-24 pt-48 text-center">
