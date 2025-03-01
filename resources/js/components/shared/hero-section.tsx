@@ -1,27 +1,65 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react'
 import { Category, Package } from '@/types'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import axios from 'axios'
+import lodash from 'lodash'
+import { BeatLoader } from 'react-spinners'
 
 interface HeroProps {
     categories: Category[]
     setPackagesData: Dispatch<SetStateAction<Package[]>>
+    packagesRef: React.RefObject<HTMLDivElement>
 }
 
-const HeroSection = ({ categories, setPackagesData }: HeroProps) => {
+export default function HeroSection({
+    categories,
+    setPackagesData,
+    packagesRef,
+}: HeroProps) {
     const [search, setSearch] = useState('')
+    const searchElement = useRef<HTMLInputElement | null>(null)
+    const [isLoading, setIsLoading] = useState(false)
 
-    const handleSearch = () => {
-        axios
-            .get(route('search'), { params: { term: search } })
-            .then((response) => {
+    const fetchResults = useCallback(
+        lodash.debounce(async (searchTerm: string) => {
+            try {
+                const response = await axios.get(route('search'), {
+                    params: { term: searchTerm },
+                })
                 setPackagesData(response.data)
-            })
-            .catch((error) => {
+                setIsLoading(false)
+
+                if (
+                    window.innerWidth < 768 &&
+                    packagesRef?.current &&
+                    searchTerm
+                ) {
+                    packagesRef.current.scrollIntoView({
+                        behavior: 'smooth',
+                    })
+
+                    searchElement.current?.blur()
+                }
+            } catch (error) {
+                setIsLoading(false)
                 console.error(error)
-            })
-    }
+            }
+        }, 300),
+        [],
+    )
+
+    useEffect(() => {
+        setIsLoading(true)
+        fetchResults(search)
+    }, [search, fetchResults])
 
     return (
         <section className="bg-muted/50 py-24 pt-48 text-center">
@@ -53,15 +91,22 @@ const HeroSection = ({ categories, setPackagesData }: HeroProps) => {
                     <Input
                         type="text"
                         placeholder="Search packages..."
+                        ref={searchElement}
                         className="h-full w-full !border-none bg-transparent pl-4 text-lg !outline-none !ring-0 hover:!border-none hover:!outline-none hover:!ring-0 focus:!border-none focus:!outline-none focus:!ring-0 active:!ring-0"
                         value={search}
-                        onKeyUp={handleSearch}
                         onChange={(e) => setSearch(e.target.value)}
                     />
+                    {isLoading && (
+                        <BeatLoader
+                            color="#9c3af5"
+                            loading={true}
+                            size={10}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                    )}
                 </div>
             </div>
         </section>
     )
 }
-
-export default HeroSection
