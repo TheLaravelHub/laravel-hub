@@ -20,9 +20,10 @@ class HomePageController extends Controller
             ->whereHas('packages')
             ->forPackages()
             ->get();
-        $packages = Package::query()
-            ->with('categories')
+        $packages = Package::search()
             ->paginate(24);
+
+        $packages->load('categories');
 
         return Inertia::render('Index', [
             'categories' => CategoryResource::collection($categories),
