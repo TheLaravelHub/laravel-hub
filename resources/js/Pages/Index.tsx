@@ -1,22 +1,49 @@
-import React, { useRef, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { Star } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
 import { Head } from '@inertiajs/react'
-import { Category, Package as PackageType } from '@/types'
+import {Category, MetaType, Package as PackageType} from '@/types'
 import { Badge } from '@/components/ui/badge'
 import HeroSection from '@/components/shared/hero-section'
 import Footer from '@/components/shared/footer'
 import { formatNumber } from '@/lib/utils'
+import {useInView} from "react-intersection-observer";
+import {BeatLoader} from "react-spinners";
+import axios from "axios";
 
 interface IndexProps {
     categories: { data: Category[] }
-    packages: { data: PackageType[] }
+    packages: {
+        data: PackageType[],
+        meta: MetaType
+    }
 }
 
 export default function Index({ categories, packages }: IndexProps) {
     const [packagesData, setPackagesData] = useState(packages.data)
     const packagesRef = useRef<HTMLDivElement>(null)
+    const [hasMorePages, setHasMorePages] = useState<boolean>(packages.meta.current_page < packages.meta.last_page)
+    const [nextPage, setNextPage] = useState<number | null>(hasMorePages ? packages.meta.current_page + 1 : null)
+    const {ref, inView} = useInView({});
+
+    useEffect(() => {
+        if(inView && nextPage) {
+            axios.get(route('homepage'), {params: {page: nextPage}})
+                .then(response => {
+                    const data = response.data;
+                    setPackagesData((prevPackages) => {
+                        return [...prevPackages, ...data.data]
+                    });
+                    setHasMorePages(data.meta.current_page < data.meta.last_page)
+                    if(hasMorePages) {
+                        setNextPage(data.meta.current_page + 1);
+                    } else {
+                        setNextPage(null);
+                    }
+                }).catch(error => console.error(error));
+        }
+    }, [inView]);
 
     return (
         <>
@@ -28,6 +55,7 @@ export default function Index({ categories, packages }: IndexProps) {
                 {/*Hero Section*/}
                 <HeroSection
                     categories={categories.data}
+                    packagesData={packagesData}
                     setPackagesData={setPackagesData}
                     packagesRef={packagesRef}
                 />
@@ -98,7 +126,22 @@ export default function Index({ categories, packages }: IndexProps) {
                             </CardFooter>
                         </Card>
                     ))}
+
                 </section>
+                {hasMorePages && (
+                    <div
+                        className='w-full py-6 flex justify-center'
+                    >
+                        <div ref={ref} className="-translate-y-16"></div>
+                        <BeatLoader
+                            color="#9c3af5"
+                            loading={true}
+                            size={16}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                        />
+                    </div>
+                )}
 
                 {/* Footer */}
                 <Footer />

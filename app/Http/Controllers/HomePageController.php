@@ -16,14 +16,20 @@ class HomePageController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $page = $request->input('page', 1);
+
         $categories = Category::query()
             ->whereHas('packages')
             ->forPackages()
             ->get();
         $packages = Package::search()
-            ->paginate(24);
+            ->paginate(perPage: 24, page: $page);
 
         $packages->load('categories');
+
+        if ($request->expectsJson()) {
+            return PackageResource::collection($packages);
+        }
 
         return Inertia::render('Index', [
             'categories' => CategoryResource::collection($categories),
