@@ -46,12 +46,12 @@ const data = {
             isActive: route().current('admin.packages.packages.index'),
             items: [
                 {
-                    title: 'Packages',
-                    url: route('admin.packages.packages.index'),
-                },
-                {
                     title: 'Categories',
                     url: route('admin.packages.categories.index'),
+                },
+                {
+                    title: 'Packages',
+                    url: route('admin.packages.packages.index'),
                 },
             ],
         },

@@ -265,7 +265,7 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                 <Input
                                                     id="name"
                                                     type="text"
-                                                    placeholder="Index Name"
+                                                    placeholder="Package Name"
                                                     value={data.name}
                                                     onChange={(e) =>
                                                         setData(

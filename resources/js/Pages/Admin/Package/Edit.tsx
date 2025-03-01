@@ -279,7 +279,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 <Input
                                                     id="name"
                                                     type="text"
-                                                    placeholder="Index Name"
+                                                    placeholder="Package Name"
                                                     value={data.name}
                                                     onChange={(e) =>
                                                         setData(
