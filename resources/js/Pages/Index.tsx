@@ -42,10 +42,10 @@ export default function Index({ categories, packages }: IndexProps) {
                             key={pkg.id}
                             className="rounded-2xl border border-border bg-card p-6 shadow-md"
                         >
-                            <CardContent className="flex flex-col items-start space-y-4">
+                            <CardContent className="p-0 md:p-6 flex flex-col items-start space-y-4">
                                 <div className="flex w-full items-center justify-between">
-                                    <div className="flex items-center space-x-4">
-                                        <Image
+                                    <div className="flex items-center">
+                                        <img
                                             src={pkg.owner_avatar as string}
                                             alt={pkg.owner}
                                             className="h-16 w-16 rounded-full"
