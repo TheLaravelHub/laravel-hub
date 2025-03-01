@@ -9,6 +9,20 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:title" content="{{ 'Indxs - Explore Open Source Packages' }}">
+        <meta property="og:description" content="{{ 'Find the best Laravel and PHP packages.' }}">
+        <meta property="og:image" content="{{ asset('assets/images/og-image.png') }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:type" content="website">
+
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ 'Indxs - Explore Open Source Packages' }}">
+        <meta name="twitter:description" content="{{ 'Find the best Laravel and PHP packages.' }}">
+        <meta name="twitter:image" content="{{ asset('assets/images/og-image.png') }}">
+
+
         <!-- Fonts -->
         <link
             rel="preconnect"
