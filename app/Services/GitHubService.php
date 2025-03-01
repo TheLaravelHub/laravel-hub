@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class GitHubService
@@ -29,7 +30,7 @@ class GitHubService
         ])->get($apiUrl);
 
         if ($response->failed()) {
-            return null;
+            throw new NotFoundHttpException('Repository not found');
         }
 
         $repoData = $response->json();
