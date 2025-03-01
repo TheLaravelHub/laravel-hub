@@ -30,7 +30,7 @@ class UpdatePackageRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
             'meta_title' => ['nullable', 'string', 'max:255'],
-            'meta_description' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string'],
             'language' => ['required', 'string', 'max:255'],
             'stars' => ['required', 'integer'],
             'owner' => ['required', 'string', 'max:255'],
