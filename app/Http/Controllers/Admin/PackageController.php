@@ -20,7 +20,10 @@ class PackageController extends Controller
      */
     public function index()
     {
-        $packages = Package::query()->with(['index', 'categories'])->paginate(12);
+        $packages = Package::query()
+            ->with(['index', 'categories'])
+            ->orderByDesc('id')
+            ->paginate(12);
 
         return Inertia::render('Admin/Package/Index', [
             'packages' => PackageResource::collection($packages),
