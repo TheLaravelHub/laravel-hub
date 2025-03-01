@@ -1,16 +1,14 @@
 import {
     Dispatch,
     SetStateAction,
-    useCallback,
     useEffect,
     useRef,
-    useState,
+    useState
 } from 'react'
 import { Category, Package } from '@/types'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import axios from 'axios'
-import lodash from 'lodash'
 import { BeatLoader } from 'react-spinners'
 
 interface HeroProps {
@@ -25,7 +23,6 @@ export default function HeroSection({
     packagesRef,
 }: HeroProps) {
     const [search, setSearch] = useState('')
-    const searchElement = useRef<HTMLInputElement | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const debounceTimeout = useRef<NodeJS.Timeout | null>(null)
 
@@ -50,7 +47,6 @@ export default function HeroSection({
                         packagesRef.current.scrollIntoView({
                             behavior: 'smooth',
                         })
-                        searchElement.current?.blur()
                     }
                 } catch (error) {
                     setIsLoading(false)
@@ -96,7 +92,6 @@ export default function HeroSection({
                     <Input
                         type="text"
                         placeholder="Search packages..."
-                        ref={searchElement}
                         className="h-full w-full !border-none bg-transparent pl-4 text-lg !outline-none !ring-0 hover:!border-none hover:!outline-none hover:!ring-0 focus:!border-none focus:!outline-none focus:!ring-0 active:!ring-0"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
