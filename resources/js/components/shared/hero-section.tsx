@@ -3,7 +3,6 @@ import { Category, Package } from '@/types'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import axios from 'axios'
-import { BeatLoader } from 'react-spinners'
 
 interface HeroProps {
     categories: Category[]
@@ -97,13 +96,7 @@ export default function HeroSection({
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     {isLoading && (
-                        <BeatLoader
-                            color="#9c3af5"
-                            loading={true}
-                            size={10}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                        />
+                        <span className="loading loading-dots loading-xl text-primary"></span>
                     )}
                 </div>
             </div>

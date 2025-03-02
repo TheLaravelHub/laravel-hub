@@ -13,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea'
 import InputError from '@/components/input-error'
 import useSlugify from '@/hooks/use-slugify'
 import { Button } from '@/components/ui/button'
-import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
 import { ColorPicker } from '@/components/ui/color-picker'
@@ -197,13 +196,7 @@ const Create = ({ baseRoute }: { baseRoute: string }) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <BeatLoader
-                                                        color="#fff"
-                                                        loading={true}
-                                                        size={5}
-                                                        aria-label="Loading Spinner"
-                                                        data-testid="loader"
-                                                    />
+                                                    <span className="loading loading-dots loading-xl"></span>
                                                 ) : (
                                                     'Create'
                                                 )}

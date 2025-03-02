@@ -9,7 +9,6 @@ import HeroSection from '@/components/shared/hero-section'
 import Footer from '@/components/shared/footer'
 import { formatNumber } from '@/lib/utils'
 import { useInView } from 'react-intersection-observer'
-import { BeatLoader } from 'react-spinners'
 import axios from 'axios'
 
 interface IndexProps {
@@ -141,13 +140,7 @@ export default function Index({ categories, packages }: IndexProps) {
                             ref={ref}
                             className="-translate-y-16"
                         ></div>
-                        <BeatLoader
-                            color="#9c3af5"
-                            loading={true}
-                            size={16}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                        />
+                        <span className="loading loading-dots loading-xl text-primary"></span>
                     </div>
                 )}
 
