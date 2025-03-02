@@ -214,7 +214,7 @@ const Create = () => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <span className="loading loading-dots loading-xl"></span>
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Create'
                                                 )}

@@ -234,7 +234,7 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                         }
                                                     >
                                                         {isFetching ? (
-                                                            <span className="loading loading-dots loading-xl"></span>
+                                                            <span className="loading-xl loading loading-dots"></span>
                                                         ) : (
                                                             <Target />
                                                         )}
@@ -452,7 +452,7 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <span className="loading loading-dots loading-xl"></span>
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Create'
                                                 )}

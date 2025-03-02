@@ -252,7 +252,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                         }
                                                     >
                                                         {isFetching ? (
-                                                            <span className="loading loading-dots loading-xl"></span>
+                                                            <span className="loading-xl loading loading-dots"></span>
                                                         ) : (
                                                             <Target />
                                                         )}
@@ -477,7 +477,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <span className="loading loading-dots loading-xl"></span>
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Update'
                                                 )}

@@ -218,7 +218,7 @@ const Edit = ({ baseRoute, category }: EditCategoryProps) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <span className="loading loading-dots loading-xl"></span>
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Update'
                                                 )}

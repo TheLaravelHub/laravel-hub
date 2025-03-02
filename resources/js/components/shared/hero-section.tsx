@@ -96,7 +96,7 @@ export default function HeroSection({
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     {isLoading && (
-                        <span className="loading loading-dots loading-xl text-primary"></span>
+                        <span className="loading-xl loading loading-dots text-primary"></span>
                     )}
                 </div>
             </div>

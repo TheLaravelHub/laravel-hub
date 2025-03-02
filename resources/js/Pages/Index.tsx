@@ -140,7 +140,7 @@ export default function Index({ categories, packages }: IndexProps) {
                             ref={ref}
                             className="-translate-y-16"
                         ></div>
-                        <span className="loading loading-dots loading-xl text-primary"></span>
+                        <span className="loading-xl loading loading-dots text-primary"></span>
                     </div>
                 )}
 

@@ -28,10 +28,13 @@ export function ThemeProvider({
 }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(() => {
         if (typeof window !== 'undefined') {
-            return (window.localStorage.getItem(storageKey) as Theme | null) || defaultTheme;
+            return (
+                (window.localStorage.getItem(storageKey) as Theme | null) ||
+                defaultTheme
+            )
         }
-        return defaultTheme;
-    });
+        return defaultTheme
+    })
 
     useEffect(() => {
         const root = window.document.documentElement
