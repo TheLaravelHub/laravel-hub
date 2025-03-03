@@ -13,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea'
 import InputError from '@/components/input-error'
 import useSlugify from '@/hooks/use-slugify'
 import { Button } from '@/components/ui/button'
-import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
 import { Target } from 'lucide-react'
@@ -235,13 +234,7 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                         }
                                                     >
                                                         {isFetching ? (
-                                                            <BeatLoader
-                                                                color="#fff"
-                                                                loading={true}
-                                                                size={5}
-                                                                aria-label="Loading Spinner"
-                                                                data-testid="loader"
-                                                            />
+                                                            <span className="loading-xl loading loading-dots"></span>
                                                         ) : (
                                                             <Target />
                                                         )}
@@ -459,13 +452,7 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <BeatLoader
-                                                        color="#fff"
-                                                        loading={true}
-                                                        size={5}
-                                                        aria-label="Loading Spinner"
-                                                        data-testid="loader"
-                                                    />
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Create'
                                                 )}

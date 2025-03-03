@@ -13,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea'
 import InputError from '@/components/input-error'
 import useSlugify from '@/hooks/use-slugify'
 import { Button } from '@/components/ui/button'
-import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
 import Image from '@/components/image'
 import { Target } from 'lucide-react'
@@ -253,13 +252,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                         }
                                                     >
                                                         {isFetching ? (
-                                                            <BeatLoader
-                                                                color="#fff"
-                                                                loading={true}
-                                                                size={5}
-                                                                aria-label="Loading Spinner"
-                                                                data-testid="loader"
-                                                            />
+                                                            <span className="loading-xl loading loading-dots"></span>
                                                         ) : (
                                                             <Target />
                                                         )}
@@ -484,13 +477,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <BeatLoader
-                                                        color="#fff"
-                                                        loading={true}
-                                                        size={5}
-                                                        aria-label="Loading Spinner"
-                                                        data-testid="loader"
-                                                    />
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Update'
                                                 )}

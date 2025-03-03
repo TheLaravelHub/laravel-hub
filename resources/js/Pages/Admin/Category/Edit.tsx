@@ -13,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea'
 import InputError from '@/components/input-error'
 import useSlugify from '@/hooks/use-slugify'
 import { Button } from '@/components/ui/button'
-import { BeatLoader } from 'react-spinners'
 import { Switch } from '@/components/ui/switch'
 import { Category } from '@/types'
 
@@ -219,13 +218,7 @@ const Edit = ({ baseRoute, category }: EditCategoryProps) => {
                                                 className="my-3"
                                             >
                                                 {processing ? (
-                                                    <BeatLoader
-                                                        color="#fff"
-                                                        loading={true}
-                                                        size={5}
-                                                        aria-label="Loading Spinner"
-                                                        data-testid="loader"
-                                                    />
+                                                    <span className="loading-xl loading loading-dots"></span>
                                                 ) : (
                                                     'Update'
                                                 )}

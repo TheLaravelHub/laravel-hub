@@ -7,7 +7,7 @@ const Footer = () => {
                 <p className="text-gray-600">An open-source project by</p>
                 <div className="mt-6 flex flex-col items-center">
                     <img
-                        src={asset('assets/images/github-avatar.jpg')}
+                        src={'/assets/images/github-avatar.jpg'}
                         alt="Founder Avatar"
                         className="h-20 w-20 rounded-full border-4 border-gray-300 shadow-lg"
                     />

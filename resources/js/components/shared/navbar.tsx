@@ -33,7 +33,7 @@ const Navbar = () => {
                     className="flex items-center space-x-2"
                 >
                     <Image
-                        src={asset('assets/images/Indxs-logo.png')}
+                        src={'/assets/images/Indxs-logo.png'}
                         alt="Indxs"
                         width={150}
                     />
