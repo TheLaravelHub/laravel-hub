@@ -375,8 +375,8 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                 <Input
                                                     type="text"
                                                     id="language"
-                                                    disabled={true}
                                                     value={data.language}
+                                                    onChange={(e) => setData('language', e.target.value)}
                                                 />
                                                 <InputError
                                                     message={errors.language}
@@ -389,8 +389,8 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                 <Input
                                                     type="number"
                                                     id="stars"
-                                                    disabled={true}
                                                     value={data.stars}
+                                                    onChange={(e) => setData('stars', Number(e.target.value))}
                                                 />
                                                 <InputError
                                                     message={errors.stars}
@@ -403,8 +403,8 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                 <Input
                                                     type="text"
                                                     id="owner"
-                                                    disabled={true}
                                                     value={data.owner}
+                                                    onChange={(e) => setData('owner', e.target.value)}
                                                 />
                                                 <InputError
                                                     message={errors.owner}

@@ -88,7 +88,7 @@ class PackageController extends Controller
      */
     public function edit(Package $package)
     {
-        $package->load(['categories:id'])->setAttribute('category_ids', $package->categories->pluck('id'));
+        $package->load(['categories'])->setAttribute('category_ids', $package->categories->pluck('id'));
 
         $indexes = Index::query()->withActive()->select('name as label', 'id as value')->get();
         $categories = Category::query()->withActive()->select('name as label', 'id as value')->forPackages()->get();
