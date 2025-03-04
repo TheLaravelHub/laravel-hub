@@ -307,7 +307,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 <Textarea
                                                     id="description"
                                                     placeholder="Description .."
-                                                    value={data.description}
+                                                    value={data.description ?? ''}
                                                     onChange={(e) =>
                                                         setData(
                                                             'description',
@@ -387,8 +387,8 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 <Input
                                                     type="text"
                                                     id="language"
-                                                    disabled={true}
                                                     value={data.language}
+                                                    onChange={(e) => setData('language', e.target.value)}
                                                 />
                                                 <InputError
                                                     message={errors.language}
@@ -401,8 +401,8 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 <Input
                                                     type="number"
                                                     id="stars"
-                                                    disabled={true}
                                                     value={data.stars}
+                                                    onChange={(e) => setData('stars', Number(e.target.value))}
                                                 />
                                                 <InputError
                                                     message={errors.stars}
@@ -415,8 +415,8 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
                                                 <Input
                                                     type="text"
                                                     id="owner"
-                                                    disabled={true}
                                                     value={data.owner}
+                                                    onChange={(e) => setData('owner', e.target.value)}
                                                 />
                                                 <InputError
                                                     message={errors.owner}
