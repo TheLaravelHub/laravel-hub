@@ -28,7 +28,7 @@ class CreatePackageRequest extends FormRequest
                     }),
             ],
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string'],
             'language' => ['required', 'string', 'max:255'],
