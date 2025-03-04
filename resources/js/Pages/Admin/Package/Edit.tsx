@@ -61,7 +61,7 @@ const Edit = ({ package: singlePackage, indexes, categories }: EditProps) => {
             stars: singlePackage.stars,
             owner: singlePackage.owner,
             owner_avatar: singlePackage.owner_avatar,
-            active: singlePackage.status === 'active',
+            active: singlePackage.status.value === 'active',
         })
 
     const getRepositoryData = async () => {

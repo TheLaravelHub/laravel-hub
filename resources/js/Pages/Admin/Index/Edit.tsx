@@ -39,7 +39,7 @@ const Edit = ({ index }: EditIndexProps) => {
             slug: index.slug,
             description: index.description,
             color_code: index.color_code,
-            active: index.status === 'active',
+            active: index.status.value === 'active',
             icon: null,
             _method: 'PUT',
         })

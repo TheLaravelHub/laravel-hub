@@ -36,7 +36,7 @@ const Edit = ({ baseRoute, category }: EditCategoryProps) => {
             slug: category.slug,
             meta_title: category.meta_title ?? '',
             meta_description: category.meta_description ?? '',
-            active: category.status === 'active',
+            active: category.status.value === 'active',
             _method: 'PUT',
         })
 
