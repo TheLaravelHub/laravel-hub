@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use SimpleStatsIo\LaravelClient\Contracts\TrackablePerson;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
-class User extends Authenticatable implements TrackablePerson
+class User extends Authenticatable
 {
     use HasActiveScope;
 
@@ -53,10 +52,5 @@ class User extends Authenticatable implements TrackablePerson
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function getTrackingTime(): CarbonInterface
-    {
-        return $this->created_at;
     }
 }
