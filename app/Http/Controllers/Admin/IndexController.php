@@ -54,7 +54,7 @@ class IndexController extends Controller
         } catch (\Exception $e) {
             // Delete media uploaded if an error occurs
             if (isset($index)) {
-                $index->getFirstMedia('icon')->delete();
+                $index->getFirstMedia('icon')?->delete();
             }
             DB::rollBack();
             throw $e;
@@ -90,7 +90,7 @@ class IndexController extends Controller
         try {
             $index->update($request->safe()->merge(['status' => $request->get('status', Status::INACTIVE)])->all());
             if ($request->hasFile('icon')) {
-                $index->getFirstMedia()->delete();
+                $index->getFirstMedia()?->delete();
                 $index->addMediaFromRequest('icon')
                     ->toMediaCollection();
             }
@@ -103,7 +103,7 @@ class IndexController extends Controller
         } catch (\Exception $e) {
             // Delete media uploaded if an error occurs
             if ($request->hasFile('icon')) {
-                $index->getFirstMedia('icon')->delete();
+                $index->getFirstMedia('icon')?->delete();
             }
             DB::rollBack();
             throw $e;
