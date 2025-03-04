@@ -2,6 +2,7 @@ import { Head, Link } from '@inertiajs/react'
 import AdminAuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Category } from '@/types'
+import Packages from '@/Pages/Admin/Category/components/packages'
 
 interface ShowCategoryProps {
     baseRoute: string
@@ -90,9 +91,23 @@ const Show = ({ baseRoute, category }: ShowCategoryProps) => {
                                         <div className="flex flex-col gap-1">
                                             <span>Status</span>
                                             <span className="font-bold">
-                                                {category.status}
+                                                {category.status.value}
                                             </span>
                                         </div>
+                                    </CardContent>
+                                </Card>
+                            </div>
+                            <div className="col-span-8">
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle className="text-2xl">
+                                            Packages ({category.packages_count})
+                                        </CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="flex flex-col justify-between gap-4">
+                                        <Packages
+                                            packages={category.packages}
+                                        />
                                     </CardContent>
                                 </Card>
                             </div>

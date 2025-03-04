@@ -20,7 +20,7 @@ import Image from '@/components/image'
 
 const PackageRow = ({ single_package }: { single_package: Package }) => {
     const [isChecked, setIsChecked] = useState(
-        single_package.status === 'active',
+        single_package.status.value === 'active',
     )
     const toggleStatusForm = useForm({ status: single_package.status })
     const deleteForm = useForm({})
@@ -67,9 +67,9 @@ const PackageRow = ({ single_package }: { single_package: Package }) => {
                     {single_package.id}
                 </TableCell>
                 <TableCell>{single_package.name}</TableCell>
-                <TableCell>{single_package.index.name}</TableCell>
+                <TableCell>{single_package.index?.name}</TableCell>
                 <TableCell>
-                    {single_package.categories.map((category) => (
+                    {single_package.categories?.map((category) => (
                         <Badge
                             key={category.id}
                             variant={'outline'}

@@ -2,7 +2,6 @@ import { Category } from '@/types'
 import { Link, useForm } from '@inertiajs/react'
 import { useState } from 'react'
 import { TableCell, TableRow } from '@/components/ui/table'
-import Image from '@/components/image'
 import { Switch } from '@/components/ui/switch'
 import moment from 'moment/moment'
 import { Eye, FilePenLine, Trash2 } from 'lucide-react'
@@ -23,7 +22,9 @@ interface CategoryRowProps {
 }
 
 const CategoryRow = ({ baseRoute, category }: CategoryRowProps) => {
-    const [isChecked, setIsChecked] = useState(category.status === 'active')
+    const [isChecked, setIsChecked] = useState(
+        category.status.value === 'active',
+    )
     const toggleStatusForm = useForm({ status: category.status })
     const deleteForm = useForm({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false)
@@ -37,6 +38,13 @@ const CategoryRow = ({ baseRoute, category }: CategoryRowProps) => {
     }
 
     const handleToggleStatus = (checked: boolean) => {
+        if (
+            !checked &&
+            !confirm(
+                "Are you sure? this will deactivate the category and all it's related models",
+            )
+        )
+            return
         setIsChecked(checked)
         const modelName = 'Category'
         toggleStatusForm.put(
@@ -62,6 +70,7 @@ const CategoryRow = ({ baseRoute, category }: CategoryRowProps) => {
                 <TableCell className="font-medium">{category.id}</TableCell>
                 <TableCell>{category.name}</TableCell>
                 <TableCell>{category.slug}</TableCell>
+                <TableCell>{category.packages_count}</TableCell>
                 <TableCell>
                     <Switch
                         checked={isChecked}

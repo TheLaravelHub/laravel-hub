@@ -62,6 +62,7 @@ const Index = ({
                                         </TableHead>
                                         <TableHead>Name</TableHead>
                                         <TableHead>Slug</TableHead>
+                                        <TableHead>Packages</TableHead>
                                         <TableHead>Status</TableHead>
                                         <TableHead>Created at</TableHead>
                                         <TableHead>Action</TableHead>

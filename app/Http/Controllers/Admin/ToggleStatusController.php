@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Thefeqy\ModelStatus\Status;
 
 class ToggleStatusController extends Controller
 {
@@ -24,8 +23,9 @@ class ToggleStatusController extends Controller
             throw new NotFoundHttpException('Instance not found');
         }
 
-        $modelInstance->status = $modelInstance->status === Status::active() ? Status::inactive() : Status::active();
-        $modelInstance->save();
+        $modelInstance->status->isActive()
+            ? $modelInstance->deactivate()
+            : $modelInstance->activate();
 
         return redirect()
             ->back()

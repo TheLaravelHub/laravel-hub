@@ -21,7 +21,10 @@ class PackageCategoryController extends Controller
      */
     public function index(): Response
     {
-        $categories = Category::forPackages();
+        $categories = Category::query()
+            ->forPackages()
+            ->latest()
+            ->withCount('packages');
 
         $categoriesCount = $categories->count();
 
@@ -59,9 +62,13 @@ class PackageCategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category): Response
+    public function show(Category $category)
     {
-        $category = Category::forPackages()->findOrFail($category->id);
+        $category = Category::query()
+            ->forPackages()
+            ->with(['packages' => fn ($query) => $query->with('index', 'categories')->paginate(12)])
+            ->withCount('packages')
+            ->findOrFail($category->id);
 
         return Inertia::render('Admin/Category/Show', ['baseRoute' => $this->baseRoute, 'category' => new CategoryResource($category)]);
     }

@@ -23,6 +23,30 @@ class CategoryResource extends JsonResource
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
             'status' => $this->status,
+            'packages_count' => $this->packages_count,
+            'packages' => $this->whenLoaded('packages', function () {
+                $packages = $this->packages()->paginate(12);
+
+                return [
+                    'data' => PackageResource::collection($packages->load('index', 'categories')),
+                    'links' => [
+                        'first' => $packages->url(1),
+                        'last' => $packages->url($packages->lastPage()),
+                        'prev' => $packages->previousPageUrl(),
+                        'next' => $packages->nextPageUrl(),
+                    ],
+                    'meta' => [
+                        'current_page' => $packages->currentPage(),
+                        'from' => $packages->firstItem() ?? 0,
+                        'last_page' => $packages->lastPage(),
+                        'path' => $packages->path(),
+                        'per_page' => $packages->perPage(),
+                        'to' => $packages->lastItem() ?? 0,
+                        'total' => $packages->total(),
+                        'links' => $packages->linkCollection()->values()->all(),
+                    ],
+                ];
+            }),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

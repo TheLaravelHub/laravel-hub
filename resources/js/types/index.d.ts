@@ -25,7 +25,8 @@ export type Index = {
     slug: string
     icon: string
     color_code: string
-    status: 'active' | 'inactive'
+    packages_count: number
+    status: { value: 'active' } | { value: 'inactive' }
     created_at: string
     updated_at: string
 }
@@ -36,7 +37,13 @@ export type Category = {
     slug: string
     meta_title: string
     meta_description: string
-    status: 'active' | 'inactive'
+    packages_count: number
+    packages: {
+        data: Package[]
+        meta: MetaType
+        links: LinksType
+    }
+    status: { value: 'active' } | { value: 'inactive' }
     created_at: string
     updated_at: string
 }
@@ -57,7 +64,7 @@ type Package = {
     stars: number
     owner?: string
     owner_avatar?: string
-    status: 'active' | 'inactive'
+    status: { value: 'active' } | { value: 'inactive' }
     created_at: string
     updated_at: string
 }
