@@ -26,7 +26,7 @@ class Index extends Model implements HasMedia
     protected function casts()
     {
         return [
-             'status' => StatusCast::class,
+            'status' => StatusCast::class,
         ];
     }
 

@@ -22,7 +22,9 @@ interface CategoryRowProps {
 }
 
 const CategoryRow = ({ baseRoute, category }: CategoryRowProps) => {
-    const [isChecked, setIsChecked] = useState(category.status.value === 'active')
+    const [isChecked, setIsChecked] = useState(
+        category.status.value === 'active',
+    )
     const toggleStatusForm = useForm({ status: category.status })
     const deleteForm = useForm({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false)
@@ -36,7 +38,13 @@ const CategoryRow = ({ baseRoute, category }: CategoryRowProps) => {
     }
 
     const handleToggleStatus = (checked: boolean) => {
-        if(! checked && ! confirm('Are you sure? this will deactivate the category and all it\'s related models')) return;
+        if (
+            !checked &&
+            !confirm(
+                "Are you sure? this will deactivate the category and all it's related models",
+            )
+        )
+            return
         setIsChecked(checked)
         const modelName = 'Category'
         toggleStatusForm.put(

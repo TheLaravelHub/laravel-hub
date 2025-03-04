@@ -26,6 +26,7 @@ class CategoryResource extends JsonResource
             'packages_count' => $this->packages_count,
             'packages' => $this->whenLoaded('packages', function () {
                 $packages = $this->packages()->paginate(12);
+
                 return [
                     'data' => PackageResource::collection($packages->load('index', 'categories')),
                     'links' => [

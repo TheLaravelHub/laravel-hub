@@ -1,7 +1,14 @@
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import PackageRow from "@/Pages/Admin/Package/components/package-row";
-import Paginator from "@/components/paginator";
-import {LinksType, MetaType, Package} from "@/types";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from '@/components/ui/table'
+import PackageRow from '@/Pages/Admin/Package/components/package-row'
+import Paginator from '@/components/paginator'
+import { LinksType, MetaType, Package } from '@/types'
 
 interface PackagesProps {
     packages: {
@@ -11,7 +18,7 @@ interface PackagesProps {
     }
 }
 
-const Packages = ({packages}: PackagesProps) => {
+const Packages = ({ packages }: PackagesProps) => {
     return (
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 md:min-h-min">
@@ -52,6 +59,6 @@ const Packages = ({packages}: PackagesProps) => {
             </div>
         </div>
     )
-};
+}
 
-export default Packages;
+export default Packages

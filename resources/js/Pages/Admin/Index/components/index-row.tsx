@@ -32,7 +32,13 @@ const IndexRow = ({ index }: { index: IndexType }) => {
     }
 
     const handleToggleStatus = (checked: boolean) => {
-        if(! checked && ! confirm('Are you sure? this will deactivate the index and all it\'s related models')) return;
+        if (
+            !checked &&
+            !confirm(
+                "Are you sure? this will deactivate the index and all it's related models",
+            )
+        )
+            return
 
         setIsChecked(checked)
         const modelName = 'Index'
