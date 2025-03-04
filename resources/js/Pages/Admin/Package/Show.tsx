@@ -178,7 +178,7 @@ const Show = ({ package: singlePackage }: ShowPackageProps) => {
                                             <div className="flex flex-col gap-1">
                                                 <span>Status</span>
                                                 <span className="font-bold">
-                                                    {singlePackage.status}
+                                                    {singlePackage.status.value}
                                                 </span>
                                             </div>
                                         </div>
