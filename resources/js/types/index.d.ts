@@ -36,6 +36,7 @@ export type Category = {
     slug: string
     meta_title: string
     meta_description: string
+    packages_count: number
     status: 'active' | 'inactive'
     created_at: string
     updated_at: string

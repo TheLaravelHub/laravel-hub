@@ -37,6 +37,7 @@ const Index = ({
     categories,
     categoriesCount,
 }: IndexProps) => {
+    console.log(categories);
     return (
         <AdminAuthenticatedLayout breadcrumbs={[{ title }]}>
             <Head title={title} />
@@ -62,6 +63,7 @@ const Index = ({
                                         </TableHead>
                                         <TableHead>Name</TableHead>
                                         <TableHead>Slug</TableHead>
+                                        <TableHead>Packages</TableHead>
                                         <TableHead>Status</TableHead>
                                         <TableHead>Created at</TableHead>
                                         <TableHead>Action</TableHead>

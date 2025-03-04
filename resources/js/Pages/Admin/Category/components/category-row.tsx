@@ -62,6 +62,7 @@ const CategoryRow = ({ baseRoute, category }: CategoryRowProps) => {
                 <TableCell className="font-medium">{category.id}</TableCell>
                 <TableCell>{category.name}</TableCell>
                 <TableCell>{category.slug}</TableCell>
+                <TableCell>{category.packages_count}</TableCell>
                 <TableCell>
                     <Switch
                         checked={isChecked}

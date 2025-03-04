@@ -21,7 +21,9 @@ class PackageCategoryController extends Controller
      */
     public function index(): Response
     {
-        $categories = Category::forPackages();
+        $categories = Category::query()
+            ->forPackages()
+            ->withCount('packages');
 
         $categoriesCount = $categories->count();
 

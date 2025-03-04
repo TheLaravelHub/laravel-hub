@@ -23,6 +23,7 @@ class CategoryResource extends JsonResource
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
             'status' => $this->status,
+            'packages_count' => $this->packages_count,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
