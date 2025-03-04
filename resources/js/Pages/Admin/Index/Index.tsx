@@ -71,6 +71,7 @@ const Index = ({ indexes }: IndexProps) => {
                                         <TableHead>Name</TableHead>
                                         <TableHead>Icon</TableHead>
                                         <TableHead>Slug</TableHead>
+                                        <TableHead>Packages</TableHead>
                                         <TableHead>Status</TableHead>
                                         <TableHead>Created at</TableHead>
                                         <TableHead className="text-right">
@@ -89,7 +90,7 @@ const Index = ({ indexes }: IndexProps) => {
                                     ) : (
                                         <TableRow>
                                             <TableCell
-                                                colSpan={7}
+                                                colSpan={8}
                                                 className="py-4 text-center"
                                             >
                                                 No data found

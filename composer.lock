@@ -6332,16 +6332,16 @@
         },
         {
             "name": "thefeqy/laravel-model-status",
-            "version": "v1.4.0",
+            "version": "v1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thefeqy/laravel-model-status.git",
-                "reference": "47a7d8e2aea189f0b5ec0a8fad3415d4dd03deab"
+                "reference": "1336eed628fef47915c2ba5c03d165d22f8d7f62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thefeqy/laravel-model-status/zipball/47a7d8e2aea189f0b5ec0a8fad3415d4dd03deab",
-                "reference": "47a7d8e2aea189f0b5ec0a8fad3415d4dd03deab",
+                "url": "https://api.github.com/repos/thefeqy/laravel-model-status/zipball/1336eed628fef47915c2ba5c03d165d22f8d7f62",
+                "reference": "1336eed628fef47915c2ba5c03d165d22f8d7f62",
                 "shasum": ""
             },
             "require": {
@@ -6382,7 +6382,7 @@
             "description": "A Laravel package to automate adding configurable status columns to models and migrations, and enforce user activity through middleware.",
             "support": {
                 "issues": "https://github.com/thefeqy/laravel-model-status/issues",
-                "source": "https://github.com/thefeqy/laravel-model-status/tree/v1.4.0"
+                "source": "https://github.com/thefeqy/laravel-model-status/tree/v1.5.0"
             },
             "funding": [
                 {
@@ -6390,7 +6390,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-01T13:11:00+00:00"
+            "time": "2025-03-04T14:46:27+00:00"
         },
         {
             "name": "tightenco/ziggy",

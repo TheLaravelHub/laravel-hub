@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
+use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Package extends Model
@@ -22,6 +23,13 @@ class Package extends Model
         'index_id', 'name', 'slug', 'description', 'repository_url', 'meta_title', 'meta_description',
         'language', 'stars', 'forks', 'open_issues', 'owner', 'owner_avatar',
     ];
+
+    public function casts()
+    {
+        return [
+            'status' => StatusCast::class,
+        ];
+    }
 
     /**
      * Relationship: Package belongs to an Index

@@ -23,6 +23,7 @@ class IndexResource extends JsonResource
             'slug' => $this->slug,
             'icon' => $this->getFirstMediaUrl(),
             'color_code' => $this->color_code,
+            'packages_count' => $this->packages_count,
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

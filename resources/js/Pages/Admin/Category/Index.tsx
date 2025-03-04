@@ -37,7 +37,6 @@ const Index = ({
     categories,
     categoriesCount,
 }: IndexProps) => {
-    console.log(categories);
     return (
         <AdminAuthenticatedLayout breadcrumbs={[{ title }]}>
             <Head title={title} />

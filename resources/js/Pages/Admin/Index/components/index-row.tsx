@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/alert-dialog'
 
 const IndexRow = ({ index }: { index: IndexType }) => {
-    const [isChecked, setIsChecked] = useState(index.status === 'active')
+    const [isChecked, setIsChecked] = useState(index.status.value === 'active')
     const toggleStatusForm = useForm({ status: index.status })
     const deleteIndexForm = useForm({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState<boolean>(false)
@@ -32,6 +32,8 @@ const IndexRow = ({ index }: { index: IndexType }) => {
     }
 
     const handleToggleStatus = (checked: boolean) => {
+        if(! checked && ! confirm('Are you sure? this will deactivate the index and all it\'s related models')) return;
+
         setIsChecked(checked)
         const modelName = 'Index'
         toggleStatusForm.put(
@@ -64,6 +66,7 @@ const IndexRow = ({ index }: { index: IndexType }) => {
                     />
                 </TableCell>
                 <TableCell>{index.slug}</TableCell>
+                <TableCell>{index.packages_count}</TableCell>
                 <TableCell>
                     <Switch
                         checked={isChecked}

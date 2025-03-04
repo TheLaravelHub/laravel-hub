@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
+use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Category extends Model
@@ -14,12 +15,21 @@ class Category extends Model
 
     protected $fillable = ['name', 'slug', 'meta_title', 'meta_description', 'category_type'];
 
+    protected array $cascadeDeactivate = ['packages'];
+
     protected static function boot()
     {
         parent::boot();
         static::creating(static function ($category) {
             $category->slug = Str::slug($category->name);
         });
+    }
+
+    public function casts()
+    {
+        return [
+            'status' => StatusCast::class,
+        ];
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Index extends Model implements HasMedia
@@ -20,10 +21,17 @@ class Index extends Model implements HasMedia
 
     protected $fillable = ['name', 'description', 'slug', 'color_code'];
 
+    protected array $cascadeDeactivate = ['packages'];
+
     protected function casts()
     {
         return [
-            // 'status' => Status::class,
+             'status' => StatusCast::class,
         ];
+    }
+
+    public function packages()
+    {
+        return $this->hasMany(Package::class);
     }
 }

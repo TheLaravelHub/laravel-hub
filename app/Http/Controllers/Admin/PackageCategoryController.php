@@ -23,6 +23,7 @@ class PackageCategoryController extends Controller
     {
         $categories = Category::query()
             ->forPackages()
+            ->latest()
             ->withCount('packages');
 
         $categoriesCount = $categories->count();

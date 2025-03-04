@@ -18,7 +18,9 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $indexes = Index::query()->paginate(12);
+        $indexes = Index::query()
+            ->withCount('packages')
+            ->paginate(12);
 
         return Inertia::render('Admin/Index/Index', [
             'indexes' => IndexResource::collection($indexes),

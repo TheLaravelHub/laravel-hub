@@ -24,8 +24,9 @@ class ToggleStatusController extends Controller
             throw new NotFoundHttpException('Instance not found');
         }
 
-        $modelInstance->status = $modelInstance->status === Status::active() ? Status::inactive() : Status::active();
-        $modelInstance->save();
+        $modelInstance->status->isActive()
+            ? $modelInstance->deactivate()
+            : $modelInstance->activate();
 
         return redirect()
             ->back()
