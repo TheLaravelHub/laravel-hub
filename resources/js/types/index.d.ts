@@ -38,6 +38,11 @@ export type Category = {
     meta_title: string
     meta_description: string
     packages_count: number
+    packages: {
+        data: Package[]
+        meta: MetaType
+        links: LinksType
+    }
     status: { value: 'active' } | { value: 'inactive' }
     created_at: string
     updated_at: string
