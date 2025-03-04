@@ -376,7 +376,12 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                     type="text"
                                                     id="language"
                                                     value={data.language}
-                                                    onChange={(e) => setData('language', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'language',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
                                                 <InputError
                                                     message={errors.language}
@@ -390,7 +395,14 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                     type="number"
                                                     id="stars"
                                                     value={data.stars}
-                                                    onChange={(e) => setData('stars', Number(e.target.value))}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'stars',
+                                                            Number(
+                                                                e.target.value,
+                                                            ),
+                                                        )
+                                                    }
                                                 />
                                                 <InputError
                                                     message={errors.stars}
@@ -404,7 +416,12 @@ const Create = ({ indexes, categories }: CreateProps) => {
                                                     type="text"
                                                     id="owner"
                                                     value={data.owner}
-                                                    onChange={(e) => setData('owner', e.target.value)}
+                                                    onChange={(e) =>
+                                                        setData(
+                                                            'owner',
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                 />
                                                 <InputError
                                                     message={errors.owner}
