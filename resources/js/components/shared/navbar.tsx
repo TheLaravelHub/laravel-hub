@@ -1,4 +1,4 @@
-import {BookmarkPlus, Github, LifeBuoy} from 'lucide-react'
+import { BookmarkPlus, Github, LifeBuoy } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import Image from '@/components/image'
 import { Link } from '@inertiajs/react'
@@ -60,8 +60,7 @@ const Navbar = () => {
                         target={'_blank'}
                         className="flex items-center space-x-2 transition-colors hover:text-primary"
                     >
-                        <BookmarkPlus size={28} />{' '}
-                        <span>Submit a package</span>
+                        <BookmarkPlus size={28} /> <span>Submit a package</span>
                     </a>
                 </nav>
             </div>
