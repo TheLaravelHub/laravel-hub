@@ -1,4 +1,4 @@
-import { Github, LifeBuoy } from 'lucide-react'
+import {BookmarkPlus, Github, LifeBuoy} from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import Image from '@/components/image'
 import { Link } from '@inertiajs/react'
@@ -54,6 +54,14 @@ const Navbar = () => {
                     >
                         <LifeBuoy size={28} />{' '}
                         <span className={'hidden md:block'}>Support</span>
+                    </a>
+                    <a
+                        href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
+                        target={'_blank'}
+                        className="flex items-center space-x-2 transition-colors hover:text-primary"
+                    >
+                        <BookmarkPlus size={28} />{' '}
+                        <span>Submit a package</span>
                     </a>
                 </nav>
             </div>
