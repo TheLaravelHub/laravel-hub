@@ -121,7 +121,8 @@ class PackageCategoryResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\Action::make('delete')
                     ->label('Delete')
@@ -154,7 +155,7 @@ class PackageCategoryResource extends Resource
         return [
             'index' => Pages\ListPackageCategories::route('/'),
             'create' => Pages\CreatePackageCategory::route('/create'),
-            'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
+            // 'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
             'view' => ViewCategory::route('/{record}'),
         ];
     }
