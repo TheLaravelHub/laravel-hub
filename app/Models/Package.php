@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasSlug;
+use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -16,6 +17,7 @@ class Package extends Model
 {
     use HasActiveScope;
     use HasSlug;
+    use HasStatus;
     use Searchable;
     use SoftDeletes;
 
@@ -24,12 +26,12 @@ class Package extends Model
         'language', 'stars', 'forks', 'open_issues', 'owner', 'owner_avatar',
     ];
 
-    public function casts()
-    {
-        return [
-            'status' => StatusCast::class,
-        ];
-    }
+    //    public function casts()
+    //    {
+    //        return [
+    //            'status' => StatusCast::class,
+    //        ];
+    //    }
 
     /**
      * Relationship: Package belongs to an Index
