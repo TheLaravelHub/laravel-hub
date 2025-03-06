@@ -82,7 +82,8 @@ class PackagesRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make()
+                    ->slideOver(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
