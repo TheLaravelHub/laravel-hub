@@ -14,49 +14,16 @@ class PackagesRelationManager extends RelationManager
 {
     protected static string $relationship = 'packages';
 
+
+    public function isReadOnly(): bool
+    {
+        return false;
+    }
+
     public function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Grid::make(3)
-                    ->schema([
-                        Forms\Components\Grid::make(1)
-                            ->columnSpan(2)
-                            ->schema([
-                                Forms\Components\Section::make('Category Information')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('name')
-                                            ->required()
-                                            ->maxLength(255)
-                                    ]),
-
-                                Forms\Components\Section::make('SEO Meta Information')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('meta_title')
-                                            ->maxLength(255),
-                                        Forms\Components\Textarea::make('meta_description')
-                                            ->maxLength(255),
-                                    ]),
-                            ]),
-                        Forms\Components\Grid::make(1)
-                            ->columnSpan(1)
-                            ->schema([
-                                Forms\Components\Section::make('Status')
-                                    ->schema([
-                                        Forms\Components\Hidden::make('category_type')
-                                            ->default(Package::class),
-                                        Forms\Components\Toggle::make('status')
-                                            ->default('active')
-                                            ->onIcon('heroicon-o-check-circle')
-                                            ->offIcon('heroicon-o-x-circle')
-                                            ->onColor('success')
-                                            ->offColor('danger')
-                                            ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active'))
-                                            ->dehydrateStateUsing(fn ($state) => $state ? 'active' : 'inactive'),
-                                    ]),
-                            ]),
-                    ]),
-            ]);
+            ->schema(Package::getFormSchema($this->getOwnerRecord()->id));
     }
 
     public function table(Table $table): Table
@@ -115,6 +82,9 @@ class PackagesRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                     ->slideOver(),
                 Tables\Actions\DeleteAction::make(),
+            ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
