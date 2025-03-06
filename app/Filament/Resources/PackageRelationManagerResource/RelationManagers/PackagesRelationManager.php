@@ -77,13 +77,11 @@ class PackagesRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->slideOver(),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()
-                    ->slideOver(),
+                Tables\Actions\CreateAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
