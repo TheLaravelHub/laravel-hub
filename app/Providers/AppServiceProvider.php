@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\EditAction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Vite;
@@ -30,6 +32,14 @@ class AppServiceProvider extends ServiceProvider
 
         Auth::macro('admin', function () {
             return Auth::guard('admin')->user();
+        });
+
+        CreateAction::configureUsing(function (CreateAction $action) {
+            return $action->slideOver();
+        });
+
+        EditAction::configureUsing(function (EditAction $action) {
+            return $action->slideOver();
         });
     }
 }
