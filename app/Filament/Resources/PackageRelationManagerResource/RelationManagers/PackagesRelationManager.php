@@ -9,8 +9,6 @@ use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PackagesRelationManager extends RelationManager
 {
@@ -52,11 +50,11 @@ class PackagesRelationManager extends RelationManager
                     ->offColor('danger')
                     ->sortable()
                     ->toggleable()
-                    ->getStateUsing(fn(Package $package) => $package->status === 'active')
+                    ->getStateUsing(fn (Package $package) => $package->status === 'active')
                     ->beforeStateUpdated(function ($record, $state) {
                         Notification::make()
                             ->title('Status Updated')
-                            ->body('The status has been changed to ' . ($state ? 'Active' : 'Inactive'))
+                            ->body('The status has been changed to '.($state ? 'Active' : 'Inactive'))
                             ->success()
                             ->send();
                     }),

@@ -31,7 +31,7 @@ class ListPackages extends ListRecords
                 ->modifyQueryUsing(function ($query) {
                     return $query->withoutGlobalScope(SoftDeletingScope::class)
                         ->where('status', 'inactive');
-                })
+                }),
         ];
     }
 

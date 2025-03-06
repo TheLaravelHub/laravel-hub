@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PackageResource\Pages;
-use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
-use Filament\Actions\Action;
 use Filament\Actions\RestoreAction;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -13,8 +11,6 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Http;
 use Str;
 
@@ -86,13 +82,14 @@ class PackageResource extends Resource
                                                                 ->title('Repository URL is required')
                                                                 ->danger()
                                                                 ->send();
+
                                                             return;
                                                         }
 
                                                         try {
                                                             // Call your internal API to get repository data
                                                             $response = Http::get(route('get-repository-data'), [
-                                                                'repository_url' => $repoUrl
+                                                                'repository_url' => $repoUrl,
                                                             ]);
 
                                                             if ($response->failed()) {
@@ -167,9 +164,9 @@ class PackageResource extends Resource
                                             ->onIcon('heroicon-o-check-circle')
                                             ->offIcon('heroicon-o-x-circle')
                                             ->onColor('success')
-                                            ->offColor('danger')
-                                    ])
-                            ])
+                                            ->offColor('danger'),
+                                    ]),
+                            ]),
                     ]),
             ]);
     }
@@ -201,11 +198,11 @@ class PackageResource extends Resource
                     ->offColor('danger')
                     ->sortable()
                     ->toggleable()
-                    ->getStateUsing(fn(Package $package) => $package->status === 'active')
+                    ->getStateUsing(fn (Package $package) => $package->status === 'active')
                     ->beforeStateUpdated(function ($record, $state) {
                         Notification::make()
                             ->title('Status Updated')
-                            ->body('The status has been changed to ' . ($state ? 'Active' : 'Inactive'))
+                            ->body('The status has been changed to '.($state ? 'Active' : 'Inactive'))
                             ->success()
                             ->send();
                     }),
@@ -221,7 +218,7 @@ class PackageResource extends Resource
                         'active' => 'Active',
                         'inactive' => 'Inactive',
                     ]),
-                Tables\Filters\TrashedFilter::make()
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -230,17 +227,17 @@ class PackageResource extends Resource
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn(Package $package) => $package->delete())
-                    ->visible(fn(Package $package) => !$package->trashed()),
+                    ->action(fn (Package $package) => $package->delete())
+                    ->visible(fn (Package $package) => ! $package->trashed()),
 
                 Tables\Actions\RestoreAction::make()
                     ->requiresConfirmation()
-                    ->visible(fn(Package $package) => $package->trashed())
+                    ->visible(fn (Package $package) => $package->trashed()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
-//                    RestoreAction::make()
+                    //                    RestoreAction::make()
                 ]),
             ]);
     }

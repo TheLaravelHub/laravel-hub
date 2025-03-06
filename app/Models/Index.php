@@ -23,12 +23,12 @@ class Index extends Model implements HasMedia
 
     protected array $cascadeDeactivate = ['packages'];
 
-//    protected function casts()
-//    {
-//        return [
-//            'status' => StatusCast::class,
-//        ];
-//    }
+    //    protected function casts()
+    //    {
+    //        return [
+    //            'status' => StatusCast::class,
+    //        ];
+    //    }
 
     public function packages()
     {
