@@ -18,15 +18,54 @@ class PackagesRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Grid::make(3)
+                    ->schema([
+                        Forms\Components\Grid::make(1)
+                            ->columnSpan(2)
+                            ->schema([
+                                Forms\Components\Section::make('Category Information')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('name')
+                                            ->required()
+                                            ->maxLength(255)
+                                    ]),
+
+                                Forms\Components\Section::make('SEO Meta Information')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('meta_title')
+                                            ->maxLength(255),
+                                        Forms\Components\Textarea::make('meta_description')
+                                            ->maxLength(255),
+                                    ]),
+                            ]),
+                        Forms\Components\Grid::make(1)
+                            ->columnSpan(1)
+                            ->schema([
+                                Forms\Components\Section::make('Status')
+                                    ->schema([
+                                        Forms\Components\Hidden::make('category_type')
+                                            ->default(Package::class),
+                                        Forms\Components\Toggle::make('status')
+                                            ->default('active')
+                                            ->onIcon('heroicon-o-check-circle')
+                                            ->offIcon('heroicon-o-x-circle')
+                                            ->onColor('success')
+                                            ->offColor('danger')
+                                            ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active'))
+                                            ->dehydrateStateUsing(fn ($state) => $state ? 'active' : 'inactive'),
+                                    ]),
+                            ]),
+                    ]),
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
+            ->persistFiltersInSession()
+            ->filtersTriggerAction(function ($action) {
+                return $action->button()->label('Filters');
+            })
             ->recordTitleAttribute('title')
             ->columns([
                 Tables\Columns\TextColumn::make('index.name')
@@ -60,10 +99,17 @@ class PackagesRelationManager extends RelationManager
                     }),
             ])
             ->filters([
-                //
-            ])
-            ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('categories', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                    ]),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
