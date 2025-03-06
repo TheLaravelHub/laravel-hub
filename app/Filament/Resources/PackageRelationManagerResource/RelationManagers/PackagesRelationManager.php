@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PackageRelationManagerResource\RelationManagers;
 
 use App\Models\Package;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -14,19 +13,24 @@ class PackagesRelationManager extends RelationManager
 {
     protected static string $relationship = 'packages';
 
+    public function isReadOnly(): bool
+    {
+        return false;
+    }
+
     public function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-            ]);
+            ->schema(Package::getFormSchema($this->getOwnerRecord()->id));
     }
 
     public function table(Table $table): Table
     {
         return $table
+            ->persistFiltersInSession()
+            ->filtersTriggerAction(function ($action) {
+                return $action->button()->label('Filters');
+            })
             ->recordTitleAttribute('title')
             ->columns([
                 Tables\Columns\TextColumn::make('index.name')
@@ -60,14 +64,25 @@ class PackagesRelationManager extends RelationManager
                     }),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('categories', 'name')
+                    ->multiple()
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                    ]),
+                Tables\Filters\TrashedFilter::make(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
