@@ -10,6 +10,7 @@ use App\Models\Package;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -77,8 +78,7 @@ class PackageCategoryResource extends Resource
                                             ->offIcon('heroicon-o-x-circle')
                                             ->onColor('success')
                                             ->offColor('danger')
-                                            ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active'))
-                                            ->dehydrateStateUsing(fn ($state) => $state ? 'active' : 'inactive'),
+                                            ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
                                     ]),
                             ]),
                     ]),
@@ -109,7 +109,14 @@ class PackageCategoryResource extends Resource
                     ->offColor('danger')
                     ->sortable()
                     ->toggleable()
-                    ->getStateUsing(fn ($record) => $record->status === 'active'),
+                    ->getStateUsing(fn ($record) => $record->status === 'active')
+                    ->beforeStateUpdated(function ($record, $state) {
+                        Notification::make()
+                            ->title('Status Updated')
+                            ->body('The status has been changed to '.($state ? 'Active' : 'Inactive'))
+                            ->success()
+                            ->send();
+                    }),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')

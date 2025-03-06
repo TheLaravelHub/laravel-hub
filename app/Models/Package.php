@@ -232,7 +232,8 @@ class Package extends Model
                                         ->onIcon('heroicon-o-check-circle')
                                         ->offIcon('heroicon-o-x-circle')
                                         ->onColor('success')
-                                        ->offColor('danger'),
+                                        ->offColor('danger')
+                                        ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
                                 ]),
                         ]),
                 ]),
