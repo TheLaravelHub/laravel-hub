@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
@@ -12,6 +13,7 @@ class Category extends Model
 {
     use HasActiveScope;
     use SoftDeletes;
+    use HasStatus;
 
     protected $fillable = ['name', 'slug', 'meta_title', 'meta_description', 'category_type'];
 
@@ -25,12 +27,12 @@ class Category extends Model
         });
     }
 
-    public function casts()
-    {
-        return [
-            'status' => StatusCast::class,
-        ];
-    }
+//    public function casts()
+//    {
+//        return [
+//            'status' => StatusCast::class,
+//        ];
+//    }
 
     /**
      * Scope to filter only package categories.
