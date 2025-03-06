@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\PackageRelationManagerResource\RelationManagers;
 
 use App\Models\Package;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -13,7 +12,6 @@ use Filament\Tables\Table;
 class PackagesRelationManager extends RelationManager
 {
     protected static string $relationship = 'packages';
-
 
     public function isReadOnly(): bool
     {

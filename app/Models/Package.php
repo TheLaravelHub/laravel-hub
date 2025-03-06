@@ -75,7 +75,7 @@ class Package extends Model
 
     public function searchableAs(): string
     {
-        return 'packages_index_' . env('APP_ENV');
+        return 'packages_index_'.env('APP_ENV');
     }
 
     /**
@@ -89,7 +89,7 @@ class Package extends Model
         return $this->toArray();
     }
 
-    public static function getFormSchema(int|null $categoryId = null): array
+    public static function getFormSchema(?int $categoryId = null): array
     {
         return [
             Grid::make(3)
