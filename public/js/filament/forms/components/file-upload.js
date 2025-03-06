@@ -14406,15 +14406,13 @@ function gf({
             this.destroyEditor(), gt(this.$refs.input), (this.pond = null)
         },
         dispatchFormEvent: function (V, B = {}) {
-            this.$el
-                .closest('form')
-                ?.dispatchEvent(
-                    new CustomEvent(V, {
-                        composed: !0,
-                        cancelable: !0,
-                        detail: B,
-                    }),
-                )
+            this.$el.closest('form')?.dispatchEvent(
+                new CustomEvent(V, {
+                    composed: !0,
+                    cancelable: !0,
+                    detail: B,
+                }),
+            )
         },
         getUploadedFiles: async function () {
             let V = await s()
