@@ -4,19 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CategoryResource\Pages\ViewCategory;
 use App\Filament\Resources\PackageCategoryResource\Pages;
-use App\Filament\Resources\PackageCategoryResource\RelationManagers;
 use App\Filament\Resources\PackageRelationManagerResource\RelationManagers\PackagesRelationManager;
 use App\Models\Category;
 use App\Models\Package;
-use App\Models\PackageCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Forms\Set;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Str;
 
 class PackageCategoryResource extends Resource
@@ -24,7 +21,9 @@ class PackageCategoryResource extends Resource
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
+
     protected static ?string $label = 'Package Categories';
+
     protected static ?string $navigationGroup = 'Packages';
 
     public static function getEloquentQuery(): Builder
@@ -78,9 +77,9 @@ class PackageCategoryResource extends Resource
                                             ->offIcon('heroicon-o-x-circle')
                                             ->onColor('success')
                                             ->offColor('danger')
-                                            ->afterStateHydrated(fn($state, callable $set) => $set('status', $state === 'active'))
-                                            ->dehydrateStateUsing(fn($state) => $state ? 'active' : 'inactive'),
-                                    ])
+                                            ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active'))
+                                            ->dehydrateStateUsing(fn ($state) => $state ? 'active' : 'inactive'),
+                                    ]),
                             ]),
                     ]),
             ]);
@@ -97,7 +96,7 @@ class PackageCategoryResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('packages')
-                    ->formatStateUsing(fn(Category $category) => $category->packages->count() ?? 0)
+                    ->formatStateUsing(fn (Category $category) => $category->packages->count() ?? 0)
                     ->sortable(),
                 Tables\Columns\ToggleColumn::make('status')
                     ->onIcon('heroicon-o-check-circle')
@@ -106,7 +105,7 @@ class PackageCategoryResource extends Resource
                     ->offColor('danger')
                     ->sortable()
                     ->toggleable()
-                    ->getStateUsing(fn($record) => $record->status === 'active')
+                    ->getStateUsing(fn ($record) => $record->status === 'active'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
@@ -114,7 +113,7 @@ class PackageCategoryResource extends Resource
                     ->options([
                         'active' => 'Active',
                         'inactive' => 'Inactive',
-                    ])
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -131,7 +130,7 @@ class PackageCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PackagesRelationManager::class
+            PackagesRelationManager::class,
         ];
     }
 
@@ -140,8 +139,8 @@ class PackageCategoryResource extends Resource
         return [
             'index' => Pages\ListPackageCategories::route('/'),
             'create' => Pages\CreatePackageCategory::route('/create'),
-//            'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
-            'view' => ViewCategory::route('/{record}')
+            //            'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
+            'view' => ViewCategory::route('/{record}'),
         ];
     }
 }

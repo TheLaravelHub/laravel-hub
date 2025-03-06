@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasSlug;
+use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -11,7 +12,6 @@ use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
 use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
-use App\Traits\HasStatus;
 
 class Package extends Model
 {
@@ -26,12 +26,12 @@ class Package extends Model
         'language', 'stars', 'forks', 'open_issues', 'owner', 'owner_avatar',
     ];
 
-//    public function casts()
-//    {
-//        return [
-//            'status' => StatusCast::class,
-//        ];
-//    }
+    //    public function casts()
+    //    {
+    //        return [
+    //            'status' => StatusCast::class,
+    //        ];
+    //    }
 
     /**
      * Relationship: Package belongs to an Index
