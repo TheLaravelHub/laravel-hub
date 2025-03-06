@@ -88,6 +88,10 @@ class PackageCategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->persistFiltersInSession()
+            ->filtersTriggerAction(function ($action) {
+                return $action->button()->label('Filters');
+            })
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
@@ -114,11 +118,23 @@ class PackageCategoryResource extends Resource
                         'active' => 'Active',
                         'inactive' => 'Inactive',
                     ]),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
                     ->slideOver(),
                 Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('delete')
+                    ->label('Delete')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->action(fn (Category $category) => $category->delete())
+                    ->visible(fn (Category $category) => ! $category->trashed()),
+
+                Tables\Actions\RestoreAction::make()
+                    ->requiresConfirmation()
+                    ->visible(fn (Category $category) => $category->trashed()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -139,7 +155,7 @@ class PackageCategoryResource extends Resource
         return [
             'index' => Pages\ListPackageCategories::route('/'),
             'create' => Pages\CreatePackageCategory::route('/create'),
-            //            'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
+            // 'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
             'view' => ViewCategory::route('/{record}'),
         ];
     }
