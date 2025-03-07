@@ -22,7 +22,7 @@ class CategoryResource extends JsonResource
             'slug' => $this->slug,
             'meta_title' => $this->meta_title,
             'meta_description' => $this->meta_description,
-            'packages_count' => $this->packages_count
+            'packages_count' => $this->packages_count,
         ];
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PackageResource;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\PackageResource;
 use App\Models\Category;
 use App\Models\Package;
 use Illuminate\Http\Request;

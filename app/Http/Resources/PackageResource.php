@@ -20,7 +20,7 @@ class PackageResource extends JsonResource
             'id' => $this->id,
             'index_id' => $this->index_id,
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'category_ids' => $this->whenLoaded('categories', fn() => $this->categories->pluck('id')),
+            'category_ids' => $this->whenLoaded('categories', fn () => $this->categories->pluck('id')),
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
