@@ -106,7 +106,7 @@ const StatsSection = ({
                                 }}
                                 viewport={{ once: true }}
                             >
-                                {stat.value.toLocaleString()}
+                                {stat.value?.toLocaleString()}
                             </motion.span>
                             <span
                                 className={`mt-1 text-muted-foreground ${compact ? 'text-xs md:text-sm' : 'text-sm md:text-base'}`}
