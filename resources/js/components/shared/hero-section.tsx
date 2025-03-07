@@ -230,7 +230,7 @@ export default function HeroSection({
                             }}
                             className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary shadow-sm transition-all duration-200"
                         >
-                            {category.name}
+                            {category.name} ({category.packages_count})
                         </motion.span>
                     ))}
                 </motion.div>
