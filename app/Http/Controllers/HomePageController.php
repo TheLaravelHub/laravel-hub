@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Admin\CategoryResource;
-use App\Http\Resources\Admin\PackageResource;
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\PackageResource;
 use App\Models\Category;
 use App\Models\Package;
 use Illuminate\Http\Request;
@@ -21,9 +21,18 @@ class HomePageController extends Controller
         $categories = Category::query()
             ->whereHas('packages')
             ->forPackages()
+            ->withCount('packages')
             ->get();
-        $packages = Package::search()
-            ->paginate(perPage: 24, page: $page);
+
+        $packages = $request->input('search')
+            ? Package::search($request->input('search'))
+                ->query(function ($query) {
+                    return $query->select('id', 'name', 'slug', 'description', 'stars', 'owner', 'owner_avatar');
+                })
+                ->paginate(perPage: 24, page: $page)
+            : Package::query()
+                ->select('id', 'name', 'slug', 'description', 'stars', 'owner', 'owner_avatar')
+                ->paginate(perPage: 24, page: $page);
 
         $packages->load('categories');
 
