@@ -278,7 +278,7 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                     totalPackages={packages.meta.total}
                     totalStars={stars}
                     totalCategories={categories.data.length}
-                    compact={true}
+                    compact={false}
                 />
 
                 {/* CTA Section */}
