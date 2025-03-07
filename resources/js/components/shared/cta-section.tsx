@@ -1,7 +1,7 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { BookmarkPlus, Github } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import React from 'react'
+import { motion } from 'framer-motion'
+import { BookmarkPlus, Github } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 const CTASection = () => {
     const containerVariants = {
@@ -9,10 +9,10 @@ const CTASection = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.2
-            }
-        }
-    };
+                staggerChildren: 0.2,
+            },
+        },
+    }
 
     const itemVariants = {
         hidden: { y: 20, opacity: 0 },
@@ -20,11 +20,11 @@ const CTASection = () => {
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring",
-                stiffness: 100
-            }
-        }
-    };
+                type: 'spring',
+                stiffness: 100,
+            },
+        },
+    }
 
     return (
         <section className="relative overflow-hidden py-20">
@@ -53,15 +53,24 @@ const CTASection = () => {
                     className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground"
                     variants={itemVariants}
                 >
-                    Contribute to the project, submit your packages, or help us improve the platform.
+                    Contribute to the project, submit your packages, or help us
+                    improve the platform.
                 </motion.p>
 
                 <motion.div
                     className="mt-10 flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
                     variants={itemVariants}
                 >
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button asChild variant="default" size="lg" className="flex items-center gap-2">
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <Button
+                            asChild
+                            variant="default"
+                            size="lg"
+                            className="flex items-center gap-2"
+                        >
                             <a
                                 href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
                                 target="_blank"
@@ -73,8 +82,16 @@ const CTASection = () => {
                         </Button>
                     </motion.div>
 
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button asChild variant="outline" size="lg" className="flex items-center gap-2">
+                    <motion.div
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <Button
+                            asChild
+                            variant="outline"
+                            size="lg"
+                            className="flex items-center gap-2"
+                        >
                             <a
                                 href="https://github.com/indxs/indxs"
                                 target="_blank"
@@ -88,7 +105,7 @@ const CTASection = () => {
                 </motion.div>
             </motion.div>
         </section>
-    );
-};
+    )
+}
 
-export default CTASection;
+export default CTASection

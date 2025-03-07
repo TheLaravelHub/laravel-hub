@@ -38,7 +38,7 @@ export default function HeroSection({
 
         // Don't search if less than 3 characters
         if (search.length < 3) {
-            return;
+            return
         }
 
         if (debounceTimeout.current) {
@@ -59,13 +59,14 @@ export default function HeroSection({
 
                 // Smooth scroll to show both search and results
                 if (packagesRef?.current) {
-                    const offset = window.innerWidth < 768 ? 100 : 150; // Less scroll on mobile
-                    const targetPosition = packagesRef.current.offsetTop - offset;
+                    const offset = window.innerWidth < 768 ? 100 : 150 // Less scroll on mobile
+                    const targetPosition =
+                        packagesRef.current.offsetTop - offset
 
                     window.scrollTo({
                         top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                        behavior: 'smooth',
+                    })
                 }
             } catch (error) {
                 setIsLoading(false)
@@ -85,9 +86,9 @@ export default function HeroSection({
             opacity: 1,
             transition: {
                 delayChildren: 0.3,
-                staggerChildren: 0.2
-            }
-        }
+                staggerChildren: 0.2,
+            },
+        },
     }
 
     const itemVariants = {
@@ -96,10 +97,10 @@ export default function HeroSection({
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring",
-                stiffness: 100
-            }
-        }
+                type: 'spring',
+                stiffness: 100,
+            },
+        },
     }
 
     const categoryVariants = {
@@ -109,47 +110,48 @@ export default function HeroSection({
             opacity: 1,
             transition: {
                 delay: i * 0.05,
-                type: "spring",
-                stiffness: 100
-            }
-        })
+                type: 'spring',
+                stiffness: 100,
+            },
+        }),
     }
 
     const handleCategoryClick = (categoryId: number) => {
         // Filter packages by category
-        if (setIsSearching) setIsSearching(true);
-        setIsLoading(true);
+        if (setIsSearching) setIsSearching(true)
+        setIsLoading(true)
 
-        axios.get(route('search'), {
-            params: { category: categoryId }
-        })
-        .then(response => {
-            setPackagesData(response.data);
-            setIsLoading(false);
+        axios
+            .get(route('search'), {
+                params: { category: categoryId },
+            })
+            .then((response) => {
+                setPackagesData(response.data)
+                setIsLoading(false)
 
-            // Always scroll to results when filtering by category
-            if (packagesRef?.current) {
-                packagesRef.current.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start',
-                });
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            setIsLoading(false);
-        });
-    };
+                // Always scroll to results when filtering by category
+                if (packagesRef?.current) {
+                    packagesRef.current.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start',
+                    })
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+                setIsLoading(false)
+            })
+    }
 
     const clearSearch = () => {
-        setSearch('');
+        setSearch('')
         if (searchInputRef.current) {
-            searchInputRef.current.focus();
+            searchInputRef.current.focus()
         }
-    };
+    }
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pt-32 pb-16 lg:pt-40 lg:pb-20">
+        <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pb-16 pt-32 lg:pb-20 lg:pt-40">
             {/* Decorative elements */}
             <motion.div
                 className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/5 blur-3xl"
@@ -182,7 +184,10 @@ export default function HeroSection({
                 initial="hidden"
                 animate="visible"
             >
-                <motion.div variants={itemVariants} className="relative inline-block">
+                <motion.div
+                    variants={itemVariants}
+                    className="relative inline-block"
+                >
                     <FloatingElement
                         className="absolute -right-8 -top-8 text-primary"
                         duration={3}
@@ -190,9 +195,7 @@ export default function HeroSection({
                     >
                         <Sparkles size={24} />
                     </FloatingElement>
-                    <motion.h2
-                        className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl lg:text-6xl"
-                    >
+                    <motion.h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl lg:text-6xl">
                         Explore & Discover Open-Source Packages
                     </motion.h2>
                 </motion.div>
@@ -217,13 +220,13 @@ export default function HeroSection({
                             variants={categoryVariants}
                             whileHover={{
                                 scale: 1.05,
-                                backgroundColor: "var(--primary)",
+                                backgroundColor: 'var(--primary)',
                                 // color: "white",
                                 transition: {
-                                    type: "spring",
+                                    type: 'spring',
                                     stiffness: 300,
-                                    damping: 10
-                                }
+                                    damping: 10,
+                                },
                             }}
                             className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary shadow-sm transition-all duration-200"
                         >
@@ -239,7 +242,10 @@ export default function HeroSection({
                 >
                     <motion.div
                         className="group relative flex h-16 w-full items-center overflow-hidden rounded-full bg-card px-6 shadow-lg transition-all focus-within:shadow-xl"
-                        whileHover={{ boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+                        whileHover={{
+                            boxShadow:
+                                '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        }}
                         whileTap={{ scale: 0.98 }}
                     >
                         <Search

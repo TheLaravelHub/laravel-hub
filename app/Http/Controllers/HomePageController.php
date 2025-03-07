@@ -29,7 +29,6 @@ class HomePageController extends Controller
 
         $stars = Package::sum('stars');
 
-
         if ($request->expectsJson()) {
             return PackageResource::collection($packages);
         }

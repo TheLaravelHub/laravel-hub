@@ -1,14 +1,14 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from 'react'
+import { motion } from 'framer-motion'
 
 interface AnimatedGradientBackgroundProps {
-    children: React.ReactNode;
-    className?: string;
+    children: React.ReactNode
+    className?: string
 }
 
 export const AnimatedGradientBackground = ({
     children,
-    className = ''
+    className = '',
 }: AnimatedGradientBackgroundProps) => {
     return (
         <div className={`relative overflow-hidden ${className}`}>
@@ -51,11 +51,9 @@ export const AnimatedGradientBackground = ({
             />
 
             {/* Content */}
-            <div className="relative z-10">
-                {children}
-            </div>
+            <div className="relative z-10">{children}</div>
         </div>
-    );
-};
+    )
+}
 
-export default AnimatedGradientBackground;
+export default AnimatedGradientBackground

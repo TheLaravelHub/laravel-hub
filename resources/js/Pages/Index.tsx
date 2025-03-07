@@ -20,8 +20,8 @@ interface IndexProps {
     packages: {
         data: PackageType[]
         meta: MetaType
-    },
-    stars: number,
+    }
+    stars: number
 }
 
 export default function Index({ categories, packages, stars }: IndexProps) {
@@ -72,9 +72,9 @@ export default function Index({ categories, packages, stars }: IndexProps) {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
-            }
-        }
+                staggerChildren: 0.1,
+            },
+        },
     }
 
     const cardVariants = {
@@ -83,20 +83,21 @@ export default function Index({ categories, packages, stars }: IndexProps) {
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring",
+                type: 'spring',
                 stiffness: 100,
-                damping: 15
-            }
+                damping: 15,
+            },
         },
         hover: {
             y: -10,
-            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+            boxShadow:
+                '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
             transition: {
-                type: "spring",
+                type: 'spring',
                 stiffness: 400,
-                damping: 10
-            }
-        }
+                damping: 10,
+            },
+        },
     }
 
     return (
@@ -118,7 +119,7 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                 {/* Packages */}
                 <section
                     ref={packagesRef}
-                    className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-16 pb-8"
+                    className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-8 pt-16"
                 >
                     {!isSearching && (
                         <motion.h2
@@ -126,7 +127,7 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ type: "spring", stiffness: 100 }}
+                            transition={{ type: 'spring', stiffness: 100 }}
                         >
                             Discover Popular Packages
                         </motion.h2>
@@ -151,38 +152,67 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                             <div className="flex w-full items-center justify-between">
                                                 <div className="flex items-center">
                                                     <motion.img
-                                                        src={pkg.owner_avatar as string}
+                                                        src={
+                                                            pkg.owner_avatar as string
+                                                        }
                                                         alt={pkg.owner}
                                                         className="h-14 w-14 rounded-full border-2 border-primary/20"
-                                                        initial={{ scale: 0.8, opacity: 0 }}
-                                                        animate={{ scale: 1, opacity: 1 }}
-                                                        transition={{ delay: index * 0.05 }}
+                                                        initial={{
+                                                            scale: 0.8,
+                                                            opacity: 0,
+                                                        }}
+                                                        animate={{
+                                                            scale: 1,
+                                                            opacity: 1,
+                                                        }}
+                                                        transition={{
+                                                            delay: index * 0.05,
+                                                        }}
                                                     />
                                                     <div className="ml-4">
                                                         <a
-                                                            href={pkg.repository_url}
+                                                            href={
+                                                                pkg.repository_url
+                                                            }
                                                             target={'_blank'}
                                                             className="group flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary/80"
                                                         >
                                                             {pkg.name}
-                                                            <ExternalLink size={16} className="opacity-0 transition-opacity group-hover:opacity-100" />
+                                                            <ExternalLink
+                                                                size={16}
+                                                                className="opacity-0 transition-opacity group-hover:opacity-100"
+                                                            />
                                                         </a>
-                                                        <p className="text-sm text-muted-foreground">{pkg.owner}</p>
+                                                        <p className="text-sm text-muted-foreground">
+                                                            {pkg.owner}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <motion.div
                                                     className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400"
                                                     whileHover={{ scale: 1.05 }}
                                                 >
-                                                    <Star size={16} className="fill-current" />
-                                                    <span className="text-sm font-medium">{formatNumber(pkg.stars)}</span>
+                                                    <Star
+                                                        size={16}
+                                                        className="fill-current"
+                                                    />
+                                                    <span className="text-sm font-medium">
+                                                        {formatNumber(
+                                                            pkg.stars,
+                                                        )}
+                                                    </span>
                                                 </motion.div>
                                             </div>
                                             {pkg.description && (
                                                 <p className="text-sm text-muted-foreground">
-                                                    {pkg.description.length > 120 ? (
+                                                    {pkg.description.length >
+                                                    120 ? (
                                                         <>
-                                                            {pkg.description.substring(0, 120)}...
+                                                            {pkg.description.substring(
+                                                                0,
+                                                                120,
+                                                            )}
+                                                            ...
                                                         </>
                                                     ) : (
                                                         pkg.description
@@ -212,8 +242,12 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                         >
-                            <p className="text-xl text-muted-foreground">No packages found matching your search criteria.</p>
-                            <p className="mt-2 text-muted-foreground">Try adjusting your search or browse categories.</p>
+                            <p className="text-xl text-muted-foreground">
+                                No packages found matching your search criteria.
+                            </p>
+                            <p className="mt-2 text-muted-foreground">
+                                Try adjusting your search or browse categories.
+                            </p>
                         </motion.div>
                     )}
                 </section>
@@ -227,7 +261,10 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                         {isLoadingMore && (
                             <motion.div
                                 initial={{ scale: 0.8, opacity: 0.5 }}
-                                animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+                                animate={{
+                                    scale: [0.8, 1.2, 0.8],
+                                    opacity: [0.5, 1, 0.5],
+                                }}
                                 transition={{ repeat: Infinity, duration: 1.5 }}
                             >
                                 <span className="loading-xl loading loading-dots text-primary"></span>
@@ -238,7 +275,7 @@ export default function Index({ categories, packages, stars }: IndexProps) {
 
                 {/* Stats Section - Moved below search results */}
                 <StatsSection
-                    totalPackages={packages.meta.total }
+                    totalPackages={packages.meta.total}
                     totalStars={stars}
                     totalCategories={categories.data.length}
                     compact={true}

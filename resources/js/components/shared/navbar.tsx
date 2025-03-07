@@ -33,19 +33,19 @@ const Navbar = () => {
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring",
+                type: 'spring',
                 stiffness: 100,
-                damping: 20
-            }
-        }
+                damping: 20,
+            },
+        },
     }
 
     const linkVariants = {
         hover: {
             scale: 1.05,
-            color: "var(--primary)",
-            transition: { type: "spring", stiffness: 300, damping: 10 }
-        }
+            color: 'var(--primary)',
+            transition: { type: 'spring', stiffness: 300, damping: 10 },
+        },
     }
 
     const mobileMenuVariants = {
@@ -54,22 +54,22 @@ const Navbar = () => {
             y: -20,
             transition: {
                 staggerChildren: 0.05,
-                staggerDirection: -1
-            }
+                staggerDirection: -1,
+            },
         },
         open: {
             opacity: 1,
             y: 0,
             transition: {
                 staggerChildren: 0.1,
-                delayChildren: 0.2
-            }
-        }
+                delayChildren: 0.2,
+            },
+        },
     }
 
     const menuItemVariants = {
         closed: { opacity: 0, y: -10 },
-        open: { opacity: 1, y: 0 }
+        open: { opacity: 1, y: 0 },
     }
 
     return (
@@ -89,7 +89,11 @@ const Navbar = () => {
                 >
                     <motion.div
                         whileHover={{ scale: 1.05 }}
-                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 400,
+                            damping: 10,
+                        }}
                     >
                         <Image
                             src={'/assets/images/Indxs-logo.png'}
@@ -120,13 +124,18 @@ const Navbar = () => {
                         <LifeBuoy size={22} /> <span>Support</span>
                     </motion.a>
                     <motion.div whileHover={{ scale: 1.05 }}>
-                        <Button asChild variant="default" className="flex items-center gap-2">
+                        <Button
+                            asChild
+                            variant="default"
+                            className="flex items-center gap-2"
+                        >
                             <a
                                 href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
                                 target={'_blank'}
                                 className="flex items-center space-x-2"
                             >
-                                <BookmarkPlus size={18} /> <span>Submit a package</span>
+                                <BookmarkPlus size={18} />{' '}
+                                <span>Submit a package</span>
                             </a>
                         </Button>
                     </motion.div>
@@ -172,13 +181,18 @@ const Navbar = () => {
                                 <LifeBuoy size={24} /> <span>Support</span>
                             </motion.a>
                             <motion.div variants={menuItemVariants}>
-                                <Button asChild variant="default" className="w-full justify-start">
+                                <Button
+                                    asChild
+                                    variant="default"
+                                    className="w-full justify-start"
+                                >
                                     <a
                                         href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
                                         target={'_blank'}
                                         className="flex items-center space-x-2"
                                     >
-                                        <BookmarkPlus size={18} /> <span>Submit a package</span>
+                                        <BookmarkPlus size={18} />{' '}
+                                        <span>Submit a package</span>
                                     </a>
                                 </Button>
                             </motion.div>

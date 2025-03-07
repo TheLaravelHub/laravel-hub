@@ -7,9 +7,9 @@ const Footer = () => {
         visible: {
             opacity: 1,
             transition: {
-                staggerChildren: 0.1
-            }
-        }
+                staggerChildren: 0.1,
+            },
+        },
     }
 
     const itemVariants = {
@@ -18,10 +18,10 @@ const Footer = () => {
             y: 0,
             opacity: 1,
             transition: {
-                type: "spring",
-                stiffness: 100
-            }
-        }
+                type: 'spring',
+                stiffness: 100,
+            },
+        },
     }
 
     const socialLinkVariants = {
@@ -29,11 +29,11 @@ const Footer = () => {
             y: -5,
             scale: 1.1,
             transition: {
-                type: "spring",
+                type: 'spring',
                 stiffness: 400,
-                damping: 10
-            }
-        }
+                damping: 10,
+            },
+        },
     }
 
     return (
@@ -75,7 +75,9 @@ const Footer = () => {
                 viewport={{ once: true, amount: 0.3 }}
             >
                 <motion.div variants={itemVariants}>
-                    <p className="text-lg font-medium text-muted-foreground">An open-source project by</p>
+                    <p className="text-lg font-medium text-muted-foreground">
+                        An open-source project by
+                    </p>
                 </motion.div>
 
                 <motion.div
@@ -84,11 +86,15 @@ const Footer = () => {
                 >
                     <motion.div
                         whileHover={{ scale: 1.05, rotate: 5 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 300,
+                            damping: 10,
+                        }}
                     >
-                    <img
-                        src={'/assets/images/github-avatar.jpg'}
-                        alt="Founder Avatar"
+                        <img
+                            src={'/assets/images/github-avatar.jpg'}
+                            alt="Founder Avatar"
                             className="h-24 w-24 rounded-full border-4 border-primary/20 shadow-lg"
                         />
                     </motion.div>
@@ -155,11 +161,17 @@ const Footer = () => {
                                 repeatType: 'loop',
                             }}
                         >
-                            <Heart size={16} className="fill-red-500 text-red-500" />
+                            <Heart
+                                size={16}
+                                className="fill-red-500 text-red-500"
+                            />
                         </motion.div>
                         <span>for the open-source community</span>
                     </div>
-                    <p>© {new Date().getFullYear()} Indxs. All rights reserved.</p>
+                    <p>
+                        © {new Date().getFullYear()} Indxs. All rights
+                        reserved.
+                    </p>
                 </motion.div>
             </motion.div>
         </footer>

@@ -1,13 +1,13 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React from 'react'
+import { motion } from 'framer-motion'
 
 interface FloatingElementProps {
-    children: React.ReactNode;
-    delay?: number;
-    duration?: number;
-    className?: string;
-    distance?: number;
-    onClick?: () => void;
+    children: React.ReactNode
+    delay?: number
+    duration?: number
+    className?: string
+    distance?: number
+    onClick?: () => void
 }
 
 export const FloatingElement = ({
@@ -37,7 +37,7 @@ export const FloatingElement = ({
         >
             {children}
         </motion.div>
-    );
-};
+    )
+}
 
-export default FloatingElement;
+export default FloatingElement
