@@ -27,6 +27,8 @@ class HomePageController extends Controller
 
         $packages->load('categories');
 
+        $stars = Package::sum('stars');
+
         if ($request->expectsJson()) {
             return PackageResource::collection($packages);
         }
@@ -34,6 +36,8 @@ class HomePageController extends Controller
         return Inertia::render('Index', [
             'categories' => CategoryResource::collection($categories),
             'packages' => PackageResource::collection($packages),
+            'stars' => $stars,
+            'categories_count' => $categories->count(),
         ]);
     }
 }
