@@ -76,7 +76,7 @@ const StatsSection = ({
                     </motion.h2>
                 )}
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6">
+                <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-6">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={index}

@@ -189,13 +189,13 @@ export default function HeroSection({
                     className="relative inline-block"
                 >
                     <FloatingElement
-                        className="absolute right-3 md:-right-8 -top-8 text-primary"
+                        className="absolute -top-8 right-3 text-primary md:-right-8"
                         duration={3}
                         distance={10}
                     >
                         <Sparkles size={24} />
                     </FloatingElement>
-                    <motion.h2 className="bg-gradient-to-r from-primary p-2 to-secondary bg-clip-text text-4xl font-extrabold text-transparent sm:text-5xl lg:text-6xl">
+                    <motion.h2 className="bg-gradient-to-r from-primary to-secondary bg-clip-text p-2 text-4xl font-extrabold text-transparent sm:text-5xl lg:text-6xl">
                         Explore & Discover Open-Source Packages
                     </motion.h2>
                 </motion.div>
