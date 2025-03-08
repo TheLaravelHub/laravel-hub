@@ -4,12 +4,24 @@ import Image from '@/components/image'
 import { Link } from '@inertiajs/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import Mixpanel from '@/lib/mixpanel'
+import useClickTracker from '@/hooks/use-click-tracker'
 
 const Navbar = () => {
     const [showNav, setShowNav] = useState(true)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navRef = useRef<HTMLDivElement>(null)
     const [lastScrollY, setLastScrollY] = useState(0)
+    const handleGithubRepoClick = useClickTracker('Github Repo Clicked', {
+        location: 'Navbar',
+    })
+    const handleSponsorLinkClick = useClickTracker('Github Sponsor Clicked', {
+        location: 'Navbar',
+    })
+    const handlePackageSubmissionLinkClick = useClickTracker(
+        'Package Submission Clicked',
+        { location: 'Navbar' },
+    )
 
     useEffect(() => {
         const handleScroll = () => {
@@ -114,6 +126,7 @@ const Navbar = () => {
                             className="flex items-center space-x-2 transition-colors hover:text-primary"
                             variants={linkVariants}
                             whileHover="hover"
+                            onClick={handleGithubRepoClick}
                         >
                             <Github size={22} /> <span>GitHub</span>
                         </motion.a>
@@ -123,6 +136,7 @@ const Navbar = () => {
                             className="flex items-center space-x-2 transition-colors hover:text-primary"
                             variants={linkVariants}
                             whileHover="hover"
+                            onClick={handleSponsorLinkClick}
                         >
                             <LifeBuoy size={22} /> <span>Support</span>
                         </motion.a>
@@ -136,6 +150,7 @@ const Navbar = () => {
                                     href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
                                     target={'_blank'}
                                     className="flex items-center space-x-2"
+                                    onClick={handlePackageSubmissionLinkClick}
                                 >
                                     <BookmarkPlus size={18} />{' '}
                                     <span>Submit a package</span>

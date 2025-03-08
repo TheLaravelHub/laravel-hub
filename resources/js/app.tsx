@@ -4,8 +4,13 @@ import './bootstrap'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot, hydrateRoot } from 'react-dom/client'
+import { router } from '@inertiajs/react'
+import Mixpanel from '@/lib/mixpanel'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
+router.on('navigate', (event) => {
+    Mixpanel.track('Page Viewed', { page: event.detail.page.url })
+})
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
