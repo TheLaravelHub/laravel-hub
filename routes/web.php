@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePageController::class)->name('homepage');
+Route::get('/package/{slug}', PackageController::class)->name('packagePage');
 
 Route::get('get-repository-data', GetPackageRepoDataController::class)
     ->middleware('throttle:5,1')
