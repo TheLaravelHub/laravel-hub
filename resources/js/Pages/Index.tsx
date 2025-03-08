@@ -151,24 +151,35 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                         <CardContent className="flex flex-1 flex-col items-start space-y-4 p-6">
                                             <div className="flex w-full items-center justify-between">
                                                 <div className="flex items-center">
-                                                    <motion.img
-                                                        src={
-                                                            pkg.owner_avatar as string
-                                                        }
-                                                        alt={pkg.owner}
-                                                        className="h-14 w-14 rounded-full border-2 border-primary/20"
-                                                        initial={{
-                                                            scale: 0.8,
-                                                            opacity: 0,
-                                                        }}
-                                                        animate={{
-                                                            scale: 1,
-                                                            opacity: 1,
-                                                        }}
-                                                        transition={{
-                                                            delay: index * 0.05,
-                                                        }}
-                                                    />
+                                                    <Link
+                                                        href={route(
+                                                            'packagePage',
+                                                            {
+                                                                slug: pkg.slug,
+                                                            },
+                                                        )}
+                                                    >
+                                                        <motion.img
+                                                            src={
+                                                                pkg.owner_avatar as string
+                                                            }
+                                                            alt={pkg.owner}
+                                                            className="h-14 w-14 rounded-full border-2 border-primary/20"
+                                                            initial={{
+                                                                scale: 0.8,
+                                                                opacity: 0,
+                                                            }}
+                                                            animate={{
+                                                                scale: 1,
+                                                                opacity: 1,
+                                                            }}
+                                                            transition={{
+                                                                delay:
+                                                                    index *
+                                                                    0.05,
+                                                            }}
+                                                        />
+                                                    </Link>
                                                     <div className="ml-4">
                                                         <Link
                                                             href={route(
@@ -177,17 +188,18 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                                                     slug: pkg.slug,
                                                                 },
                                                             )}
-                                                            className="group flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary/80"
                                                         >
-                                                            {pkg.name}
-                                                            <ExternalLink
-                                                                size={16}
-                                                                className="opacity-0 transition-opacity group-hover:opacity-100"
-                                                            />
+                                                            <div className="group flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary/80">
+                                                                {pkg.name}
+                                                                <ExternalLink
+                                                                    size={16}
+                                                                    className="opacity-0 transition-opacity group-hover:opacity-100"
+                                                                />
+                                                            </div>
+                                                            <p className="text-sm text-muted-foreground">
+                                                                {pkg.owner}
+                                                            </p>
                                                         </Link>
-                                                        <p className="text-sm text-muted-foreground">
-                                                            {pkg.owner}
-                                                        </p>
                                                     </div>
                                                 </div>
                                                 <motion.div
