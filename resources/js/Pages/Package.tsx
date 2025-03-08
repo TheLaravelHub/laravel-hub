@@ -1,4 +1,4 @@
-    import React from 'react'
+import React from 'react'
 import { Deferred, Head } from '@inertiajs/react'
 import { Package as PackageType } from '@/types'
 import Navbar from '@/components/shared/navbar'
@@ -388,12 +388,25 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                                     variant="outline"
                                                     className="flex items-center gap-1"
                                                     style={{
-                                                        backgroundColor: pkg.index.color_code ? `${pkg.index.color_code}20` : 'rgba(var(--primary), 0.1)',
-                                                        color: pkg.index.color_code || 'hsl(var(--primary))',
-                                                        borderColor: pkg.index.color_code ? `${pkg.index.color_code}40` : 'rgba(var(--primary), 0.2)'
+                                                        backgroundColor: pkg
+                                                            .index.color_code
+                                                            ? `${pkg.index.color_code}20`
+                                                            : 'rgba(var(--primary), 0.1)',
+                                                        color:
+                                                            pkg.index
+                                                                .color_code ||
+                                                            'hsl(var(--primary))',
+                                                        borderColor: pkg.index
+                                                            .color_code
+                                                            ? `${pkg.index.color_code}40`
+                                                            : 'rgba(var(--primary), 0.2)',
                                                     }}
                                                 >
-                                                    <img src={pkg.index.icon} alt={pkg.index.name} className="h-4 w-4" />
+                                                    <img
+                                                        src={pkg.index.icon}
+                                                        alt={pkg.index.name}
+                                                        className="h-4 w-4"
+                                                    />
                                                     {pkg.index.name}
                                                 </Badge>
                                             )}

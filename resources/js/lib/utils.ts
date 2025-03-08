@@ -16,10 +16,10 @@ export const formatNumber = (num: number) => {
 }
 
 export function formatDate(date: string | Date): string {
-    const d = new Date(date);
+    const d = new Date(date)
     return d.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric'
-    });
+        day: 'numeric',
+    })
 }

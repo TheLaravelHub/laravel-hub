@@ -16,8 +16,8 @@ class PackageController extends Controller
     public function __invoke(string $slug)
     {
         $package = Package::query()
-        ->select('id', 'index_id', 'name', 'slug', 'description', 'repository_url', 'meta_title', 'meta_description', 'language', 'stars', 'owner', 'owner_avatar', 'created_at')
-        ->with(['categories', 'index'])
+            ->select('id', 'index_id', 'name', 'slug', 'description', 'repository_url', 'meta_title', 'meta_description', 'language', 'stars', 'owner', 'owner_avatar', 'created_at')
+            ->with(['categories', 'index'])
             ->where('slug', $slug)
             ->firstOrFail();
 

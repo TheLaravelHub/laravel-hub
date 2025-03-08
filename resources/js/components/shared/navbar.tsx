@@ -80,7 +80,7 @@ const Navbar = () => {
             }`}
         >
             <motion.div
-                className="w-full bg-background/80 backdrop-blur-md shadow-sm"
+                className="w-full bg-background/80 shadow-sm backdrop-blur-md"
                 initial="hidden"
                 animate="visible"
                 variants={navVariants}
@@ -151,7 +151,11 @@ const Navbar = () => {
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             className="rounded-full p-2 text-gray-600 hover:bg-gray-100"
                         >
-                            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                            {mobileMenuOpen ? (
+                                <X size={24} />
+                            ) : (
+                                <Menu size={24} />
+                            )}
                         </motion.button>
                     </div>
                 </div>

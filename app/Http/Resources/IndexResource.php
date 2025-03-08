@@ -21,7 +21,7 @@ class IndexResource extends JsonResource
             'slug' => $this->slug,
             'icon' => $this->getFirstMediaUrl(),
             'color_code' => $this->color_code,
-            'status' => $this->status
+            'status' => $this->status,
         ];
     }
 }

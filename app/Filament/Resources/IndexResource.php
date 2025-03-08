@@ -5,15 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\IndexResource\Pages;
 use App\Models\Index;
 use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use Filament\Forms\Set;
-use Filament\Forms\Components\Toggle;
 
 class IndexResource extends Resource
 {
@@ -45,11 +44,11 @@ class IndexResource extends Resource
                     ->offIcon('heroicon-o-x-circle')
                     ->onColor('success')
                     ->offColor('danger')
-                    ->afterStateHydrated(fn($state, callable $set) => $set('status', $state === 'active')),
+                    ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
 
-                    SpatieMediaLibraryFileUpload::make('icon')
-                        ->avatar()
-                        ->imageEditor()
+                SpatieMediaLibraryFileUpload::make('icon')
+                    ->avatar()
+                    ->imageEditor(),
             ]);
     }
 

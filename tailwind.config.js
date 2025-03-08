@@ -82,6 +82,6 @@ export default {
         require('@tailwindcss/typography'),
         require('daisyui'),
         forms,
-        require('tailwindcss-animate')
+        require('tailwindcss-animate'),
     ],
 }
