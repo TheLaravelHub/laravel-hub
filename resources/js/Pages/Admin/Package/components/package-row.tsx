@@ -20,7 +20,7 @@ import Image from '@/components/image'
 
 const PackageRow = ({ single_package }: { single_package: Package }) => {
     const [isChecked, setIsChecked] = useState(
-        single_package.status.value === 'active',
+        single_package.status === 'active',
     )
     const toggleStatusForm = useForm({ status: single_package.status })
     const deleteForm = useForm({})
