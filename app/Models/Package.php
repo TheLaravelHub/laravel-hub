@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\IndexResource;
 use App\Traits\HasSlug;
 use App\Traits\HasStatus;
 use Filament\Forms\Components\Actions\Action;
@@ -35,7 +37,7 @@ class Package extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'index_id',
+//        'index_id',
         'name',
         'slug',
         'description',
@@ -57,10 +59,19 @@ class Package extends Model
 
     /**
      * Relationship: Package belongs to an Index
+     * @deprecated
      */
     public function index(): BelongsTo
     {
         return $this->belongsTo(Index::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function indexes(): BelongsToMany
+    {
+        return $this->belongsToMany(Index::class);
     }
 
     /**
@@ -84,10 +95,27 @@ class Package extends Model
     #[SearchUsingFullText(['name', 'description', 'owner'])]
     public function toSearchableArray()
     {
-        return $this->toArray();
+        return [
+            ... $this->toArray(),
+            'categories' => $this->categories->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                ];
+            }),
+            'indexes' => $this->indexes->map(function ($index) {
+                return [
+                    'id' => $index->id,
+                    'name' => $index->name,
+                    'slug' => $index->slug,
+                    'color_code' => $index->color_code,
+                ];
+            }),
+        ];
     }
 
-    public static function getFormSchema(?int $categoryId = null): array
+    public static function getFormSchema(?int $categoryId = null, ?int $indexId = null): array
     {
         return [
             Grid::make(3)
@@ -97,19 +125,16 @@ class Package extends Model
                         ->schema([
                             Section::make()
                                 ->schema([
-                                    Select::make('index_id')
-                                        ->relationship('index', 'name')
+                                    Select::make('index_ids')
+                                        ->relationship('indexes', 'name')
                                         ->required()
-                                        ->createOptionForm([
-                                            TextInput::make('name')
-                                                ->required()
-                                                ->live(onBlur: true)
-                                                ->afterStateUpdated(function (Set $set, ?string $state) {
-                                                    $set('slug', Str::slug($state));
-                                                }),
-                                            TextInput::make('slug')
-                                                ->required(),
-                                        ]),
+                                        ->multiple()
+                                        ->searchable()
+                                        ->preload()
+                                        ->visible(function () use ($indexId) {
+                                            return $indexId === null;
+                                        })
+                                        ->createOptionForm(Index::getFormSchema()),
                                     Select::make('category_ids')
                                         ->relationship('categories', 'name')
                                         ->visible(function () use ($categoryId) {
@@ -129,7 +154,7 @@ class Package extends Model
                                             TextInput::make('slug')
                                                 ->required(),
                                             Hidden::make('category_type')
-                                                ->default(Package::class),
+                                                ->default(__CLASS__),
                                         ]),
                                 ]),
                             Section::make('Package Data')

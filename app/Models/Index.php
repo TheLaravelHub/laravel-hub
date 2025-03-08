@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasSlug;
 use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -32,8 +33,8 @@ class Index extends Model implements HasMedia
     //        ];
     //    }
 
-    public function packages()
+    public function packages(): BelongsToMany
     {
-        return $this->hasMany(Package::class);
+        return $this->belongsToMany(Package::class);
     }
 }
