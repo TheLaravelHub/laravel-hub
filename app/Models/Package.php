@@ -44,8 +44,6 @@ class Package extends Model
         'meta_description',
         'language',
         'stars',
-        'forks',
-        'open_issues',
         'owner',
         'owner_avatar',
     ];

@@ -12,11 +12,13 @@
         "php": "^8.3",
         "algolia/algoliasearch-client-php": "^4.15",
         "filament/filament": "^3.2",
+        "filament/spatie-laravel-media-library-plugin": "^3.2",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/scout": "^10.13",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "^3.0",
         "spatie/laravel-medialibrary": "^11.12",
         "thefeqy/laravel-model-status": "^1.3",
         "tightenco/ziggy": "^2.0"
