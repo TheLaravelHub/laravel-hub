@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasSlug;
+use App\Traits\HasStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
@@ -14,6 +15,7 @@ class Index extends Model implements HasMedia
 {
     use HasActiveScope;
     use HasSlug;
+    use HasStatus;
     use InteractsWithMedia;
     use SoftDeletes;
 

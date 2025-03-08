@@ -78,5 +78,10 @@ export default {
         },
     },
 
-    plugins: [require('daisyui'), forms, require('tailwindcss-animate')],
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('daisyui'),
+        forms,
+        require('tailwindcss-animate'),
+    ],
 }

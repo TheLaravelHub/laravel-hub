@@ -5,10 +5,14 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\IndexResource\Pages;
 use App\Models\Index;
 use Filament\Forms;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class IndexResource extends Resource
 {
@@ -21,20 +25,30 @@ class IndexResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (Set $set, ?string $state) {
+                        $set('slug', Str::slug($state));
+                    })
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('slug')
+                    ->required(),
                 Forms\Components\Textarea::make('description')
                     ->required()
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('slug')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('color_code')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('active'),
+                Toggle::make('status')
+                    ->default('active')
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
+
+                SpatieMediaLibraryFileUpload::make('icon')
+                    ->avatar()
+                    ->imageEditor(),
             ]);
     }
 
@@ -50,6 +64,7 @@ class IndexResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
+                Tables\Columns\SpatieMediaLibraryImageColumn::make('icon'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { ExternalLink, Star } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
-import { Head } from '@inertiajs/react'
+import { Head, Link } from '@inertiajs/react'
 import { Category, MetaType, Package as PackageType } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import HeroSection from '@/components/shared/hero-section'
@@ -170,11 +170,13 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                                         }}
                                                     />
                                                     <div className="ml-4">
-                                                        <a
-                                                            href={
-                                                                pkg.repository_url
-                                                            }
-                                                            target={'_blank'}
+                                                        <Link
+                                                            href={route(
+                                                                'packagePage',
+                                                                {
+                                                                    slug: pkg.slug,
+                                                                },
+                                                            )}
                                                             className="group flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary/80"
                                                         >
                                                             {pkg.name}
@@ -182,7 +184,7 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                                                 size={16}
                                                                 className="opacity-0 transition-opacity group-hover:opacity-100"
                                                             />
-                                                        </a>
+                                                        </Link>
                                                         <p className="text-sm text-muted-foreground">
                                                             {pkg.owner}
                                                         </p>
