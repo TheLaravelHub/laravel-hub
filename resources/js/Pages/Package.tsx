@@ -5,20 +5,7 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
-import {
-    ExternalLink,
-    Github,
-    Star,
-    Calendar,
-    Code,
-    Globe,
-    FileText,
-    CheckCircle,
-    XCircle,
-    User,
-    Info,
-    BookOpen,
-} from 'lucide-react'
+import { ExternalLink, Github, Star, Calendar, Code, User } from 'lucide-react'
 import { formatNumber, formatDate } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
@@ -29,6 +16,7 @@ import rehypeSanitize from 'rehype-sanitize'
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/prism'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Skeleton } from '@/components/ui/skeleton'
+import useClickTracker from '@/hooks/use-click-tracker'
 
 interface PackageProps {
     package: PackageType
@@ -36,6 +24,11 @@ interface PackageProps {
 }
 
 export default function Package({ package: pkg, readme }: PackageProps) {
+    const handleRepositoryLinkClick = useClickTracker(
+        'Package repository clicked',
+        { location: pkg.name },
+    )
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -484,6 +477,9 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center justify-between text-sm transition-colors hover:text-primary"
+                                                onClick={
+                                                    handleRepositoryLinkClick
+                                                }
                                             >
                                                 <div className="flex items-center gap-2">
                                                     <Github size={16} />

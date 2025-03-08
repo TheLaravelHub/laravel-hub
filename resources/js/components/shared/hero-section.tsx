@@ -5,6 +5,7 @@ import { Search, Sparkles, X } from 'lucide-react'
 import axios from 'axios'
 import { motion, AnimatePresence } from 'framer-motion'
 import FloatingElement from '@/components/ui/floating-element'
+import Mixpanel from '@/lib/mixpanel'
 
 interface HeroProps {
     categories: Category[]
@@ -54,6 +55,10 @@ export default function HeroSection({
                     params: { term: search },
                 })
 
+                Mixpanel.track('Search', {
+                    term: search,
+                    packages: response.data,
+                })
                 setPackagesData(response.data)
                 setIsLoading(false)
 
