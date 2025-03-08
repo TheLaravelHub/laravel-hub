@@ -2,8 +2,17 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { BookmarkPlus, Github } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import useClickTracker from '@/hooks/use-click-tracker'
 
 const CTASection = () => {
+    const handleStarOnGithubClick = useClickTracker('Star on github', {
+        location: 'Homepage',
+    })
+    const handlePackageSubmissionLinkClick = useClickTracker(
+        'Package Submission Clicked',
+        { location: 'Homepage' },
+    )
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -75,6 +84,7 @@ const CTASection = () => {
                                 href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={handlePackageSubmissionLinkClick}
                             >
                                 <BookmarkPlus size={18} />
                                 <span>Submit a Package</span>
@@ -96,6 +106,7 @@ const CTASection = () => {
                                 href="https://github.com/indxs/indxs"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={handleStarOnGithubClick}
                             >
                                 <Github size={18} />
                                 <span>Star on GitHub</span>

@@ -1,7 +1,19 @@
 import { Github, Heart, LifeBuoy, Twitter } from 'lucide-react'
 import { motion } from 'framer-motion'
+import useClickTracker from '@/hooks/use-click-tracker'
 
 const Footer = () => {
+    const handleGithubProfileLinkClick = useClickTracker(
+        'Github profile link clicked',
+        { location: 'Footer' },
+    )
+    const handleXProfileLinkClick = useClickTracker('X profile link clicked', {
+        location: 'Footer',
+    })
+    const handleSponsorLinkClick = useClickTracker('Github Sponsor Clicked', {
+        location: 'Footer',
+    })
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -121,6 +133,7 @@ const Footer = () => {
                             className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-md transition-colors hover:text-primary"
                             variants={socialLinkVariants}
                             whileHover="hover"
+                            onClick={handleGithubProfileLinkClick}
                         >
                             <Github size={20} />
                         </motion.a>
@@ -130,6 +143,7 @@ const Footer = () => {
                             className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-md transition-colors hover:text-primary"
                             variants={socialLinkVariants}
                             whileHover="hover"
+                            onClick={handleXProfileLinkClick}
                         >
                             <Twitter size={20} />
                         </motion.a>
@@ -139,6 +153,7 @@ const Footer = () => {
                             className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-md transition-colors hover:text-primary"
                             variants={socialLinkVariants}
                             whileHover="hover"
+                            onClick={handleSponsorLinkClick}
                         >
                             <LifeBuoy size={20} />
                         </motion.a>
