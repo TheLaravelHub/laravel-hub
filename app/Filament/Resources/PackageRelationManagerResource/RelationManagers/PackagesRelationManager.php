@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\PackageRelationManagerResource\RelationManagers;
 
+use App\Models\Category;
+use App\Models\Index;
 use App\Models\Package;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -21,7 +23,15 @@ class PackagesRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         return $form
-            ->schema(Package::getFormSchema($this->getOwnerRecord()->id));
+            ->schema(Package::getFormSchema(...[$this->ownerTypeKey() => $this->getOwnerRecord()->id]));
+    }
+
+    private function ownerTypeKey(): string
+    {
+        return match (get_class($this->getOwnerRecord())) {
+            Index::class => 'indexId',
+            Category::class => 'categoryId'
+        };
     }
 
     public function table(Table $table): Table
@@ -33,11 +43,12 @@ class PackagesRelationManager extends RelationManager
             })
             ->recordTitleAttribute('title')
             ->columns([
-                Tables\Columns\TextColumn::make('index.name')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('id'),
+                Tables\Columns\TextColumn::make('indexes.name')
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->badge()
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

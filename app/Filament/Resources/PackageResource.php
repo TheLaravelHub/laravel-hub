@@ -35,11 +35,11 @@ class PackageResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('index.name')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('indexes.name')
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->badge()
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -79,6 +79,11 @@ class PackageResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\Action::make('View')
+                    ->icon('heroicon-o-eye')
+                    ->color('secondary')
+                    ->url(fn (Package $record) => route('packagePage', $record->slug))
+                    ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('delete')
                     ->label('Delete')
@@ -91,6 +96,7 @@ class PackageResource extends Resource
                 Tables\Actions\RestoreAction::make()
                     ->requiresConfirmation()
                     ->visible(fn (Package $package) => $package->trashed()),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

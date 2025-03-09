@@ -376,33 +376,35 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                         </div>
 
                                         <div className="mb-4 flex flex-wrap items-center gap-2">
-                                            {pkg.index && (
-                                                <Badge
-                                                    variant="outline"
-                                                    className="flex items-center gap-1"
-                                                    style={{
-                                                        backgroundColor: pkg
-                                                            .index.color_code
-                                                            ? `${pkg.index.color_code}20`
-                                                            : 'rgba(var(--primary), 0.1)',
-                                                        color:
-                                                            pkg.index
-                                                                .color_code ||
-                                                            'hsl(var(--primary))',
-                                                        borderColor: pkg.index
-                                                            .color_code
-                                                            ? `${pkg.index.color_code}40`
-                                                            : 'rgba(var(--primary), 0.2)',
-                                                    }}
-                                                >
-                                                    <img
-                                                        src={pkg.index.icon}
-                                                        alt={pkg.index.name}
-                                                        className="h-4 w-4"
-                                                    />
-                                                    {pkg.index.name}
-                                                </Badge>
-                                            )}
+                                            {pkg.indexes &&
+                                                pkg.indexes.map((index) => (
+                                                    <div key={index.id}>
+                                                        <Badge
+                                                            variant="outline"
+                                                            className="flex items-center gap-1"
+                                                            style={{
+                                                                backgroundColor:
+                                                                    index.color_code
+                                                                        ? `${index.color_code}20`
+                                                                        : 'rgba(var(--primary), 0.1)',
+                                                                color:
+                                                                    index.color_code ||
+                                                                    'hsl(var(--primary))',
+                                                                borderColor:
+                                                                    index.color_code
+                                                                        ? `${index.color_code}40`
+                                                                        : 'rgba(var(--primary), 0.2)',
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={index.icon}
+                                                                alt={index.name}
+                                                                className="h-4 w-4"
+                                                            />
+                                                            {index.name}
+                                                        </Badge>
+                                                    </div>
+                                                ))}
 
                                             {pkg.language && (
                                                 <Badge

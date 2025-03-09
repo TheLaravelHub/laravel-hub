@@ -17,7 +17,7 @@ class PackageController extends Controller
     {
         $package = Package::query()
             ->select('id', 'index_id', 'name', 'slug', 'description', 'repository_url', 'meta_title', 'meta_description', 'language', 'stars', 'owner', 'owner_avatar', 'created_at')
-            ->with(['categories', 'index'])
+            ->with(['categories', 'indexes'])
             ->where('slug', $slug)
             ->firstOrFail();
 

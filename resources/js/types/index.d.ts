@@ -51,7 +51,7 @@ export type Category = {
 type Package = {
     id: number
     index_id: number
-    index: Index
+    indexes: Index[]
     categories: Category[]
     category_ids: string[]
     name: string
