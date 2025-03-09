@@ -6,15 +6,9 @@ use App\Filament\Resources\IndexResource\Pages;
 use App\Filament\Resources\PackageRelationManagerResource\RelationManagers\PackagesRelationManager;
 use App\Models\Index;
 use App\Models\Package;
-use Filament\Actions\ViewAction;
-use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
 use Filament\Infolists\Components\ColorEntry;
 use Filament\Infolists\Components\Grid;
-use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
 use Filament\Infolists\Components\TextEntry;
@@ -22,7 +16,6 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 
 class IndexResource extends Resource
 {
@@ -74,12 +67,12 @@ class IndexResource extends Resource
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn(Index $index) => $index->delete())
-                    ->visible(fn(Index $index) => !$index->trashed()),
+                    ->action(fn (Index $index) => $index->delete())
+                    ->visible(fn (Index $index) => ! $index->trashed()),
 
                 Tables\Actions\RestoreAction::make()
                     ->requiresConfirmation()
-                    ->visible(fn(Package $package) => $package->trashed()),
+                    ->visible(fn (Package $package) => $package->trashed()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

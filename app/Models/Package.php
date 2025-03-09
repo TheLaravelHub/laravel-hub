@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Resources\CategoryResource;
-use App\Http\Resources\IndexResource;
 use App\Traits\HasSlug;
 use App\Traits\HasStatus;
 use Filament\Forms\Components\Actions\Action;
@@ -37,7 +35,7 @@ class Package extends Model
     use SoftDeletes;
 
     protected $fillable = [
-//        'index_id',
+        //        'index_id',
         'name',
         'slug',
         'description',
@@ -59,6 +57,7 @@ class Package extends Model
 
     /**
      * Relationship: Package belongs to an Index
+     *
      * @deprecated
      */
     public function index(): BelongsTo
@@ -66,9 +65,6 @@ class Package extends Model
         return $this->belongsTo(Index::class);
     }
 
-    /**
-     * @return BelongsToMany
-     */
     public function indexes(): BelongsToMany
     {
         return $this->belongsToMany(Index::class);
@@ -96,7 +92,7 @@ class Package extends Model
     public function toSearchableArray()
     {
         return [
-            ... $this->toArray(),
+            ...$this->toArray(),
             'categories' => $this->categories->map(function ($category) {
                 return [
                     'id' => $category->id,

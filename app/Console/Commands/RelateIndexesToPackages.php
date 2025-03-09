@@ -30,7 +30,7 @@ class RelateIndexesToPackages extends Command
 
         $packages = Package::withoutActive()->get();
 
-        foreach($packages as $package) {
+        foreach ($packages as $package) {
             $package->indexes()->sync($package->index_id);
         }
 

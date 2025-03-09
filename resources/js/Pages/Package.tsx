@@ -5,20 +5,7 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import { Badge } from '@/components/ui/badge'
 import { motion } from 'framer-motion'
-import {
-    ExternalLink,
-    Github,
-    Star,
-    Calendar,
-    Code,
-    Globe,
-    FileText,
-    CheckCircle,
-    XCircle,
-    User,
-    Info,
-    BookOpen,
-} from 'lucide-react'
+import { ExternalLink, Github, Star, Calendar, Code, User } from 'lucide-react'
 import { formatNumber, formatDate } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
@@ -383,34 +370,35 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                         </div>
 
                                         <div className="mb-4 flex flex-wrap items-center gap-2">
-                                            {pkg.indexes && pkg.indexes.map((index) => (
-                                                <div key={index.id}>
-                                                    <Badge
-                                                        variant="outline"
-                                                        className="flex items-center gap-1"
-                                                        style={{
-                                                            backgroundColor: index.color_code
-                                                                ? `${index.color_code}20`
-                                                                : 'rgba(var(--primary), 0.1)',
-                                                            color:
-                                                                index
-                                                                    .color_code ||
-                                                                'hsl(var(--primary))',
-                                                            borderColor: index
-                                                                .color_code
-                                                                ? `${index.color_code}40`
-                                                                : 'rgba(var(--primary), 0.2)',
-                                                        }}
-                                                    >
-                                                        <img
-                                                            src={index.icon}
-                                                            alt={index.name}
-                                                            className="h-4 w-4"
-                                                        />
-                                                        {index.name}
-                                                    </Badge>
-                                                </div>
-                                            ))}
+                                            {pkg.indexes &&
+                                                pkg.indexes.map((index) => (
+                                                    <div key={index.id}>
+                                                        <Badge
+                                                            variant="outline"
+                                                            className="flex items-center gap-1"
+                                                            style={{
+                                                                backgroundColor:
+                                                                    index.color_code
+                                                                        ? `${index.color_code}20`
+                                                                        : 'rgba(var(--primary), 0.1)',
+                                                                color:
+                                                                    index.color_code ||
+                                                                    'hsl(var(--primary))',
+                                                                borderColor:
+                                                                    index.color_code
+                                                                        ? `${index.color_code}40`
+                                                                        : 'rgba(var(--primary), 0.2)',
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={index.icon}
+                                                                alt={index.name}
+                                                                className="h-4 w-4"
+                                                            />
+                                                            {index.name}
+                                                        </Badge>
+                                                    </div>
+                                                ))}
 
                                             {pkg.language && (
                                                 <Badge

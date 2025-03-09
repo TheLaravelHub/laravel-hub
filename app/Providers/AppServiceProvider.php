@@ -26,13 +26,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
 
-//        Request::macro('admin', function () {
-//            return $this->user('admin');
-//        });
-//
-//        Auth::macro('admin', function () {
-//            return Auth::guard('admin')->user();
-//        });
+        //        Request::macro('admin', function () {
+        //            return $this->user('admin');
+        //        });
+        //
+        //        Auth::macro('admin', function () {
+        //            return Auth::guard('admin')->user();
+        //        });
 
         CreateAction::configureUsing(function (CreateAction $action) {
             return $action->slideOver();

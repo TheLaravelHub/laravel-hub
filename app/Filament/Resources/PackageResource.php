@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PackageResource\Pages;
-use App\Models\Index;
 use App\Models\Package;
 use Filament\Actions\RestoreAction;
 use Filament\Forms\Form;

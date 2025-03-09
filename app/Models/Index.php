@@ -86,12 +86,12 @@ class Index extends Model implements HasMedia
                                         ->offIcon('heroicon-o-x-circle')
                                         ->onColor('success')
                                         ->offColor('danger')
-                                        ->afterStateHydrated(fn($state, callable $set) => $set('status', $state === 'active')),
+                                        ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
                                     SpatieMediaLibraryFileUpload::make('icon')
                                         ->avatar()
                                         ->imageEditor(),
-                                ])
-                        ])
+                                ]),
+                        ]),
                 ]),
         ];
     }
