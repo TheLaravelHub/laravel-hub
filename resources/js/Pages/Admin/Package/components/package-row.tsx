@@ -67,7 +67,7 @@ const PackageRow = ({ single_package }: { single_package: Package }) => {
                     {single_package.id}
                 </TableCell>
                 <TableCell>{single_package.name}</TableCell>
-                <TableCell>{single_package.index?.name}</TableCell>
+                <TableCell>{single_package.indexes[0]?.name}</TableCell>
                 <TableCell>
                     {single_package.categories?.map((category) => (
                         <Badge
