@@ -3,12 +3,22 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\IndexResource\Pages;
+use App\Filament\Resources\PackageRelationManagerResource\RelationManagers\PackagesRelationManager;
 use App\Models\Index;
+use App\Models\Package;
+use Filament\Actions\ViewAction;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
+use Filament\Infolists\Components\ColorEntry;
+use Filament\Infolists\Components\Grid;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\SpatieMediaLibraryImageEntry;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -23,33 +33,7 @@ class IndexResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->live(onBlur: true)
-                    ->afterStateUpdated(function (Set $set, ?string $state) {
-                        $set('slug', Str::slug($state));
-                    })
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('slug')
-                    ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required()
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('color_code')
-                    ->maxLength(255),
-                Toggle::make('status')
-                    ->default('active')
-                    ->onIcon('heroicon-o-check-circle')
-                    ->offIcon('heroicon-o-x-circle')
-                    ->onColor('success')
-                    ->offColor('danger')
-                    ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
-
-                SpatieMediaLibraryFileUpload::make('icon')
-                    ->avatar()
-                    ->imageEditor(),
-            ]);
+            ->schema(Index::getFormSchema());
     }
 
     public static function table(Table $table): Table
@@ -60,7 +44,7 @@ class IndexResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('color_code')
+                Tables\Columns\ColorColumn::make('color_code')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
@@ -82,7 +66,20 @@ class IndexResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->slideOver(),
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('delete')
+                    ->label('Delete')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger')
+                    ->requiresConfirmation()
+                    ->action(fn(Index $index) => $index->delete())
+                    ->visible(fn(Index $index) => !$index->trashed()),
+
+                Tables\Actions\RestoreAction::make()
+                    ->requiresConfirmation()
+                    ->visible(fn(Package $package) => $package->trashed()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -94,7 +91,7 @@ class IndexResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PackagesRelationManager::class,
         ];
     }
 
@@ -103,7 +100,39 @@ class IndexResource extends Resource
         return [
             'index' => Pages\ListIndices::route('/'),
             'create' => Pages\CreateIndex::route('/create'),
-            'edit' => Pages\EditIndex::route('/{record}/edit'),
+            'view' => Pages\ViewIndex::route('/{record}'),
         ];
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Grid::make(3)
+                    ->schema([
+                        Grid::make()
+                            ->columnSpan(2)
+                            ->schema([
+                                Section::make('Index Details')
+                                    ->columns(2)
+                                    ->schema([
+                                        TextEntry::make('name'),
+                                        TextEntry::make('slug'),
+                                        TextEntry::make('description')
+                                            ->columnSpanFull(),
+                                    ]),
+                            ]),
+                        Grid::make()
+                            ->columnSpan(1)
+                            ->schema([
+                                Section::make('Status')
+                                    ->schema([
+                                        ColorEntry::make('color_code'),
+                                        TextEntry::make('status'),
+                                        SpatieMediaLibraryImageEntry::make('icon'),
+                                    ]),
+                            ]),
+                    ]),
+            ]);
     }
 }
