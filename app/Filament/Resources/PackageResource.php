@@ -35,11 +35,11 @@ class PackageResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('index.name')
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('indexes.name')
+                    ->badge()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->badge()
-                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
