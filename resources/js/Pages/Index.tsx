@@ -150,7 +150,7 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                     <Card className="flex h-full flex-col overflow-hidden rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm transition-all">
                                         <CardContent className="flex flex-1 flex-col items-start space-y-4 p-6">
                                             <div className="flex w-full items-center justify-between">
-                                                <div className="flex items-center">
+                                                <div className="flex flex-shrink-0 items-center">
                                                     <Link
                                                         href={route(
                                                             'packagePage',
@@ -202,20 +202,6 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                                         </Link>
                                                     </div>
                                                 </div>
-                                                <motion.div
-                                                    className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400"
-                                                    whileHover={{ scale: 1.05 }}
-                                                >
-                                                    <Star
-                                                        size={16}
-                                                        className="fill-current"
-                                                    />
-                                                    <span className="text-sm font-medium">
-                                                        {formatNumber(
-                                                            pkg.stars,
-                                                        )}
-                                                    </span>
-                                                </motion.div>
                                             </div>
                                             {pkg.description && (
                                                 <p className="text-sm text-muted-foreground">
@@ -235,16 +221,34 @@ export default function Index({ categories, packages, stars }: IndexProps) {
                                             )}
                                             <div className="flex-1"></div>
                                         </CardContent>
-                                        <CardFooter className="mt-auto flex flex-wrap gap-2 border-t border-border/50 bg-muted/30 p-4">
-                                            {pkg.categories.map((category) => (
-                                                <Badge
-                                                    key={category.id}
-                                                    variant={'secondary'}
-                                                    className="bg-primary/10 text-primary hover:bg-primary hover:text-white"
-                                                >
-                                                    {category.name}
-                                                </Badge>
-                                            ))}
+                                        <CardFooter className="mt-auto flex flex-wrap justify-between gap-2 border-t border-border/50 bg-muted/30 p-4">
+                                            <div className="flex gap-2">
+                                                {pkg.categories.map(
+                                                    (category) => (
+                                                        <Badge
+                                                            key={category.id}
+                                                            variant={
+                                                                'secondary'
+                                                            }
+                                                            className="bg-primary/10 text-primary hover:bg-primary hover:text-white"
+                                                        >
+                                                            {category.name}
+                                                        </Badge>
+                                                    ),
+                                                )}
+                                            </div>
+                                            <motion.div
+                                                className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400"
+                                                whileHover={{ scale: 1.05 }}
+                                            >
+                                                <Star
+                                                    size={16}
+                                                    className="fill-current"
+                                                />
+                                                <span className="text-sm font-medium">
+                                                    {formatNumber(pkg.stars)}
+                                                </span>
+                                            </motion.div>
                                         </CardFooter>
                                     </Card>
                                 </motion.div>

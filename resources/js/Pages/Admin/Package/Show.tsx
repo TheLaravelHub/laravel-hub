@@ -51,7 +51,7 @@ const Show = ({ package: singlePackage }: ShowPackageProps) => {
                                         <div className="flex flex-col gap-1">
                                             <span>Index</span>
                                             <span className="font-bold">
-                                                {singlePackage.index.name}
+                                                {singlePackage.indexes[0]?.name}
                                             </span>
                                         </div>
                                         <div className="flex flex-col gap-1">

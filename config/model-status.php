@@ -72,6 +72,6 @@ return [
     |
     */
     'admin_detector' => function () {
-        return Auth::guard('admin')->check();
+        return Auth::check() && Auth::user()->is_admin;
     },
 ];
