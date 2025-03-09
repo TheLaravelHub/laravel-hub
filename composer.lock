@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23cd0de179b6693ddb0decae9aae3e4b",
+    "content-hash": "486240069055d9364a97a58acd26c558",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3639,6 +3639,48 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.9.0"
             },
             "time": "2024-03-31T07:05:07+00:00"
+        },
+        {
+            "name": "mixpanel/mixpanel-php",
+            "version": "2.11.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mixpanel/mixpanel-php.git",
+                "reference": "4b0fafacf2129eff5d50721e129b07f0c32687e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mixpanel/mixpanel-php/zipball/4b0fafacf2129eff5d50721e129b07f0c32687e7",
+                "reference": "4b0fafacf2129eff5d50721e129b07f0c32687e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.9.*",
+                "phpunit/phpunit": "5.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": ["lib/Mixpanel.php"]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": ["Apache-2.0"],
+            "authors": [
+                {
+                    "name": "Mixpanel <dev@mixpanel.com>",
+                    "homepage": "https://mixpanel.com/"
+                }
+            ],
+            "description": "The Official PHP library for Mixpanel",
+            "homepage": "https://mixpanel.com/help/reference/php",
+            "keywords": ["mixpanel", "mixpanel php"],
+            "support": {
+                "issues": "https://github.com/mixpanel/mixpanel-php/issues",
+                "source": "https://github.com/mixpanel/mixpanel-php/tree/2.11.0"
+            },
+            "time": "2023-04-11T23:03:57+00:00"
         },
         {
             "name": "monolog/monolog",
