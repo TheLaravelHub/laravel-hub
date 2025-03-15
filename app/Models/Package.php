@@ -157,6 +157,7 @@ class Package extends Model
                                 ->schema([
                                     TextInput::make('repository_url')
                                         ->required()
+                                        ->unique(table: self::class, column: 'repository_url')
                                         ->maxLength(255)
                                         ->suffixAction(
                                             Action::make('fetchRepoData')
