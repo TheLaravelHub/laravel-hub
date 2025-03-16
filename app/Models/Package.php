@@ -132,7 +132,9 @@ class Package extends Model
                                         })
                                         ->createOptionForm(Index::getFormSchema()),
                                     Select::make('category_ids')
-                                        ->relationship('categories', 'name')
+                                        ->relationship('categories', 'name', function ($query) {
+                                            return $query->forPackages();
+                                        })
                                         ->visible(function () use ($categoryId) {
                                             return $categoryId === null;
                                         })

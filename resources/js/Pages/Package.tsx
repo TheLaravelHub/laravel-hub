@@ -17,6 +17,7 @@ import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/prism'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Skeleton } from '@/components/ui/skeleton'
 import useClickTracker from '@/hooks/use-click-tracker'
+import AppHead from '@/components/shared/AppHead'
 
 interface PackageProps {
     package: PackageType
@@ -24,6 +25,8 @@ interface PackageProps {
 }
 
 export default function Package({ package: pkg, readme }: PackageProps) {
+    const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+
     const handleRepositoryLinkClick = useClickTracker(
         'Package repository clicked',
         { location: pkg.name },
@@ -53,7 +56,127 @@ export default function Package({ package: pkg, readme }: PackageProps) {
 
     return (
         <AnimatedGradientBackground className="min-h-screen">
-            <Head title={pkg.name} />
+            <AppHead title={`${pkg.name} - Indxs Package`}>
+                {/* Meta Description */}
+                <meta
+                    name="description"
+                    content={
+                        pkg.meta_description ||
+                        pkg.description ||
+                        `Explore ${pkg.name}, an open-source ${pkg.language} package developed by ${pkg.owner}.`
+                    }
+                />
+
+                {/* Keywords */}
+                <meta
+                    name="keywords"
+                    content={`Indxs, ${pkg.name}, ${pkg.language} package, open-source, ${pkg.owner}, ${pkg.categories.map((cat) => cat.name).join(', ')}`}
+                />
+
+                {/* Open Graph (Facebook, LinkedIn, etc.) */}
+                <meta
+                    property="og:title"
+                    content={`${pkg.name} - Indxs Package`}
+                />
+                <meta
+                    property="og:description"
+                    content={
+                        pkg.description ||
+                        `Discover ${pkg.name}, a powerful ${pkg.language} package by ${pkg.owner}.`
+                    }
+                />
+                <meta
+                    property="og:image"
+                    content={
+                        pkg.owner_avatar ||
+                        `${appURL}/assets/images/og-image.png`
+                    }
+                />
+                <meta
+                    property="og:url"
+                    content={`${appURL}/packages/${pkg.slug}`}
+                />
+                <meta
+                    property="og:type"
+                    content="website"
+                />
+                <meta
+                    property="og:site_name"
+                    content="Indxs"
+                />
+
+                {/* Twitter Meta Tags */}
+                <meta
+                    name="twitter:card"
+                    content="summary_large_image"
+                />
+                <meta
+                    name="twitter:title"
+                    content={`${pkg.name} - Indxs Package`}
+                />
+                <meta
+                    name="twitter:description"
+                    content={
+                        pkg.description ||
+                        `Explore ${pkg.name}, an open-source ${pkg.language} package developed by ${pkg.owner}.`
+                    }
+                />
+                <meta
+                    name="twitter:image"
+                    content={
+                        pkg.owner_avatar ||
+                        `${appURL}/assets/images/og-image.png`
+                    }
+                />
+                <meta
+                    name="twitter:site"
+                    content="@IndxsDev"
+                />
+
+                {/* Canonical URL */}
+                <link
+                    rel="canonical"
+                    href={`${appURL}/packages/${pkg.slug}`}
+                />
+
+                {/* JSON-LD Structured Data for SEO */}
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        '@context': 'https://schema.org',
+                        '@type': 'SoftwareApplication',
+                        name: pkg.name,
+                        description:
+                            pkg.meta_description ||
+                            pkg.description ||
+                            `Explore ${pkg.name}, an open-source ${pkg.language} package developed by ${pkg.owner}.`,
+                        applicationCategory: 'Software Library',
+                        operatingSystem: 'All',
+                        creator: {
+                            '@type': 'Person',
+                            name: pkg.owner,
+                        },
+                        publisher: {
+                            '@type': 'Organization',
+                            name: 'Indxs',
+                            logo: {
+                                '@type': 'ImageObject',
+                                url: `${appURL}/assets/images/Indxs-logo.png`,
+                            },
+                        },
+                        url: `${appURL}/packages/${pkg.slug}`,
+                        image: `${appURL}/assets/images/og-image.png`,
+                        dateCreated: pkg.created_at,
+                        dateModified: pkg.updated_at,
+                        softwareVersion: 'Latest',
+                        aggregateRating: {
+                            '@type': 'AggregateRating',
+                            ratingValue: pkg.stars || '4.5',
+                            ratingCount: formatNumber(pkg.stars),
+                        },
+                    })}
+                </script>
+            </AppHead>
+
             <div className="relative flex min-h-screen flex-col">
                 <Navbar />
 

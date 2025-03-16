@@ -2,46 +2,41 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages\ViewPackageCategory;
-use App\Filament\Resources\PackageCategoryResource\Pages;
-use App\Filament\Resources\PackageRelationManagerResource\RelationManagers\PackagesRelationManager;
+use App\Filament\Resources\BlogPostCategoryResource\Pages;
+use App\Filament\Resources\BlogPostCategoryResource\RelationManagers\BlogPostsRelationManager;
+use App\Models\BlogPost;
 use App\Models\Category;
-use App\Models\Package;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-class PackageCategoryResource extends Resource
+class BlogPostCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
-    protected static ?string $label = 'Package Categories';
+    protected static ?string $label = 'Post Categories';
 
-    protected static ?string $navigationGroup = 'Packages';
+    protected static ?string $navigationGroup = 'Blog';
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('category_type', Package::class);
+        return parent::getEloquentQuery()->where('category_type', BlogPost::class);
     }
 
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(Category::getFormSchema(model: Package::class));
+            ->schema(Category::getFormSchema(model: BlogPost::class));
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->persistFiltersInSession()
-            ->filtersTriggerAction(function ($action) {
-                return $action->button()->label('Filters');
-            })
-            ->columns(Category::getTableColumns(model: Package::class))
+            ->columns(Category::getTableColumns(model: BlogPost::class))
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')
@@ -77,17 +72,16 @@ class PackageCategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PackagesRelationManager::class,
+            BlogPostsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPackageCategories::route('/'),
-            'create' => Pages\CreatePackageCategory::route('/create'),
-            // 'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
-            'view' => ViewPackageCategory::route('/{record}'),
+            'index' => Pages\ListBlogPostCategories::route('/'),
+            'create' => Pages\CreateBlogPostCategory::route('/create'),
+            'view' => Pages\ViewBlogPostCategory::route('/{record}'),
         ];
     }
 }

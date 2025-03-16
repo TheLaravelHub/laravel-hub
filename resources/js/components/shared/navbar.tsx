@@ -1,4 +1,4 @@
-import { BookmarkPlus, Github, LifeBuoy, Menu, X } from 'lucide-react'
+import { BookmarkPlus, Github, LifeBuoy, Menu, X, BookOpen } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import Image from '@/components/image'
 import { Link } from '@inertiajs/react'
@@ -121,6 +121,14 @@ const Navbar = () => {
                     {/* Desktop Navigation */}
                     <nav className="hidden space-x-6 md:flex">
                         <motion.a
+                            href={route('blog.index')}
+                            className="flex items-center space-x-2 transition-colors hover:text-primary"
+                            variants={linkVariants}
+                            whileHover="hover"
+                        >
+                            <BookOpen size={22} /> <span>Blog</span>
+                        </motion.a>
+                        <motion.a
                             href="https://github.com/indxs/indxs"
                             target={'_blank'}
                             className="flex items-center space-x-2 transition-colors hover:text-primary"
@@ -187,6 +195,13 @@ const Navbar = () => {
                         className="absolute left-0 right-0 z-40 w-full bg-background/95 px-6 py-8 shadow-lg backdrop-blur-md md:hidden"
                     >
                         <div className="flex flex-col space-y-6">
+                            <motion.a
+                                href={route('blog.index')}
+                                className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
+                                variants={menuItemVariants}
+                            >
+                                <BookOpen size={24} /> <span>Blog</span>
+                            </motion.a>
                             <motion.a
                                 href="https://github.com/indxs/indxs"
                                 target={'_blank'}

@@ -70,6 +70,22 @@ type Package = {
     updated_at: string
 }
 
+type BlogPost = {
+    id: number
+    categories: Category[]
+    title: string
+    sub_title: string
+    slug: string
+    content: string
+    meta_title?: string
+    meta_description?: string
+    image?: string
+    status: 'draft' | 'published' | 'scheduled'
+    published_at: string
+    created_at: string
+    updated_at: string
+}
+
 export type LinkType = {
     active: boolean
     label: string

@@ -10,7 +10,7 @@ trait HasSlug
     public static function bootHasSlug(): void
     {
         static::creating(function ($model) {
-            $model->slug = $model->generateSlug($model->name);
+            $model->slug = $model->generateSlug();
         });
 
         //        static::updating(function ($model) {
@@ -21,9 +21,12 @@ trait HasSlug
     /**
      * Generate a unique slug for the model.
      */
-    protected function generateSlug(string $name): string
+    protected function generateSlug(): string
     {
-        $slug = \Str::slug($name);
+        $sluggableColumn = $this->sluggable ?? 'name';
+        $sluggableValue = $this->{$sluggableColumn};
+
+        $slug = \Str::slug($sluggableValue);
 
         $count = $this->where('slug', $slug)->where('id', '!=', $this->id)->count();
 
