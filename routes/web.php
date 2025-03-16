@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\GetPackageRepoDataController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PackageController;
@@ -9,6 +10,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePageController::class)->name('homepage');
 Route::get('/package/{slug}', PackageController::class)->name('packagePage');
+
+Route::prefix('blog')
+    ->controller(BlogController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('blog.index');
+        Route::get('/{slug}', 'show')->name('blog.show');
+    });
 
 Route::get('get-repository-data', GetPackageRepoDataController::class)
     ->middleware('throttle:5,1')
