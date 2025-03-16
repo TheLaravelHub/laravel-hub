@@ -161,4 +161,15 @@ class BlogPost extends Model implements HasMedia
                 ]),
         ];
     }
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::saving(static function (BlogPost $post) {
+            if ($post->status === 'published' && ! $post->published_at) {
+                $post->published_at = now();
+            }
+        });
+    }
 }
