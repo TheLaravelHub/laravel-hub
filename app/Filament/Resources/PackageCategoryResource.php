@@ -2,20 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages\ViewCategory;
+use App\Filament\Resources\CategoryResource\Pages\ViewPackageCategory;
 use App\Filament\Resources\PackageCategoryResource\Pages;
 use App\Filament\Resources\PackageRelationManagerResource\RelationManagers\PackagesRelationManager;
 use App\Models\Category;
 use App\Models\Package;
-use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Forms\Set;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Str;
 
 class PackageCategoryResource extends Resource
 {
@@ -35,54 +31,7 @@ class PackageCategoryResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Grid::make(3)
-                    ->schema([
-                        Forms\Components\Grid::make(1)
-                            ->columnSpan(2)
-                            ->schema([
-                                Forms\Components\Section::make('Category Information')
-                                    ->columns(2)
-                                    ->schema([
-                                        Forms\Components\TextInput::make('name')
-                                            ->live(onBlur: true)
-                                            ->required()
-                                            ->maxLength(255)
-                                            ->afterStateUpdated(function (Set $set, ?string $state) {
-                                                $set('slug', Str::slug($state));
-                                            }),
-                                        Forms\Components\TextInput::make('slug')
-                                            ->required()
-                                            ->disabled()
-                                            ->maxLength(255),
-                                    ]),
-
-                                Forms\Components\Section::make('SEO Meta Information')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('meta_title')
-                                            ->maxLength(255),
-                                        Forms\Components\Textarea::make('meta_description')
-                                            ->maxLength(255),
-                                    ]),
-                            ]),
-                        Forms\Components\Grid::make(1)
-                            ->columnSpan(1)
-                            ->schema([
-                                Forms\Components\Section::make('Status')
-                                    ->schema([
-                                        Forms\Components\Hidden::make('category_type')
-                                            ->default(Package::class),
-                                        Forms\Components\Toggle::make('status')
-                                            ->default('active')
-                                            ->onIcon('heroicon-o-check-circle')
-                                            ->offIcon('heroicon-o-x-circle')
-                                            ->onColor('success')
-                                            ->offColor('danger')
-                                            ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
-                                    ]),
-                            ]),
-                    ]),
-            ]);
+            ->schema(Category::getFormSchema(model: Package::class));
     }
 
     public static function table(Table $table): Table
@@ -92,32 +41,7 @@ class PackageCategoryResource extends Resource
             ->filtersTriggerAction(function ($action) {
                 return $action->button()->label('Filters');
             })
-            ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('packages')
-                    ->formatStateUsing(fn (Category $category) => $category->packages->count() ?? 0)
-                    ->sortable(),
-                Tables\Columns\ToggleColumn::make('status')
-                    ->onIcon('heroicon-o-check-circle')
-                    ->offIcon('heroicon-o-x-circle')
-                    ->onColor('success')
-                    ->offColor('danger')
-                    ->sortable()
-                    ->toggleable()
-                    ->getStateUsing(fn ($record) => $record->status === 'active')
-                    ->beforeStateUpdated(function ($record, $state) {
-                        Notification::make()
-                            ->title('Status Updated')
-                            ->body('The status has been changed to '.($state ? 'Active' : 'Inactive'))
-                            ->success()
-                            ->send();
-                    }),
-            ])
+            ->columns(Category::getTableColumns(model: Package::class))
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')
@@ -163,7 +87,7 @@ class PackageCategoryResource extends Resource
             'index' => Pages\ListPackageCategories::route('/'),
             'create' => Pages\CreatePackageCategory::route('/create'),
             // 'edit' => Pages\EditPackageCategory::route('/{record}/edit'),
-            'view' => ViewCategory::route('/{record}'),
+            'view' => ViewPackageCategory::route('/{record}'),
         ];
     }
 }
