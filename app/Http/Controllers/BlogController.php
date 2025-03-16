@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogPostResource;
 use App\Models\BlogPost;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class BlogController extends Controller
@@ -18,7 +17,7 @@ class BlogController extends Controller
             ->paginate(24);
 
         return Inertia::render('Blog', [
-            'blogPosts' => BlogPostResource::collection($blogPosts)
+            'blogPosts' => BlogPostResource::collection($blogPosts),
         ]);
     }
 
@@ -30,7 +29,7 @@ class BlogController extends Controller
             ->firstOrFail();
 
         return Inertia::render('BlogPost', [
-            'blogPost' => new BlogPostResource($blogPost)
+            'blogPost' => new BlogPostResource($blogPost),
         ]);
     }
 }
