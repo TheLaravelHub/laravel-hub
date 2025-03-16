@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BlogPostResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Resources\PackageResource;
+use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\Package;
 use Illuminate\Http\Request;
@@ -38,6 +40,13 @@ class HomePageController extends Controller
 
         $stars = Package::sum('stars');
 
+        $latestPosts = BlogPost::published()
+            ->select('id', 'title', 'sub_title', 'slug', 'published_at', 'meta_description')
+            ->with(['categories'])
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+
         if ($request->expectsJson()) {
             return PackageResource::collection($packages);
         }
@@ -47,6 +56,7 @@ class HomePageController extends Controller
             'packages' => PackageResource::collection($packages),
             'stars' => $stars,
             'categories_count' => $categories->count(),
+            'latestPosts' => BlogPostResource::collection($latestPosts),
         ]);
     }
 }
