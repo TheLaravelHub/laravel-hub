@@ -28,14 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Vite::prefetch(concurrency: 3);
         Model::preventLazyLoading();
 
-        //        Request::macro('admin', function () {
-        //            return $this->user('admin');
-        //        });
-        //
-        //        Auth::macro('admin', function () {
-        //            return Auth::guard('admin')->user();
-        //        });
-
         CreateAction::configureUsing(function (CreateAction $action) {
             return $action->slideOver();
         });
@@ -43,5 +35,17 @@ class AppServiceProvider extends ServiceProvider
         EditAction::configureUsing(function (EditAction $action) {
             return $action->slideOver();
         });
+
+        $this->configureModels();
+    }
+
+    /**
+     * Configure the application's models.
+     */
+    private function configureModels(): void
+    {
+        Model::unguard();
+
+        Model::shouldBeStrict();
     }
 }
