@@ -9,7 +9,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePageController::class)->name('homepage');
-Route::get('/package/{slug}', PackageController::class)->name('packagePage');
+
+Route::controller(PackageController::class)
+    ->group(function () {
+        Route::get('/packages', 'index')->name('packages.index');
+        Route::get('/package/{slug}', 'show')->name('packagePage');
+    });
 
 Route::prefix('blog')
     ->controller(BlogController::class)
