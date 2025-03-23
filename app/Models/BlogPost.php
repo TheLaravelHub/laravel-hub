@@ -26,8 +26,6 @@ class BlogPost extends Model implements HasMedia
     use InteractsWithMedia;
     use SoftDeletes;
 
-    protected $guarded = ['id'];
-
     protected $sluggable = 'title';
 
     public function author()

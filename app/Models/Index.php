@@ -31,8 +31,6 @@ class Index extends Model implements HasMedia
 
     protected $table = 'indexes';
 
-    protected $fillable = ['name', 'description', 'slug', 'color_code'];
-
     protected array $cascadeDeactivate = ['packages'];
 
     //    protected function casts()

@@ -27,8 +27,6 @@ class Category extends Model
     use HasStatus;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'slug', 'meta_title', 'meta_description', 'category_type'];
-
     protected array $cascadeDeactivate = ['packages'];
 
     protected static function boot()

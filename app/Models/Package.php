@@ -34,20 +34,6 @@ class Package extends Model
     use Searchable;
     use SoftDeletes;
 
-    protected $fillable = [
-        //        'index_id',
-        'name',
-        'slug',
-        'description',
-        'repository_url',
-        'meta_title',
-        'meta_description',
-        'language',
-        'stars',
-        'owner',
-        'owner_avatar',
-    ];
-
     //    public function casts()
     //    {
     //        return [

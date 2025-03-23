@@ -22,18 +22,6 @@ class User extends Authenticatable implements FilamentUser
     use SoftDeletes;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'is_admin',
-    ];
-
-    /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>

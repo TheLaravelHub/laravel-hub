@@ -43,5 +43,17 @@ class AppServiceProvider extends ServiceProvider
         EditAction::configureUsing(function (EditAction $action) {
             return $action->slideOver();
         });
+
+        $this->configureModels();
+    }
+
+    /**
+     * Configure the application's models.
+     */
+    private function configureModels(): void
+    {
+        Model::unguard();
+
+        Model::preventLazyLoading();
     }
 }
