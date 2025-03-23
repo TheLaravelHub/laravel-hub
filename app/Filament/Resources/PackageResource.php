@@ -82,7 +82,7 @@ class PackageResource extends Resource
                 Tables\Actions\Action::make('View')
                     ->icon('heroicon-o-eye')
                     ->color('secondary')
-                    ->url(fn (Package $record) => route('packagePage', $record->slug))
+                    ->url(fn (Package $record) => route('packages.show', $record->slug))
                     ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('delete')

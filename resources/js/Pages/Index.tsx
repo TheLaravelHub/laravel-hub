@@ -245,7 +245,7 @@ export default function Index({
                                                 <div className="flex flex-shrink-0 items-center">
                                                     <Link
                                                         href={route(
-                                                            'packagePage',
+                                                            'packages.show',
                                                             {
                                                                 slug: pkg.slug,
                                                             },
@@ -275,7 +275,7 @@ export default function Index({
                                                     <div className="ml-4">
                                                         <Link
                                                             href={route(
-                                                                'packagePage',
+                                                                'packages.show',
                                                                 {
                                                                     slug: pkg.slug,
                                                                 },

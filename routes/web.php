@@ -13,7 +13,7 @@ Route::get('/', HomePageController::class)->name('homepage');
 Route::controller(PackageController::class)
     ->group(function () {
         Route::get('/packages', 'index')->name('packages.index');
-        Route::get('/package/{slug}', 'show')->name('packagePage');
+        Route::get('/package/{slug}', 'show')->name('packages.show');
     });
 
 Route::prefix('blog')
