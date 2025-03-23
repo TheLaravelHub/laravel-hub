@@ -409,7 +409,7 @@ export default function Index({
                         </div>
 
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                            {latestPosts.data.slice(0, 3).map((post) => (
+                            {latestPosts.data.map((post) => (
                                 <motion.div
                                     key={post.id}
                                     initial={{ opacity: 0, y: 20 }}
