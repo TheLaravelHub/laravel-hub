@@ -104,7 +104,7 @@ export default function Packages({
             route('packages.index'),
             {
                 search: searchQuery,
-                category: activeCategory
+                category: activeCategory,
             },
             {
                 preserveState: true,
@@ -113,8 +113,8 @@ export default function Packages({
                 },
                 onError: () => {
                     setIsLoading(false)
-                }
-            }
+                },
+            },
         )
     }
 
@@ -125,7 +125,7 @@ export default function Packages({
             {
                 page,
                 search: searchQuery,
-                category: activeCategory
+                category: activeCategory,
             },
             {
                 preserveState: true,
@@ -134,14 +134,15 @@ export default function Packages({
                 },
                 onError: () => {
                     setIsLoading(false)
-                }
-            }
+                },
+            },
         )
     }
 
     const handleCategoryClick = (categorySlug: string) => {
         // If the category is already active, remove the filter
-        const newCategory = categorySlug === activeCategory ? undefined : categorySlug
+        const newCategory =
+            categorySlug === activeCategory ? undefined : categorySlug
 
         setIsLoading(true)
 
@@ -150,7 +151,7 @@ export default function Packages({
             route('packages.index'),
             {
                 category: newCategory,
-                search: searchQuery
+                search: searchQuery,
             },
             {
                 onSuccess: () => {
@@ -159,8 +160,8 @@ export default function Packages({
                 },
                 onError: () => {
                     setIsLoading(false)
-                }
-            }
+                },
+            },
         )
     }
 
@@ -178,8 +179,8 @@ export default function Packages({
                 },
                 onError: () => {
                     setIsLoading(false)
-                }
-            }
+                },
+            },
         )
     }
 
@@ -273,7 +274,8 @@ export default function Packages({
                             className="mx-auto mt-6 max-w-2xl text-xl text-muted-foreground"
                             variants={itemVariants}
                         >
-                            Browse and search through our collection of packages and libraries
+                            Browse and search through our collection of packages
+                            and libraries
                         </motion.p>
 
                         {/* Categories */}
@@ -290,21 +292,24 @@ export default function Packages({
                                         whileHover={{
                                             scale: 1.05,
                                             backgroundColor: 'var(--primary)',
-                                            color: "var(--secondary)",
+                                            color: 'var(--secondary)',
                                             transition: {
                                                 type: 'spring',
                                                 stiffness: 300,
                                                 damping: 10,
                                             },
                                         }}
-                                        onClick={() => handleCategoryClick(category.slug)}
+                                        onClick={() =>
+                                            handleCategoryClick(category.slug)
+                                        }
                                         className={`cursor-pointer rounded-full ${
                                             activeCategory === category.slug
-                                                ? "bg-primary text-white"
-                                                : "bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary"
+                                                ? 'bg-primary text-white'
+                                                : 'bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary'
                                         } px-4 py-2 text-sm font-medium shadow-sm transition-all duration-200`}
                                     >
-                                        {category.name} ({category.packages_count})
+                                        {category.name} (
+                                        {category.packages_count})
                                     </motion.span>
                                 ))}
                             </motion.div>
@@ -334,15 +339,26 @@ export default function Packages({
                                         placeholder="Search packages..."
                                         className="h-full w-full !border-none bg-transparent pl-4 text-lg !outline-none !ring-0 hover:!border-none hover:!outline-none hover:!ring-0 focus:!border-none focus:!outline-none focus:!ring-0 active:!ring-0"
                                         value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        onChange={(e) =>
+                                            setSearchQuery(e.target.value)
+                                        }
                                     />
                                     <AnimatePresence>
                                         {searchQuery && (
                                             <motion.button
                                                 type="button"
-                                                initial={{ opacity: 0, scale: 0.8 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                exit={{ opacity: 0, scale: 0.8 }}
+                                                initial={{
+                                                    opacity: 0,
+                                                    scale: 0.8,
+                                                }}
+                                                animate={{
+                                                    opacity: 1,
+                                                    scale: 1,
+                                                }}
+                                                exit={{
+                                                    opacity: 0,
+                                                    scale: 0.8,
+                                                }}
                                                 className="mr-2 rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
                                                 onClick={clearSearch}
                                             >
@@ -362,7 +378,7 @@ export default function Packages({
                                     ) : (
                                         <Button
                                             type="submit"
-                                            className="ml-2 rounded-full px-4 py-2 bg-primary text-white hover:bg-primary/90"
+                                            className="ml-2 rounded-full bg-primary px-4 py-2 text-white hover:bg-primary/90"
                                             size="sm"
                                         >
                                             Search
@@ -375,25 +391,43 @@ export default function Packages({
                         {/* Active Filters */}
                         {(activeCategory || filters.search) && (
                             <motion.div
-                                className="mt-6 flex justify-center items-center gap-2"
+                                className="mt-6 flex items-center justify-center gap-2"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.35, duration: 0.5 }}
                             >
-                                <div className="text-sm text-muted-foreground">Active filters:</div>
+                                <div className="text-sm text-muted-foreground">
+                                    Active filters:
+                                </div>
                                 {activeCategory && (
-                                    <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary">
-                                        Category: {categories.data.find(c => c.slug === activeCategory)?.name}
+                                    <Badge
+                                        variant="secondary"
+                                        className="bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary"
+                                    >
+                                        Category:{' '}
+                                        {
+                                            categories.data.find(
+                                                (c) =>
+                                                    c.slug === activeCategory,
+                                            )?.name
+                                        }
                                         <button
                                             className="ml-2 text-xs opacity-70 hover:opacity-100"
-                                            onClick={() => handleCategoryClick(activeCategory)}
+                                            onClick={() =>
+                                                handleCategoryClick(
+                                                    activeCategory,
+                                                )
+                                            }
                                         >
                                             ×
                                         </button>
                                     </Badge>
                                 )}
                                 {filters.search && (
-                                    <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary">
+                                    <Badge
+                                        variant="secondary"
+                                        className="bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary"
+                                    >
                                         Search: {filters.search}
                                         <button
                                             className="ml-2 text-xs opacity-70 hover:opacity-100"
@@ -401,8 +435,11 @@ export default function Packages({
                                                 setSearchQuery('')
                                                 router.get(
                                                     route('packages.index'),
-                                                    { category: activeCategory },
-                                                    { preserveState: true }
+                                                    {
+                                                        category:
+                                                            activeCategory,
+                                                    },
+                                                    { preserveState: true },
                                                 )
                                             }}
                                         >
@@ -511,7 +548,9 @@ export default function Packages({
                                                                 <div className="group flex items-center gap-2 text-xl font-semibold text-primary transition-colors hover:text-primary/80">
                                                                     {pkg.name}
                                                                     <ExternalLink
-                                                                        size={16}
+                                                                        size={
+                                                                            16
+                                                                        }
                                                                         className="opacity-0 transition-opacity group-hover:opacity-100"
                                                                     />
                                                                 </div>
@@ -524,8 +563,8 @@ export default function Packages({
                                                 </div>
                                                 {pkg.description && (
                                                     <p className="text-sm text-muted-foreground">
-                                                        {pkg.description.length >
-                                                        120 ? (
+                                                        {pkg.description
+                                                            .length > 120 ? (
                                                             <>
                                                                 {pkg.description.substring(
                                                                     0,
@@ -545,16 +584,26 @@ export default function Packages({
                                                     {pkg.categories.map(
                                                         (category) => (
                                                             <Badge
-                                                                key={category.id}
+                                                                key={
+                                                                    category.id
+                                                                }
                                                                 variant={
-                                                                    activeCategory === category.slug ? "default" : "secondary"
+                                                                    activeCategory ===
+                                                                    category.slug
+                                                                        ? 'default'
+                                                                        : 'secondary'
                                                                 }
                                                                 className={`${
-                                                                    activeCategory === category.slug
-                                                                        ? "bg-primary text-white"
-                                                                        : "bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary"
+                                                                    activeCategory ===
+                                                                    category.slug
+                                                                        ? 'bg-primary text-white'
+                                                                        : 'bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary'
                                                                 } cursor-pointer`}
-                                                                onClick={() => handleCategoryClick(category.slug)}
+                                                                onClick={() =>
+                                                                    handleCategoryClick(
+                                                                        category.slug,
+                                                                    )
+                                                                }
                                                             >
                                                                 {category.name}
                                                             </Badge>
@@ -570,7 +619,9 @@ export default function Packages({
                                                         className="fill-current"
                                                     />
                                                     <span className="text-sm font-medium">
-                                                        {formatNumber(pkg.stars)}
+                                                        {formatNumber(
+                                                            pkg.stars,
+                                                        )}
                                                     </span>
                                                 </motion.div>
                                             </CardFooter>
@@ -593,7 +644,8 @@ export default function Packages({
                     ) : (
                         <div className="py-12 text-center">
                             <p className="text-lg text-muted-foreground">
-                                No packages found. Try a different search term or category.
+                                No packages found. Try a different search term
+                                or category.
                             </p>
                             {(activeCategory || filters.search) && (
                                 <Button

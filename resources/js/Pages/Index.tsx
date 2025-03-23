@@ -25,8 +25,8 @@ interface IndexProps {
     packages: {
         data: PackageType[]
         meta: MetaType
-    },
-    packagesCount: number,
+    }
+    packagesCount: number
     stars: number
     latestPosts?: { data: BlogPostType[] }
 }
@@ -203,9 +203,14 @@ export default function Index({
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: 0.1, type: 'spring', stiffness: 100 }}
+                                transition={{
+                                    delay: 0.1,
+                                    type: 'spring',
+                                    stiffness: 100,
+                                }}
                             >
-                                Explore the most starred packages in our collection
+                                Explore the most starred packages in our
+                                collection
                             </motion.p>
                         </div>
                         <Link

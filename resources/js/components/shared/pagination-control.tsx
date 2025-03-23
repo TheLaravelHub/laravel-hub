@@ -23,34 +23,34 @@ export function PaginationControl({
     // Generate page numbers to display
     const getPageNumbers = () => {
         const pageNumbers = []
-        
+
         // Always show first page
         pageNumbers.push(1)
-        
+
         // Calculate range around current page
         let rangeStart = Math.max(2, currentPage - 1)
         let rangeEnd = Math.min(totalPages - 1, currentPage + 1)
-        
+
         // Add ellipsis after first page if needed
         if (rangeStart > 2) {
             pageNumbers.push('ellipsis1')
         }
-        
+
         // Add pages in range
         for (let i = rangeStart; i <= rangeEnd; i++) {
             pageNumbers.push(i)
         }
-        
+
         // Add ellipsis before last page if needed
         if (rangeEnd < totalPages - 1) {
             pageNumbers.push('ellipsis2')
         }
-        
+
         // Always show last page if there is more than one page
         if (totalPages > 1) {
             pageNumbers.push(totalPages)
         }
-        
+
         return pageNumbers
     }
 
@@ -61,12 +61,12 @@ export function PaginationControl({
             <PaginationContent>
                 {currentPage > 1 && (
                     <PaginationItem>
-                        <PaginationPrevious 
-                            href="#" 
+                        <PaginationPrevious
+                            href="#"
                             onClick={(e) => {
                                 e.preventDefault()
                                 onPageChange(currentPage - 1)
-                            }} 
+                            }}
                         />
                     </PaginationItem>
                 )}
@@ -98,12 +98,12 @@ export function PaginationControl({
 
                 {currentPage < totalPages && (
                     <PaginationItem>
-                        <PaginationNext 
-                            href="#" 
+                        <PaginationNext
+                            href="#"
                             onClick={(e) => {
                                 e.preventDefault()
                                 onPageChange(currentPage + 1)
-                            }} 
+                            }}
                         />
                     </PaginationItem>
                 )}

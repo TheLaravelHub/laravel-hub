@@ -1,4 +1,12 @@
-import { BookmarkPlus, Github, LifeBuoy, Menu, X, BookOpen, Package } from 'lucide-react'
+import {
+    BookmarkPlus,
+    Github,
+    LifeBuoy,
+    Menu,
+    X,
+    BookOpen,
+    Package,
+} from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import Image from '@/components/image'
 import { Link } from '@inertiajs/react'
@@ -120,7 +128,7 @@ const Navbar = () => {
                         </Link>
 
                         {/* Navigation Links Next to Logo */}
-                        <div className="hidden md:flex items-center space-x-6">
+                        <div className="hidden items-center space-x-6 md:flex">
                             <motion.a
                                 href={route('packages.index')}
                                 className="flex items-center space-x-2 text-foreground/80 transition-colors hover:text-foreground"
@@ -215,7 +223,10 @@ const Navbar = () => {
                                 variants={menuItemVariants}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
-                                <Package size={22} className="text-primary" />
+                                <Package
+                                    size={22}
+                                    className="text-primary"
+                                />
                                 <span>Packages</span>
                             </motion.a>
                             <motion.a

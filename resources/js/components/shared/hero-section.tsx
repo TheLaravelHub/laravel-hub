@@ -12,13 +12,13 @@ interface HeroProps {
     categories: Category[]
 }
 
-export default function HeroSection({
-    categories,
-}: HeroProps) {
+export default function HeroSection({ categories }: HeroProps) {
     const [search, setSearch] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const searchInputRef = useRef<HTMLInputElement>(null)
-    const [activeCategory, setActiveCategory] = useState<string | undefined>(undefined)
+    const [activeCategory, setActiveCategory] = useState<string | undefined>(
+        undefined,
+    )
 
     // Animation variants
     const containerVariants = {
@@ -66,15 +66,12 @@ export default function HeroSection({
             query: search,
         })
 
-        router.visit(
-            '/packages',
-            {
-                method: 'get',
-                data: {
-                    search: search.trim()
-                }
-            }
-        )
+        router.visit('/packages', {
+            method: 'get',
+            data: {
+                search: search.trim(),
+            },
+        })
     }
 
     const handleCategoryClick = (categorySlug: string) => {
@@ -87,16 +84,13 @@ export default function HeroSection({
 
         console.log('going on')
 
-        router.visit(
-            '/packages',
-            {
-                method: 'get',
-                data: {
-                    category: categorySlug,
-                    search: search.trim() || undefined
-                }
-            }
-        )
+        router.visit('/packages', {
+            method: 'get',
+            data: {
+                category: categorySlug,
+                search: search.trim() || undefined,
+            },
+        })
     }
 
     const clearSearch = () => {
@@ -177,7 +171,7 @@ export default function HeroSection({
                             whileHover={{
                                 scale: 1.05,
                                 backgroundColor: 'var(--primary)',
-                                color: "var(--secondary)",
+                                color: 'var(--secondary)',
                                 transition: {
                                     type: 'spring',
                                     stiffness: 300,
@@ -187,8 +181,8 @@ export default function HeroSection({
                             onClick={() => handleCategoryClick(category.slug)}
                             className={`cursor-pointer rounded-full ${
                                 activeCategory === category.slug
-                                    ? "bg-primary text-white"
-                                    : "bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary"
+                                    ? 'bg-primary text-white'
+                                    : 'bg-primary/10 text-primary hover:bg-primary-foreground hover:text-primary'
                             } px-4 py-2 text-sm font-medium shadow-sm transition-all duration-200`}
                         >
                             {category.name} ({category.packages_count})
@@ -248,7 +242,7 @@ export default function HeroSection({
                             ) : (
                                 <Button
                                     type="submit"
-                                    className="ml-2 rounded-full px-4 py-2 bg-primary text-white hover:bg-primary/90"
+                                    className="ml-2 rounded-full bg-primary px-4 py-2 text-white hover:bg-primary/90"
                                     size="sm"
                                 >
                                     Search

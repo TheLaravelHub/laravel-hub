@@ -36,13 +36,13 @@ class PackageController extends Controller
             ? Package::search($request->input('search'))
                 ->query(function ($query) use ($categorySlug) {
                     $query = $query->select('id', 'name', 'slug', 'description', 'stars', 'owner', 'owner_avatar');
-                    
+
                     if ($categorySlug) {
                         $query->whereHas('categories', function ($query) use ($categorySlug) {
                             $query->where('slug', $categorySlug);
                         });
                     }
-                    
+
                     return $query;
                 })
                 ->paginate(perPage: $perPage, page: $page)
