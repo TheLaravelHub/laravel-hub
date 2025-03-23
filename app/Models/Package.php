@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Traits\HasSlug;
 use App\Traits\HasStatus;
+use Exception;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
@@ -23,93 +26,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
 use Str;
-use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
+use Throwable;
 
-class Package extends Model
+final class Package extends Model
 {
     use HasActiveScope;
     use HasSlug;
     use HasStatus;
     use Searchable;
     use SoftDeletes;
-
-    protected $fillable = [
-        //        'index_id',
-        'name',
-        'slug',
-        'description',
-        'repository_url',
-        'meta_title',
-        'meta_description',
-        'language',
-        'stars',
-        'owner',
-        'owner_avatar',
-    ];
-
-    //    public function casts()
-    //    {
-    //        return [
-    //            'status' => StatusCast::class,
-    //        ];
-    //    }
-
-    /**
-     * Relationship: Package belongs to an Index
-     *
-     * @deprecated
-     */
-    public function index(): BelongsTo
-    {
-        return $this->belongsTo(Index::class);
-    }
-
-    public function indexes(): BelongsToMany
-    {
-        return $this->belongsToMany(Index::class);
-    }
-
-    /**
-     * Relationship: Package belongs to multiple Categories
-     */
-    public function categories(): BelongsToMany
-    {
-        return $this->belongsToMany(Category::class, 'category_package');
-    }
-
-    public function searchableAs(): string
-    {
-        return 'packages_index_'.env('APP_ENV');
-    }
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array<string, mixed>
-     */
-    #[SearchUsingFullText(['name', 'description', 'owner'])]
-    public function toSearchableArray()
-    {
-        return [
-            ...$this->toArray(),
-            'categories' => $this->categories->map(function ($category) {
-                return [
-                    'id' => $category->id,
-                    'name' => $category->name,
-                    'slug' => $category->slug,
-                ];
-            }),
-            'indexes' => $this->indexes->map(function ($index) {
-                return [
-                    'id' => $index->id,
-                    'name' => $index->name,
-                    'slug' => $index->slug,
-                    'color_code' => $index->color_code,
-                ];
-            }),
-        ];
-    }
 
     public static function getFormSchema(?int $categoryId = null, ?int $indexId = null): array
     {
@@ -183,7 +109,7 @@ class Package extends Model
                                                         ]);
 
                                                         if ($response->failed()) {
-                                                            throw new \Exception('Failed to fetch repository data.');
+                                                            throw new Exception('Failed to fetch repository data.');
                                                         }
 
                                                         $data = $response->json();
@@ -202,7 +128,7 @@ class Package extends Model
                                                             ->title('Repository Data Fetched Successfully')
                                                             ->success()
                                                             ->send();
-                                                    } catch (\Throwable $e) {
+                                                    } catch (Throwable $e) {
                                                         Notification::make()
                                                             ->title('Error Fetching Repository Data')
                                                             ->danger()
@@ -266,12 +192,75 @@ class Package extends Model
     {
         parent::boot();
 
-        static::created(function (Package $package) {
+        self::created(function (Package $package) {
             $package->searchable();
         });
 
-        static::updated(function (Package $package) {
+        self::updated(function (Package $package) {
             $package->searchable();
         });
+    }
+
+    //    public function casts()
+    //    {
+    //        return [
+    //            'status' => StatusCast::class,
+    //        ];
+    //    }
+
+    /**
+     * Relationship: Package belongs to an Index
+     *
+     * @deprecated
+     */
+    public function index(): BelongsTo
+    {
+        return $this->belongsTo(Index::class);
+    }
+
+    public function indexes(): BelongsToMany
+    {
+        return $this->belongsToMany(Index::class);
+    }
+
+    /**
+     * Relationship: Package belongs to multiple Categories
+     */
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'category_package');
+    }
+
+    public function searchableAs(): string
+    {
+        return 'packages_index_'.env('APP_ENV');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array<string, mixed>
+     */
+    #[SearchUsingFullText(['name', 'description', 'owner'])]
+    public function toSearchableArray()
+    {
+        return [
+            ...$this->toArray(),
+            'categories' => $this->categories->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                ];
+            }),
+            'indexes' => $this->indexes->map(function ($index) {
+                return [
+                    'id' => $index->id,
+                    'name' => $index->name,
+                    'slug' => $index->slug,
+                    'color_code' => $index->color_code,
+                ];
+            }),
+        ];
     }
 }

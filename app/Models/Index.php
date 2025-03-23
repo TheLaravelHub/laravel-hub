@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Traits\HasSlug;
@@ -18,10 +20,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
-class Index extends Model implements HasMedia
+final class Index extends Model implements HasMedia
 {
     use HasActiveScope;
     use HasSlug;
@@ -31,21 +32,7 @@ class Index extends Model implements HasMedia
 
     protected $table = 'indexes';
 
-    protected $fillable = ['name', 'description', 'slug', 'color_code'];
-
     protected array $cascadeDeactivate = ['packages'];
-
-    //    protected function casts()
-    //    {
-    //        return [
-    //            'status' => StatusCast::class,
-    //        ];
-    //    }
-
-    public function packages(): BelongsToMany
-    {
-        return $this->belongsToMany(Package::class);
-    }
 
     public static function getFormSchema(): array
     {
@@ -94,5 +81,17 @@ class Index extends Model implements HasMedia
                         ]),
                 ]),
         ];
+    }
+
+    //    protected function casts()
+    //    {
+    //        return [
+    //            'status' => StatusCast::class,
+    //        ];
+    //    }
+
+    public function packages(): BelongsToMany
+    {
+        return $this->belongsToMany(Package::class);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PackageResource;
@@ -8,7 +10,7 @@ use App\Services\GitHubService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class PackageController extends Controller
+final class PackageController extends Controller
 {
     /**
      * Handle the incoming request.

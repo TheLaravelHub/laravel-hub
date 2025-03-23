@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Index;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -25,7 +27,7 @@ return new class extends Migration
             $table->integer('stars')->default(0);
             $table->string('owner')->nullable();
             $table->string('owner_avatar')->nullable();
-            $table->string('status', 10)->default(\Thefeqy\ModelStatus\Status::active());
+            $table->string('status', 10)->default(Thefeqy\ModelStatus\Status::active());
             $table->timestamps();
             $table->softDeletes();
         });

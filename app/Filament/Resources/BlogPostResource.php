@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlogPostResource\Pages;
@@ -9,7 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class BlogPostResource extends Resource
+final class BlogPostResource extends Resource
 {
     protected static ?string $model = BlogPost::class;
 
@@ -66,6 +68,11 @@ class BlogPostResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\Action::make('View')
+                    ->icon('heroicon-o-eye')
+                    ->color('secondary')
+                    ->url(fn (BlogPost $record) => route('blog.show', $record->slug))
+                    ->openUrlInNewTab(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('delete')
                     ->label('Delete')

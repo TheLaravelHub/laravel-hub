@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\PackageRelationManagerResource\RelationManagers;
 
 use App\Models\Category;
@@ -11,7 +13,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class PackagesRelationManager extends RelationManager
+final class PackagesRelationManager extends RelationManager
 {
     protected static string $relationship = 'packages';
 
@@ -24,14 +26,6 @@ class PackagesRelationManager extends RelationManager
     {
         return $form
             ->schema(Package::getFormSchema(...[$this->ownerTypeKey() => $this->getOwnerRecord()->id]));
-    }
-
-    private function ownerTypeKey(): string
-    {
-        return match (get_class($this->getOwnerRecord())) {
-            Index::class => 'indexId',
-            Category::class => 'categoryId'
-        };
     }
 
     public function table(Table $table): Table
@@ -99,5 +93,13 @@ class PackagesRelationManager extends RelationManager
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    private function ownerTypeKey(): string
+    {
+        return match (get_class($this->getOwnerRecord())) {
+            Index::class => 'indexId',
+            Category::class => 'categoryId'
+        };
     }
 }

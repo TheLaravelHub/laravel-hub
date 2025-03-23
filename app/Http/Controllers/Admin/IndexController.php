@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -8,10 +10,11 @@ use App\Http\Requests\Admin\UpdateIndexRequest;
 use App\Http\Resources\Admin\IndexResource;
 use App\Models\Index;
 use DB;
+use Exception;
 use Inertia\Inertia;
 use Thefeqy\ModelStatus\Enums\Status;
 
-class IndexController extends Controller
+final class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -51,7 +54,7 @@ class IndexController extends Controller
             return redirect()
                 ->route('admin.indexes.index')
                 ->with('message', 'Index created successfully');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Delete media uploaded if an error occurs
             if (isset($index)) {
                 $index->getFirstMedia('icon')?->delete();
@@ -100,7 +103,7 @@ class IndexController extends Controller
             return redirect()
                 ->route('admin.indexes.index')
                 ->with('message', 'Index updated successfully');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Delete media uploaded if an error occurs
             if ($request->hasFile('icon')) {
                 $index->getFirstMedia('icon')?->delete();

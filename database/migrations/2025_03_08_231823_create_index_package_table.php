@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Index;
 use App\Models\Package;
 use Illuminate\Database\Migrations\Migration;

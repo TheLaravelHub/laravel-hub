@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Traits\HasSlug;
@@ -17,70 +19,16 @@ use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Str;
-use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
-class Category extends Model
+final class Category extends Model
 {
     use HasActiveScope;
     use HasSlug;
     use HasStatus;
     use SoftDeletes;
 
-    protected $fillable = ['name', 'slug', 'meta_title', 'meta_description', 'category_type'];
-
     protected array $cascadeDeactivate = ['packages'];
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(static function ($category) {
-            $category->slug = Str::slug($category->name);
-        });
-    }
-
-    //    public function casts()
-    //    {
-    //        return [
-    //            'status' => StatusCast::class,
-    //        ];
-    //    }
-
-    /**
-     * Scope to filter only package categories.
-     */
-    public function scopeForPackages($query)
-    {
-        return $query->where('category_type', Package::class);
-    }
-
-    /**
-     * Scope to filter only blog categories.
-     */
-    public function scopeForBlogPosts($query)
-    {
-        return $query->where('category_type', BlogPost::class);
-    }
-
-    /**
-     * Relationship: Category belongs to many Packages.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function packages()
-    {
-        return $this->belongsToMany(Package::class, 'category_package');
-    }
-
-    /**
-     * Relationship: Category belongs to many BlogPosts.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function blogPosts()
-    {
-        return $this->belongsToMany(BlogPost::class);
-    }
 
     public static function getFormSchema(string $model): array
     {
@@ -168,5 +116,56 @@ class Category extends Model
                         ->send();
                 }),
         ];
+    }
+
+    //    public function casts()
+    //    {
+    //        return [
+    //            'status' => StatusCast::class,
+    //        ];
+    //    }
+
+    /**
+     * Scope to filter only package categories.
+     */
+    public function scopeForPackages($query)
+    {
+        return $query->where('category_type', Package::class);
+    }
+
+    /**
+     * Scope to filter only blog categories.
+     */
+    public function scopeForBlogPosts($query)
+    {
+        return $query->where('category_type', BlogPost::class);
+    }
+
+    /**
+     * Relationship: Category belongs to many Packages.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'category_package');
+    }
+
+    /**
+     * Relationship: Category belongs to many BlogPosts.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function blogPosts()
+    {
+        return $this->belongsToMany(BlogPost::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(static function ($category) {
+            $category->slug = Str::slug($category->name);
+        });
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogPostResource;
@@ -11,7 +13,7 @@ use App\Models\Package;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class HomePageController extends Controller
+final class HomePageController extends Controller
 {
     /**
      * Handle the incoming request.

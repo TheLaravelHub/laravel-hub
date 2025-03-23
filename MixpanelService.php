@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Mixpanel;
 
-class MixpanelService
+final class MixpanelService
 {
-    protected $mixpanel;
+    private $mixpanel;
 
     public function __construct()
     {

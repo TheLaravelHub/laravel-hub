@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -10,10 +12,11 @@ use App\Models\Category;
 use App\Models\Index;
 use App\Models\Package;
 use DB;
+use Exception;
 use Inertia\Inertia;
 use Thefeqy\ModelStatus\Status;
 
-class PackageController extends Controller
+final class PackageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -65,7 +68,7 @@ class PackageController extends Controller
             return redirect()
                 ->route('admin.packages.packages.index')
                 ->with('message', 'Package created successfully');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
             throw $e;
         }
@@ -115,7 +118,7 @@ class PackageController extends Controller
             return redirect()
                 ->route('admin.packages.packages.index')
                 ->with('message', 'Package updated successfully');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             DB::rollback();
             throw $e;
         }

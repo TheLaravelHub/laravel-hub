@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Models\BlogPost;
 use Illuminate\Console\Command;
 
-class PublishScheduledPosts extends Command
+final class PublishScheduledPosts extends Command
 {
     /**
      * The name and signature of the console command.

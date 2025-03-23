@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -12,7 +14,7 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Thefeqy\ModelStatus\Status;
 
-class PackageCategoryController extends Controller
+final class PackageCategoryController extends Controller
 {
     private string $baseRoute = 'admin.packages.categories';
 

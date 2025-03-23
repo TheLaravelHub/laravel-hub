@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BlogPostResource extends JsonResource
+final class BlogPostResource extends JsonResource
 {
     public static $wrap = null;
 
