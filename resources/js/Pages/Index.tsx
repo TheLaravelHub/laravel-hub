@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { ExternalLink, Star, ArrowRight, Calendar } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
-import { Head, Link } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import {
     Category,
     MetaType,
@@ -13,8 +13,6 @@ import { Badge } from '@/components/ui/badge'
 import HeroSection from '@/components/shared/hero-section'
 import Footer from '@/components/shared/footer'
 import { formatNumber } from '@/lib/utils'
-import { useInView } from 'react-intersection-observer'
-import axios from 'axios'
 import { motion } from 'framer-motion'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import StatsSection from '@/components/shared/stats-section'
@@ -27,7 +25,8 @@ interface IndexProps {
     packages: {
         data: PackageType[]
         meta: MetaType
-    }
+    },
+    packagesCount: number,
     stars: number
     latestPosts?: { data: BlogPostType[] }
 }
@@ -35,51 +34,14 @@ interface IndexProps {
 export default function Index({
     categories,
     packages,
+    packagesCount,
     stars,
     latestPosts,
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
 
-    const [packagesData, setPackagesData] = useState(packages.data)
+    const [packagesData] = useState(packages.data)
     const packagesRef = useRef<HTMLDivElement>(null)
-    const [hasMorePages, setHasMorePages] = useState<boolean>(
-        packages.meta.current_page < packages.meta.last_page,
-    )
-    const [nextPage, setNextPage] = useState<number | null>(
-        hasMorePages ? packages.meta.current_page + 1 : null,
-    )
-    const [isLoadingMore, setIsLoadingMore] = useState(false)
-    const [isSearching, setIsSearching] = useState(false)
-    const { ref, inView } = useInView({
-        threshold: 0.1,
-    })
-
-    useEffect(() => {
-        if (inView && nextPage && !isLoadingMore && !isSearching) {
-            setIsLoadingMore(true)
-            axios
-                .get(route('homepage'), { params: { page: nextPage } })
-                .then((response) => {
-                    const data = response.data
-                    setPackagesData((prevPackages) => {
-                        return [...prevPackages, ...data.data]
-                    })
-                    setHasMorePages(
-                        data.meta.current_page < data.meta.last_page,
-                    )
-                    if (data.meta.current_page < data.meta.last_page) {
-                        setNextPage(data.meta.current_page + 1)
-                    } else {
-                        setNextPage(null)
-                    }
-                    setIsLoadingMore(false)
-                })
-                .catch((error) => {
-                    console.error(error)
-                    setIsLoadingMore(false)
-                })
-        }
-    }, [inView, isSearching])
 
     // Animation variants
     const containerVariants = {
@@ -217,9 +179,7 @@ export default function Index({
                 <HeroSection
                     categories={categories.data}
                     packagesData={packagesData}
-                    setPackagesData={setPackagesData}
                     packagesRef={packagesRef}
-                    setIsSearching={setIsSearching}
                 />
 
                 {/* Packages */}
@@ -227,17 +187,38 @@ export default function Index({
                     ref={packagesRef}
                     className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-8 pt-16"
                 >
-                    {!isSearching && (
-                        <motion.h2
-                            className="mb-6 text-center text-2xl font-bold md:text-3xl"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ type: 'spring', stiffness: 100 }}
+                    <div className="mb-12 flex items-center justify-between">
+                        <div>
+                            <motion.h2
+                                className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ type: 'spring', stiffness: 100 }}
+                            >
+                                Discover Popular Packages
+                            </motion.h2>
+                            <motion.p
+                                className="mt-4 text-lg text-gray-600"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.1, type: 'spring', stiffness: 100 }}
+                            >
+                                Explore the most starred packages in our collection
+                            </motion.p>
+                        </div>
+                        <Link
+                            href={route('packages.index')}
+                            className="group hidden items-center gap-2 font-semibold text-primary transition-colors hover:text-primary/80 sm:flex"
                         >
-                            Discover Popular Packages
-                        </motion.h2>
-                    )}
+                            View all packages
+                            <ArrowRight
+                                className="transition-transform group-hover:translate-x-1"
+                                size={20}
+                            />
+                        </Link>
+                    </div>
 
                     {packagesData.length > 0 ? (
                         <motion.div
@@ -374,32 +355,24 @@ export default function Index({
                             </p>
                         </motion.div>
                     )}
-                </section>
 
-                {hasMorePages && !isSearching && (
-                    <div className="flex w-full justify-center py-6">
-                        <div
-                            ref={ref}
-                            className="-translate-y-16"
-                        ></div>
-                        {isLoadingMore && (
-                            <motion.div
-                                initial={{ scale: 0.8, opacity: 0.5 }}
-                                animate={{
-                                    scale: [0.8, 1.2, 0.8],
-                                    opacity: [0.5, 1, 0.5],
-                                }}
-                                transition={{ repeat: Infinity, duration: 1.5 }}
-                            >
-                                <span className="loading-xl loading loading-dots text-primary"></span>
-                            </motion.div>
-                        )}
+                    <div className="mt-8 flex justify-center sm:hidden">
+                        <Link
+                            href={route('packages.index')}
+                            className="group flex items-center gap-2 font-semibold text-primary transition-colors hover:text-primary/80"
+                        >
+                            View all packages
+                            <ArrowRight
+                                className="transition-transform group-hover:translate-x-1"
+                                size={20}
+                            />
+                        </Link>
                     </div>
-                )}
+                </section>
 
                 {/* Stats Section - Moved below search results */}
                 <StatsSection
-                    totalPackages={packages.meta.total}
+                    totalPackages={packagesCount}
                     totalStars={stars}
                     totalCategories={categories.data.length}
                     compact={false}
