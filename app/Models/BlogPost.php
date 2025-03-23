@@ -115,7 +115,6 @@ class BlogPost extends Model implements HasMedia
                                         ->maxLength(255),
                                     TextInput::make('slug')
                                         ->required()
-                                        ->disabled()
                                         ->maxLength(255),
                                     MarkdownEditor::make('content')
                                         ->fileAttachmentsDisk('public')
