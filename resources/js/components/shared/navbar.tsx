@@ -1,4 +1,4 @@
-import { BookmarkPlus, Github, LifeBuoy, Menu, X, BookOpen } from 'lucide-react'
+import { BookmarkPlus, Github, LifeBuoy, Menu, X, BookOpen, Package } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import Image from '@/components/image'
 import { Link } from '@inertiajs/react'
@@ -98,36 +98,50 @@ const Navbar = () => {
                 variants={navVariants}
             >
                 <div className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:p-6">
-                    <Link
-                        href={route('homepage')}
-                        className="flex items-center space-x-2"
-                    >
-                        <motion.div
-                            whileHover={{ scale: 1.05 }}
-                            transition={{
-                                type: 'spring',
-                                stiffness: 400,
-                                damping: 10,
-                            }}
+                    <div className="flex items-center space-x-6">
+                        <Link
+                            href={route('homepage')}
+                            className="flex items-center space-x-2"
                         >
-                            <Image
-                                src={'/assets/images/Indxs-logo.png'}
-                                alt="Indxs"
-                                width={150}
-                            />
-                        </motion.div>
-                    </Link>
+                            <motion.div
+                                whileHover={{ scale: 1.05 }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 400,
+                                    damping: 10,
+                                }}
+                            >
+                                <Image
+                                    src={'/assets/images/Indxs-logo.png'}
+                                    alt="Indxs"
+                                    width={150}
+                                />
+                            </motion.div>
+                        </Link>
+
+                        {/* Navigation Links Next to Logo */}
+                        <div className="hidden md:flex items-center space-x-6">
+                            <motion.a
+                                href={route('packages.index')}
+                                className="flex items-center space-x-2 text-foreground/80 transition-colors hover:text-foreground"
+                                variants={linkVariants}
+                                whileHover="hover"
+                            >
+                                <span className="font-bold">Packages</span>
+                            </motion.a>
+                            <motion.a
+                                href={route('blog.index')}
+                                className="flex items-center space-x-2 text-foreground/80 transition-colors hover:text-foreground"
+                                variants={linkVariants}
+                                whileHover="hover"
+                            >
+                                <span className="font-bold">Blog</span>
+                            </motion.a>
+                        </div>
+                    </div>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden space-x-6 md:flex">
-                        <motion.a
-                            href={route('blog.index')}
-                            className="flex items-center space-x-2 transition-colors hover:text-primary"
-                            variants={linkVariants}
-                            whileHover="hover"
-                        >
-                            <BookOpen size={22} /> <span>Blog</span>
-                        </motion.a>
                         <motion.a
                             href="https://github.com/indxs/indxs"
                             target={'_blank'}
@@ -196,11 +210,21 @@ const Navbar = () => {
                     >
                         <div className="flex flex-col space-y-6">
                             <motion.a
+                                href={route('packages.index')}
+                                className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
+                                variants={menuItemVariants}
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                <Package size={22} className="text-primary" />
+                                <span>Packages</span>
+                            </motion.a>
+                            <motion.a
                                 href={route('blog.index')}
                                 className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
                                 variants={menuItemVariants}
+                                onClick={() => setMobileMenuOpen(false)}
                             >
-                                <BookOpen size={24} /> <span>Blog</span>
+                                <BookOpen size={22} /> <span>Blog</span>
                             </motion.a>
                             <motion.a
                                 href="https://github.com/indxs/indxs"
