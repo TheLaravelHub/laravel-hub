@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogPostResource;
 use App\Models\BlogPost;
+use Auth;
 use Inertia\Inertia;
 
 class BlogController extends Controller
@@ -23,10 +24,14 @@ class BlogController extends Controller
 
     public function show(string $slug)
     {
-        $blogPost = BlogPost::published()
-            ->with(['categories'])
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $blogPost = BlogPost::with(['categories'])
+            ->where('slug', $slug);
+
+        if(! Auth::check() || ! Auth::user()->is_admin) {
+            $blogPost->where('status', 'published');
+        }
+
+        $blogPost = $blogPost->firstOrFail();
 
         return Inertia::render('BlogPost', [
             'blogPost' => new BlogPostResource($blogPost),
