@@ -27,7 +27,7 @@ class BlogController extends Controller
         $blogPost = BlogPost::with(['categories'])
             ->where('slug', $slug);
 
-        if(! Auth::check() || ! Auth::user()->is_admin) {
+        if (! Auth::check() || ! Auth::user()->is_admin) {
             $blogPost->where('status', 'published');
         }
 
