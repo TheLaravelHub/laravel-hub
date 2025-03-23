@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardController;

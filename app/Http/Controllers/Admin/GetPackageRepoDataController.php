@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\GetPackageRepoDataRequest;
 use App\Services\GitHubService;
 use Illuminate\Http\Request;
+use Throwable;
 
-class GetPackageRepoDataController extends Controller
+final class GetPackageRepoDataController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -18,7 +21,7 @@ class GetPackageRepoDataController extends Controller
             $repositoryData = GitHubService::fetchRepositoryData($request->repository_url);
 
             return response()->json($repositoryData);
-        } catch (\Throwable $th) {
+        } catch (Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 500);
         }
     }

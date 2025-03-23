@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PackageResource\Pages;
@@ -11,7 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class PackageResource extends Resource
+final class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 

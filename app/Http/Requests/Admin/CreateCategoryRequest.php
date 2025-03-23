@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -7,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Str;
 use Thefeqy\ModelStatus\Status;
 
-class CreateCategoryRequest extends FormRequest
+final class CreateCategoryRequest extends FormRequest
 {
     private string $categoryType;
 
@@ -38,6 +40,14 @@ class CreateCategoryRequest extends FormRequest
     }
 
     /**
+     * Retrieve category type.
+     */
+    public function getCategoryType(): string
+    {
+        return $this->categoryType;
+    }
+
+    /**
      * Slugify name in slug column before validation.
      */
     protected function prepareForValidation(): void
@@ -52,13 +62,5 @@ class CreateCategoryRequest extends FormRequest
             'slug' => Str::slug($this->name),
             'status' => $this->active ? Status::active() : Status::inactive(),
         ]);
-    }
-
-    /**
-     * Retrieve category type.
-     */
-    public function getCategoryType(): string
-    {
-        return $this->categoryType;
     }
 }

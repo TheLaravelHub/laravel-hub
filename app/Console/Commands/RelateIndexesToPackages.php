@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Models\Package;
 use Illuminate\Console\Command;
 
-class RelateIndexesToPackages extends Command
+final class RelateIndexesToPackages extends Command
 {
     /**
      * The name and signature of the console command.

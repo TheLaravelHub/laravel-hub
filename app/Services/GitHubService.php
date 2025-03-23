@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
@@ -8,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Class GitHubService
  */
-class GitHubService
+final class GitHubService
 {
     /**
      * Fetch repository data from GitHub API

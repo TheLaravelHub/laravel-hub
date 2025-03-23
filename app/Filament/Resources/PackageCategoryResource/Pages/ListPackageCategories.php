@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\PackageCategoryResource\Pages;
 
 use App\Filament\Resources\PackageCategoryResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListPackageCategories extends ListRecords
+final class ListPackageCategories extends ListRecords
 {
     protected static string $resource = PackageCategoryResource::class;
 

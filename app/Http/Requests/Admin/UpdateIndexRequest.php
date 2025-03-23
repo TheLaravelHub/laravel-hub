@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Str;
 use Thefeqy\ModelStatus\Enums\Status;
 
-class UpdateIndexRequest extends FormRequest
+final class UpdateIndexRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

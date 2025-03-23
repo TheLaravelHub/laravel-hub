@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlogPostCategoryResource\Pages;
@@ -12,7 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
-class BlogPostCategoryResource extends Resource
+final class BlogPostCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 

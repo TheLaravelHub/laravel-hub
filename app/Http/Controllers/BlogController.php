@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogPostResource;
@@ -7,7 +9,7 @@ use App\Models\BlogPost;
 use Auth;
 use Inertia\Inertia;
 
-class BlogController extends Controller
+final class BlogController extends Controller
 {
     public function index()
     {
@@ -27,7 +29,7 @@ class BlogController extends Controller
         $blogPost = BlogPost::with(['categories'])
             ->where('slug', $slug);
 
-        if(! Auth::check() || ! Auth::user()->is_admin) {
+        if (! Auth::check() || ! Auth::user()->is_admin) {
             $blogPost->where('status', 'published');
         }
 

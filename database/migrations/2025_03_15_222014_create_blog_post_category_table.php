@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\BlogPost;
 use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;

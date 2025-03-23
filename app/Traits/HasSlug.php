@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Traits;
+
+use Str;
 
 trait HasSlug
 {
@@ -26,7 +30,7 @@ trait HasSlug
         $sluggableColumn = $this->sluggable ?? 'name';
         $sluggableValue = $this->{$sluggableColumn};
 
-        $slug = \Str::slug($sluggableValue);
+        $slug = Str::slug($sluggableValue);
 
         $count = $this->where('slug', $slug)->where('id', '!=', $this->id)->count();
 

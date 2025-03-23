@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -7,7 +9,7 @@ use Illuminate\Validation\Rule;
 use Str;
 use Thefeqy\ModelStatus\Status;
 
-class UpdateCategoryRequest extends FormRequest
+final class UpdateCategoryRequest extends FormRequest
 {
     private string $categoryType;
 

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests\Admin;
 
 use App\Models\Package;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdatePackageRequest extends FormRequest
+final class UpdatePackageRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

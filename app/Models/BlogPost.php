@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Traits\HasSlug;
@@ -20,51 +22,13 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Str;
 
-class BlogPost extends Model implements HasMedia
+final class BlogPost extends Model implements HasMedia
 {
     use HasSlug;
     use InteractsWithMedia;
     use SoftDeletes;
 
-    protected $guarded = ['id'];
-
     protected $sluggable = 'title';
-
-    public function author()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class);
-    }
-
-    public function casts()
-    {
-        return [
-            'scheduled_at' => 'datetime',
-            'published_at' => 'datetime',
-        ];
-    }
-
-    public function scopePublished(Builder $query): Builder
-    {
-        return $query->where('status', 'published')
-            ->where('published_at', '<=', now());
-    }
-
-    public function scopeScheduled(Builder $query): Builder
-    {
-        return $query->where('status', 'scheduled')
-            ->where('scheduled_at', '>', now());
-    }
-
-    public function scopeNeedsPublishing(Builder $query)
-    {
-        return $query->where('status', 'scheduled')
-            ->where('scheduled_at', '>=', now());
-    }
 
     public static function getFormSchema(?int $categoryId = null, ?int $indexId = null): array
     {
@@ -165,10 +129,46 @@ class BlogPost extends Model implements HasMedia
     {
         parent::boot();
 
-        static::saving(static function (BlogPost $post) {
+        self::saving(static function (BlogPost $post) {
             if ($post->status === 'published' && ! $post->published_at) {
                 $post->published_at = now();
             }
         });
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function casts()
+    {
+        return [
+            'scheduled_at' => 'datetime',
+            'published_at' => 'datetime',
+        ];
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('status', 'published')
+            ->where('published_at', '<=', now());
+    }
+
+    public function scopeScheduled(Builder $query): Builder
+    {
+        return $query->where('status', 'scheduled')
+            ->where('scheduled_at', '>', now());
+    }
+
+    public function scopeNeedsPublishing(Builder $query)
+    {
+        return $query->where('status', 'scheduled')
+            ->where('scheduled_at', '>=', now());
     }
 }
