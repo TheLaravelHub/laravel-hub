@@ -114,7 +114,7 @@ const Navbar = () => {
                                 <Image
                                     src={'/assets/images/Indxs-logo.png'}
                                     alt="Indxs"
-                                    width={150}
+                                    width={100}
                                 />
                             </motion.div>
                         </Link>
