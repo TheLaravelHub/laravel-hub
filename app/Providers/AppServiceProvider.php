@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+        Model::preventLazyLoading();
 
         //        Request::macro('admin', function () {
         //            return $this->user('admin');
@@ -35,15 +36,15 @@ class AppServiceProvider extends ServiceProvider
         //            return Auth::guard('admin')->user();
         //        });
 
-        // CreateAction::configureUsing(function (CreateAction $action) {
-        //     return $action->slideOver();
-        // });
+        CreateAction::configureUsing(function (CreateAction $action) {
+            return $action->slideOver();
+        });
 
-        // EditAction::configureUsing(function (EditAction $action) {
-        //     return $action->slideOver();
-        // });
+        EditAction::configureUsing(function (EditAction $action) {
+            return $action->slideOver();
+        });
 
-        // $this->configureModels();
+        $this->configureModels();
     }
 
     /**
