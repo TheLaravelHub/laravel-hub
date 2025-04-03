@@ -37,7 +37,7 @@ class HomePageController extends Controller
             ->select('id', 'title', 'sub_title', 'slug', 'published_at', 'meta_description')
             ->with(['categories'])
             ->latest('published_at')
-            ->take(6)
+            ->take(3)
             ->get();
 
         return Inertia::render('Index', [
