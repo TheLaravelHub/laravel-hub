@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, Tag } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
@@ -8,6 +9,7 @@ import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import { Badge } from '@/components/ui/badge'
 import SocialShareButtons from '@/components/shared/social-share-buttons'
+import TableOfContents from '@/components/blog/table-of-contents'
 import { BlogPost as BlogPostType, Category } from '@/types'
 import { format } from 'date-fns'
 import AppHead from '@/components/shared/AppHead'
@@ -17,6 +19,94 @@ interface BlogPostProps {
 
 const BlogPost = ({ blogPost }: BlogPostProps) => {
     const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+
+    // Handle hash navigation when page loads
+    useEffect(() => {
+        // Check if there's a hash in the URL
+        if (window.location.hash) {
+            const id = window.location.hash.substring(1) // Remove the # character
+
+            // Add a small delay to ensure the page is fully rendered
+            setTimeout(() => {
+                const element = document.getElementById(id)
+                if (element) {
+                    // Calculate the element's position
+                    const elementPosition = element.getBoundingClientRect().top + window.scrollY
+
+                    // Smoothly scroll to the element
+                    window.scrollTo({
+                        top: elementPosition,
+                        behavior: 'smooth'
+                    })
+                }
+            }, 500)
+        }
+    }, [])
+
+    // Maintain URL hash during scrolling
+    useEffect(() => {
+        let ticking = false
+        let lastKnownScrollPosition = 0
+        let currentHash = window.location.hash
+
+        const updateHash = () => {
+            // Find all headings with IDs
+            const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
+            if (headings.length === 0) return
+
+            // Find the heading that's currently in view
+            let currentHeading = null
+            const scrollPosition = window.scrollY + 100 // Add offset for better UX
+
+            // Iterate through headings to find the one currently in view
+            for (let i = 0; i < headings.length; i++) {
+                const heading = headings[i]
+                const nextHeading = headings[i + 1]
+
+                const headingTop = heading.getBoundingClientRect().top + window.scrollY
+                const nextHeadingTop = nextHeading
+                    ? nextHeading.getBoundingClientRect().top + window.scrollY
+                    : Number.MAX_SAFE_INTEGER
+
+                if (scrollPosition >= headingTop && scrollPosition < nextHeadingTop) {
+                    currentHeading = heading
+                    break
+                }
+            }
+
+            // Update URL if we found a heading and it's different from current hash
+            if (currentHeading) {
+                const newHash = `#${currentHeading.id}`
+                if (newHash !== currentHash) {
+                    currentHash = newHash
+                    window.history.replaceState(null, '', newHash)
+                }
+            }
+
+            ticking = false
+        }
+
+        const handleScroll = () => {
+            lastKnownScrollPosition = window.scrollY
+
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateHash()
+                    ticking = false
+                })
+
+                ticking = true
+            }
+        }
+
+        // Add scroll event listener
+        window.addEventListener('scroll', handleScroll, { passive: true })
+
+        // Clean up
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
 
     return (
         <AnimatedGradientBackground>
@@ -226,6 +316,18 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                             />
                         </motion.div>
 
+                        {/* Table of Contents */}
+                        {blogPost.content && (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 0.35 }}
+                                className="mb-8"
+                            >
+                                <TableOfContents content={blogPost.content} className="sticky top-24" />
+                            </motion.div>
+                        )}
+
                         {/* Content */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -236,30 +338,74 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                             {blogPost.content && (
                                 <ReactMarkdown
                                     components={{
-                                        h1: ({ node, ...props }) => (
-                                            <h1
-                                                className="mb-4 mt-8 text-3xl font-bold text-gray-900"
-                                                {...props}
-                                            />
-                                        ),
-                                        h2: ({ node, ...props }) => (
-                                            <h2
-                                                className="mb-4 mt-8 text-2xl font-bold text-gray-900"
-                                                {...props}
-                                            />
-                                        ),
-                                        h3: ({ node, ...props }) => (
-                                            <h3
-                                                className="mb-3 mt-6 text-xl font-bold text-gray-900"
-                                                {...props}
-                                            />
-                                        ),
-                                        h4: ({ node, ...props }) => (
-                                            <h4
-                                                className="mb-3 mt-6 text-lg font-bold text-gray-900"
-                                                {...props}
-                                            />
-                                        ),
+                                        h1: ({ node, children, ...props }) => {
+                                            const id = children
+                                                ? String(children)
+                                                    .toLowerCase()
+                                                    .replace(/[^\w\s-]/g, '')
+                                                    .replace(/\s+/g, '-')
+                                                : ''
+                                            return (
+                                                <h1
+                                                    id={id}
+                                                    className="mb-4 mt-8 scroll-mt-24 text-3xl font-bold text-gray-900"
+                                                    {...props}
+                                                >
+                                                    {children}
+                                                </h1>
+                                            )
+                                        },
+                                        h2: ({ node, children, ...props }) => {
+                                            const id = children
+                                                ? String(children)
+                                                    .toLowerCase()
+                                                    .replace(/[^\w\s-]/g, '')
+                                                    .replace(/\s+/g, '-')
+                                                : ''
+                                            return (
+                                                <h2
+                                                    id={id}
+                                                    className="mb-4 mt-8 scroll-mt-24 text-2xl font-bold text-gray-900"
+                                                    {...props}
+                                                >
+                                                    {children}
+                                                </h2>
+                                            )
+                                        },
+                                        h3: ({ node, children, ...props }) => {
+                                            const id = children
+                                                ? String(children)
+                                                    .toLowerCase()
+                                                    .replace(/[^\w\s-]/g, '')
+                                                    .replace(/\s+/g, '-')
+                                                : ''
+                                            return (
+                                                <h3
+                                                    id={id}
+                                                    className="mb-3 mt-6 scroll-mt-24 text-xl font-bold text-gray-900"
+                                                    {...props}
+                                                >
+                                                    {children}
+                                                </h3>
+                                            )
+                                        },
+                                        h4: ({ node, children, ...props }) => {
+                                            const id = children
+                                                ? String(children)
+                                                    .toLowerCase()
+                                                    .replace(/[^\w\s-]/g, '')
+                                                    .replace(/\s+/g, '-')
+                                                : ''
+                                            return (
+                                                <h4
+                                                    id={id}
+                                                    className="mb-3 mt-6 scroll-mt-24 text-lg font-bold text-gray-900"
+                                                    {...props}
+                                                >
+                                                    {children}
+                                                </h4>
+                                            )
+                                        },
                                         p: ({ node, ...props }) => (
                                             <p
                                                 className="mb-4 leading-relaxed text-gray-700"
