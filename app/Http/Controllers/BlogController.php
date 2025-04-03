@@ -18,7 +18,7 @@ class BlogController extends Controller
             ->paginate(24);
 
         return Inertia::render('Blog', [
-            'blogPosts' => BlogPostResource::collection($blogPosts)
+            'blogPosts' => BlogPostResource::collection($blogPosts),
         ]);
     }
 
@@ -34,7 +34,7 @@ class BlogController extends Controller
         $blogPost = $blogPost->firstOrFail();
 
         return Inertia::render('BlogPost', [
-            'blogPost' => new BlogPostResource($blogPost)
+            'blogPost' => new BlogPostResource($blogPost),
         ]);
     }
 }

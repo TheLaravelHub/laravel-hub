@@ -28,7 +28,7 @@ interface IndexProps {
     }
     packagesCount: number
     stars: number
-    latestPosts?: {data: BlogPostType[]}
+    latestPosts?: { data: BlogPostType[] }
 }
 
 export default function Index({

@@ -1,7 +1,13 @@
 import React from 'react'
 import { Head, Link } from '@inertiajs/react'
 import { motion } from 'framer-motion'
-import { Calendar, ChevronRight, Tag, ChevronLeft, ChevronRight as ChevronRightIcon } from 'lucide-react'
+import {
+    Calendar,
+    ChevronRight,
+    Tag,
+    ChevronLeft,
+    ChevronRight as ChevronRightIcon,
+} from 'lucide-react'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
@@ -56,33 +62,40 @@ const Blog = ({ blogPosts }: BlogProps) => {
 
     // Generate pagination array
     const generatePaginationArray = (currentPage: number, lastPage: number) => {
-        const delta = 2; // Number of pages to show before and after current page
-        const range = [];
-        const rangeWithDots = [];
-        let l;
+        const delta = 2 // Number of pages to show before and after current page
+        const range = []
+        const rangeWithDots = []
+        let l
 
         for (let i = 1; i <= lastPage; i++) {
-            if (i === 1 || i === lastPage || (i >= currentPage - delta && i <= currentPage + delta)) {
-                range.push(i);
+            if (
+                i === 1 ||
+                i === lastPage ||
+                (i >= currentPage - delta && i <= currentPage + delta)
+            ) {
+                range.push(i)
             }
         }
 
         for (let i of range) {
             if (l) {
                 if (i - l === 2) {
-                    rangeWithDots.push(l + 1);
+                    rangeWithDots.push(l + 1)
                 } else if (i - l !== 1) {
-                    rangeWithDots.push('...');
+                    rangeWithDots.push('...')
                 }
             }
-            rangeWithDots.push(i);
-            l = i;
+            rangeWithDots.push(i)
+            l = i
         }
 
-        return rangeWithDots;
-    };
+        return rangeWithDots
+    }
 
-    const paginationArray = generatePaginationArray(meta.current_page, meta.last_page);
+    const paginationArray = generatePaginationArray(
+        meta.current_page,
+        meta.last_page,
+    )
 
     return (
         <AnimatedGradientBackground>
@@ -327,10 +340,19 @@ const Blog = ({ blogPosts }: BlogProps) => {
 
                     {meta.last_page > 1 && (
                         <div className="mt-12 flex justify-center">
-                            <nav className="flex items-center justify-center space-x-2" aria-label="Pagination">
+                            <nav
+                                className="flex items-center justify-center space-x-2"
+                                aria-label="Pagination"
+                            >
                                 {/* Previous Page Button */}
                                 <Link
-                                    href={meta.current_page > 1 ? route('blog.index', { page: meta.current_page - 1 }) : '#'}
+                                    href={
+                                        meta.current_page > 1
+                                            ? route('blog.index', {
+                                                  page: meta.current_page - 1,
+                                              })
+                                            : '#'
+                                    }
                                     className={`inline-flex items-center justify-center rounded-md border border-gray-300 px-3 py-2 text-sm font-medium ${
                                         meta.current_page === 1
                                             ? 'cursor-not-allowed text-gray-300'
@@ -339,47 +361,74 @@ const Blog = ({ blogPosts }: BlogProps) => {
                                     aria-disabled={meta.current_page === 1}
                                     tabIndex={meta.current_page === 1 ? -1 : 0}
                                 >
-                                    <ChevronLeft size={16} className="mr-1" />
+                                    <ChevronLeft
+                                        size={16}
+                                        className="mr-1"
+                                    />
                                     <span>Previous</span>
                                 </Link>
 
                                 {/* Page Numbers */}
                                 <div className="hidden sm:flex sm:items-center sm:space-x-2">
-                                    {paginationArray.map((page, index) => (
+                                    {paginationArray.map((page, index) =>
                                         page === '...' ? (
-                                            <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
+                                            <span
+                                                key={`ellipsis-${index}`}
+                                                className="px-3 py-2 text-gray-500"
+                                            >
                                                 ...
                                             </span>
                                         ) : (
                                             <Link
                                                 key={`page-${page}`}
-                                                href={route('blog.index', { page })}
+                                                href={route('blog.index', {
+                                                    page,
+                                                })}
                                                 className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium ${
                                                     meta.current_page === page
                                                         ? 'bg-primary text-white'
                                                         : 'border border-gray-300 text-gray-700 hover:bg-gray-50'
                                                 }`}
-                                                aria-current={meta.current_page === page ? 'page' : undefined}
+                                                aria-current={
+                                                    meta.current_page === page
+                                                        ? 'page'
+                                                        : undefined
+                                                }
                                             >
                                                 {page}
                                             </Link>
-                                        )
-                                    ))}
+                                        ),
+                                    )}
                                 </div>
 
                                 {/* Next Page Button */}
                                 <Link
-                                    href={meta.current_page < meta.last_page ? route('blog.index', { page: meta.current_page + 1 }) : '#'}
+                                    href={
+                                        meta.current_page < meta.last_page
+                                            ? route('blog.index', {
+                                                  page: meta.current_page + 1,
+                                              })
+                                            : '#'
+                                    }
                                     className={`inline-flex items-center justify-center rounded-md border border-gray-300 px-3 py-2 text-sm font-medium ${
                                         meta.current_page === meta.last_page
                                             ? 'cursor-not-allowed text-gray-300'
                                             : 'text-gray-700 hover:bg-gray-50'
                                     }`}
-                                    aria-disabled={meta.current_page === meta.last_page}
-                                    tabIndex={meta.current_page === meta.last_page ? -1 : 0}
+                                    aria-disabled={
+                                        meta.current_page === meta.last_page
+                                    }
+                                    tabIndex={
+                                        meta.current_page === meta.last_page
+                                            ? -1
+                                            : 0
+                                    }
                                 >
                                     <span>Next</span>
-                                    <ChevronRightIcon size={16} className="ml-1" />
+                                    <ChevronRightIcon
+                                        size={16}
+                                        className="ml-1"
+                                    />
                                 </Link>
                             </nav>
                         </div>
