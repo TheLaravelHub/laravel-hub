@@ -62,3 +62,6 @@ database/migrations
 5. Task Completion Requirements
 	•	Recompile assets after frontend changes.
 	•	Follow all rules before marking tasks complete.
+
+resources/js/components
+	•	use kebab case in new file names.
