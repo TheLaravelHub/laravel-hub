@@ -4,12 +4,12 @@ export default function AppHead({
     title,
     children,
 }: {
-    title: string
+    title?: string
     children: React.ReactNode
 }) {
     return (
         <Head>
-            <title>{title ? `${title} - My App` : 'My App'}</title>
+            <title>{title ?? 'Indxs'}</title>
             {children}
         </Head>
     )
