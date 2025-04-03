@@ -86,6 +86,7 @@ type BlogPost = {
     updated_at: string
 }
 
+
 export type LinkType = {
     active: boolean
     label: string
