@@ -31,12 +31,13 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                 const element = document.getElementById(id)
                 if (element) {
                     // Calculate the element's position
-                    const elementPosition = element.getBoundingClientRect().top + window.scrollY
+                    const elementPosition =
+                        element.getBoundingClientRect().top + window.scrollY
 
                     // Smoothly scroll to the element
                     window.scrollTo({
                         top: elementPosition,
-                        behavior: 'smooth'
+                        behavior: 'smooth',
                     })
                 }
             }, 500)
@@ -51,7 +52,9 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
 
         const updateHash = () => {
             // Find all headings with IDs
-            const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]')
+            const headings = document.querySelectorAll(
+                'h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]',
+            )
             if (headings.length === 0) return
 
             // Find the heading that's currently in view
@@ -63,12 +66,16 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                 const heading = headings[i]
                 const nextHeading = headings[i + 1]
 
-                const headingTop = heading.getBoundingClientRect().top + window.scrollY
+                const headingTop =
+                    heading.getBoundingClientRect().top + window.scrollY
                 const nextHeadingTop = nextHeading
                     ? nextHeading.getBoundingClientRect().top + window.scrollY
                     : Number.MAX_SAFE_INTEGER
 
-                if (scrollPosition >= headingTop && scrollPosition < nextHeadingTop) {
+                if (
+                    scrollPosition >= headingTop &&
+                    scrollPosition < nextHeadingTop
+                ) {
                     currentHeading = heading
                     break
                 }
@@ -324,7 +331,10 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                 transition={{ duration: 0.5, delay: 0.35 }}
                                 className="mb-8"
                             >
-                                <TableOfContents content={blogPost.content} className="sticky top-24" />
+                                <TableOfContents
+                                    content={blogPost.content}
+                                    className="sticky top-24"
+                                />
                             </motion.div>
                         )}
 
@@ -341,9 +351,9 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                         h1: ({ node, children, ...props }) => {
                                             const id = children
                                                 ? String(children)
-                                                    .toLowerCase()
-                                                    .replace(/[^\w\s-]/g, '')
-                                                    .replace(/\s+/g, '-')
+                                                      .toLowerCase()
+                                                      .replace(/[^\w\s-]/g, '')
+                                                      .replace(/\s+/g, '-')
                                                 : ''
                                             return (
                                                 <h1
@@ -358,9 +368,9 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                         h2: ({ node, children, ...props }) => {
                                             const id = children
                                                 ? String(children)
-                                                    .toLowerCase()
-                                                    .replace(/[^\w\s-]/g, '')
-                                                    .replace(/\s+/g, '-')
+                                                      .toLowerCase()
+                                                      .replace(/[^\w\s-]/g, '')
+                                                      .replace(/\s+/g, '-')
                                                 : ''
                                             return (
                                                 <h2
@@ -375,9 +385,9 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                         h3: ({ node, children, ...props }) => {
                                             const id = children
                                                 ? String(children)
-                                                    .toLowerCase()
-                                                    .replace(/[^\w\s-]/g, '')
-                                                    .replace(/\s+/g, '-')
+                                                      .toLowerCase()
+                                                      .replace(/[^\w\s-]/g, '')
+                                                      .replace(/\s+/g, '-')
                                                 : ''
                                             return (
                                                 <h3
@@ -392,9 +402,9 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                         h4: ({ node, children, ...props }) => {
                                             const id = children
                                                 ? String(children)
-                                                    .toLowerCase()
-                                                    .replace(/[^\w\s-]/g, '')
-                                                    .replace(/\s+/g, '-')
+                                                      .toLowerCase()
+                                                      .replace(/[^\w\s-]/g, '')
+                                                      .replace(/\s+/g, '-')
                                                 : ''
                                             return (
                                                 <h4
