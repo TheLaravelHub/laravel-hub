@@ -233,21 +233,48 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                                 rehypePlugins={[
                                                     rehypeRaw,
                                                     rehypeSanitize,
-                                                    [rehypeRewrite, {
-                                                        rewrite: (node: { type: string; tagName: string }) => {
-                                                            if (node.type === 'element' && node.tagName === 'img') {
-                                                                const imgNode = node as any;
-                                                                const src = imgNode.properties.src;
+                                                    [
+                                                        rehypeRewrite,
+                                                        {
+                                                            rewrite: (node: {
+                                                                type: string
+                                                                tagName: string
+                                                            }) => {
+                                                                if (
+                                                                    node.type ===
+                                                                        'element' &&
+                                                                    node.tagName ===
+                                                                        'img'
+                                                                ) {
+                                                                    const imgNode =
+                                                                        node as any
+                                                                    const src =
+                                                                        imgNode
+                                                                            .properties
+                                                                            .src
 
-                                                                if (src && typeof src === 'string' && !src.startsWith('http')) {
-                                                                    // If it's a relative URL, transform it to a full URL
-                                                                    const repoUrl = pkg.repository_url.replace('https://github.com', 'https://raw.githubusercontent.com');
-                                                                    const branch = 'main'; // Replace with the branch name if different
-                                                                    imgNode.properties.src = `${repoUrl}/${branch}/${src.startsWith('./') ? src.substring(2) : src}`;
+                                                                    if (
+                                                                        src &&
+                                                                        typeof src ===
+                                                                            'string' &&
+                                                                        !src.startsWith(
+                                                                            'http',
+                                                                        )
+                                                                    ) {
+                                                                        // If it's a relative URL, transform it to a full URL
+                                                                        const repoUrl =
+                                                                            pkg.repository_url.replace(
+                                                                                'https://github.com',
+                                                                                'https://raw.githubusercontent.com',
+                                                                            )
+                                                                        const branch =
+                                                                            'main' // Replace with the branch name if different
+                                                                        imgNode.properties.src = `${repoUrl}/${branch}/${src.startsWith('./') ? src.substring(2) : src}`
+                                                                    }
                                                                 }
-                                                            }
-                                                        }
-                                                    }]
+                                                            },
+                                                        },
+                                                    ],
                                                 ]}
                                                 components={{
                                                     code({
@@ -430,8 +457,14 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                                             className="my-4 border-l-4 border-primary/30 pl-4 italic text-muted-foreground"
                                                         />
                                                     ),
-                                                    img: ({ node, ...props }) => (
-                                                        <img {...props} className="my-4 h-auto max-w-full rounded-md" />
+                                                    img: ({
+                                                        node,
+                                                        ...props
+                                                    }) => (
+                                                        <img
+                                                            {...props}
+                                                            className="my-4 h-auto max-w-full rounded-md"
+                                                        />
                                                     ),
                                                     table: ({
                                                         node,
