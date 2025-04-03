@@ -78,7 +78,10 @@
         ],
         "format": [
             "@pint",
-            "npm run format",
+            "npm run format"
+        ],
+        "format:git": [
+            "@format",
             "git add .",
             "git commit -m 'fix: code styling issues (PHP & JS/TS/Blade)'"
         ],
