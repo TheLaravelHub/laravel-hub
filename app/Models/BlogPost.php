@@ -28,6 +28,21 @@ class BlogPost extends Model implements HasMedia
 
     protected $sluggable = 'title';
 
+    protected static function booted(): void
+    {
+        static::creating(function (BlogPost $blogPost) {
+            if ($blogPost->status === 'published' && empty($blogPost->published_at)) {
+                $blogPost->published_at = now();
+            }
+        });
+
+        static::updating(function (BlogPost $blogPost) {
+            if ($blogPost->status === 'published' && empty($blogPost->published_at)) {
+                $blogPost->published_at = now();
+            }
+        });
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class);
