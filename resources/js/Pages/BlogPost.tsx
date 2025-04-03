@@ -21,9 +21,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
 
     return (
         <AnimatedGradientBackground>
-            <AppHead
-                title={blogPost.title}
-            >
+            <AppHead title={blogPost.title}>
                 <meta
                     name="description"
                     content={
@@ -35,7 +33,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
 
                 <meta
                     name="keywords"
-                    content={`blog, tech, programming, ${blogPost.categories?.map(cat => cat.name).join(', ')}`}
+                    content={`blog, tech, programming, ${blogPost.categories?.map((cat) => cat.name).join(', ')}`}
                 />
 
                 {/* Open Graph (Facebook, LinkedIn, etc.) */}
@@ -54,8 +52,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                 <meta
                     property="og:image"
                     content={
-                        blogPost.image ||
-                        `${appURL}/assets/images/og-image.png`
+                        blogPost.image || `${appURL}/assets/images/og-image.png`
                     }
                 />
                 <meta
@@ -91,8 +88,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                 <meta
                     name="twitter:image"
                     content={
-                        blogPost.image ||
-                        `${appURL}/assets/images/og-image.png`
+                        blogPost.image || `${appURL}/assets/images/og-image.png`
                     }
                 />
                 <meta
