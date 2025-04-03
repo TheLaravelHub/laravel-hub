@@ -1,4 +1,3 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, Tag } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
@@ -8,9 +7,9 @@ import AnimatedGradientBackground from '@/components/ui/animated-gradient-backgr
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import { Badge } from '@/components/ui/badge'
+import SocialShareButtons from '@/components/shared/social-share-buttons'
 import { BlogPost as BlogPostType, Category } from '@/types'
 import { format } from 'date-fns'
-import { Head } from '@inertiajs/react'
 import AppHead from '@/components/shared/AppHead'
 interface BlogPostProps {
     blogPost: BlogPostType
@@ -213,6 +212,20 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                             </motion.div>
                         )}
 
+                        {/* Social Share Buttons - Top */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className="mb-8"
+                        >
+                            <SocialShareButtons
+                                url={`${appURL}/blog/${blogPost.slug}`}
+                                title={blogPost.title}
+                                className="justify-center sm:justify-start"
+                            />
+                        </motion.div>
+
                         {/* Content */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -353,6 +366,25 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                     {blogPost.content}
                                 </ReactMarkdown>
                             )}
+                        </motion.div>
+
+                        {/* Social Share Buttons - Bottom */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="mt-12"
+                        >
+                            <div className="border-t border-gray-200 pt-8">
+                                <h3 className="mb-4 text-lg font-medium text-gray-900">
+                                    Did you find this article helpful? Share it!
+                                </h3>
+                                <SocialShareButtons
+                                    url={`${appURL}/blog/${blogPost.slug}`}
+                                    title={blogPost.title}
+                                    className="justify-center sm:justify-start"
+                                />
+                            </div>
                         </motion.div>
                     </article>
                 </main>
