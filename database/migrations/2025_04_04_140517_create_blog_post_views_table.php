@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('user_agent')->nullable();
             $table->string('session_id')->nullable();
             $table->timestamps();
-            
+
             // Create a unique index to prevent duplicate views
             $table->unique(['blog_post_id', 'ip_address', 'user_agent', 'session_id']);
         });
@@ -29,7 +29,7 @@ return new class extends Migration
      */
     /**
      * Reverse the migrations.
-     * 
+     *
      * Per project standards, down() method is omitted for new migrations.
      */
     public function down(): void

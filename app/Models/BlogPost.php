@@ -52,7 +52,7 @@ class BlogPost extends Model implements HasMedia
     {
         return $this->belongsToMany(Category::class);
     }
-    
+
     /**
      * Get the views for this blog post.
      */
@@ -60,7 +60,7 @@ class BlogPost extends Model implements HasMedia
     {
         return $this->hasMany(BlogPostView::class);
     }
-    
+
     /**
      * Get the count of unique views for this blog post.
      */

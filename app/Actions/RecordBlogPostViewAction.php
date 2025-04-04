@@ -22,7 +22,7 @@ class RecordBlogPostViewAction
             ->first();
 
         // If the view doesn't exist, create it
-        if (!$view) {
+        if (! $view) {
             BlogPostView::query()->create([
                 'blog_post_id' => $blogPost->id,
                 'ip_address' => $request->ip(),

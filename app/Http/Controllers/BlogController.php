@@ -33,7 +33,7 @@ class BlogController extends Controller
         }
 
         $blogPost = $blogPost->firstOrFail();
-        
+
         // Record the view for this blog post
         $recordViewAction->handle($blogPost, request());
 
