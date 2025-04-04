@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\RecordBlogPostViewAction;
 use App\Http\Resources\BlogPostResource;
 use App\Models\BlogPost;
 use Auth;
@@ -22,7 +23,7 @@ class BlogController extends Controller
         ]);
     }
 
-    public function show(string $slug)
+    public function show(string $slug, RecordBlogPostViewAction $recordViewAction)
     {
         $blogPost = BlogPost::with(['categories'])
             ->where('slug', $slug);
@@ -32,6 +33,9 @@ class BlogController extends Controller
         }
 
         $blogPost = $blogPost->firstOrFail();
+        
+        // Record the view for this blog post
+        $recordViewAction->handle($blogPost, request());
 
         return Inertia::render('BlogPost', [
             'blogPost' => new BlogPostResource($blogPost),

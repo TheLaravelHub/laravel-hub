@@ -37,6 +37,12 @@ class BlogPostResource extends Resource
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
+                    Tables\Columns\TextColumn::make('unique_views_count')
+                        ->label('Views')
+                        ->badge()
+                        ->color('success')
+                        ->sortable()
+                        ->getStateUsing(fn (BlogPost $record) => $record->unique_views_count),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable()
