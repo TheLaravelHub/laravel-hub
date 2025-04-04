@@ -57,7 +57,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
 
     return (
         <AnimatedGradientBackground className="min-h-screen">
-            <AppHead title={`${pkg.name} - Indxs Package`}>
+            <AppHead title={`${pkg.name}`}>
                 {/* Meta Description */}
                 <meta
                     name="description"

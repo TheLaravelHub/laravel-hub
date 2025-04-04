@@ -99,7 +99,7 @@ const Blog = ({ blogPosts }: BlogProps) => {
 
     return (
         <AnimatedGradientBackground>
-            <AppHead title="Latest Articles - Indxs Blog">
+            <AppHead title="Latest Articles">
                 {/* Meta Description */}
                 <meta
                     name="description"

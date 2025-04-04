@@ -11,7 +11,7 @@ createServer((page) =>
     createInertiaApp({
         page,
         render: ReactDOMServer.renderToString,
-        title: (title) => `${title} - ${appName}`,
+        title: (title) => `${appName} - ${title}`,
         resolve: (name) =>
             resolvePageComponent(
                 `./Pages/${name}.tsx`,

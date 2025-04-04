@@ -79,7 +79,7 @@ export default function Index({
 
     return (
         <AnimatedGradientBackground className="min-h-screen">
-            <AppHead title="Indxs - Discover the Best Packages & Libraries for Developers">
+            <AppHead title="Discover the Best Packages & Libraries for Developers">
                 {/* Meta Description */}
                 <meta
                     name="description"

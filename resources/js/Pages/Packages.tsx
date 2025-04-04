@@ -193,7 +193,7 @@ export default function Packages({
 
     return (
         <AnimatedGradientBackground className="min-h-screen">
-            <AppHead title="Packages - Indxs">
+            <AppHead title="Packages">
                 <meta
                     name="description"
                     content="Browse and search through our collection of packages and libraries for developers."

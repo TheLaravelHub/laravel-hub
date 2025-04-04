@@ -9,7 +9,7 @@ export default function AppHead({
 }) {
     return (
         <Head>
-            <title>{title ?? 'Indxs'}</title>
+            <title>{title ? title : 'Indxs'}</title>
             {children}
         </Head>
     )
