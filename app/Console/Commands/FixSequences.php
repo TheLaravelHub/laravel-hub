@@ -19,7 +19,7 @@ class FixSequences extends Command
         'index_package',
         'indexes',
         'packages',
-        'users'
+        'users',
     ];
 
     public function handle()
@@ -30,8 +30,9 @@ class FixSequences extends Command
             try {
                 $sequence = DB::selectOne("SELECT pg_get_serial_sequence('{$table}', 'id') AS seq")->seq;
 
-                if (!$sequence) {
+                if (! $sequence) {
                     $this->warn("⚠️ No sequence found for {$table}. Skipping...");
+
                     continue;
                 }
 
@@ -39,7 +40,7 @@ class FixSequences extends Command
 
                 $this->info("✅ Sequence fixed for {$table} ({$sequence})");
             } catch (\Exception $e) {
-                $this->error("❌ Failed for {$table}: " . $e->getMessage());
+                $this->error("❌ Failed for {$table}: ".$e->getMessage());
             }
         }
 
