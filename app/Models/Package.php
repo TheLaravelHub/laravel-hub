@@ -15,15 +15,15 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
-use Illuminate\Support\Str;
 use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
@@ -148,6 +148,7 @@ class Package extends Model
                                         ->required()
                                         ->rules(function (Get $get) {
                                             $recordId = $get('id');
+
                                             return [
                                                 Rule::unique('packages', 'repository_url')->ignore($recordId),
                                             ];
