@@ -16,7 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Str;
+use Illuminate\Support\Str;
 use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
@@ -132,7 +132,7 @@ class Category extends Model
         ];
     }
 
-    public static function getTableColumns(string $model): array
+    public static function getTableColumns(): array
     {
         return [
             TextColumn::make('name')
@@ -141,14 +141,13 @@ class Category extends Model
             TextColumn::make('slug')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('packages')
-                ->visible($model === Package::class)
-                ->formatStateUsing(fn (Category $category) => $category->packages->count() ?? 0)
+            TextColumn::make('packages_count')
+                ->label('Packages')
+                ->visible(request()->routeIs('filament.admin.resources.package-categories.index'))
                 ->sortable(),
-            TextColumn::make('blogPosts')
+            TextColumn::make('blog_posts_count')
                 ->label('Blog Posts')
-                ->visible($model === BlogPost::class)
-                ->formatStateUsing(fn (Category $category) => $category->blogPosts->count() ?? 0)
+                ->visible(request()->routeIs('filament.admin.resources.blog-post-categories.index'))
                 ->sortable(),
             ToggleColumn::make('status')
                 ->onIcon('heroicon-o-check-circle')

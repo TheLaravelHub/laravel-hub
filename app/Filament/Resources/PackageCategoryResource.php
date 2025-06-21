@@ -37,11 +37,14 @@ class PackageCategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(
+                fn () => static::getEloquentQuery()->withCount('packages')
+            )
             ->persistFiltersInSession()
             ->filtersTriggerAction(function ($action) {
                 return $action->button()->label('Filters');
             })
-            ->columns(Category::getTableColumns(model: Package::class))
+            ->columns(Category::getTableColumns())
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')

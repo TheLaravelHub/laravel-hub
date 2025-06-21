@@ -36,7 +36,10 @@ class BlogPostCategoryResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns(Category::getTableColumns(model: BlogPost::class))
+            ->query(
+                fn () => static::getEloquentQuery()->withCount('blogPosts')
+            )
+            ->columns(Category::getTableColumns())
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status')
