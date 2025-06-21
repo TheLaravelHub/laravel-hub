@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\FilamentMarkdownEditor\MarkdownEditor;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Str;
+use \Illuminate\Support\Str;
 
 class BlogPost extends Model implements HasMedia
 {
@@ -150,6 +150,7 @@ class BlogPost extends Model implements HasMedia
                                         ->fileAttachmentsVisibility('public')
                                         ->required(),
                                     SpatieMediaLibraryFileUpload::make('image')
+                                        ->disk('blog-posts')
                                         ->required()
                                         ->imageEditor(),
                                 ]),

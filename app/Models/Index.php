@@ -86,6 +86,7 @@ class Index extends Model implements HasMedia
                                         ->offColor('danger')
                                         ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
                                     SpatieMediaLibraryFileUpload::make('icon')
+                                        ->disk('Indices')
                                         ->avatar()
                                         ->imageEditor(),
                                 ]),
