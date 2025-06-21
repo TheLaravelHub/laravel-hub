@@ -148,7 +148,6 @@ class Package extends Model
                                         ->required()
                                         ->rules(function (Get $get) {
                                             $recordId = $get('id');
-
                                             return [
                                                 Rule::unique('packages', 'repository_url')->ignore($recordId),
                                             ];
