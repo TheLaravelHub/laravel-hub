@@ -176,9 +176,7 @@ export default function Index({
                 <Navbar />
 
                 {/*Hero Section*/}
-                <HeroSection
-                    categories={categories.data}
-                />
+                <HeroSection categories={categories.data} />
 
                 {/* Packages */}
                 <section
