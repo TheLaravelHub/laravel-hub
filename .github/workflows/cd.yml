@@ -1,0 +1,62 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: SSH Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, bcmath, curl, mysql
+          tools: composer
+
+      - name: Install PHP Dependencies
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Build Frontend & SSR
+        run: npm run build:ssr
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_SSH_HOST }}
+          username: ${{ secrets.DO_SSH_USERNAME }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            cd ${{ secrets.DEPLOY_PATH }}
+            git pull origin main
+
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+
+            npm ci
+            npm run build:ssr
+
+            if pm2 list | grep ssr; then
+              pm2 restart ssr
+            else
+              pm2 start bootstrap/ssr/ssr.js --name=ssr
+            fi
+
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
