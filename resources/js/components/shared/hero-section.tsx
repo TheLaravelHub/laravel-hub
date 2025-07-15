@@ -62,9 +62,9 @@ export default function HeroSection({ categories }: HeroProps) {
         setIsLoading(true)
 
         // Track search event
-        // Mixpanel.track('Search', {
-        //     query: search,
-        // })
+        Mixpanel.track('Search', {
+            query: search,
+        })
 
         router.visit('/packages', {
             method: 'get',
@@ -78,11 +78,9 @@ export default function HeroSection({ categories }: HeroProps) {
         setIsLoading(true)
 
         // Track category click event
-        // Mixpanel.track('Category Click', {
-        //     category: categorySlug,
-        // })
-        //
-        // console.log('going on')
+        Mixpanel.track('Category Click', {
+            category: categorySlug,
+        })
 
         router.visit('/packages', {
             method: 'get',
