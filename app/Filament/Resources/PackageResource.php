@@ -64,6 +64,13 @@ class PackageResource extends Resource
                             ->success()
                             ->send();
                     }),
+                Tables\Columns\ToggleColumn::make('is_featured')
+                    ->onIcon('heroicon-o-check-circle')
+                    ->offIcon('heroicon-o-x-circle')
+                    ->onColor('success')
+                    ->offColor('danger')
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')

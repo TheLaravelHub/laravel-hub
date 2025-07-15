@@ -251,6 +251,13 @@ class Package extends Model
                                         ->onColor('success')
                                         ->offColor('danger')
                                         ->afterStateHydrated(fn ($state, callable $set) => $set('status', $state === 'active')),
+
+                                    Toggle::make('is_featured')
+                                        ->default(0)
+                                        ->onIcon('heroicon-o-check-circle')
+                                        ->offIcon('heroicon-o-x-circle')
+                                        ->onColor('success')
+                                        ->offColor('danger'),
                                 ]),
                         ]),
                 ]),
