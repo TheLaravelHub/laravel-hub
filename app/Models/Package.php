@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasSlug;
 use App\Traits\HasStatus;
+use EloquentFilter\Filterable;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
@@ -29,6 +30,7 @@ use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class Package extends Model
 {
+    use Filterable;
     use HasActiveScope;
     use HasSlug;
     use HasStatus;
