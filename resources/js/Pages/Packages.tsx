@@ -100,43 +100,37 @@ export default function Packages({
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
-        router.get(
-            route('packages.index'),
-            {
-                search: searchQuery,
-                category: activeCategory,
+
+        const params: Record<string, any> = {}
+        if (searchQuery) params.search = searchQuery
+        if (activeCategory) params.category = activeCategory
+
+        router.get(route('packages.index'), params, {
+            preserveState: true,
+            onSuccess: () => {
+                setIsLoading(false)
             },
-            {
-                preserveState: true,
-                onSuccess: () => {
-                    setIsLoading(false)
-                },
-                onError: () => {
-                    setIsLoading(false)
-                },
+            onError: () => {
+                setIsLoading(false)
             },
-        )
+        })
     }
 
     const handlePageChange = (page: number) => {
         setIsLoading(true)
-        router.get(
-            route('packages.index'),
-            {
-                page,
-                search: searchQuery,
-                category: activeCategory,
+        const params: Record<string, any> = { page }
+        if (searchQuery) params.search = searchQuery
+        if (activeCategory) params.category = activeCategory
+
+        router.get(route('packages.index'), params, {
+            preserveState: true,
+            onSuccess: () => {
+                setIsLoading(false)
             },
-            {
-                preserveState: true,
-                onSuccess: () => {
-                    setIsLoading(false)
-                },
-                onError: () => {
-                    setIsLoading(false)
-                },
+            onError: () => {
+                setIsLoading(false)
             },
-        )
+        })
     }
 
     const handleCategoryClick = (categorySlug: string) => {
@@ -145,24 +139,19 @@ export default function Packages({
             categorySlug === activeCategory ? undefined : categorySlug
 
         setIsLoading(true)
+        const params: Record<string, any> = {}
+        if (searchQuery) params.search = searchQuery
+        if (newCategory) params.category = newCategory
 
-        // Use the newCategory variable directly instead of relying on the state
-        router.get(
-            route('packages.index'),
-            {
-                category: newCategory,
-                search: searchQuery,
+        router.get(route('packages.index'), params, {
+            onSuccess: () => {
+                setActiveCategory(newCategory)
+                setIsLoading(false)
             },
-            {
-                onSuccess: () => {
-                    setActiveCategory(newCategory)
-                    setIsLoading(false)
-                },
-                onError: () => {
-                    setIsLoading(false)
-                },
+            onError: () => {
+                setIsLoading(false)
             },
-        )
+        })
     }
 
     const clearFilters = () => {
