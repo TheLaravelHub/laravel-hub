@@ -10,4 +10,11 @@ class PackageFilter extends ModelFilter
     {
         return $this->whereRaw('LOWER(language) = ?', [strtolower($lang)]);
     }
+
+    public function isFeatured(bool $isFeatured = false)
+    {
+        if ($isFeatured) {
+            return $this->orderByDesc('is_featured');
+        }
+    }
 }
