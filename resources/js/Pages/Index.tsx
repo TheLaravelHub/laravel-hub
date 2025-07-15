@@ -178,8 +178,6 @@ export default function Index({
                 {/*Hero Section*/}
                 <HeroSection
                     categories={categories.data}
-                    packagesData={packagesData}
-                    packagesRef={packagesRef}
                 />
 
                 {/* Packages */}
