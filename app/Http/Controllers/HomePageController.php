@@ -25,6 +25,7 @@ class HomePageController extends Controller
 
         $packages = Package::query()
             ->select('id', 'name', 'slug', 'description', 'stars', 'owner', 'owner_avatar')
+            ->filter(['is_featured' => true])
             ->orderBy('stars', 'desc')
             ->take(6)
             ->get();

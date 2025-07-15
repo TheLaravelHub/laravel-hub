@@ -24,7 +24,8 @@
         "spatie/filament-markdown-editor": "^2.0",
         "spatie/laravel-medialibrary": "^11.12",
         "thefeqy/laravel-model-status": "^1.3",
-        "tightenco/ziggy": "^2.0"
+        "tightenco/ziggy": "^2.0",
+        "tucker-eric/eloquentfilter": "^3.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.15",
