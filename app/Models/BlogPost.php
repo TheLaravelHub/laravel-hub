@@ -146,7 +146,7 @@ class BlogPost extends Model implements HasMedia
                                         ->required()
                                         ->maxLength(255),
                                     MarkdownEditor::make('content')
-                                        ->fileAttachmentsDisk('public')
+                                        ->fileAttachmentsDisk('blog-posts')
                                         ->fileAttachmentsVisibility('public')
                                         ->required(),
                                     SpatieMediaLibraryFileUpload::make('image')
