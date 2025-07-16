@@ -26,7 +26,7 @@ class GitHubService
 
         $response = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer '.env('GITHUB_TOKEN'),
+            'Authorization' => 'Bearer '.env('GHUB_TOKEN'),
         ])->get($apiUrl);
 
         if ($response->failed()) {
@@ -57,7 +57,7 @@ class GitHubService
 
         $response = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer '.env('GITHUB_TOKEN'),
+            'Authorization' => 'Bearer '.env('GHUB_TOKEN'),
         ])->get($apiUrl);
 
         if ($response->failed()) {
