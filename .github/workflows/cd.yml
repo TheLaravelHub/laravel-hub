@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  prepare:
-    name: Prepare Environment
+  build:
+    name: Install & Build SSR
     runs-on: ubuntu-latest
 
     steps:
@@ -23,23 +23,6 @@ jobs:
 
       - name: Install PHP Dependencies
         run: composer install --no-dev --optimize-autoloader
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      - name: Install Node Dependencies
-        run: npm ci
-
-  build:
-    name: Build SSR
-    runs-on: ubuntu-latest
-    needs: prepare
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
