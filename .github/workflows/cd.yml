@@ -118,7 +118,7 @@ jobs:
             MODEL_STATUS_ACTIVE=${{ vars.MODEL_STATUS_ACTIVE }}
             MODEL_STATUS_INACTIVE=${{ vars.MODEL_STATUS_INACTIVE }}
 
-            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            GHUB_TOKEN=${{ secrets.GHUB_TOKEN }}
 
             SCOUT_DRIVER=${{ vars.SCOUT_DRIVER }}
             SCOUT_QUEUE=${{ vars.SCOUT_QUEUE }}
