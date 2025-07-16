@@ -110,7 +110,7 @@ jobs:
             AWS_URL=${{ secrets.AWS_URL }}
             AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
 
-            VITE_APP_NAME=${{ vars.VITE_APP_NAME }}
+            VITE_APP_NAME=${{ vars.APP_NAME }}
 
             MODEL_STATUS_COLUMN=${{ vars.MODEL_STATUS_COLUMN }}
             MODEL_STATUS_COLUMN_LENGTH=${{ vars.MODEL_STATUS_COLUMN_LENGTH }}
