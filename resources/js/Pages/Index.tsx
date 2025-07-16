@@ -79,7 +79,7 @@ export default function Index({
 
     return (
         <AnimatedGradientBackground className="min-h-screen">
-            <AppHead title="Discover the Best Packages & Libraries for Developers">
+            <AppHead title="Discover the Best Laravel Packages & Libraries for Developers">
                 {/* Meta Description */}
                 <meta
                     name="description"
@@ -89,13 +89,13 @@ export default function Index({
                 {/* Keywords */}
                 <meta
                     name="keywords"
-                    content="Indxs, Laravel packages, PHP libraries, ReactJS components, open-source, programming, web development, tech blog, software development"
+                    content="Indxs, Laravel package, Laravel packages, PHP libraries, ReactJS components, open-source, programming, web development, tech blog, software development"
                 />
 
                 {/* Open Graph (Facebook, LinkedIn, etc.) */}
                 <meta
                     property="og:title"
-                    content="Indxs - Discover the Best Packages & Libraries for Developers"
+                    content="Indxs - Discover the Best Laravel Packages & Libraries for Developers"
                 />
                 <meta
                     property="og:description"
@@ -125,7 +125,7 @@ export default function Index({
                 />
                 <meta
                     name="twitter:title"
-                    content="Indxs - Discover the Best Packages & Libraries for Developers"
+                    content="Indxs - Discover the Best Laravel Packages & Libraries for Developers"
                 />
                 <meta
                     name="twitter:description"
