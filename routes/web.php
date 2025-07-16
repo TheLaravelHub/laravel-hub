@@ -6,9 +6,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SitemapGeneratorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePageController::class)->name('homepage');
+Route::get('/sitemap.xml', SitemapGeneratorController::class);
 
 Route::controller(PackageController::class)
     ->group(function () {

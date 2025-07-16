@@ -15,6 +15,10 @@ class HandleInertiaRequests extends Middleware
      */
     protected $rootView = 'app';
 
+    protected $except = [
+        '/sitemap.xml',
+    ];
+
     /**
      * Determine the current asset version.
      */
