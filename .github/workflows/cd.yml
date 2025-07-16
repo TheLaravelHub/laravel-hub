@@ -67,84 +67,84 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cat <<EOF > ${{ secrets.DEPLOY_PATH }}/.env
-  APP_NAME=${{ vars.APP_NAME }}
-  APP_ENV=${{ vars.APP_ENV }}
-  APP_KEY=${{ secrets.APP_KEY }}
-  APP_DEBUG=${{ vars.APP_DEBUG }}
-  APP_TIMEZONE=${{ vars.APP_TIMEZONE }}
-  APP_URL=${{ vars.APP_URL }}
+            APP_NAME=${{ vars.APP_NAME }}
+            APP_ENV=${{ vars.APP_ENV }}
+            APP_KEY=${{ secrets.APP_KEY }}
+            APP_DEBUG=${{ vars.APP_DEBUG }}
+            APP_TIMEZONE=${{ vars.APP_TIMEZONE }}
+            APP_URL=${{ vars.APP_URL }}
 
-  APP_LOCALE=${{ vars.APP_LOCALE }}
-  APP_FALLBACK_LOCALE=${{ vars.APP_FALLBACK_LOCALE }}
-  APP_FAKER_LOCALE=${{ vars.APP_FAKER_LOCALE }}
-  APP_MAINTENANCE_DRIVER=${{ vars.APP_MAINTENANCE_DRIVER }}
+            APP_LOCALE=${{ vars.APP_LOCALE }}
+            APP_FALLBACK_LOCALE=${{ vars.APP_FALLBACK_LOCALE }}
+            APP_FAKER_LOCALE=${{ vars.APP_FAKER_LOCALE }}
+            APP_MAINTENANCE_DRIVER=${{ vars.APP_MAINTENANCE_DRIVER }}
 
-  PHP_CLI_SERVER_WORKERS=${{ vars.PHP_CLI_SERVER_WORKERS }}
-  BCRYPT_ROUNDS=${{ vars.BCRYPT_ROUNDS }}
+            PHP_CLI_SERVER_WORKERS=${{ vars.PHP_CLI_SERVER_WORKERS }}
+            BCRYPT_ROUNDS=${{ vars.BCRYPT_ROUNDS }}
 
-  LOG_CHANNEL=${{ vars.LOG_CHANNEL }}
-  LOG_STACK=${{ vars.LOG_STACK }}
-  LOG_DEPRECATIONS_CHANNEL=${{ vars.LOG_DEPRECATIONS_CHANNEL }}
-  LOG_LEVEL=${{ vars.LOG_LEVEL }}
+            LOG_CHANNEL=${{ vars.LOG_CHANNEL }}
+            LOG_STACK=${{ vars.LOG_STACK }}
+            LOG_DEPRECATIONS_CHANNEL=${{ vars.LOG_DEPRECATIONS_CHANNEL }}
+            LOG_LEVEL=${{ vars.LOG_LEVEL }}
 
-  DB_CONNECTION=pgsql
-  DB_HOST=${{ secrets.DB_HOST }}
-  DB_PORT=${{ secrets.DB_PORT }}
-  DB_DATABASE=${{ secrets.DB_DATABASE }}
-  DB_USERNAME=${{ secrets.DB_USERNAME }}
-  DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DB_CONNECTION=pgsql
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_PORT=${{ secrets.DB_PORT }}
+            DB_DATABASE=${{ secrets.DB_DATABASE }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 
-  SESSION_DRIVER=${{ vars.SESSION_DRIVER }}
-  SESSION_LIFETIME=${{ vars.SESSION_LIFETIME }}
-  SESSION_ENCRYPT=${{ vars.SESSION_ENCRYPT }}
-  SESSION_PATH=${{ vars.SESSION_PATH }}
-  SESSION_DOMAIN=${{ vars.SESSION_DOMAIN }}
+            SESSION_DRIVER=${{ vars.SESSION_DRIVER }}
+            SESSION_LIFETIME=${{ vars.SESSION_LIFETIME }}
+            SESSION_ENCRYPT=${{ vars.SESSION_ENCRYPT }}
+            SESSION_PATH=${{ vars.SESSION_PATH }}
+            SESSION_DOMAIN=${{ vars.SESSION_DOMAIN }}
 
-  BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
-  FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
-  QUEUE_CONNECTION=${{ vars.QUEUE_CONNECTION }}
-  CACHE_STORE=${{ vars.CACHE_STORE }}
-  CACHE_PREFIX=${{ vars.CACHE_PREFIX }}
+            BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
+            FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
+            QUEUE_CONNECTION=${{ vars.QUEUE_CONNECTION }}
+            CACHE_STORE=${{ vars.CACHE_STORE }}
+            CACHE_PREFIX=${{ vars.CACHE_PREFIX }}
 
-  MEMCACHED_HOST=${{ vars.MEMCACHED_HOST }}
-  REDIS_CLIENT=${{ vars.REDIS_CLIENT }}
-  REDIS_HOST=${{ vars.REDIS_HOST }}
-  REDIS_PASSWORD=${{ vars.REDIS_PASSWORD }}
-  REDIS_PORT=${{ vars.REDIS_PORT }}
+            MEMCACHED_HOST=${{ vars.MEMCACHED_HOST }}
+            REDIS_CLIENT=${{ vars.REDIS_CLIENT }}
+            REDIS_HOST=${{ vars.REDIS_HOST }}
+            REDIS_PASSWORD=${{ vars.REDIS_PASSWORD }}
+            REDIS_PORT=${{ vars.REDIS_PORT }}
 
-  MAIL_MAILER=${{ secrets.MAIL_MAILER }}
-  MAIL_HOST=${{ secrets.MAIL_HOST }}
-  MAIL_PORT=${{ secrets.MAIL_PORT }}
-  MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}
-  MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}
-  MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}
-  MAIL_FROM_NAME=${{ vars.APP_NAME }}
+            MAIL_MAILER=${{ secrets.MAIL_MAILER }}
+            MAIL_HOST=${{ secrets.MAIL_HOST }}
+            MAIL_PORT=${{ secrets.MAIL_PORT }}
+            MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}
+            MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}
+            MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}
+            MAIL_FROM_NAME=${{ vars.APP_NAME }}
 
-  AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}
-  AWS_BUCKET=${{ secrets.AWS_BUCKET }}
-  AWS_URL=${{ secrets.AWS_URL }}
-  AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
+            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}
+            AWS_BUCKET=${{ secrets.AWS_BUCKET }}
+            AWS_URL=${{ secrets.AWS_URL }}
+            AWS_USE_PATH_STYLE_ENDPOINT=${{ secrets.AWS_USE_PATH_STYLE_ENDPOINT }}
 
-  VITE_APP_NAME=${{ vars.VITE_APP_NAME }}
+            VITE_APP_NAME=${{ vars.VITE_APP_NAME }}
 
-  MODEL_STATUS_COLUMN=${{ vars.MODEL_STATUS_COLUMN }}
-  MODEL_STATUS_COLUMN_LENGTH=${{ vars.MODEL_STATUS_COLUMN_LENGTH }}
-  MODEL_STATUS_ACTIVE=${{ vars.MODEL_STATUS_ACTIVE }}
-  MODEL_STATUS_INACTIVE=${{ vars.MODEL_STATUS_INACTIVE }}
+            MODEL_STATUS_COLUMN=${{ vars.MODEL_STATUS_COLUMN }}
+            MODEL_STATUS_COLUMN_LENGTH=${{ vars.MODEL_STATUS_COLUMN_LENGTH }}
+            MODEL_STATUS_ACTIVE=${{ vars.MODEL_STATUS_ACTIVE }}
+            MODEL_STATUS_INACTIVE=${{ vars.MODEL_STATUS_INACTIVE }}
 
-  GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
 
-  SCOUT_DRIVER=${{ vars.SCOUT_DRIVER }}
-  SCOUT_QUEUE=${{ vars.SCOUT_QUEUE }}
+            SCOUT_DRIVER=${{ vars.SCOUT_DRIVER }}
+            SCOUT_QUEUE=${{ vars.SCOUT_QUEUE }}
 
-  ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
-  ALGOLIA_SECRET=${{ secrets.ALGOLIA_SECRET }}
+            ALGOLIA_APP_ID=${{ secrets.ALGOLIA_APP_ID }}
+            ALGOLIA_SECRET=${{ secrets.ALGOLIA_SECRET }}
 
-  MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
-  VITE_MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
-  EOF
+            MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
+            VITE_MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
+            EOF
 
   deploy:
     name: Deploy to Server
