@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: SSH Deploy
+  prepare:
+    name: Prepare Environment
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +32,32 @@ jobs:
       - name: Install Node Dependencies
         run: npm ci
 
-      - name: Build Frontend & SSR
+  build:
+    name: Build SSR
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Build Frontend and SSR
         run: npm run build:ssr
 
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
