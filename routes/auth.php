@@ -8,6 +8,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\Social\GithubCallbackController;
+use App\Http\Controllers\Auth\Social\GithubRedirectController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +23,16 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    // Social Authentication Routes
+    Route::prefix('auth/social')
+        ->name('auth.social.')
+        ->group(function () {
+            Route::get('github', GithubRedirectController::class)
+                ->name('github.redirect');
+            Route::get('github/callback', GithubCallbackController::class)
+                ->name('github.callback');
+        });
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
