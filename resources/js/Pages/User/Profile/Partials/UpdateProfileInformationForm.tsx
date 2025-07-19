@@ -26,7 +26,7 @@ export default function UpdateProfileInformation({
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
 
-        patch(route('profile.update'))
+        patch(route('user.profile.update'))
     }
 
     return (

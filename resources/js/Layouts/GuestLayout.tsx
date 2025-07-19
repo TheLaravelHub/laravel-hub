@@ -1,17 +1,21 @@
-import ApplicationLogo from '@/components/application-logo'
 import { Link } from '@inertiajs/react'
 import { PropsWithChildren } from 'react'
+import Image from '@/components/image'
 
 export default function Guest({ children }: PropsWithChildren) {
     return (
-        <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 dark:bg-gray-900 sm:justify-center sm:pt-0">
-            <div>
+        <div className="flex min-h-screen flex-col items-center bg-background pt-6 sm:justify-center sm:pt-0">
+            <div className="mt-6">
                 <Link href="/">
-                    <ApplicationLogo className="h-20 w-20 fill-current text-gray-500" />
+                    <Image
+                        src="/assets/images/Indxs-logo.png"
+                        alt="Indxs"
+                        width={150}
+                    />
                 </Link>
             </div>
 
-            <div className="mt-6 w-full overflow-hidden bg-white px-6 py-4 shadow-md dark:bg-gray-800 sm:max-w-md sm:rounded-lg">
+            <div className="mt-6 w-full overflow-hidden rounded-lg bg-card px-6 py-8 shadow-md sm:max-w-md">
                 {children}
             </div>
         </div>

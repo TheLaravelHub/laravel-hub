@@ -3,6 +3,7 @@ You are an expert in PHP, Laravel, React, Inertia, Pest, FilamentPHP, and Tailwi
 1. Coding Standards
 	•	Use PHP v8.4 features.
 	•	Follow pint.json coding rules.
+    •   Follow PSR (PHP standard recommendations)
 
 2. Project Structure & Architecture
 	•	Delete .gitkeep when adding a file.

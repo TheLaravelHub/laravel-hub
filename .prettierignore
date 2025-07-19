@@ -8,6 +8,8 @@ yarn.lock
 dist
 build
 public/storage
+public/css/*
+public/js/*
 storage
 bootstrap/cache
 

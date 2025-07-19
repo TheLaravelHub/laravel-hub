@@ -3,8 +3,10 @@ import InputLabel from '@/components/input-label'
 import PrimaryButton from '@/components/primary-button'
 import TextInput from '@/components/text-input'
 import GuestLayout from '@/Layouts/GuestLayout'
-import { Head, Link, useForm } from '@inertiajs/react'
+import { Head, Link, router, useForm } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
+import { Github } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -18,13 +20,47 @@ export default function Register() {
         e.preventDefault()
 
         post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
+            onFinish: () => reset(),
         })
     }
 
     return (
         <GuestLayout>
             <Head title="Register" />
+
+            <div className="mb-8 text-center">
+                <h1 className="text-3xl font-bold text-foreground">
+                    Create an Account
+                </h1>
+                <p className="mt-2 text-muted-foreground">
+                    Join our community and start exploring
+                </p>
+            </div>
+
+            {/* GitHub Registration Button */}
+            <div className="mb-6">
+                <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href={'/auth/social/github'}
+                    type="button"
+                    className="flex w-full items-center justify-center gap-2 rounded-md border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm transition-all hover:bg-accent focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                >
+                    <Github size={18} />
+                    <span>Continue with GitHub</span>
+                </motion.a>
+            </div>
+
+            <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-border"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                    <span className="bg-card px-2 text-muted-foreground">
+                        Or continue with email
+                    </span>
+                </div>
+            </div>
 
             <form onSubmit={submit}>
                 <div>
@@ -121,20 +157,25 @@ export default function Register() {
                     />
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="mt-6 flex items-center justify-between">
                     <Link
                         href={route('login')}
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                        className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
-                        Already registered?
+                        Already have an account?
                     </Link>
 
-                    <PrimaryButton
-                        className="ms-4"
-                        disabled={processing}
+                    <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                     >
-                        Register
-                    </PrimaryButton>
+                        <PrimaryButton
+                            className="px-6 py-2.5"
+                            disabled={processing}
+                        >
+                            Create Account
+                        </PrimaryButton>
+                    </motion.div>
                 </div>
             </form>
         </GuestLayout>

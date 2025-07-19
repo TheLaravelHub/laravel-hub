@@ -6,6 +6,8 @@ import TextInput from '@/components/text-input'
 import GuestLayout from '@/Layouts/GuestLayout'
 import { Head, Link, useForm } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
+import { Github } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function Login({
     status,
@@ -31,6 +33,39 @@ export default function Login({
     return (
         <GuestLayout>
             <Head title="Log in" />
+
+            <div className="mb-8 text-center">
+                <h1 className="text-3xl font-bold text-foreground">
+                    Welcome Back
+                </h1>
+                <p className="mt-2 text-muted-foreground">
+                    Sign in to your account
+                </p>
+            </div>
+
+            {/* GitHub Login Button */}
+            <div className="mb-6">
+                <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href={'/auth/social/github'}
+                    className="flex w-full items-center justify-center gap-2 rounded-md border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm transition-all hover:bg-accent focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                >
+                    <Github size={18} />
+                    <span>Continue with GitHub</span>
+                </motion.a>
+            </div>
+
+            <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-border"></div>
+                </div>
+                <div className="relative flex justify-center text-sm">
+                    <span className="bg-card px-2 text-muted-foreground">
+                        Or continue with email
+                    </span>
+                </div>
+            </div>
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
@@ -93,28 +128,44 @@ export default function Login({
                                 setData('remember', e.target.checked)
                             }
                         />
-                        <span className="ms-2 text-sm text-gray-600 dark:text-gray-400">
+                        <span className="ms-2 text-sm text-muted-foreground">
                             Remember me
                         </span>
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
+                <div className="mt-6 flex flex-col space-y-4">
+                    <div className="flex items-center justify-between">
+                        {canResetPassword && (
+                            <Link
+                                href={route('password.request')}
+                                className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                            >
+                                Forgot your password?
+                            </Link>
+                        )}
 
-                    <PrimaryButton
-                        className="ms-4"
-                        disabled={processing}
-                    >
-                        Log in
-                    </PrimaryButton>
+                        <motion.div
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <PrimaryButton
+                                className="px-6 py-2.5"
+                                disabled={processing}
+                            >
+                                Sign In
+                            </PrimaryButton>
+                        </motion.div>
+                    </div>
+
+                    <div className="text-center">
+                        <Link
+                            href={route('register')}
+                            className="text-sm text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        >
+                            Don't have an account? Register now
+                        </Link>
+                    </div>
                 </div>
             </form>
         </GuestLayout>

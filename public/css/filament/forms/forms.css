@@ -808,8 +808,7 @@ input::-webkit-datetime-edit {
 .filepond--root[data-style-panel-layout~='circle'] > .filepond--panel > * {
     display: none;
 }
-@media not all and (-webkit-min-device-pixel-ratio: 0),
-    not all and (min-resolution: 0.001dpcm) {
+@media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
         .filepond--root[data-style-panel-layout~='circle'] {
             will-change: transform;
@@ -3081,7 +3080,7 @@ cropperjs/dist/cropper.min.css:
 
 filepond/dist/filepond.min.css:
   (*!
-   * FilePond 4.32.7
+   * FilePond 4.32.8
    * Licensed under MIT, https://opensource.org/licenses/MIT/
    * Please visit https://pqina.nl/filepond/ for details.
    *)
@@ -3109,7 +3108,7 @@ filepond-plugin-media-preview/dist/filepond-plugin-media-preview.css:
 
 easymde/dist/easymde.min.css:
   (**
-   * easymde v2.18.0
+   * easymde v2.20.0
    * Copyright Jeroen Akkerman
    * @link https://github.com/ionaru/easy-markdown-editor
    * @license MIT

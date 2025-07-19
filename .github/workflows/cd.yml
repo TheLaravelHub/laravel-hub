@@ -96,13 +96,10 @@ jobs:
             REDIS_PASSWORD=${{ vars.REDIS_PASSWORD }}
             REDIS_PORT=${{ vars.REDIS_PORT }}
 
-            MAIL_MAILER=${{ secrets.MAIL_MAILER }}
-            MAIL_HOST=${{ secrets.MAIL_HOST }}
-            MAIL_PORT=${{ secrets.MAIL_PORT }}
-            MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}
-            MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}
-            MAIL_FROM_ADDRESS=${{ secrets.MAIL_FROM_ADDRESS }}
+            MAIL_MAILER=${{ vars.MAIL_MAILER }}
+            MAIL_FROM_ADDRESS=${{ vars.MAIL_FROM_ADDRESS }}
             MAIL_FROM_NAME=${{ vars.APP_NAME }}
+            RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
 
             AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -128,6 +125,10 @@ jobs:
 
             MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
             VITE_MIXPANEL_TOKEN=${{ secrets.MIXPANEL_TOKEN }}
+
+            GHUB_ID=${{ secrets.GHUB_ID }}
+            GHUB_SECRET=${{ secrets.GHUB_SECRET }}
+            GHUB_URL=${{ vars.GHUB_URL }}
             EOF
 
   deploy:
