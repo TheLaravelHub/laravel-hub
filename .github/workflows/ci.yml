@@ -24,45 +24,67 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: indxs_test
+          POSTGRES_USER: indxs_user
+          POSTGRES_PASSWORD: secret
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd="pg_isready -U indxs_user -d indxs_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: indxs_test
+      DB_USERNAME: indxs_user
+      DB_PASSWORD: secret
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Set up PHP
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.4'
-          extensions: mbstring, dom, fileinfo
+          php-version: '8.2'
+          extensions: mbstring, dom, fileinfo, pgsql
           tools: composer
 
       - name: Install PHP dependencies
         run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-      - name: Run Laravel Pint (check only)
-        run: ./vendor/bin/pint --test
-
-      - name: Set up Laravel .env
-        run: cp .env.example .env
-
-      - name: Generate APP_KEY
-        run: php artisan key:generate
-
-      - name: Set up SQLite for testing
+      - name: Copy .env and generate key
         run: |
-          touch database/database.sqlite
-          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
-          sed -i 's/DB_DATABASE=.*/DB_DATABASE=database\/database.sqlite/' .env
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Update DB config in .env
+        run: |
+          sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=pgsql/' .env
+          sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' .env
+          sed -i 's/^DB_PORT=.*/DB_PORT=5432/' .env
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=indxs_test/' .env
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=indxs_user/' .env
+          sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=secret/' .env
 
       - name: Run Migrations
         run: php artisan migrate --force
 
-      - name: Run PHPUnit tests
+      - name: Run Pint
+        run: ./vendor/bin/pint --test
+
+      - name: Run PHPUnit Tests
         run: ./vendor/bin/phpunit
 
-      # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -71,5 +93,5 @@ jobs:
       - name: Install JS dependencies
         run: npm ci
 
-      - name: Run Prettier check
+      - name: Check formatting with Prettier
         run: npm run format:check
