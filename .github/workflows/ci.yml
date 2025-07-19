@@ -56,7 +56,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: mbstring, dom, fileinfo, pgsql
+          extensions: mbstring, dom, fileinfo, pgsql, pdo_pgsql
           tools: composer
 
       - name: Install PHP dependencies
@@ -79,11 +79,8 @@ jobs:
       - name: Run Migrations
         run: php artisan migrate --force
 
-      - name: Run Pint
+      - name: Run Laravel Pint
         run: ./vendor/bin/pint --test
-
-      - name: Run PHPUnit Tests
-        run: ./vendor/bin/phpunit
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -92,6 +89,12 @@ jobs:
 
       - name: Install JS dependencies
         run: npm ci
+
+      - name: Build assets (Vite)
+        run: npm run build
+
+      - name: Run PHPUnit Tests
+        run: ./vendor/bin/phpunit
 
       - name: Check formatting with Prettier
         run: npm run format:check
