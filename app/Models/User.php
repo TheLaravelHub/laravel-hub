@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\SocialProvider;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -29,7 +30,8 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
-        'github_token',
+        'provider_token',
+        'provider_refresh_token'
     ];
 
     /**
@@ -44,6 +46,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             'password' => 'hashed',
             'github_id' => 'string',
             'github_avatar' => 'string',
+            'provider_type' => SocialProvider::class,
         ];
     }
 
