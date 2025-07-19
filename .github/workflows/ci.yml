@@ -44,6 +44,21 @@ jobs:
       - name: Run Laravel Pint (check only)
         run: ./vendor/bin/pint --test
 
+      - name: Set up Laravel .env
+        run: cp .env.example .env
+
+      - name: Generate APP_KEY
+        run: php artisan key:generate
+
+      - name: Set up SQLite for testing
+        run: |
+          touch database/database.sqlite
+          sed -i 's/DB_CONNECTION=.*/DB_CONNECTION=sqlite/' .env
+          sed -i 's/DB_DATABASE=.*/DB_DATABASE=database\/database.sqlite/' .env
+
+      - name: Run Migrations
+        run: php artisan migrate --force
+
       - name: Run PHPUnit tests
         run: ./vendor/bin/phpunit
 
