@@ -1,0 +1,60 @@
+name: Run Full CI Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**.php'
+      - '**.js'
+      - '**.jsx'
+      - '**.ts'
+      - '**.tsx'
+      - '**.json'
+      - '**.css'
+      - '**.scss'
+      - '**.blade.php'
+      - '**.md'
+
+permissions:
+  contents: read
+
+jobs:
+  ci-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Set up PHP
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, dom, fileinfo
+          tools: composer
+
+      - name: Install PHP dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
+
+      - name: Run Laravel Pint (check only)
+        run: ./vendor/bin/pint --test
+
+      - name: Run PHPUnit tests
+        run: ./vendor/bin/phpunit
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      - name: Run Prettier check
+        run: npm run format:check
