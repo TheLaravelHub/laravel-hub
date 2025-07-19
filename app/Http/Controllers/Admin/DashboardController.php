@@ -14,7 +14,7 @@ class DashboardController extends Controller
         $activePackagesCount = Package::query()->active()->count();
         $inActivePackagesCount = Package::query()->inActive()->count();
 
-        return Inertia::render('Admin/Dashboard/Index',
+        return Inertia::render('Admin/User/Index',
             compact('packagesCount', 'activePackagesCount', 'inActivePackagesCount'));
     }
 }

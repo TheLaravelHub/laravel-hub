@@ -33,7 +33,7 @@ export default function Login({
     return (
         <GuestLayout>
             <Head title="Log in" />
-            
+
             <div className="mb-8 text-center">
                 <h1 className="text-3xl font-bold text-foreground">
                     Welcome Back
@@ -42,7 +42,7 @@ export default function Login({
                     Sign in to your account
                 </p>
             </div>
-            
+
             {/* GitHub Login Button */}
             <div className="mb-6">
                 <motion.a
@@ -55,7 +55,7 @@ export default function Login({
                     <span>Continue with GitHub</span>
                 </motion.a>
             </div>
-            
+
             <div className="relative mb-6">
                 <div className="absolute inset-0 flex items-center">
                     <div className="w-full border-t border-border"></div>
@@ -144,7 +144,7 @@ export default function Login({
                                 Forgot your password?
                             </Link>
                         )}
-                        
+
                         <motion.div
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
@@ -157,7 +157,7 @@ export default function Login({
                             </PrimaryButton>
                         </motion.div>
                     </div>
-                    
+
                     <div className="text-center">
                         <Link
                             href={route('register')}

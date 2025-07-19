@@ -19,6 +19,6 @@ class GithubCallbackController extends Controller
         Auth::login($user);
 
         return redirect()
-            ->route('dashboard');
+            ->route('user.dashboard');
     }
 }
