@@ -11791,6 +11791,7 @@ export { Xc as default }
 /*! Bundled license information:
 
 chart.js/dist/chunks/helpers.segment.mjs:
+chart.js/dist/chart.mjs:
   (*!
    * Chart.js v3.9.1
    * https://www.chartjs.org
@@ -11803,14 +11804,6 @@ chart.js/dist/chunks/helpers.segment.mjs:
    * @kurkle/color v0.2.1
    * https://github.com/kurkle/color#readme
    * (c) 2022 Jukka Kurkela
-   * Released under the MIT License
-   *)
-
-chart.js/dist/chart.mjs:
-  (*!
-   * Chart.js v3.9.1
-   * https://www.chartjs.org
-   * (c) 2022 Chart.js Contributors
    * Released under the MIT License
    *)
 */
