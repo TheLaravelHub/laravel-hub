@@ -59,5 +59,8 @@ class ProfileTest extends TestCase
             ->assertRedirect('/user/profile');
 
         $this->assertNotNull($user->refresh()->email_verified_at);
+
+        // TODO: Remove this
+        $this->assertTrue(false);
     }
 }
