@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('provider_id')->nullable();
             $table->string('provider_token')->nullable();
             $table->string('provider_refresh_token')->nullable();
-            $table->string('provider_avatar')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('password')
                 ->nullable()
                 ->change();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('password')
                 ->nullable(false)
                 ->change();
-            $table->dropColumn(['provider_type', 'provider_id', 'provider_token', 'provider_avatar']);
+            $table->dropColumn(['provider_type', 'provider_id', 'provider_token', 'provider_refresh_token', 'avatar']);
         });
     }
 };

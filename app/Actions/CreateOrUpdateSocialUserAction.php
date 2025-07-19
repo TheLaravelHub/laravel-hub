@@ -25,7 +25,7 @@ class CreateOrUpdateSocialUserAction
                     'provider_id' => $provider === 'github' ? $socialUser->getId() : null,
                     'provider_token' => $provider === 'github' ? $socialUser->token : null,
                     'provider_refresh_token' => $provider === 'github' ? $socialUser->refreshToken : null,
-                    'provider_avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
+                    'avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
                 ]);
         } else {
             $user->update([
@@ -33,7 +33,7 @@ class CreateOrUpdateSocialUserAction
                 'provider_id' => $provider === 'github' ? $socialUser->getId() : null,
                 'provider_token' => $provider === 'github' ? $socialUser->token : null,
                 'provider_refresh_token' => $provider === 'github' ? $socialUser->refreshToken : null,
-                'provider_avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
+                'avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
             ]);
         }
 

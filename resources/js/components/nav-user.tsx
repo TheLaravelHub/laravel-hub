@@ -9,7 +9,7 @@ import {
     Sparkles,
 } from 'lucide-react'
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -46,7 +46,10 @@ export function NavUser({ user }: { user: User }) {
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <Avatar className="h-8 w-8 rounded-lg">
-                                {/*<AvatarImage src={user.avatar} alt={user.name} />*/}
+                                <AvatarImage
+                                    src={user.avatar}
+                                    alt={user.name}
+                                />
                                 <AvatarFallback className="rounded-lg">
                                     {user.name.slice(0, 2).toUpperCase()}
                                 </AvatarFallback>
@@ -97,7 +100,7 @@ export function NavUser({ user }: { user: User }) {
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 <Link
-                                    href={route('profile.edit')}
+                                    href={route('user.profile.edit')}
                                     className="flex items-center gap-2"
                                 >
                                     <BadgeCheck />
