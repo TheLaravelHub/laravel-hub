@@ -3,6 +3,7 @@
     "type": "module",
     "scripts": {
         "format": "prettier --write .",
+        "format:check": "prettier --check .",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite"
