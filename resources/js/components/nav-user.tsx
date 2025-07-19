@@ -74,7 +74,7 @@ export function NavUser({ user }: { user: User }) {
                         <DropdownMenuLabel className="p-0 font-normal">
                             <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                                 <Avatar className="h-8 w-8 rounded-lg">
-                                    {/*<AvatarImage src={user.avatar} alt={user.name} />*/}
+                                    <AvatarImage src={user.avatar} alt={user.name} />
                                     <AvatarFallback className="rounded-lg">
                                         {user.name.slice(0, 2).toUpperCase()}
                                     </AvatarFallback>
@@ -92,13 +92,6 @@ export function NavUser({ user }: { user: User }) {
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
-                                <Sparkles />
-                                Upgrade to Pro
-                            </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                            <DropdownMenuItem>
                                 <Link
                                     href={route('user.profile.edit')}
                                     className="flex items-center gap-2"
@@ -106,14 +99,6 @@ export function NavUser({ user }: { user: User }) {
                                     <BadgeCheck />
                                     Account
                                 </Link>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <CreditCard />
-                                Billing
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Bell />
-                                Notifications
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />

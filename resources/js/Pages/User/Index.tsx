@@ -9,7 +9,6 @@ export default function Home() {
                     Home
                 </h2>
             }
-            breadcrumbs={[{ title: 'Home' }]}
         >
             <Head title="Home" />
 
