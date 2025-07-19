@@ -3,13 +3,14 @@ import {
     Github,
     LifeBuoy,
     Menu,
+    UserPlus,
     X,
     BookOpen,
-    Package,
+    Package, User2,
 } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 import Image from '@/components/image'
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import Mixpanel from '@/lib/mixpanel'
@@ -30,6 +31,9 @@ const Navbar = () => {
         'Package Submission Clicked',
         { location: 'Navbar' },
     )
+    
+    // Check if user is authenticated
+    const { auth } = usePage().props as any
 
     useEffect(() => {
         const handleScroll = () => {
@@ -150,26 +154,25 @@ const Navbar = () => {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden space-x-6 md:flex">
-                        <motion.a
-                            href="https://github.com/indxs/indxs"
-                            target={'_blank'}
-                            className="flex items-center space-x-2 transition-colors hover:text-primary"
-                            variants={linkVariants}
-                            whileHover="hover"
-                            onClick={handleGithubRepoClick}
-                        >
-                            <Github size={22} /> <span>GitHub</span>
-                        </motion.a>
-                        <motion.a
-                            href="https://github.com/sponsors/thefeqy"
-                            target={'_blank'}
-                            className="flex items-center space-x-2 transition-colors hover:text-primary"
-                            variants={linkVariants}
-                            whileHover="hover"
-                            onClick={handleSponsorLinkClick}
-                        >
-                            <LifeBuoy size={22} /> <span>Support</span>
-                        </motion.a>
+                        {auth?.user ? (
+                            <motion.a
+                                href={route('dashboard')}
+                                className="flex items-center space-x-2 text-foreground/80 transition-colors hover:text-foreground"
+                                variants={linkVariants}
+                                whileHover="hover"
+                            >
+                                <span className="font-bold">Your Account</span>
+                            </motion.a>
+                        ) : (
+                            <motion.a
+                                href={route('login')}
+                                className="flex items-center space-x-2 text-foreground/80 transition-colors hover:text-foreground"
+                                variants={linkVariants}
+                                whileHover="hover"
+                            >
+                                <span className="font-bold">Login</span>
+                            </motion.a>
+                        )}
                         <motion.div whileHover={{ scale: 1.05 }}>
                             <Button
                                 asChild
@@ -237,22 +240,6 @@ const Navbar = () => {
                             >
                                 <BookOpen size={22} /> <span>Blog</span>
                             </motion.a>
-                            <motion.a
-                                href="https://github.com/indxs/indxs"
-                                target={'_blank'}
-                                className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
-                                variants={menuItemVariants}
-                            >
-                                <Github size={24} /> <span>GitHub</span>
-                            </motion.a>
-                            <motion.a
-                                href="https://github.com/sponsors/thefeqy"
-                                target={'_blank'}
-                                className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
-                                variants={menuItemVariants}
-                            >
-                                <LifeBuoy size={24} /> <span>Support</span>
-                            </motion.a>
                             <motion.div variants={menuItemVariants}>
                                 <Button
                                     asChild
@@ -269,6 +256,25 @@ const Navbar = () => {
                                     </a>
                                 </Button>
                             </motion.div>
+                            {auth?.user ? (
+                                <motion.a
+                                    href={route('dashboard')}
+                                    className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
+                                    variants={menuItemVariants}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <User2 size={22} /> <span>Your Account</span>
+                                </motion.a>
+                            ) : (
+                                <motion.a
+                                    href={route('login')}
+                                    className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
+                                    variants={menuItemVariants}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <User2 size={22} /> <span>Login</span>
+                                </motion.a>
+                            )}
                         </div>
                     </motion.div>
                 )}
