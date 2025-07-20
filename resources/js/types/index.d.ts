@@ -4,8 +4,11 @@ export interface User {
     id: number
     name: string
     email: string
+    username: string
     email_verified_at?: string
     avatar?: string
+    packages?: Package[]
+    packages_count?: number
 }
 
 export type BreadcrumbType = {
@@ -81,6 +84,7 @@ type BlogPost = {
     meta_title?: string
     meta_description?: string
     image?: string
+    views_count?: number
     status: 'draft' | 'published' | 'scheduled'
     published_at: string
     created_at: string
