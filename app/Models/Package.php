@@ -59,6 +59,11 @@ class Package extends Model
         return $this->belongsToMany(Index::class);
     }
 
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     /**
      * Relationship: Package belongs to multiple Categories
      */

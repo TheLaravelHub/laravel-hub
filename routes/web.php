@@ -4,7 +4,8 @@ use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\ProfileInformationController;
+use App\Http\Controllers\Profile\ProfileSecurityController;
 use App\Http\Controllers\SitemapGeneratorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -33,10 +34,17 @@ Route::middleware('auth')
     ->prefix('/user')
     ->name('user.')
     ->group(function () {
-        Route::get('/', UserController::class)->middleware(['verified'])->name('dashboard');
+        Route::get('/', UserController::class)
+            ->middleware(['verified'])
+            ->name('dashboard');
 
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        // Profile routes
+        Route::prefix('profile')->name('profile.')->group(function () {
+            Route::get('information', [ProfileInformationController::class, 'edit'])->name('information.edit');
+            Route::patch('information', [ProfileInformationController::class, 'update'])->name('information.update');
+            Route::get('security', [ProfileSecurityController::class, 'edit'])->name('security.edit');
+            Route::put('security', [ProfileSecurityController::class, 'update'])->name('security.update');
+        });
     });
 
 require __DIR__.'/auth.php';

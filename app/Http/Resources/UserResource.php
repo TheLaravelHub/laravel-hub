@@ -19,7 +19,11 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'email' => $this->email,
+            'username' => $this->username,
             'avatar' => $this->avatar,
+            'packages' => PackageResource::collection($this->whenLoaded('packages')),
+            'packages_count' => $this->whenCounted('packages'),
+            'email_verified_at' => $this->email_verified_at,
         ];
     }
 }

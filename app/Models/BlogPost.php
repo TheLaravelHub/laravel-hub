@@ -15,6 +15,7 @@ use Filament\Forms\Set;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Spatie\FilamentMarkdownEditor\MarkdownEditor;
 use Spatie\MediaLibrary\HasMedia;
@@ -93,6 +94,19 @@ class BlogPost extends Model implements HasMedia
     {
         return $query->where('status', 'scheduled')
             ->where('scheduled_at', '>=', now());
+    }
+
+    public static function popularThisWeek($limit = 6)
+    {
+        return self::query()
+            ->select('blog_posts.id', 'blog_posts.title', 'blog_posts.slug', DB::raw('COUNT(blog_post_views.id) as views_count'))
+            ->join('blog_post_views', 'blog_posts.id', '=', 'blog_post_views.blog_post_id')
+            ->whereBetween('blog_post_views.created_at', [now()->startOfWeek(), now()->endOfWeek()])
+            ->published()
+            ->groupBy('blog_posts.id')
+            ->orderByDesc('views_count')
+            ->limit($limit)
+            ->get();
     }
 
     public static function getFormSchema(?int $categoryId = null, ?int $indexId = null): array
