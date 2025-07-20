@@ -13,13 +13,13 @@ class StatsOverview extends BaseWidget
     protected function getCards(): array
     {
         return [
-            Card::make('Total Users', User::count())
+            BaseWidget\Stat::make('Total Users', User::count())
                 ->description('All registered users')
                 ->color('primary'),
-            Card::make('Total Categories', Category::count())
+            BaseWidget\Stat::make('Total Categories', Category::count())
                 ->description('Categories')
                 ->color('success'),
-            Card::make('Total Packages', Package::count())
+            BaseWidget\Stat::make('Total Packages', Package::count())
                 ->description('Available packages')
                 ->color('warning'),
         ];
