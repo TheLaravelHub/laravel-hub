@@ -5,6 +5,7 @@ namespace App\Providers;
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\EditAction;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,15 +26,11 @@ class AppServiceProvider extends ServiceProvider
     {
         Vite::prefetch(concurrency: 3);
 
-        CreateAction::configureUsing(function (CreateAction $action) {
-            return $action->slideOver();
-        });
-
-        EditAction::configureUsing(function (EditAction $action) {
-            return $action->slideOver();
-        });
+        $this->configureFilament();
 
         $this->configureModels();
+
+        $this->forceSSLOnProduction();
     }
 
     /**
@@ -44,5 +41,23 @@ class AppServiceProvider extends ServiceProvider
         Model::unguard();
 
         Model::preventLazyLoading();
+    }
+
+    private function forceSSLOnProduction(): void
+    {
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
+    }
+
+    private function configureFilament(): void
+    {
+        CreateAction::configureUsing(function (CreateAction $action) {
+            return $action->slideOver();
+        });
+
+        EditAction::configureUsing(function (EditAction $action) {
+            return $action->slideOver();
+        });
     }
 }
