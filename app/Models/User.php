@@ -67,7 +67,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         parent::boot();
 
         static::creating(function ($user) {
-            $username = (new UserService())->generateUsername($user);
+            $username = (new UserService)->generateUsername($user);
             $user->username = $username;
             $user->save();
         });

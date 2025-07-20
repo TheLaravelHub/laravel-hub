@@ -5,6 +5,8 @@ import { FormEventHandler } from 'react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
+import { Check, Mail, User } from 'lucide-react'
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -16,6 +18,7 @@ export default function UpdateProfileInformation({
     className?: string
 }) {
     const user = usePage().props.auth.user
+    console.log(user)
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -26,70 +29,104 @@ export default function UpdateProfileInformation({
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
 
-        patch(route('user.profile.update'))
+        patch(route('user.profile.information.update'))
     }
 
     return (
         <section className={className}>
-            <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                    Profile Information
-                </h2>
-
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                    Update your account's profile information and email address.
-                </p>
-            </header>
+            <p className="mb-6 text-sm text-muted-foreground">
+                Update your account's profile information and email address.
+            </p>
 
             <form
                 onSubmit={submit}
-                className="mt-6 space-y-6"
+                className="space-y-6"
             >
-                <div>
-                    <Label htmlFor="name">Name</Label>
+                <div className="rounded-lg border border-border bg-card/50 p-4">
+                    <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-2">
+                            <User
+                                size={18}
+                                className="text-primary"
+                            />
+                        </div>
+                        <div>
+                            <Label
+                                htmlFor="name"
+                                className="text-base font-medium"
+                            >
+                                Name
+                            </Label>
+                            <p className="text-xs text-muted-foreground">
+                                Your full name as displayed on your profile
+                            </p>
+                        </div>
+                    </div>
 
-                    <Input
-                        id="name"
-                        className="mt-1 block w-full"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
-                        required
-                        autoComplete="name"
-                    />
-                    <InputError
-                        className="mt-2"
-                        message={errors.name}
-                    />
+                    <div className="mt-4 pl-11">
+                        <Input
+                            id="name"
+                            className="block w-full"
+                            value={data.name}
+                            onChange={(e) => setData('name', e.target.value)}
+                            required
+                            autoComplete="name"
+                        />
+                        <InputError
+                            className="mt-2"
+                            message={errors.name}
+                        />
+                    </div>
                 </div>
 
-                <div>
-                    <Label htmlFor="name">Email</Label>
+                <div className="rounded-lg border border-border bg-card/50 p-4">
+                    <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-2">
+                            <Mail
+                                size={18}
+                                className="text-primary"
+                            />
+                        </div>
+                        <div>
+                            <Label
+                                htmlFor="email"
+                                className="text-base font-medium"
+                            >
+                                Email
+                            </Label>
+                            <p className="text-xs text-muted-foreground">
+                                Your email address for notifications and account
+                                recovery
+                            </p>
+                        </div>
+                    </div>
 
-                    <Input
-                        id="email"
-                        type="email"
-                        className="mt-1 block w-full"
-                        value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
-                        autoComplete="email"
-                    />
-
-                    <InputError
-                        className="mt-2"
-                        message={errors.email}
-                    />
+                    <div className="mt-4 pl-11">
+                        <Input
+                            id="email"
+                            type="email"
+                            className="block w-full"
+                            value={data.email}
+                            onChange={(e) => setData('email', e.target.value)}
+                            required
+                            autoComplete="email"
+                        />
+                        <InputError
+                            className="mt-2"
+                            message={errors.email}
+                        />
+                    </div>
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
-                    <div>
-                        <p className="mt-2 text-sm text-gray-800 dark:text-gray-200">
+                    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-900/30 dark:bg-yellow-900/10">
+                        <p className="text-sm text-yellow-800 dark:text-yellow-200">
                             Your email address is unverified.
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
-                                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:text-gray-400 dark:hover:text-gray-100 dark:focus:ring-offset-gray-800"
+                                className="ml-1 font-medium text-yellow-600 underline hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300"
                             >
                                 Click here to re-send the verification email.
                             </Link>
@@ -105,12 +142,39 @@ export default function UpdateProfileInformation({
                 )}
 
                 <div className="flex items-center gap-4">
-                    <Button
-                        type="submit"
-                        disabled={processing}
+                    <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                     >
-                        Update
-                    </Button>
+                        <Button
+                            type="submit"
+                            disabled={processing}
+                            className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
+                        >
+                            <span className="mr-2">Update Profile</span>
+                            {processing ? (
+                                <svg
+                                    className="h-4 w-4 animate-spin"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        className="opacity-25"
+                                        cx="12"
+                                        cy="12"
+                                        r="10"
+                                        stroke="currentColor"
+                                        strokeWidth="4"
+                                        fill="none"
+                                    />
+                                    <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    />
+                                </svg>
+                            ) : null}
+                        </Button>
+                    </motion.div>
 
                     <Transition
                         show={recentlySuccessful}
@@ -119,9 +183,10 @@ export default function UpdateProfileInformation({
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Saved.
-                        </p>
+                        <div className="flex items-center gap-1 text-sm font-medium text-green-600 dark:text-green-400">
+                            <Check size={16} />
+                            <span>Saved successfully</span>
+                        </div>
                     </Transition>
                 </div>
             </form>

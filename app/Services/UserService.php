@@ -19,9 +19,9 @@ class UserService
         $i = 1;
 
         while (
-        DB::table('users')
-            ->where('username', $username)
-            ->exists()
+            DB::table('users')
+                ->where('username', $username)
+                ->exists()
         ) {
             $username = "{$base}{$i}";
             $i++;
