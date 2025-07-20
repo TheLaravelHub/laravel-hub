@@ -21,6 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'username' => $this->username,
             'avatar' => $this->avatar,
+            'packages' => PackageResource::collection($this->whenLoaded('packages')),
+            'packages_count' => $this->whenCounted('packages'),
         ];
     }
 }

@@ -8,6 +8,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -49,6 +50,11 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             'github_avatar' => 'string',
             'provider_type' => SocialProvider::class,
         ];
+    }
+
+    public function packages(): HasMany
+    {
+        return $this->hasMany(Package::class);
     }
 
     public function canAccessPanel(Panel $panel): bool
