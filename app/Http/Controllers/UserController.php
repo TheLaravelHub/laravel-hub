@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\BlogPostResource;
 use App\Http\Resources\UserResource;
 use App\Models\BlogPost;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $user = $request->user()->withCount('packages')->first();
+        $user = User::query()->whereId($request->user()->id)->withCount('packages')->first();
         $popularBlogPosts = BlogPost::popularThisWeek();
 
         return inertia('User/Index', [
