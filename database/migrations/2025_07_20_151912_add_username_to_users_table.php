@@ -20,7 +20,7 @@ return new class extends Migration
 
         $users = \App\Models\User::all();
         foreach ($users as $user) {
-            $username = (new UserService)->generateUsername($user);
+            $username = (new UserService)->generateUsername($user->name);
             $user->username = $username;
             $user->save();
         }
