@@ -16,7 +16,7 @@ import { PaginationControl } from '@/components/shared/pagination-control'
 import FloatingElement from '@/components/ui/floating-element'
 
 interface PackagesProps {
-    categories: { data: Category[] }
+    categories: Category[]
     packages: {
         data: PackageType[]
         meta: MetaType
@@ -268,12 +268,12 @@ export default function Packages({
                         </motion.p>
 
                         {/* Categories */}
-                        {categories.data.length > 0 && (
+                        {categories.length > 0 && (
                             <motion.div
                                 className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-3"
                                 variants={containerVariants}
                             >
-                                {categories.data.map((category, i) => (
+                                {categories.map((category, i) => (
                                     <motion.span
                                         key={category.id}
                                         custom={i}
@@ -395,7 +395,7 @@ export default function Packages({
                                     >
                                         Category:{' '}
                                         {
-                                            categories.data.find(
+                                            categories.find(
                                                 (c) =>
                                                     c.slug === activeCategory,
                                             )?.name

@@ -21,14 +21,11 @@ import { format } from 'date-fns'
 import AppHead from '@/components/shared/AppHead'
 
 interface IndexProps {
-    categories: { data: Category[] }
-    packages: {
-        data: PackageType[]
-        meta: MetaType
-    }
+    categories: Category[]
+    packages: PackageType[]
     packagesCount: number
     stars: number
-    latestPosts?: { data: BlogPostType[] }
+    latestPosts?: BlogPostType[]
 }
 
 export default function Index({
@@ -40,7 +37,7 @@ export default function Index({
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
 
-    const [packagesData] = useState(packages.data)
+    const [packagesData] = useState(packages)
     const packagesRef = useRef<HTMLDivElement>(null)
 
     // Animation variants
@@ -176,7 +173,7 @@ export default function Index({
                 <Navbar />
 
                 {/*Hero Section*/}
-                <HeroSection categories={categories.data} />
+                <HeroSection categories={categories} />
 
                 {/* Packages */}
                 <section
@@ -375,12 +372,12 @@ export default function Index({
                 <StatsSection
                     totalPackages={packagesCount}
                     totalStars={stars}
-                    totalCategories={categories.data.length}
+                    totalCategories={categories.length}
                     compact={false}
                 />
 
                 {/* Latest Blog Posts Section */}
-                {latestPosts && latestPosts.data.length >= 3 && (
+                {latestPosts && latestPosts.length >= 3 && (
                     <section className="mx-auto max-w-7xl px-6 py-24">
                         <div className="mb-12 flex items-center justify-between">
                             <div>
@@ -405,7 +402,7 @@ export default function Index({
                         </div>
 
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                            {latestPosts.data.map((post) => (
+                            {latestPosts.map((post) => (
                                 <motion.div
                                     key={post.id}
                                     initial={{ opacity: 0, y: 20 }}
