@@ -3,11 +3,9 @@
 namespace App\Filament\Widgets;
 
 use App\Models\BlogPost;
-use App\Models\Category;
 use App\Models\Package;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
-use Filament\Widgets\StatsOverviewWidget\Card;
 
 class StatsOverview extends BaseWidget
 {

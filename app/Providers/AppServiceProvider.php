@@ -43,9 +43,6 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading();
     }
 
-    /**
-     * @return void
-     */
     private function forceSSLOnProduction(): void
     {
         if (app()->environment('production')) {
@@ -53,9 +50,6 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * @return void
-     */
     private function configureFilament(): void
     {
         CreateAction::configureUsing(function (CreateAction $action) {
