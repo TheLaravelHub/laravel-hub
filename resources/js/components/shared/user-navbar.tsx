@@ -52,7 +52,9 @@ export function UserNavbar() {
                         className="text-gray-700 transition-colors hover:text-gray-900"
                         whileHover={{ scale: 1.05 }}
                     >
-                        <span className="font-medium text-gray-700">Packages</span>
+                        <span className="font-medium text-gray-700">
+                            Packages
+                        </span>
                     </motion.a>
                     <motion.a
                         href={route('blog.index')}
@@ -66,7 +68,9 @@ export function UserNavbar() {
                         className="text-gray-400 transition-colors hover:text-gray-600"
                         whileHover={{ scale: 1.05 }}
                     >
-                        <span className="font-medium text-gray-400">Forum (Coming soon)</span>
+                        <span className="font-medium text-gray-400">
+                            Forum (Coming soon)
+                        </span>
                     </motion.a>
                 </div>
 
@@ -118,7 +122,7 @@ export function UserNavbar() {
                                     <div className="mt-2 space-y-1">
                                         <Link
                                             href={route('user.dashboard')}
-                                            className="flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 text-gray-800"
+                                            className="flex items-center gap-2 rounded-md px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         >
                                             <User
                                                 size={16}
@@ -130,7 +134,7 @@ export function UserNavbar() {
                                             href={route(
                                                 'user.profile.information.edit',
                                             )}
-                                            className="flex items-center gap-2 rounded-md px-4 py-2 hover:bg-gray-100 text-gray-800"
+                                            className="flex items-center gap-2 rounded-md px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         >
                                             <Cog
                                                 size={16}
