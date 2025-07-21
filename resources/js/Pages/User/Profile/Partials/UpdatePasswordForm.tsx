@@ -52,7 +52,7 @@ export default function UpdatePasswordForm({
 
     return (
         <section className={className}>
-            <p className="mb-6 text-sm text-muted-foreground">
+            <p className="mb-6 text-sm text-gray-600">
                 Ensure your account is using a long, random password to stay
                 secure.
             </p>
@@ -61,7 +61,7 @@ export default function UpdatePasswordForm({
                 onSubmit={updatePassword}
                 className="space-y-6"
             >
-                <div className="rounded-lg border border-border bg-card/50 p-4">
+                <div className="rounded-lg border border-border bg-white p-4">
                     <div className="flex items-center gap-3">
                         <div className="rounded-full bg-primary/10 p-2">
                             <KeyRound
@@ -72,11 +72,11 @@ export default function UpdatePasswordForm({
                         <div>
                             <Label
                                 htmlFor="current_password"
-                                className="text-base font-medium"
+                                className="text-base font-medium text-gray-800"
                             >
                                 Current Password
                             </Label>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-gray-600">
                                 Enter your current password to verify your
                                 identity
                             </p>
@@ -103,7 +103,7 @@ export default function UpdatePasswordForm({
                     </div>
                 </div>
 
-                <div className="rounded-lg border border-border bg-card/50 p-4">
+                <div className="rounded-lg border border-border bg-white p-4">
                     <div className="flex items-center gap-3">
                         <div className="rounded-full bg-primary/10 p-2">
                             <Lock
@@ -114,11 +114,11 @@ export default function UpdatePasswordForm({
                         <div>
                             <Label
                                 htmlFor="password"
-                                className="text-base font-medium"
+                                className="text-base font-medium text-gray-800"
                             >
                                 New Password
                             </Label>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-gray-600">
                                 Choose a strong password with at least 8
                                 characters
                             </p>
@@ -145,7 +145,7 @@ export default function UpdatePasswordForm({
                     </div>
                 </div>
 
-                <div className="rounded-lg border border-border bg-card/50 p-4">
+                <div className="rounded-lg border border-border bg-white p-4">
                     <div className="flex items-center gap-3">
                         <div className="rounded-full bg-primary/10 p-2">
                             <ShieldCheck
@@ -156,11 +156,11 @@ export default function UpdatePasswordForm({
                         <div>
                             <Label
                                 htmlFor="password_confirmation"
-                                className="text-base font-medium"
+                                className="text-base font-medium text-gray-800"
                             >
                                 Confirm Password
                             </Label>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-gray-600">
                                 Re-enter your new password to confirm
                             </p>
                         </div>

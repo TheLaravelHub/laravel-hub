@@ -52,7 +52,7 @@ export default function Home({
         <UserLayout
             header={
                 <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
                         Community Hub
                     </h2>
                     {/*<div className="flex items-center space-x-2">*/}
@@ -72,11 +72,11 @@ export default function Home({
             <div className="grid grid-cols-1 gap-6 p-4 md:grid-cols-12">
                 {/* User Profile Card */}
                 <div className="md:col-span-4">
-                    <div className="rounded-xl bg-card shadow dark:bg-gray-800">
+                    <div className="rounded-xl bg-white shadow">
                         <div className="relative">
-                            <div className="h-32 w-full rounded-t-xl bg-gradient-to-r from-primary to-secondary"></div>
+                            <div className="h-32 w-full rounded-t-xl bg-gradient-to-r from-primary to-secondary opacity-90"></div>
                             <div className="absolute -bottom-12 left-0 flex w-full justify-center">
-                                <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-card bg-background dark:border-gray-800">
+                                <div className="h-24 w-24 overflow-hidden rounded-full border-4 border-white bg-white">
                                     <Avatar className="h-full w-full rounded-lg object-cover">
                                         <AvatarImage
                                             src={user.avatar}
@@ -93,26 +93,26 @@ export default function Home({
                         </div>
 
                         <div className="mt-14 p-6 text-center">
-                            <h3 className="text-xl font-bold text-foreground">
+                            <h2 className="mt-6 text-xl font-semibold text-gray-800">
                                 {user?.name}
-                            </h3>
-                            <p className="text-sm text-muted-foreground">
+                            </h2>
+                            <div className="text-xs text-gray-600">
                                 @{user?.username}
-                            </p>
+                            </div>
 
                             <div className="mt-6 grid grid-cols-2 gap-4">
                                 {userStats.map((stat) => (
                                     <div
                                         key={stat.label}
-                                        className="flex flex-col items-center rounded-lg bg-muted/30 p-3 transition-all hover:bg-muted/50"
+                                        className="flex flex-col items-center rounded-lg bg-gray-50 p-3 transition-all hover:bg-gray-100"
                                     >
                                         <div className="mb-1 rounded-full bg-primary/10 p-2 text-primary">
                                             <stat.icon size={16} />
                                         </div>
-                                        <span className="text-lg font-bold text-foreground">
+                                        <div className="text-xs font-medium text-gray-800">
                                             {stat.value}
-                                        </span>
-                                        <span className="text-xs text-muted-foreground">
+                                        </div>
+                                        <span className="text-xs text-gray-600">
                                             {stat.label}
                                         </span>
                                     </div>
@@ -125,9 +125,9 @@ export default function Home({
                 {/* Main Content */}
                 <div className="space-y-6 md:col-span-8">
                     {/* Activity Feed */}
-                    <div className="rounded-xl bg-card shadow dark:bg-gray-800">
+                    <div className="rounded-xl bg-white shadow">
                         <div className="border-b border-border p-6">
-                            <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                            <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                                 <Activity
                                     size={18}
                                     className="text-primary"
@@ -151,15 +151,15 @@ export default function Home({
                                     {/*        </div>*/}
                                     {/*    </div>*/}
                                     {/*))}*/}
-                                    <div className="rounded-lg bg-muted/20 p-6 text-center">
-                                        <p className="text-muted-foreground">
+                                    <div className="rounded-lg bg-gray-50 p-6 text-center">
+                                        <p className="text-gray-600">
                                             No recent activity
                                         </p>
                                     </div>
                                 </div>
                             ) : (
-                                <div className="rounded-lg bg-muted/20 p-6 text-center">
-                                    <p className="text-muted-foreground">
+                                <div className="rounded-lg bg-gray-50 p-6 text-center">
+                                    <p className="text-gray-600">
                                         No recent activity
                                     </p>
                                 </div>
@@ -168,9 +168,9 @@ export default function Home({
                     </div>
 
                     {/* Popular Topics */}
-                    <div className="rounded-xl bg-card shadow dark:bg-gray-800">
+                    <div className="rounded-xl bg-white shadow">
                         <div className="border-b border-border p-6">
-                            <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                            <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                                 <BookOpen
                                     size={18}
                                     className="text-primary"
@@ -182,14 +182,14 @@ export default function Home({
                             <div className="overflow-hidden rounded-lg border border-border">
                                 <table className="w-full">
                                     <thead>
-                                        <tr className="bg-muted/30">
-                                            <th className="p-4 text-left text-sm font-medium text-foreground">
+                                        <tr className="bg-gray-50">
+                                            <th className="p-4 text-left text-sm font-medium text-gray-800">
                                                 Topic
                                             </th>
-                                            <th className="p-4 text-center text-sm font-medium text-foreground">
+                                            <th className="p-4 text-center text-sm font-medium text-gray-800">
                                                 Replies
                                             </th>
-                                            <th className="p-4 text-center text-sm font-medium text-foreground">
+                                            <th className="p-4 text-center text-sm font-medium text-gray-800">
                                                 Views
                                             </th>
                                         </tr>
@@ -198,7 +198,7 @@ export default function Home({
                                         {popularBlogPosts.map((blogPost) => (
                                             <tr
                                                 key={blogPost.id}
-                                                className="transition-colors hover:bg-muted/20"
+                                                className="transition-colors hover:bg-gray-50"
                                             >
                                                 <td className="p-4">
                                                     <Link
@@ -206,15 +206,16 @@ export default function Home({
                                                             'blog.show',
                                                             blogPost.slug,
                                                         )}
-                                                        className="font-medium text-primary"
                                                     >
-                                                        {blogPost.title}
+                                                        <div className="font-medium text-gray-800">
+                                                            {blogPost.title}
+                                                        </div>
                                                     </Link>
                                                 </td>
-                                                <td className="p-4 text-center text-sm text-muted-foreground">
+                                                <td className="p-4 text-center text-sm text-gray-600">
                                                     0
                                                 </td>
-                                                <td className="p-4 text-center text-sm text-muted-foreground">
+                                                <td className="p-4 text-center text-sm text-gray-600">
                                                     {blogPost.views_count}
                                                 </td>
                                             </tr>
@@ -226,18 +227,18 @@ export default function Home({
                     </div>
 
                     {/* Future Features Teaser */}
-                    <div className="rounded-xl bg-gradient-to-r from-primary/10 to-secondary/10 p-6 shadow">
+                    <div className="rounded-xl bg-gradient-to-r from-primary/5 to-secondary/5 p-6 shadow">
                         <div className="flex items-center justify-between">
                             <div>
-                                <h3 className="text-lg font-semibold text-foreground">
+                                <h3 className="text-lg font-semibold text-gray-800">
                                     Coming Soon
                                 </h3>
-                                <p className="text-sm text-muted-foreground">
+                                <p className="text-sm text-gray-600">
                                     We're working on exciting new community
                                     features!
                                 </p>
                             </div>
-                            <div className="rounded-full bg-card p-3 shadow-lg">
+                            <div className="rounded-full bg-white p-3 shadow-lg">
                                 <Users
                                     size={24}
                                     className="text-primary"

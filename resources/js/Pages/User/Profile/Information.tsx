@@ -18,7 +18,7 @@ export default function Information({
         <UserLayout
             header={
                 <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
                         Profile Settings
                     </h2>
                 </div>
@@ -34,9 +34,9 @@ export default function Information({
 
                 {/* Main content */}
                 <div className="space-y-6 md:col-span-9">
-                    <div className="rounded-xl bg-card shadow dark:bg-gray-800">
+                    <div className="rounded-xl bg-white shadow">
                         <div className="border-b border-border p-6">
-                            <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                            <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                                 <User
                                     size={18}
                                     className="text-primary"
