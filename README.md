@@ -1,22 +1,22 @@
-# Indxs - The Open-Source Package Index 🚀
+# Laravel Hub - The Open-Source Package Index 🚀
 
-![Indxs Logo](public/assets/images/Indxs-logo-cover.jpg)
+![Laravel Hub Logo](public/assets/images/Laravel-Hub-logo-cover.jpg)
 
 **_"From Developers, For Developers."_**
 
-Welcome to **Indxs**, an open-source platform that helps developers discover and explore packages and libraries across different programming languages and frameworks.
+Welcome to **Laravel Hub**, an open-source platform that helps developers discover and explore packages and libraries across different programming languages and frameworks.
 
 <!-- TODO: uncomment later -->
-<!-- [![GitHub stars](https://img.shields.io/github/stars/Indxs/indxs?style=social)](https://github.com/Indxs/indxs)
-[![GitHub forks](https://img.shields.io/github/forks/Indxs/indxs?style=social)](https://github.com/Indxs/indxs) -->
+<!-- [![GitHub stars](https://img.shields.io/github/stars/LaravelHub/laravel-hub?style=social)](https://github.com/theLaravelHub/laravel-hub)
+[![GitHub forks](https://img.shields.io/github/forks/LaravelHub/laravel-hub?style=social)](https://github.com/theLaravelHub/laravel-hub) -->
 
-🔗 **Project Link:** [Indxs.dev](https://indxs.dev)
+🔗 **Project Link:** [Laravel-Hub.com](https://laravel-hub.com)
 
 ---
 
 ## 📚 Table of Contents
 
-- [About Indxs](#-about-indxs)
+- [About Laravel Hub](#-about-laravel-hub)
 - [Getting Started](#-getting-started)
 - [Installation](#-installation)
 - [Usage](#-usage)
@@ -28,9 +28,9 @@ Welcome to **Indxs**, an open-source platform that helps developers discover and
 
 ---
 
-## 📖 About Indxs
+## 📖 About Laravel Hub
 
-**Indxs** is an open-source project that serves as a package index for multiple programming languages and frameworks. It allows developers to:  
+**Laravel Hub** is an open-source project that serves as a package index for multiple programming languages and frameworks. It allows developers to:  
 ✅ Discover high-quality packages.  
 ✅ Search & filter libraries easily.  
 ✅ Contribute by submitting new packages (Soon).  
@@ -50,7 +50,7 @@ We are currently focusing on **PHP & Laravel packages**, with plans to expand to
 
 ## 🚀 Getting Started
 
-Follow these steps to set up **Indxs** on your local machine.
+Follow these steps to set up **Laravel Hub** on your local machine.
 
 ### Prerequisites
 
@@ -69,8 +69,8 @@ Make sure you have the following installed:
 ### 1️⃣ Clone the repository
 
 ```sh
-git clone https://github.com/Indxs/indxs.git
-cd indxs
+git clone https://github.com/theLaravelHub/laravel-hub.git
+cd laravel-hub
 ```
 
 ### 2️⃣ Install dependencies
@@ -131,9 +131,9 @@ We love community contributions! To contribute:
 
 If you find a security vulnerability, do not open a public issue. Instead, please report it to:
 
-📧 [indxs.dev@gmail.com](mailto:indxs.dev@gmail.com)
+📧 [laravel-hub@gmail.com](mailto:laravel-hub@gmail.com)
 
-For general bugs, feel free to open an issue in the [GitHub Issues](https://github.com/Indxs/indxs/issues) section.
+For general bugs, feel free to open an issue in the [GitHub Issues](https://github.com/theLaravelHub/laravel-hub/issues) section.
 
 ---
 
@@ -145,11 +145,11 @@ This project is open-source under the MIT License. Feel free to use and modify i
 
 ## 💬 Community & Support
 
-Join the Indxs community to stay updated:
+Join the Laravel Hub community to stay updated:
 
-GitHub Discussions: [Join here](https://github.com/Indxs/indxs/discussions)
-Twitter/X: [@IndxsDev](https://x.com/IndxsDev)
-Email: [indxs.dev@gmail.com](mailto:indxs.dev@gmail.com)
+GitHub Discussions: [Join here](https://github.com/theLaravelHub/laravel-hub/discussions)
+Twitter/X: [@thelaravelhub](https://x.com/thelaravelhub)
+Email: [laravel-hub@gmail.com](mailto:laravel-hub@gmail.com)
 
 ---
 
@@ -158,8 +158,8 @@ Email: [indxs.dev@gmail.com](mailto:indxs.dev@gmail.com)
 If you find this project useful:
 
 - Give us a ⭐ Star on GitHub!
-- Follow us on X/Twitter [@IndxsDev](https://x.com/IndxsDev) for updates
-- Follow the organization [@Indxs](https://github.com/Indxs)
-- Share **Indxs.dev** with fellow developers!
+- Follow us on X/Twitter [@thelaravelhub](https://x.com/thelaravelhub) for updates
+- Follow the organization [@theLaravelHub](https://github.com/theLaravelHub)
+- Share **Laravel-Hub.com** with fellow developers!
 
 🚀 Let's build the best open-source package index together!

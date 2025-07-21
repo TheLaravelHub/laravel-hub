@@ -125,9 +125,9 @@ const Navbar = () => {
                                 }}
                             >
                                 <Image
-                                    src={'/assets/images/Indxs-logo.png'}
-                                    alt="Indxs"
-                                    width={100}
+                                    src={'/assets/images/logo.png'}
+                                    alt="Laravel Hub"
+                                    width={200}
                                 />
                             </motion.div>
                         </Link>
@@ -181,7 +181,7 @@ const Navbar = () => {
                                 className="flex items-center gap-2"
                             >
                                 <a
-                                    href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
+                                    href="https://github.com/LaravelHub/laravel-hub/discussions/new?category=package-submission"
                                     target={'_blank'}
                                     className="flex items-center space-x-2"
                                     onClick={handlePackageSubmissionLinkClick}
@@ -248,7 +248,7 @@ const Navbar = () => {
                                     className="w-full justify-start"
                                 >
                                     <a
-                                        href="https://github.com/Indxs/indxs/discussions/new?category=package-submission"
+                                        href="https://github.com/LaravelHub/laravel-hub/discussions/new?category=package-submission"
                                         target={'_blank'}
                                         className="flex items-center space-x-2"
                                     >

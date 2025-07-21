@@ -7,11 +7,11 @@
         --foreground: 222.2 84% 4.9%;
 
         /* Primary Colors */
-        --primary: 278 90% 60%; /* #9c3af5 */
+        --primary: 220 100% 37%; /* #295ed9 */
         --primary-foreground: 0 0% 100%; /* White text for readability */
 
         /* Secondary Colors */
-        --secondary: 300 90% 55%; /* #d916f2 */
+        --secondary: 220 100% 19%; /* #0b2761 */
         --secondary-foreground: 0 0% 100%; /* White text for readability */
 
         /* Card & Popovers */
@@ -21,21 +21,21 @@
         --popover-foreground: 222.2 84% 4.9%;
 
         /* Muted & Accent Colors */
-        --muted: 278 40% 90%; /* Softened version of primary */
-        --muted-foreground: 278 50% 40%;
-        --accent: 300 40% 90%; /* Softened version of secondary */
-        --accent-foreground: 300 50% 40%;
+        --muted: 220 40% 90%; /* Softened version of primary */
+        --muted-foreground: 220 50% 40%;
+        --accent: 220 40% 90%; /* Softened version of secondary */
+        --accent-foreground: 220 50% 40%;
 
         /* Destructive (Danger) */
         --destructive: 0 72% 50%;
         --destructive-foreground: 0 0% 100%;
 
         /* Borders & Inputs */
-        --border: 278 40% 85%;
-        --input: 278 40% 85%;
+        --border: 0 0% 90%; /* Light gray border */
+        --input: 0 0% 90%; /* Light gray input */
 
         /* Focus Ring */
-        --ring: 278 90% 60%; /* Matches primary */
+        --ring: 220 100% 37%; /* Matches primary */
 
         /* Charts */
         --chart-1: 280 76% 61%;
@@ -50,24 +50,24 @@
         /* Sidebar */
         --sidebar-background: 0 0% 98%;
         --sidebar-foreground: 240 5.3% 26.1%;
-        --sidebar-primary: 278 90% 50%; /* Primary for sidebar */
+        --sidebar-primary: 220 100% 37%; /* Primary for sidebar */
         --sidebar-primary-foreground: 0 0% 98%;
-        --sidebar-accent: 300 90% 45%; /* Secondary for sidebar */
+        --sidebar-accent: 220 100% 19%; /* Secondary for sidebar */
         --sidebar-accent-foreground: 0 0% 98%;
-        --sidebar-border: 278 30% 80%;
-        --sidebar-ring: 278 90% 60%;
+        --sidebar-border: 220 30% 80%;
+        --sidebar-ring: 220 100% 37%;
     }
 
     .dark {
-        --background: 278 80% 10%;
+        --background: 220 80% 10%;
         --foreground: 210 40% 98%;
 
         /* Primary */
-        --primary: 278 90% 65%;
+        --primary: 220 100% 45%;
         --primary-foreground: 0 0% 100%;
 
         /* Secondary */
-        --secondary: 300 80% 55%;
+        --secondary: 220 100% 25%;
         --secondary-foreground: 0 0% 100%;
 
         /* Card & Popovers */
@@ -77,21 +77,21 @@
         --popover-foreground: 210 40% 98%;
 
         /* Muted & Accent */
-        --muted: 278 30% 20%;
-        --muted-foreground: 278 40% 60%;
-        --accent: 300 30% 20%;
-        --accent-foreground: 300 40% 60%;
+        --muted: 220 30% 20%;
+        --muted-foreground: 220 40% 60%;
+        --accent: 220 30% 20%;
+        --accent-foreground: 220 40% 60%;
 
         /* Destructive */
         --destructive: 0 62.8% 45%;
         --destructive-foreground: 210 40% 98%;
 
         /* Borders & Inputs */
-        --border: 278 40% 30%;
-        --input: 278 40% 30%;
+        --border: 220 40% 30%;
+        --input: 220 40% 30%;
 
         /* Focus Ring */
-        --ring: 278 90% 65%;
+        --ring: 220 100% 45%;
 
         /* Charts */
         --chart-1: 280 70% 50%;
@@ -101,14 +101,14 @@
         --chart-5: 340 75% 55%;
 
         /* Sidebar */
-        --sidebar-background: 278 80% 8%;
+        --sidebar-background: 220 80% 8%;
         --sidebar-foreground: 240 4.8% 95.9%;
-        --sidebar-primary: 278 90% 50%;
+        --sidebar-primary: 220 100% 37%;
         --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 300 90% 45%;
+        --sidebar-accent: 220 100% 19%;
         --sidebar-accent-foreground: 0 0% 98%;
-        --sidebar-border: 278 30% 25%;
-        --sidebar-ring: 278 90% 65%;
+        --sidebar-border: 220 30% 25%;
+        --sidebar-ring: 220 100% 45%;
     }
 }
 @layer base {

@@ -18,7 +18,7 @@ interface BlogPostProps {
 }
 
 const BlogPost = ({ blogPost }: BlogPostProps) => {
-    const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+    const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
     // Handle hash navigation when page loads
     useEffect(() => {
@@ -161,7 +161,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                 />
                 <meta
                     property="og:site_name"
-                    content="Indxs Blog"
+                    content="Laravel Hub Blog"
                 />
 
                 {/* Twitter Meta Tags */}
@@ -189,7 +189,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                 />
                 <meta
                     name="twitter:site"
-                    content="@IndxsDev"
+                    content="@thelaravelhub"
                 />
 
                 {/* Canonical URL */}
@@ -217,10 +217,10 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                         },
                         publisher: {
                             '@type': 'Organization',
-                            name: 'Indxs',
+                            name: 'Laravel Hub',
                             logo: {
                                 '@type': 'ImageObject',
-                                url: `${appURL}/assets/images/Indxs-logo.png`,
+                                url: `${appURL}/assets/images/logo.png`,
                             },
                         },
                         datePublished: blogPost.published_at,

@@ -99,8 +99,8 @@ export function AdminSidebar({
                                 <div className="flex flex-col gap-0.5 leading-none">
                                     <img
                                         className="w-3/4"
-                                        src={'/assets/images/Indxs-logo.png'}
-                                        alt=""
+                                        src={'/assets/images/logo.png'}
+                                        alt="Laravel Hub"
                                     />
                                 </div>
                             </Link>
