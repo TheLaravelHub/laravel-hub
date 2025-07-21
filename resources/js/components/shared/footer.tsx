@@ -184,7 +184,7 @@ const Footer = () => {
                         <span>for the open-source community</span>
                     </div>
                     <p>
-                        © {new Date().getFullYear()} Indxs. All rights
+                        © {new Date().getFullYear()} Laravel Hub. All rights
                         reserved.
                     </p>
                 </motion.div>

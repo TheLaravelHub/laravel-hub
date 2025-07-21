@@ -22,8 +22,8 @@
         <div class="flex min-h-screen flex-col items-center justify-center p-4">
             <div class="mb-8">
                 <img
-                    src="{{ asset('assets/images/Indxs-logo.png') }}"
-                    alt="Indxs Logo"
+                    src="{{ asset('assets/images/logo.png') }}"
+                    alt="Laravel Hub Logo"
                     class="h-16"
                 />
             </div>

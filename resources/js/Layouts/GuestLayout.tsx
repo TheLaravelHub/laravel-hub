@@ -8,8 +8,8 @@ export default function Guest({ children }: PropsWithChildren) {
             <div className="mt-6">
                 <Link href="/">
                     <Image
-                        src="/assets/images/Indxs-logo.png"
-                        alt="Indxs"
+                        src="/assets/images/logo.png"
+                        alt="Laravel Hub"
                         width={150}
                     />
                 </Link>

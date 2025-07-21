@@ -99,7 +99,7 @@ export default function HeroSection({ categories }: HeroProps) {
     }
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pb-16 pt-32 lg:pb-20 lg:pt-40">
+        <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background pb-16 pt-32 lg:pb-20 lg:pt-64">
             {/* Decorative elements */}
             <motion.div
                 className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-primary/5 blur-3xl"

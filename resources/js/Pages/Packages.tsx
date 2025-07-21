@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { ExternalLink, Star, Search, X, Sparkles } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
-import { Head, Link, router } from '@inertiajs/react'
+import { Link, router } from '@inertiajs/react'
 import { Category, MetaType, Package as PackageType } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import Footer from '@/components/shared/footer'
@@ -32,7 +32,7 @@ export default function Packages({
     packages,
     filters,
 }: PackagesProps) {
-    const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+    const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
     const [searchQuery, setSearchQuery] = useState(filters.search)
     const searchInputRef = useRef<HTMLInputElement>(null)
     const [activeCategory, setActiveCategory] = useState(filters.category)
@@ -189,7 +189,7 @@ export default function Packages({
                 />
                 <meta
                     property="og:title"
-                    content="Packages - Indxs"
+                    content="Packages - Laravel Hub"
                 />
                 <meta
                     property="og:description"

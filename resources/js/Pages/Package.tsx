@@ -26,7 +26,7 @@ interface PackageProps {
 }
 
 export default function Package({ package: pkg, readme }: PackageProps) {
-    const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+    const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
     const handleRepositoryLinkClick = useClickTracker(
         'Package repository clicked',
@@ -71,13 +71,13 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 {/* Keywords */}
                 <meta
                     name="keywords"
-                    content={`Indxs, ${pkg.name}, ${pkg.language} package, open-source, ${pkg.owner}, ${pkg.categories.map((cat) => cat.name).join(', ')}`}
+                    content={`Laravel Hub, ${pkg.name}, ${pkg.language} package, open-source, ${pkg.owner}, ${pkg.categories.map((cat) => cat.name).join(', ')}`}
                 />
 
                 {/* Open Graph (Facebook, LinkedIn, etc.) */}
                 <meta
                     property="og:title"
-                    content={`${pkg.name} - Indxs Package`}
+                    content={`${pkg.name} - Laravel Hub`}
                 />
                 <meta
                     property="og:description"
@@ -103,7 +103,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 />
                 <meta
                     property="og:site_name"
-                    content="Indxs"
+                    content="Laravel Hub"
                 />
 
                 {/* Twitter Meta Tags */}
@@ -113,7 +113,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 />
                 <meta
                     name="twitter:title"
-                    content={`${pkg.name} - Indxs Package`}
+                    content={`${pkg.name} - Laravel Hub`}
                 />
                 <meta
                     name="twitter:description"
@@ -131,7 +131,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 />
                 <meta
                     name="twitter:site"
-                    content="@IndxsDev"
+                    content="@thelaravelhub"
                 />
 
                 {/* Canonical URL */}
@@ -158,10 +158,10 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                         },
                         publisher: {
                             '@type': 'Organization',
-                            name: 'Indxs',
+                            name: 'Laravel Hub',
                             logo: {
                                 '@type': 'ImageObject',
-                                url: `${appURL}/assets/images/Indxs-logo.png`,
+                                url: `${appURL}/assets/images/Laravel-Hub-logo.png`,
                             },
                         },
                         url: `${appURL}/packages/${pkg.slug}`,
