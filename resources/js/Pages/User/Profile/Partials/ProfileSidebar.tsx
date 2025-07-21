@@ -9,9 +9,9 @@ interface ProfileSidebarProps {
 
 export default function ProfileSidebar({ activeTab }: ProfileSidebarProps) {
     return (
-        <div className="rounded-xl bg-card shadow dark:bg-gray-800">
+        <div className="rounded-xl bg-white shadow">
             <div className="border-b border-border p-4">
-                <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+                <h3 className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                     <User
                         size={18}
                         className="text-primary"
@@ -27,7 +27,7 @@ export default function ProfileSidebar({ activeTab }: ProfileSidebarProps) {
                             'flex items-center gap-2 rounded-md p-2 transition-colors',
                             activeTab === 'information'
                                 ? 'bg-primary/10 text-primary'
-                                : 'text-foreground hover:bg-muted/50',
+                                : 'text-gray-800 hover:bg-gray-100',
                         )}
                     >
                         <User size={16} />
@@ -39,7 +39,7 @@ export default function ProfileSidebar({ activeTab }: ProfileSidebarProps) {
                             'flex items-center gap-2 rounded-md p-2 transition-colors',
                             activeTab === 'security'
                                 ? 'bg-primary/10 text-primary'
-                                : 'text-foreground hover:bg-muted/50',
+                                : 'text-gray-800 hover:bg-gray-100',
                         )}
                     >
                         <Shield size={16} />

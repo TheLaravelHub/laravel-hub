@@ -8,14 +8,14 @@ export default function UserLayout({
 }: PropsWithChildren<{ header?: ReactNode }>) {
     return (
         <ThemeProvider
-            defaultTheme="dark"
+            defaultTheme="light"
             storageKey="vite-ui-theme"
         >
-            <div className="min-h-screen bg-background">
+            <div className="min-h-screen bg-white">
                 <UserNavbar />
 
                 {header && (
-                    <header className="border-b border-border bg-background">
+                    <header className="border-b border-border bg-white">
                         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                             {header}
                         </div>

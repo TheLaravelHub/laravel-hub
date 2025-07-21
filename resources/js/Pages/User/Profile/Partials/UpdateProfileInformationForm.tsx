@@ -34,7 +34,7 @@ export default function UpdateProfileInformation({
 
     return (
         <section className={className}>
-            <p className="mb-6 text-sm text-muted-foreground">
+            <p className="mb-6 text-sm text-gray-600">
                 Update your account's profile information and email address.
             </p>
 
@@ -42,7 +42,7 @@ export default function UpdateProfileInformation({
                 onSubmit={submit}
                 className="space-y-6"
             >
-                <div className="rounded-lg border border-border bg-card/50 p-4">
+                <div className="rounded-lg border border-border bg-white p-4">
                     <div className="flex items-center gap-3">
                         <div className="rounded-full bg-primary/10 p-2">
                             <User
@@ -53,11 +53,11 @@ export default function UpdateProfileInformation({
                         <div>
                             <Label
                                 htmlFor="name"
-                                className="text-base font-medium"
+                                className="text-base font-medium text-gray-800"
                             >
                                 Name
                             </Label>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-gray-600">
                                 Your full name as displayed on your profile
                             </p>
                         </div>
@@ -79,7 +79,7 @@ export default function UpdateProfileInformation({
                     </div>
                 </div>
 
-                <div className="rounded-lg border border-border bg-card/50 p-4">
+                <div className="rounded-lg border border-border bg-white p-4">
                     <div className="flex items-center gap-3">
                         <div className="rounded-full bg-primary/10 p-2">
                             <Mail
@@ -90,11 +90,11 @@ export default function UpdateProfileInformation({
                         <div>
                             <Label
                                 htmlFor="email"
-                                className="text-base font-medium"
+                                className="text-base font-medium text-gray-800"
                             >
                                 Email
                             </Label>
-                            <p className="text-xs text-muted-foreground">
+                            <p className="text-xs text-gray-600">
                                 Your email address for notifications and account
                                 recovery
                             </p>

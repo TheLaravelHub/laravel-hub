@@ -8,9 +8,19 @@ import { router } from '@inertiajs/react'
 import Mixpanel from '@/lib/mixpanel'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
-router.on('navigate', (event) => {
-    Mixpanel.track('Page Viewed', { page: event.detail.page.url })
-})
+
+// Add error handling to router events
+try {
+    router.on('navigate', (event) => {
+        try {
+            Mixpanel.track('Page Viewed', { page: event.detail.page.url })
+        } catch (error) {
+            console.warn('Failed to track page view', error)
+        }
+    })
+} catch (error) {
+    console.warn('Failed to register navigation event handler', error)
+}
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

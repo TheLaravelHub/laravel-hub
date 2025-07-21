@@ -35,7 +35,7 @@ export default function Index({
     stars,
     latestPosts,
 }: IndexProps) {
-    const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+    const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
     const [packagesData] = useState(packages)
     const packagesRef = useRef<HTMLDivElement>(null)
@@ -80,19 +80,19 @@ export default function Index({
                 {/* Meta Description */}
                 <meta
                     name="description"
-                    content="Indxs is the go-to platform for discovering the best open-source packages and libraries for Laravel, PHP, React, and more. Stay updated with the latest blog posts and trending tech tools."
+                    content="Laravel Hub is the go-to platform for discovering the best open-source packages and libraries for Laravel, PHP, React, and more. Stay updated with the latest blog posts and trending tech tools."
                 />
 
                 {/* Keywords */}
                 <meta
                     name="keywords"
-                    content="Indxs, Laravel package, Laravel packages, PHP libraries, ReactJS components, open-source, programming, web development, tech blog, software development"
+                    content="Laravel Hub, Laravel package, Laravel packages, PHP libraries, ReactJS components, open-source, programming, web development, tech blog, software development"
                 />
 
                 {/* Open Graph (Facebook, LinkedIn, etc.) */}
                 <meta
                     property="og:title"
-                    content="Indxs - Discover the Best Laravel Packages & Libraries for Developers"
+                    content="Laravel Hub - Discover the Best Laravel Packages & Libraries for Developers"
                 />
                 <meta
                     property="og:description"
@@ -112,7 +112,7 @@ export default function Index({
                 />
                 <meta
                     property="og:site_name"
-                    content="Indxs"
+                    content="Laravel Hub"
                 />
 
                 {/* Twitter Meta Tags */}
@@ -122,7 +122,7 @@ export default function Index({
                 />
                 <meta
                     name="twitter:title"
-                    content="Indxs - Discover the Best Laravel Packages & Libraries for Developers"
+                    content="Laravel Hub - Discover the Best Laravel Packages & Libraries for Developers"
                 />
                 <meta
                     name="twitter:description"
@@ -134,7 +134,7 @@ export default function Index({
                 />
                 <meta
                     name="twitter:site"
-                    content="@IndxsDev"
+                    content="@thelaravelhub"
                 />
 
                 {/* Canonical URL */}
@@ -148,16 +148,16 @@ export default function Index({
                     {JSON.stringify({
                         '@context': 'https://schema.org',
                         '@type': 'WebSite',
-                        name: 'Indxs',
+                        name: 'Laravel Hub',
                         description:
                             'A directory of the best Laravel, PHP, and ReactJS packages, along with insightful tech blog articles.',
                         url: `${appURL}`,
                         publisher: {
                             '@type': 'Organization',
-                            name: 'Indxs',
+                            name: 'Laravel Hub',
                             logo: {
                                 '@type': 'ImageObject',
-                                url: `${appURL}/assets/images/Indxs-logo.png`,
+                                url: `${appURL}/assets/images/logo.png`,
                             },
                         },
                         mainEntityOfPage: {

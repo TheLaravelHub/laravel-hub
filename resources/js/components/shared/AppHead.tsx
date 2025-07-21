@@ -9,7 +9,7 @@ export default function AppHead({
 }) {
     return (
         <Head>
-            <title>{title ? title : 'Indxs'}</title>
+            <title>{title ? title : 'Laravel Hub'}</title>
             {children}
         </Head>
     )

@@ -43,9 +43,9 @@ class AdminPanelProvider extends PanelProvider
                 //                Widgets\AccountWidget::class,
                 StatsOverview::class,
             ])
-            ->brandLogo(asset('assets/images/Indxs-logo-white.png'))
+            ->brandLogo(asset('assets/images/logo.png'))
             ->brandLogoHeight('40px')
-            ->brandName('Indxs')
+            ->brandName(env('APP_NAME', 'Laravel'))
             ->navigationItems([
                 NavigationItem::make('Home')
                     ->icon('heroicon-o-globe-alt')

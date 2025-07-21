@@ -32,7 +32,7 @@ interface BlogProps {
 }
 
 const Blog = ({ blogPosts }: BlogProps) => {
-    const appURL = import.meta.env.VITE_APP_URL || 'https://indxs.dev'
+    const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
     // Ensure we have valid data
     const posts = blogPosts?.data || []
     const meta = blogPosts?.meta || { current_page: 1, last_page: 1 }
@@ -115,7 +115,7 @@ const Blog = ({ blogPosts }: BlogProps) => {
                 {/* Open Graph (Facebook, LinkedIn, etc.) */}
                 <meta
                     property="og:title"
-                    content="Latest Articles - Indxs Blog"
+                    content="Latest Articles - Laravel Hub Blog"
                 />
                 <meta
                     property="og:description"
@@ -135,7 +135,7 @@ const Blog = ({ blogPosts }: BlogProps) => {
                 />
                 <meta
                     property="og:site_name"
-                    content="Indxs Blog"
+                    content="Laravel Hub Blog"
                 />
 
                 {/* Twitter Meta Tags */}
@@ -145,7 +145,7 @@ const Blog = ({ blogPosts }: BlogProps) => {
                 />
                 <meta
                     name="twitter:title"
-                    content="Latest Articles - Indxs Blog"
+                    content="Latest Articles - Laravel Hub Blog"
                 />
                 <meta
                     name="twitter:description"
@@ -157,7 +157,7 @@ const Blog = ({ blogPosts }: BlogProps) => {
                 />
                 <meta
                     name="twitter:site"
-                    content="@IndxsDev"
+                    content="@thelaravelhub"
                 />
 
                 {/* Canonical URL */}
@@ -171,15 +171,15 @@ const Blog = ({ blogPosts }: BlogProps) => {
                     {JSON.stringify({
                         '@context': 'https://schema.org',
                         '@type': 'Blog',
-                        name: 'Indxs Blog',
+                        name: 'Laravel Hub Blog',
                         description:
                             'A blog covering Laravel, PHP, React, InertiaJS, and open-source development.',
                         publisher: {
                             '@type': 'Organization',
-                            name: 'Indxs',
+                            name: 'Laravel Hub',
                             logo: {
                                 '@type': 'ImageObject',
-                                url: `${appURL}/assets/images/Indxs-logo.png`,
+                                url: `${appURL}/assets/images/logo.png`,
                             },
                         },
                         url: `${appURL}/blog`,
