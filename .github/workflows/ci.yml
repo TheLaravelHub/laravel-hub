@@ -28,12 +28,12 @@ jobs:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_DB: indxs_test
-          POSTGRES_USER: indxs_user
+          POSTGRES_DB: laravel_hub_test
+          POSTGRES_USER: laravel_hub_user
           POSTGRES_PASSWORD: secret
         ports: ['5432:5432']
         options: >-
-          --health-cmd="pg_isready -U indxs_user -d indxs_test"
+          --health-cmd="pg_isready -U laravel_hub_user -d laravel_hub_test"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -42,8 +42,8 @@ jobs:
       DB_CONNECTION: pgsql
       DB_HOST: 127.0.0.1
       DB_PORT: 5432
-      DB_DATABASE: indxs_test
-      DB_USERNAME: indxs_user
+      DB_DATABASE: laravel_hub_test
+      DB_USERNAME: laravel_hub_user
       DB_PASSWORD: secret
 
     steps:
@@ -72,8 +72,8 @@ jobs:
           sed -i 's/^DB_CONNECTION=.*/DB_CONNECTION=pgsql/' .env
           sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' .env
           sed -i 's/^DB_PORT=.*/DB_PORT=5432/' .env
-          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=indxs_test/' .env
-          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=indxs_user/' .env
+          sed -i 's/^DB_DATABASE=.*/DB_DATABASE=laravel_hub_test/' .env
+          sed -i 's/^DB_USERNAME=.*/DB_USERNAME=laravel_hub_user/' .env
           sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=secret/' .env
 
       - name: Run Migrations
