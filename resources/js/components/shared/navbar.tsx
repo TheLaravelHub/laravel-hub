@@ -178,11 +178,10 @@ const Navbar = () => {
                             <Button
                                 asChild
                                 variant="default"
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2 rounded-full"
                             >
                                 <a
-                                    href="https://github.com/LaravelHub/laravel-hub/discussions/new?category=package-submission"
-                                    target={'_blank'}
+                                    href={route('user.packages.create')}
                                     className="flex items-center space-x-2"
                                     onClick={handlePackageSubmissionLinkClick}
                                 >

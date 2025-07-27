@@ -96,7 +96,7 @@ export function NavUser({ user }: { user: User }) {
                         <DropdownMenuGroup>
                             <DropdownMenuItem>
                                 <Link
-                                    href={route('user.profile.edit')}
+                                    href={route('user.profile.information.edit')}
                                     className="flex items-center gap-2"
                                 >
                                     <BadgeCheck />

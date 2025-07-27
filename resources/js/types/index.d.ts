@@ -128,3 +128,14 @@ export interface SelectOption {
     value: string | number
     label: string
 }
+
+export type ReviewStatus = 'pending' | 'approved' | 'rejected';
+
+export type PackageSubmission = {
+    id: number
+    user_id: number
+    repository_url: string
+    status: ReviewStatus
+    created_at: string
+    updated_at: string
+}

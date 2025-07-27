@@ -55,6 +55,14 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     {
         return $this->hasMany(Package::class);
     }
+    
+    /**
+     * Get the package submissions for the user.
+     */
+    public function packageSubmissions(): HasMany
+    {
+        return $this->hasMany(PackageSubmission::class);
+    }
 
     public function canAccessPanel(Panel $panel): bool
     {
