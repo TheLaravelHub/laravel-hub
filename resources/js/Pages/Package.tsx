@@ -641,7 +641,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                         </h3>
                                         <div className="space-y-3">
                                             <a
-                                                href={pkg.repository_url}
+                                                href={`${pkg.repository_url}?ref=laravel-hub.com`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className="flex items-center justify-between text-sm transition-colors hover:text-primary"
