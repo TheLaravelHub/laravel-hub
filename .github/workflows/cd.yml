@@ -148,7 +148,7 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             git pull origin main
 
-            composer install --no-dev --optimize-autoloader
+            COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
             php artisan migrate --force
 
             npm ci

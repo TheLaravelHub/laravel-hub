@@ -26,6 +26,6 @@ class UserService
             $i++;
         }
 
-        return $username->toString();
+        return $username;
     }
 }
