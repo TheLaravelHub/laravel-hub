@@ -131,9 +131,7 @@ export function UserNavbar() {
                                             <span>Profile</span>
                                         </Link>
                                         <Link
-                                            href={route(
-                                                'user.packages.index',
-                                            )}
+                                            href={route('user.packages.index')}
                                             className="flex items-center gap-2 rounded-md px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         >
                                             <Package

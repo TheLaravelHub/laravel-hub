@@ -1,29 +1,29 @@
 /* Custom overrides for sonner toast notifications */
 :root {
-  --toast-icon-margin: 0;
-  --toast-height: auto !important;
-  --normal-height: auto !important;
+    --toast-icon-margin: 0;
+    --toast-height: auto !important;
+    --normal-height: auto !important;
 }
 
 [data-sonner-toaster] {
-  height: auto !important;
-  max-height: 100vh !important;
+    height: auto !important;
+    max-height: 100vh !important;
 }
 
 [data-sonner-toast] {
-  height: auto !important;
-  min-height: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  padding: 8px 12px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 8px 12px !important;
 }
 
 [data-sonner-toast] [data-icon] {
-  margin-right: 8px !important;
-  display: inline-flex !important;
+    margin-right: 8px !important;
+    display: inline-flex !important;
 }
 
 [data-sonner-toast] [data-title] {
-  display: inline-flex !important;
-  align-items: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
 }

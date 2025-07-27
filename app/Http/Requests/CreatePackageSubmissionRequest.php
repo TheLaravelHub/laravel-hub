@@ -22,7 +22,7 @@ class CreatePackageSubmissionRequest extends FormRequest
                 'max:255',
                 Rule::unique('package_submissions', 'repository_url'),
                 Rule::unique('packages', 'repository_url'),
-            ]
+            ],
         ];
     }
 

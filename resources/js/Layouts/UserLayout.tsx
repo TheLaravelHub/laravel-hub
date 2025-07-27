@@ -9,7 +9,7 @@ export default function UserLayout({
     children,
 }: PropsWithChildren<{ header?: ReactNode }>) {
     const { flash } = usePage().props as unknown as {
-        flash: { success?: string, error?: string, message?: string }
+        flash: { success?: string; error?: string; message?: string }
     }
 
     // Using custom toast component

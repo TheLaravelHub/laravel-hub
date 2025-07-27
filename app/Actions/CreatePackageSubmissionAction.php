@@ -11,9 +11,7 @@ class CreatePackageSubmissionAction
     /**
      * Handle the package submission creation.
      *
-     * @param User $user
-     * @param array<string, mixed> $data
-     * @return PackageSubmission
+     * @param  array<string, mixed>  $data
      */
     public function handle(User $user, array $data): PackageSubmission
     {

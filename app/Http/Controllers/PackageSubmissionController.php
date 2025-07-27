@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\CreatePackageSubmissionAction;
 use App\Http\Requests\CreatePackageSubmissionRequest;
 use App\Http\Resources\PackageSubmissionResource;
-use App\Models\PackageSubmission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

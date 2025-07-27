@@ -129,7 +129,7 @@ export interface SelectOption {
     label: string
 }
 
-export type ReviewStatus = 'pending' | 'approved' | 'rejected';
+export type ReviewStatus = 'pending' | 'approved' | 'rejected'
 
 export type PackageSubmission = {
     id: number
