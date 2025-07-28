@@ -6,14 +6,16 @@ import { Head, useForm } from '@inertiajs/react'
 import { FormEventHandler } from 'react'
 
 export default function ForgotPassword({ status }: { status?: string }) {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
     })
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
 
-        post(route('password.email'))
+        post(route('password.email'), {
+            onFinish: () => reset('email'),
+        })
     }
 
     return (
