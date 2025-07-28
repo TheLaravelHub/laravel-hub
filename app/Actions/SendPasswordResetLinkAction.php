@@ -3,9 +3,9 @@
 namespace App\Actions;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
 class SendPasswordResetLinkAction
@@ -13,8 +13,8 @@ class SendPasswordResetLinkAction
     public function execute(Request $request): void
     {
         $email = $request->input('email');
-        $rateLimiterKey = 'password-reset|'.$email;
-        $cacheKey = 'password_reset_attempts:'.sha1($email);
+        $rateLimiterKey = 'password-reset|' . $email;
+        $cacheKey = 'password_reset_attempts:' . sha1($email);
 
         if (RateLimiter::tooManyAttempts($rateLimiterKey, 1)) {
             throw ValidationException::withMessages([

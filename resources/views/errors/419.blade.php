@@ -21,13 +21,14 @@
         <style>
             body {
                 background: url('assets/images/419.png');
-                background-size: cover; /* Like object-fit: cover */
-                background-position: center; /* Center the image */
-                background-repeat: no-repeat; /* Prevent tiling */
-                width: 100%; /* Full width */
+                background-size: cover;         /* Like object-fit: cover */
+                background-position: center;    /* Center the image */
+                background-repeat: no-repeat;   /* Prevent tiling */
+                width: 100%;                    /* Full width */
                 height: 100vh;
             }
         </style>
     </head>
-    <body class="bg-white text-foreground"></body>
+    <body class="bg-white text-foreground">
+    </body>
 </html>
