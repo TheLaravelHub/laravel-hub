@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.3",
         "algolia/algoliasearch-client-php": "^4.15",
+        "coderflex/laravel-turnstile": "^2.1",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "inertiajs/inertia-laravel": "^2.0",

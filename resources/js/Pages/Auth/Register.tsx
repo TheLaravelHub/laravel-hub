@@ -4,9 +4,10 @@ import PrimaryButton from '@/components/primary-button'
 import TextInput from '@/components/text-input'
 import GuestLayout from '@/Layouts/GuestLayout'
 import { Head, Link, router, useForm } from '@inertiajs/react'
-import { FormEventHandler } from 'react'
+import { FormEventHandler, useEffect, useRef, useState } from 'react'
 import { Github } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -14,13 +15,23 @@ export default function Register() {
         email: '',
         password: '',
         password_confirmation: '',
+        cf_turnstile_response: '',
     })
+
+    const [token, setToken] = useState('')
+    const turnStileRef = useRef()
+
+    useEffect(() => setData('cf_turnstile_response', token), [token])
+
+    const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || null
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
 
         post(route('register'), {
-            onFinish: () => reset(),
+            onSuccess: () => reset(),
+            // @ts-ignore
+            onError: () => turnStileRef.current?.reset(),
         })
     }
 
@@ -157,6 +168,17 @@ export default function Register() {
                     />
                 </div>
 
+                <div className="mt-4">
+                    <Turnstile
+                        ref={turnStileRef}
+                        siteKey={turnstileSiteKey}
+                        onSuccess={setToken}
+                    />
+                    <InputError
+                        message={errors.cf_turnstile_response}
+                        className="mt-2"
+                    />
+                </div>
                 <div className="mt-6 flex items-center justify-between">
                     <Link
                         href={route('login')}
@@ -170,8 +192,15 @@ export default function Register() {
                         whileTap={{ scale: 0.98 }}
                     >
                         <PrimaryButton
-                            className="px-6 py-2.5"
-                            disabled={processing}
+                            className="px-6 py-2.5 disabled:cursor-not-allowed"
+                            disabled={
+                                processing ||
+                                !data.name ||
+                                !data.email ||
+                                !data.password ||
+                                !data.password_confirmation ||
+                                !data.cf_turnstile_response
+                            }
                         >
                             Create Account
                         </PrimaryButton>

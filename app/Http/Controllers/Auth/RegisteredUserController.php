@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Services\UserService;
+use Coderflex\LaravelTurnstile\Rules\TurnstileCheck;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -35,6 +36,9 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'cf_turnstile_response' => ['required', new TurnstileCheck],
+        ], [], [
+            'cf_turnstile_response' => 'CAPTCHA',
         ]);
 
         $user = User::create([
