@@ -109,16 +109,6 @@ export default function Create({
                                     Submit Package
                                 </PrimaryButton>
 
-                                <button
-                                    type="button"
-                                    onClick={() =>
-                                        toast.success('Test toast message')
-                                    }
-                                    className="px-4 py-2 text-sm font-medium text-primary hover:text-primary/80"
-                                >
-                                    Test Toast
-                                </button>
-
                                 {recentlySuccessful && (
                                     <p className="text-sm text-gray-600">
                                         Submitted successfully.
