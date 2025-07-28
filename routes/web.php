@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PackageSubmissionController;
 use App\Http\Controllers\Profile\ProfileInformationController;
 use App\Http\Controllers\Profile\ProfileSecurityController;
 use App\Http\Controllers\SitemapGeneratorController;
@@ -30,13 +31,15 @@ Route::get('get-repository-data', GetPackageRepoDataController::class)
     ->middleware('throttle:5,1')
     ->name('get-repository-data');
 
-Route::middleware('auth')
+Route::middleware(['auth', 'verified'])
     ->prefix('/user')
     ->name('user.')
     ->group(function () {
         Route::get('/', UserController::class)
-            ->middleware(['verified'])
             ->name('dashboard');
+
+        Route::resource('packages', PackageSubmissionController::class)
+            ->only(['index', 'create', 'store']);
 
         // Profile routes
         Route::prefix('profile')->name('profile.')->group(function () {

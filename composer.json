@@ -23,6 +23,7 @@
         "league/flysystem-aws-s3-v3": "^3.0",
         "mixpanel/mixpanel-php": "^2.11",
         "resend/resend-laravel": "^0.19.0",
+        "sentry/sentry-laravel": "^4.15",
         "spatie/filament-markdown-editor": "^2.0",
         "spatie/laravel-medialibrary": "^11.12",
         "spatie/laravel-sitemap": "^7.3",

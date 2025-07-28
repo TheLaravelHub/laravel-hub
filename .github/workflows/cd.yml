@@ -129,6 +129,10 @@ jobs:
             GHUB_ID=${{ secrets.GHUB_ID }}
             GHUB_SECRET=${{ secrets.GHUB_SECRET }}
             GHUB_URL=${{ vars.GHUB_URL }}
+
+            SENTRY_LARAVEL_DSN=${{ secrets.SENTRY_LARAVEL_DSN }}
+            SENTRY_SEND_DEFAULT_PII=${{ secrets.SENTRY_SEND_DEFAULT_PII }}
+            SENTRY_TRACES_SAMPLE_RATE=${{ secrets.SENTRY_TRACES_SAMPLE_RATE }}
             EOF
 
   deploy:
