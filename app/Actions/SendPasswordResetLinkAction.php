@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use Coderflex\LaravelTurnstile\Rules\TurnstileCheck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Password;
@@ -29,6 +30,9 @@ class SendPasswordResetLinkAction
 
         $request->validate([
             'email' => 'required|email',
+            'cf_turnstile_response' => ['required', new TurnstileCheck],
+        ], [], [
+            'cf_turnstile_response' => 'CAPTCHA',
         ]);
 
         Password::sendResetLink(
