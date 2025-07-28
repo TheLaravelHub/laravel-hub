@@ -155,6 +155,7 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
+            git reset --hard
             git pull origin main
 
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader
