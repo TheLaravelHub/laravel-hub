@@ -20,6 +20,7 @@ class CreatePackageSubmissionRequest extends FormRequest
                 'url',
                 'string',
                 'max:255',
+                'regex:/^https:\/\/github\.com\/[^\/]+\/[^\/]+$/i',
                 Rule::unique('package_submissions', 'repository_url'),
                 Rule::unique('packages', 'repository_url'),
             ],
