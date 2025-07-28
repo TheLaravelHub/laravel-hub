@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\SendPasswordResetLinkAction;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
@@ -24,18 +26,10 @@ class PasswordResetLinkController extends Controller
 
     /**
      * Handle an incoming password reset link request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, SendPasswordResetLinkAction $action): RedirectResponse
     {
-        $request->validate([
-            'email' => 'required|email',
-        ]);
-
-        Password::sendResetLink(
-            $request->only('email')
-        );
+        $action->execute($request);
 
         return back()->with('status', __(Password::RESET_LINK_SENT));
     }
