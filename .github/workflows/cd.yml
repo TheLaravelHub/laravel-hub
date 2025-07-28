@@ -88,7 +88,7 @@ jobs:
             FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
             QUEUE_CONNECTION=${{ vars.QUEUE_CONNECTION }}
             CACHE_STORE=${{ vars.CACHE_STORE }}
-            CACHE_PREFIX=${{ vars.CACHE_PREFIX }}
+            CACHE_PREFIX=${{ secret.CACHE_PREFIX }}
 
             MEMCACHED_HOST=${{ vars.MEMCACHED_HOST }}
             REDIS_CLIENT=${{ vars.REDIS_CLIENT }}
