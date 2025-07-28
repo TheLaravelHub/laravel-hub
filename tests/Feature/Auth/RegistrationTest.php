@@ -2,9 +2,9 @@
 
 namespace Tests\Feature\Auth;
 
+use Coderflex\LaravelTurnstile\Facades\LaravelTurnstile;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Coderflex\LaravelTurnstile\Facades\LaravelTurnstile;
 
 class RegistrationTest extends TestCase
 {
