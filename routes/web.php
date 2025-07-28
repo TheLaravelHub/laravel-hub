@@ -38,8 +38,15 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', UserController::class)
             ->name('dashboard');
 
-        Route::resource('packages', PackageSubmissionController::class)
-            ->only(['index', 'create', 'store']);
+        Route::controller(PackageSubmissionController::class)
+            ->prefix('packages')
+            ->name('packages.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::post('/', 'store')->name('store')
+                    ->middleware('throttle:2,1');
+            });
 
         // Profile routes
         Route::prefix('profile')->name('profile.')->group(function () {

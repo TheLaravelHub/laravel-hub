@@ -4,8 +4,11 @@ namespace App\Providers;
 
 use Filament\Tables\Actions\CreateAction;
 use Filament\Tables\Actions\EditAction;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +37,29 @@ class AppServiceProvider extends ServiceProvider
         $this->configureModels();
 
         $this->forceSSLOnProduction();
+
+        $this->configurePasswordRateLimiting();
+
+    }
+
+    protected function configurePasswordRateLimiting(): void
+    {
+        RateLimiter::for('password-reset', function (Request $request) {
+            $email = (string)$request->get('email');
+
+            $key = 'password_reset_attempts:' . sha1($email);
+            $attempts = cache()->get($key, 0);
+
+            $waitMinutes = match (true) {
+                $attempts === 0 => 1,
+                $attempts === 1 => 5,
+                default => 10,
+            };
+
+            cache()->put($key, $waitMinutes);
+
+            return Limit::perMinutes($waitMinutes, 1)->by($key);
+        });
     }
 
     /**
