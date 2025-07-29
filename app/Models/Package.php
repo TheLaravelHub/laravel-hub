@@ -151,6 +151,14 @@ class Package extends Model
                                 ]),
                             Section::make('Package Data')
                                 ->schema([
+                                    Select::make('user_id')
+                                        ->label('Submitted By')
+                                        ->relationship('user', 'name')
+                                        ->searchable(['name', 'email'])
+                                        ->preload()
+                                        ->default(fn () => auth()->id())
+                                        ->getOptionLabelFromRecordUsing(fn ($record) => "{$record->name} ({$record->email})")
+                                        ->searchPrompt('Search by name or email'),
                                     TextInput::make('repository_url')
                                         ->required()
                                         ->rules(function (Get $get) {
