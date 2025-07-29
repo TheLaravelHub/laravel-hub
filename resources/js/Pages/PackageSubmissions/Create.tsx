@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Head, useForm } from '@inertiajs/react'
 import UserLayout from '@/Layouts/UserLayout'
 import InputError from '@/components/input-error'
@@ -8,6 +8,7 @@ import TextInput from '@/components/text-input'
 import { PageProps } from '@/types'
 import { Package } from 'lucide-react'
 import { toast } from 'sonner'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 interface CreateProps extends PageProps {}
 
@@ -25,12 +26,19 @@ export default function Create({
         recentlySuccessful,
     } = useForm({
         repository_url: '',
+        cf_turnstile_response: '',
     })
+
+    const [token, setToken] = useState('')
+    const turnStileRef = useRef()
+
+    useEffect(() => setData('cf_turnstile_response', token), [token])
+
+    const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || null
 
     useEffect(() => {
         if (flash?.success) {
             toast.success(flash.success)
-            console.log('Toast triggered from flash:', flash.success)
         }
     }, [flash])
 
@@ -40,8 +48,10 @@ export default function Create({
             onSuccess: () => {
                 // Direct toast call that should work regardless of flash messages
                 toast.success('Your package has been submitted for review!')
-                console.log('Toast triggered from onSuccess handler')
+                reset()
             },
+            // @ts-ignore
+            onError: () => turnStileRef.current?.reset(),
         })
     }
 
@@ -101,10 +111,26 @@ export default function Create({
                                 </p>
                             </div>
 
+                            <div className="mt-4">
+                                <Turnstile
+                                    ref={turnStileRef}
+                                    siteKey={turnstileSiteKey}
+                                    onSuccess={setToken}
+                                />
+                                <InputError
+                                    message={errors.cf_turnstile_response}
+                                    className="mt-2"
+                                />
+                            </div>
+
                             <div className="flex items-center gap-4">
                                 <PrimaryButton
-                                    disabled={processing}
-                                    className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary/90"
+                                    disabled={
+                                        processing ||
+                                        !data.repository_url ||
+                                        !data.cf_turnstile_response
+                                    }
+                                    className="rounded-full bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary/90 disabled:cursor-not-allowed"
                                 >
                                     Submit Package
                                 </PrimaryButton>

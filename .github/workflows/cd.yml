@@ -133,6 +133,11 @@ jobs:
             SENTRY_LARAVEL_DSN=${{ secrets.SENTRY_LARAVEL_DSN }}
             SENTRY_SEND_DEFAULT_PII=${{ secrets.SENTRY_SEND_DEFAULT_PII }}
             SENTRY_TRACES_SAMPLE_RATE=${{ secrets.SENTRY_TRACES_SAMPLE_RATE }}
+
+            TURNSTILE_SITE_KEY=${{ secrets.TURNSTILE_SITE_KEY }}
+            TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
+            VITE_TURNSTILE_SITE_KEY=${{ secrets.TURNSTILE_SITE_KEY }}
+            VITE_TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
             EOF
 
   deploy:
@@ -150,6 +155,7 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
+            git reset --hard
             git pull origin main
 
             COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --optimize-autoloader

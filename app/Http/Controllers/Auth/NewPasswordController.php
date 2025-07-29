@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Coderflex\LaravelTurnstile\Rules\TurnstileCheck;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,6 +39,9 @@ class NewPasswordController extends Controller
             'token' => 'required',
             'email' => 'required|email',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'cf_turnstile_response' => ['required', new TurnstileCheck],
+        ], [], [
+            'cf_turnstile_response' => 'CAPTCHA',
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we
