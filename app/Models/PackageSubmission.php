@@ -10,6 +10,10 @@ class PackageSubmission extends Model
 {
     use SoftDeletes;
 
+    protected $casts = [
+        'notification_sent' => 'boolean',
+    ];
+
     /**
      * Relationship: PackageSubmission belongs to a User
      */
