@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\User;
+use App\Services\UserService;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 
 class CreateOrUpdateSocialUserAction
@@ -16,10 +17,12 @@ class CreateOrUpdateSocialUserAction
             ->where('email', $socialUser->getEmail())->first();
 
         if (! $user) {
+            $username = (new UserService)->generateUsername($socialUser->getName());
             $user = User::query()
                 ->create([
                     'name' => $socialUser->getName(),
                     'email' => $socialUser->getEmail(),
+                    'username' => $username,
                     'email_verified_at' => now(),
                     'provider_type' => $provider,
                     'provider_id' => $provider === 'github' ? $socialUser->getId() : null,
@@ -36,7 +39,7 @@ class CreateOrUpdateSocialUserAction
                 'avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
             ]);
         }
-
+        $user->save();
         return $user;
     }
 }
