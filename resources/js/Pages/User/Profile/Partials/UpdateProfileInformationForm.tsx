@@ -108,7 +108,7 @@ export default function UpdateProfileInformation({
                             value={data.username}
                             onChange={(e) => setData('username', e.target.value)}
                             required
-                            autoComplete="name"
+                            autoComplete="username"
                         />
                         <InputError
                             className="mt-2"
