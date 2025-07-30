@@ -7,8 +7,8 @@
 Welcome to **Laravel Hub**, an open-source platform that helps developers discover and explore packages and libraries across different programming languages and frameworks.
 
 <!-- TODO: uncomment later -->
-<!-- [![GitHub stars](https://img.shields.io/github/stars/LaravelHub/laravel-hub?style=social)](https://github.com/theLaravelHub/laravel-hub)
-[![GitHub forks](https://img.shields.io/github/forks/LaravelHub/laravel-hub?style=social)](https://github.com/theLaravelHub/laravel-hub) -->
+<!-- [![GitHub stars](https://img.shields.io/github/stars/TheLaravelHub/laravel-hub?style=social)](https://github.com/theLaravelHub/laravel-hub)
+[![GitHub forks](https://img.shields.io/github/forks/TheLaravelHub/laravel-hub?style=social)](https://github.com/theLaravelHub/laravel-hub) -->
 
 🔗 **Project Link:** [Laravel-Hub.com](https://laravel-hub.com)
 

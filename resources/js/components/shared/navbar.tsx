@@ -247,7 +247,7 @@ const Navbar = () => {
                                     className="w-full justify-start"
                                 >
                                     <a
-                                        href="https://github.com/LaravelHub/laravel-hub/discussions/new?category=package-submission"
+                                        href="https://github.com/TheLaravelHub/laravel-hub/discussions/new?category=package-submission"
                                         target={'_blank'}
                                         className="flex items-center space-x-2"
                                     >

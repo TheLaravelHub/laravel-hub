@@ -81,7 +81,7 @@ const CTASection = () => {
                             className="flex items-center gap-2"
                         >
                             <a
-                                href="https://github.com/LaravelHub/laravel-hub/discussions/new?category=package-submission"
+                                href="https://github.com/TheLaravelHub/laravel-hub/discussions/new?category=package-submission"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={handlePackageSubmissionLinkClick}
@@ -103,7 +103,7 @@ const CTASection = () => {
                             className="flex items-center gap-2"
                         >
                             <a
-                                href="https://github.com/LaravelHub/laravel-hub"
+                                href="https://github.com/TheLaravelHub/laravel-hub"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={handleStarOnGithubClick}
