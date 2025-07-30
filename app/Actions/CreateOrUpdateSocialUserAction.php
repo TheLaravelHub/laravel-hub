@@ -39,7 +39,6 @@ class CreateOrUpdateSocialUserAction
                 'avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
             ]);
         }
-        $user->save();
         return $user;
     }
 }
