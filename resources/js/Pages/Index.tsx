@@ -100,27 +100,27 @@ export default function Index({
             storageKey="vite-ui-theme"
         >
             <AnimatedGradientBackground className="min-h-screen">
-                <AppHead title="Discover the Best Laravel Packages & Libraries for Developers">
+                <AppHead title="Laravel Hub – The Central Community for Laravel Developers">
                     {/* Meta Description */}
                     <meta
                         name="description"
-                        content="Laravel Hub is the go-to platform for discovering the best open-source packages and libraries for Laravel, PHP, React, and more. Stay updated with the latest blog posts and trending tech tools."
+                        content="Laravel Hub is an all-in-one platform and community for Laravel developers to discover packages, stay updated with curated content, and connect with other professionals in the ecosystem."
                     />
 
                     {/* Keywords */}
                     <meta
                         name="keywords"
-                        content="Laravel Hub, Laravel package, Laravel packages, PHP libraries, ReactJS components, open-source, programming, web development, tech blog, software development"
+                        content="Laravel Hub, Laravel community, Laravel packages, PHP libraries, Laravel tutorials, Laravel news, Laravel ecosystem, Laravel developers, Laravel blog posts, Laravel podcasts, Laravel videos"
                     />
 
                     {/* Open Graph (Facebook, LinkedIn, etc.) */}
                     <meta
                         property="og:title"
-                        content="Laravel Hub - Discover the Best Laravel Packages & Libraries for Developers"
+                        content="Laravel Hub – The Central Community for Laravel Developers"
                     />
                     <meta
                         property="og:description"
-                        content="Explore the best Laravel, PHP, and ReactJS libraries. Stay ahead in the dev world with our latest insights and trending tools."
+                        content="An all-in-one platform where Laravel developers can discover packages, stay updated with curated content, and connect with other professionals in the ecosystem."
                     />
                     <meta
                         property="og:image"
@@ -146,11 +146,11 @@ export default function Index({
                     />
                     <meta
                         name="twitter:title"
-                        content="Laravel Hub - Discover the Best Laravel Packages & Libraries for Developers"
+                        content="Laravel Hub – The Central Community for Laravel Developers"
                     />
                     <meta
                         name="twitter:description"
-                        content="Find the latest and most useful open-source packages for Laravel, PHP, React, and beyond."
+                        content="Discover and explore the best Laravel packages, stay updated with curated content, and connect with other professionals in the ecosystem."
                     />
                     <meta
                         name="twitter:image"
