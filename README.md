@@ -34,9 +34,9 @@ It brings together curated blog posts, tutorials, packages, news, and multi-form
 
 **Laravel Hub** is a modern, open-source platform and Laravel community designed to help developers:
 
-- Stay up to date with curated articles, news, videos, and podcasts  
-- Submit and showcase their own packages and posts  
-- Engage with others by commenting, replying, and following topics  
+- Stay up to date with curated articles, news, videos, and podcasts
+- Submit and showcase their own packages and posts
+- Engage with others by commenting, replying, and following topics
 - Bookmark posts and explore trending content
 
 Built using:
@@ -74,7 +74,7 @@ Make sure you have the following installed:
 ```sh
 git clone https://github.com/theLaravelHub/laravel-hub.git
 cd laravel-hub
-````
+```
 
 ### 2️⃣ Install dependencies
 
@@ -170,9 +170,9 @@ You’re free to use, modify, and distribute it.
 
 Stay connected with the Laravel Hub community:
 
-* GitHub Discussions: [Start a discussion](https://github.com/theLaravelHub/laravel-hub/discussions)
-* Twitter/X: [@thelaravelhub](https://x.com/thelaravelhub)
-* Email: [thefeqy@gmail.com](mailto:thefeqy@gmail.com)
+- GitHub Discussions: [Start a discussion](https://github.com/theLaravelHub/laravel-hub/discussions)
+- Twitter/X: [@thelaravelhub](https://x.com/thelaravelhub)
+- Email: [thefeqy@gmail.com](mailto:thefeqy@gmail.com)
 
 ---
 
@@ -180,9 +180,9 @@ Stay connected with the Laravel Hub community:
 
 If you find Laravel Hub useful:
 
-* ⭐ Star the project on GitHub
-* 📰 Share Laravel-Hub.com with your network
-* 🧠 Follow us on [Twitter/X](https://x.com/thelaravelhub)
-* 🔍 Contribute your own packages and blog posts
+- ⭐ Star the project on GitHub
+- 📰 Share Laravel-Hub.com with your network
+- 🧠 Follow us on [Twitter/X](https://x.com/thelaravelhub)
+- 🔍 Contribute your own packages and blog posts
 
 Together, let's grow the Laravel community.
