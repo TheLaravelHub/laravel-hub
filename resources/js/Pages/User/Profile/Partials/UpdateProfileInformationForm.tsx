@@ -159,21 +159,21 @@ export default function UpdateProfileInformation({
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
-                    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-900/30 dark:bg-yellow-900/10">
-                        <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+                        <p className="text-sm text-yellow-800">
                             Your email address is unverified.
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
-                                className="ml-1 font-medium text-yellow-600 underline hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300"
+                                className="ml-1 font-medium text-yellow-600 underline hover:text-yellow-700"
                             >
                                 Click here to re-send the verification email.
                             </Link>
                         </p>
 
                         {status === 'verification-link-sent' && (
-                            <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
+                            <div className="mt-2 text-sm font-medium text-green-600">
                                 A new verification link has been sent to your
                                 email address.
                             </div>
@@ -223,7 +223,7 @@ export default function UpdateProfileInformation({
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <div className="flex items-center gap-1 text-sm font-medium text-green-600 dark:text-green-400">
+                        <div className="flex items-center gap-1 text-sm font-medium text-green-600">
                             <Check size={16} />
                             <span>Saved successfully</span>
                         </div>

@@ -57,59 +57,6 @@
         --sidebar-border: 220 30% 80%;
         --sidebar-ring: 220 100% 37%;
     }
-
-    .dark {
-        --background: 220 80% 10%;
-        --foreground: 210 40% 98%;
-
-        /* Primary */
-        --primary: 220 100% 45%;
-        --primary-foreground: 0 0% 100%;
-
-        /* Secondary */
-        --secondary: 220 100% 25%;
-        --secondary-foreground: 0 0% 100%;
-
-        /* Card & Popovers */
-        --card: 278 70% 12%;
-        --card-foreground: 210 40% 98%;
-        --popover: 278 70% 12%;
-        --popover-foreground: 210 40% 98%;
-
-        /* Muted & Accent */
-        --muted: 220 30% 20%;
-        --muted-foreground: 220 40% 60%;
-        --accent: 220 30% 20%;
-        --accent-foreground: 220 40% 60%;
-
-        /* Destructive */
-        --destructive: 0 62.8% 45%;
-        --destructive-foreground: 210 40% 98%;
-
-        /* Borders & Inputs */
-        --border: 220 40% 30%;
-        --input: 220 40% 30%;
-
-        /* Focus Ring */
-        --ring: 220 100% 45%;
-
-        /* Charts */
-        --chart-1: 280 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 300 65% 60%;
-        --chart-5: 340 75% 55%;
-
-        /* Sidebar */
-        --sidebar-background: 220 80% 8%;
-        --sidebar-foreground: 240 4.8% 95.9%;
-        --sidebar-primary: 220 100% 37%;
-        --sidebar-primary-foreground: 0 0% 100%;
-        --sidebar-accent: 220 100% 19%;
-        --sidebar-accent-foreground: 0 0% 98%;
-        --sidebar-border: 220 30% 25%;
-        --sidebar-ring: 220 100% 45%;
-    }
 }
 @layer base {
     * {
@@ -217,18 +164,7 @@
     @apply border-t border-border px-4 py-3 text-foreground;
 }
 
-/* Dark mode specific styles */
-.dark .prose pre {
-    @apply bg-muted/70 text-foreground;
-}
-
-.dark .prose code {
-    @apply bg-muted/70 text-foreground;
-}
-
-.dark .prose {
-    @apply text-foreground;
-}
+/* Dark mode specific styles removed - only enabled for Filament admin */
 
 /* Fix for code blocks with syntax highlighting */
 .prose pre > div {
@@ -364,55 +300,6 @@
 
 .markdown-content tr:nth-child(even) {
     background-color: #f9fafb;
-}
-
-/* Dark mode adjustments */
-.dark .markdown-content {
-    color: #e5e7eb;
-}
-
-.dark .markdown-content h1,
-.dark .markdown-content h2,
-.dark .markdown-content h3,
-.dark .markdown-content h4,
-.dark .markdown-content h5,
-.dark .markdown-content h6 {
-    color: #f9fafb;
-}
-
-.dark .markdown-content p {
-    color: #d1d5db;
-}
-
-.dark .markdown-content a {
-    color: #3b82f6;
-}
-
-.dark .markdown-content a:hover {
-    color: #60a5fa;
-}
-
-.dark .markdown-content blockquote {
-    border-left-color: #4b5563;
-    color: #9ca3af;
-}
-
-.dark .markdown-content code {
-    background-color: #374151;
-    color: #f9fafb;
-}
-
-.dark .markdown-content th {
-    background-color: #374151;
-    border-color: #4b5563;
-}
-
-.dark .markdown-content td {
-    border-color: #4b5563;
-}
-
-.dark .markdown-content tr:nth-child(even) {
-    background-color: #1f2937;
 }
 
 /* Sticky Sidebar Styles */

@@ -600,7 +600,7 @@ export default function Packages({
                                                     )}
                                                 </div>
                                                 <motion.div
-                                                    className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400"
+                                                    className="flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 text-amber-600"
                                                     whileHover={{ scale: 1.05 }}
                                                 >
                                                     <Star
