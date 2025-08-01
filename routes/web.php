@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\NewsletterSubscriptionController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackageSubmissionController;
 use App\Http\Controllers\Profile\ProfileInformationController;
@@ -13,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomePageController::class)->name('homepage');
 Route::get('/sitemap.xml', SitemapGeneratorController::class);
+
+Route::post('/newsletter/subscribe', NewsletterSubscriptionController::class)
+    ->middleware('throttle:1,1')
+    ->name('newsletter.subscribe');
 
 Route::controller(PackageController::class)
     ->group(function () {

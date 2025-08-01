@@ -15,8 +15,8 @@ import Footer from '@/components/shared/footer'
 import { formatNumber } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
-import StatsSection from '@/components/shared/stats-section'
 import CTASection from '@/components/shared/cta-section'
+import NewsletterSubscription from '@/components/newsletter-subscription'
 import { format } from 'date-fns'
 import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -47,6 +47,8 @@ export default function Index({
 
     const [packagesData] = useState(packages)
     const packagesRef = useRef<HTMLDivElement>(null)
+
+    // Package data state
 
     // Format date for blog posts
     const formatDate = (dateString: string) => {
@@ -509,13 +511,8 @@ export default function Index({
                         </div>
                     </section>
 
-                    {/* Stats Section - Moved below search results */}
-                    <StatsSection
-                        totalPackages={packagesCount}
-                        totalStars={stars}
-                        totalCategories={categories.length}
-                        compact={false}
-                    />
+                    {/* Newsletter Section */}
+                    <NewsletterSubscription />
 
                     {/* Latest Blog Posts Section */}
                     {mostReadPosts && mostReadPosts.length >= 3 && (
