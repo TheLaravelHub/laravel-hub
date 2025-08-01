@@ -22,6 +22,10 @@ import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
 
 interface IndexProps {
+    users: {
+        name: string
+        avatar: string
+    }[]
     categories: Category[]
     packages: PackageType[]
     packagesCount: number
@@ -30,6 +34,7 @@ interface IndexProps {
 }
 
 export default function Index({
+    users,
     categories,
     packages,
     packagesCount,
@@ -178,7 +183,7 @@ export default function Index({
                     <Navbar />
 
                     {/*Hero Section*/}
-                    <HeroSection categories={categories} />
+                    <HeroSection users={users} />
 
                     {/* Packages */}
                     <section

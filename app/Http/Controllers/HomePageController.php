@@ -8,6 +8,7 @@ use App\Http\Resources\PackageResource;
 use App\Models\BlogPost;
 use App\Models\Category;
 use App\Models\Package;
+use App\Models\User;
 use Inertia\Inertia;
 
 class HomePageController extends Controller
@@ -22,6 +23,21 @@ class HomePageController extends Controller
             ->forPackages()
             ->withCount('packages')
             ->get();
+
+        $users = User::query()
+            ->select('id', 'avatar', 'name')
+            ->whereNotNull('avatar')
+            ->limit(4)
+            ->get()
+            ->mapWithKeys(function ($user) {
+                return [
+                    $user->id => [
+                        'name' => $user->name,
+                        'avatar' => $user->avatar,
+                    ],
+                ];
+            })
+            ->toArray();
 
         $packages = Package::query()
             ->select('id', 'name', 'slug', 'description', 'stars', 'owner', 'owner_avatar')
@@ -42,6 +58,7 @@ class HomePageController extends Controller
             ->get();
 
         return Inertia::render('Index', [
+            'users' => $users,
             'categories' => CategoryResource::collection($categories),
             'packages' => PackageResource::collection($packages),
             'packagesCount' => Package::count(),
