@@ -17,25 +17,30 @@ class CreateOrUpdateSocialUserAction
             ->where('email', $socialUser->getEmail())->first();
 
         if (! $user) {
-            $username = (new UserService)->generateUsername($socialUser->getName());
+            $name = $socialUser->getName();
+            if (! $name) {
+                $name = (new GenerateRandomNameAction)->handle();
+            }
+
+            $username = (new UserService)->generateUsername($name);
             $user = User::query()
                 ->create([
-                    'name' => $socialUser->getName(),
+                    'name' => $name,
                     'email' => $socialUser->getEmail(),
                     'username' => $username,
                     'email_verified_at' => now(),
                     'provider_type' => $provider,
                     'provider_id' => $provider === 'github' ? $socialUser->getId() : null,
-                    'provider_token' => $provider === 'github' ? $socialUser->token : null,
-                    'provider_refresh_token' => $provider === 'github' ? $socialUser->refreshToken : null,
+                    'provider_token' => $provider === 'github' ? $socialUser->token ?? null : null,
+                    'provider_refresh_token' => $provider === 'github' ? $socialUser->refreshToken ?? null : null,
                     'avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
                 ]);
         } else {
             $user->update([
                 'provider_type' => $provider,
                 'provider_id' => $provider === 'github' ? $socialUser->getId() : null,
-                'provider_token' => $provider === 'github' ? $socialUser->token : null,
-                'provider_refresh_token' => $provider === 'github' ? $socialUser->refreshToken : null,
+                'provider_token' => $provider === 'github' ? $socialUser->token ?? null : null,
+                'provider_refresh_token' => $provider === 'github' ? $socialUser->refreshToken ?? null : null,
                 'avatar' => $provider === 'github' ? $socialUser->getAvatar() : null,
             ]);
         }
