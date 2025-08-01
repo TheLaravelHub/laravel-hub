@@ -106,7 +106,9 @@ export default function UpdateProfileInformation({
                             id="username"
                             className="block w-full"
                             value={data.username}
-                            onChange={(e) => setData('username', e.target.value)}
+                            onChange={(e) =>
+                                setData('username', e.target.value)
+                            }
                             required
                             autoComplete="username"
                         />
