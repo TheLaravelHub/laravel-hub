@@ -46,6 +46,16 @@ export default function Index({
     const [packagesData] = useState(packages)
     const packagesRef = useRef<HTMLDivElement>(null)
 
+    // Format date for blog posts
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString)
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        })
+    }
+
     // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -184,6 +194,114 @@ export default function Index({
 
                     {/*Hero Section*/}
                     <HeroSection users={users} />
+
+                    {/* Latest Blog Posts Section */}
+                    {latestPosts && latestPosts.length > 0 && (
+                        <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16">
+                            <div className="mb-12 flex items-center justify-between">
+                                <div>
+                                    <motion.h2
+                                        className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 100,
+                                        }}
+                                    >
+                                        Latest from our Blog
+                                    </motion.h2>
+                                    <motion.p
+                                        className="mt-4 text-lg text-gray-600"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{
+                                            delay: 0.1,
+                                            type: 'spring',
+                                            stiffness: 100,
+                                        }}
+                                    >
+                                        Stay updated with our latest articles
+                                        and insights
+                                    </motion.p>
+                                </div>
+                                <Link
+                                    href={route('blog.index')}
+                                    className="group hidden items-center gap-2 font-semibold text-primary transition-colors hover:text-primary/80 sm:flex"
+                                >
+                                    View all posts
+                                    <ArrowRight
+                                        className="transition-transform group-hover:translate-x-1"
+                                        size={20}
+                                    />
+                                </Link>
+                            </div>
+
+                            <motion.div
+                                className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                                {latestPosts.map((post) => (
+                                    <motion.div
+                                        key={post.id}
+                                        variants={cardVariants}
+                                        whileHover="hover"
+                                        layout
+                                    >
+                                        <Card className="group h-full overflow-hidden rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm transition-all">
+                                            <Link
+                                                href={route('blog.show', {
+                                                    slug: post.slug,
+                                                })}
+                                            >
+                                                <div className="aspect-w-16 aspect-h-9 relative overflow-hidden">
+                                                    <img
+                                                        src={post.image}
+                                                        alt={post.title}
+                                                        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    />
+                                                </div>
+                                                <CardContent className="p-6">
+                                                    <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
+                                                        <Calendar size={14} />
+                                                        <span>
+                                                            {formatDate(
+                                                                post.published_at,
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                    <h3 className="mb-2 line-clamp-2 text-xl font-bold tracking-tight transition-colors group-hover:text-primary">
+                                                        {post.title}
+                                                    </h3>
+                                                    <p className="line-clamp-3 text-muted-foreground">
+                                                        {post.sub_title ||
+                                                            post.meta_description}
+                                                    </p>
+                                                </CardContent>
+                                            </Link>
+                                        </Card>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+
+                            <div className="mt-8 flex justify-center sm:hidden">
+                                <Link
+                                    href={route('blog.index')}
+                                    className="group flex items-center gap-2 font-semibold text-primary transition-colors hover:text-primary/80"
+                                >
+                                    View all posts
+                                    <ArrowRight
+                                        className="transition-transform group-hover:translate-x-1"
+                                        size={20}
+                                    />
+                                </Link>
+                            </div>
+                        </section>
+                    )}
 
                     {/* Packages */}
                     <section
