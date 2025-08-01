@@ -1,6 +1,14 @@
-import { Github, Heart, LifeBuoy, Twitter } from 'lucide-react'
+import {
+    Github,
+    Heart,
+    LifeBuoy,
+    Twitter,
+    Linkedin,
+    MessageSquare,
+} from 'lucide-react'
 import { motion } from 'framer-motion'
 import useClickTracker from '@/hooks/use-click-tracker'
+import { Link } from '@inertiajs/react'
 
 const Footer = () => {
     const handleGithubProfileLinkClick = useClickTracker(
@@ -11,6 +19,21 @@ const Footer = () => {
         location: 'Footer',
     })
     const handleSponsorLinkClick = useClickTracker('Github Sponsor Clicked', {
+        location: 'Footer',
+    })
+    const handleLinkedinLinkClick = useClickTracker(
+        'Linkedin Profile Clicked',
+        {
+            location: 'Footer',
+        },
+    )
+    const handleTelegramLinkClick = useClickTracker(
+        'Telegram Contact Clicked',
+        {
+            location: 'Footer',
+        },
+    )
+    const handleReportBugClick = useClickTracker('Report Bug Clicked', {
         location: 'Footer',
     })
 
@@ -48,6 +71,29 @@ const Footer = () => {
         },
     }
 
+    const footerLinks = [
+        {
+            title: 'Community',
+            links: [
+                { name: 'Home', href: '/' },
+                { name: 'Login', href: '/login' },
+                { name: 'Register', href: '/register' },
+            ],
+        },
+        {
+            title: 'Resources',
+            links: [
+                { name: 'Blog', href: '/blog' },
+                { name: 'Packages', href: '/packages' },
+                {
+                    name: 'Report Bug',
+                    href: 'https://github.com/TheLaravelHub/laravel-hub/issues/new',
+                    external: true,
+                },
+            ],
+        },
+    ]
+
     return (
         <footer className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 pt-16">
             {/* Wave divider at top */}
@@ -80,92 +126,96 @@ const Footer = () => {
             </div>
 
             <motion.div
-                className="container mx-auto px-6 pb-12 text-center"
+                className="container mx-auto px-6 pb-12"
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.1 }}
             >
-                <motion.div variants={itemVariants}>
-                    <p className="text-lg font-medium text-muted-foreground">
-                        An open-source project by
-                    </p>
-                </motion.div>
-
-                <motion.div
-                    className="mt-8 flex flex-col items-center"
-                    variants={itemVariants}
-                >
+                {/* Footer links grid */}
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+                    {/* Logo and description */}
                     <motion.div
-                        whileHover={{ scale: 1.05, rotate: 5 }}
-                        transition={{
-                            type: 'spring',
-                            stiffness: 300,
-                            damping: 10,
-                        }}
+                        variants={itemVariants}
+                        className="col-span-2 mb-12 flex flex-col items-center md:items-start"
                     >
-                        <img
-                            src={'/assets/images/github-avatar.jpg'}
-                            alt="Founder Avatar"
-                            className="h-24 w-24 rounded-full border-4 border-primary/20 shadow-lg"
-                        />
+                        <div className="flex items-center">
+                            <img
+                                src="/assets/images/logo.png"
+                                alt="Laravel Hub Logo"
+                                className="w-96"
+                            />
+                        </div>
+                        <p className="mt-4 max-w-md text-muted-foreground">
+                            Laravel Hub is a platform for Laravel developers to
+                            share knowledge, find resources, and connect with
+                            the community.
+                        </p>
                     </motion.div>
-                    <motion.h3
-                        className="mt-4 text-2xl font-bold text-foreground"
-                        variants={itemVariants}
-                    >
-                        Muhammed Elfeqy
-                    </motion.h3>
-                    <motion.p
-                        className="text-muted-foreground"
-                        variants={itemVariants}
-                    >
-                        Software Engineer & Open-Source Contributor
-                    </motion.p>
+                    {footerLinks.map((column, index) => (
+                        <motion.div
+                            key={index}
+                            variants={itemVariants}
+                        >
+                            <h3 className="mb-4 text-lg font-semibold">
+                                {column.title}
+                            </h3>
+                            <ul className="space-y-2">
+                                {column.links.map((link, linkIndex) => (
+                                    <li key={linkIndex}>
+                                        {link.external ? (
+                                            <a
+                                                href={link.href}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-muted-foreground transition-colors hover:text-primary"
+                                                onClick={
+                                                    link.name === 'Report Bug'
+                                                        ? handleReportBugClick
+                                                        : undefined
+                                                }
+                                            >
+                                                {link.name}
+                                            </a>
+                                        ) : (
+                                            <Link
+                                                href={link.href}
+                                                className="text-muted-foreground transition-colors hover:text-primary"
+                                            >
+                                                {link.name}
+                                            </Link>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </motion.div>
+                    ))}
+                </div>
 
-                    <motion.div
-                        className="mt-6 flex space-x-6"
-                        variants={itemVariants}
-                    >
-                        <motion.a
-                            href="https://github.com/thefeqy"
-                            target={'_blank'}
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-md transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleGithubProfileLinkClick}
-                        >
-                            <Github size={20} />
-                        </motion.a>
-                        <motion.a
-                            href="https://twitter.com/thefeqy"
-                            target={'_blank'}
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-md transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleXProfileLinkClick}
-                        >
-                            <Twitter size={20} />
-                        </motion.a>
-                        <motion.a
-                            href="https://github.com/sponsors/thefeqy"
-                            target={'_blank'}
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-card text-muted-foreground shadow-md transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleSponsorLinkClick}
-                        >
-                            <LifeBuoy size={20} />
-                        </motion.a>
-                    </motion.div>
-                </motion.div>
-
+                {/* Divider */}
                 <motion.div
-                    className="mt-12 flex flex-col items-center justify-center space-y-4 text-sm text-muted-foreground"
                     variants={itemVariants}
-                >
-                    <div className="flex items-center space-x-2">
-                        <span>Made with</span>
+                    className="my-8 h-px w-full bg-border"
+                />
+
+                <div className="flex flex-col items-center justify-between space-y-6 md:flex-row md:space-y-0">
+                    {/* Copyright */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="mt-6 text-center md:text-left"
+                    >
+                        <p className="text-sm text-muted-foreground">
+                            © {new Date().getFullYear()} Laravel Hub. All
+                            rights reserved.
+                        </p>
+                    </motion.div>
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex items-center space-x-2"
+                    >
+                        <span className="text-sm text-muted-foreground">
+                            Built with
+                        </span>
                         <motion.div
                             animate={{
                                 scale: [1, 1.2, 1],
@@ -181,13 +231,87 @@ const Footer = () => {
                                 className="fill-red-500 text-red-500"
                             />
                         </motion.div>
-                        <span>for the open-source community</span>
-                    </div>
-                    <p>
-                        © {new Date().getFullYear()} Laravel Hub. All rights
-                        reserved.
-                    </p>
-                </motion.div>
+                        <span className="text-sm text-muted-foreground">
+                            by
+                        </span>
+                        <div className="flex items-center space-x-2">
+                            <img
+                                src="/assets/images/github-avatar.jpg"
+                                alt="Muhammed Elfeqy"
+                                className="h-6 w-6 rounded-full"
+                            />
+                            <a
+                                href="https://github.com/thefeqy"
+                                target="_blank"
+                                className="text-sm font-medium"
+                            >
+                                Muhammed Elfeqy
+                            </a>
+                        </div>
+                    </motion.div>
+
+                    {/* Social links */}
+                    <motion.div
+                        variants={itemVariants}
+                        className="flex space-x-4"
+                    >
+                        <motion.a
+                            href="https://github.com/thefeqy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                            variants={socialLinkVariants}
+                            whileHover="hover"
+                            onClick={handleGithubProfileLinkClick}
+                        >
+                            <Github size={16} />
+                        </motion.a>
+                        <motion.a
+                            href="https://x.com/thelaravelhub"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                            variants={socialLinkVariants}
+                            whileHover="hover"
+                            onClick={handleXProfileLinkClick}
+                        >
+                            <Twitter size={16} />
+                        </motion.a>
+                        <motion.a
+                            href="https://www.linkedin.com/company/thelaravelhub"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                            variants={socialLinkVariants}
+                            whileHover="hover"
+                            onClick={handleLinkedinLinkClick}
+                        >
+                            <Linkedin size={16} />
+                        </motion.a>
+                        <motion.a
+                            href="https://t.me/TheLaravelHub"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                            variants={socialLinkVariants}
+                            whileHover="hover"
+                            onClick={handleTelegramLinkClick}
+                        >
+                            <MessageSquare size={16} />
+                        </motion.a>
+                        <motion.a
+                            href="https://github.com/sponsors/thefeqy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                            variants={socialLinkVariants}
+                            whileHover="hover"
+                            onClick={handleSponsorLinkClick}
+                        >
+                            <LifeBuoy size={16} />
+                        </motion.a>
+                    </motion.div>
+                </div>
             </motion.div>
         </footer>
     )
