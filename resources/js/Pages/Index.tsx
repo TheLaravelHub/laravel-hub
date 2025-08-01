@@ -31,6 +31,7 @@ interface IndexProps {
     packagesCount: number
     stars: number
     latestPosts?: BlogPostType[]
+    mostReadPosts?: BlogPostType[]
 }
 
 export default function Index({
@@ -40,6 +41,7 @@ export default function Index({
     packagesCount,
     stars,
     latestPosts,
+    mostReadPosts,
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
@@ -516,17 +518,13 @@ export default function Index({
                     />
 
                     {/* Latest Blog Posts Section */}
-                    {latestPosts && latestPosts.length >= 3 && (
+                    {mostReadPosts && mostReadPosts.length >= 3 && (
                         <section className="mx-auto max-w-7xl px-6 py-24">
                             <div className="mb-12 flex items-center justify-between">
                                 <div>
                                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                        Latest from our Blog
+                                        Most Read
                                     </h2>
-                                    <p className="mt-4 text-lg text-gray-600">
-                                        Stay updated with our latest articles
-                                        and insights
-                                    </p>
                                 </div>
                                 <Link
                                     href={route('blog.index')}
@@ -541,7 +539,7 @@ export default function Index({
                             </div>
 
                             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                {latestPosts.map((post) => (
+                                {mostReadPosts.map((post) => (
                                     <motion.div
                                         key={post.id}
                                         initial={{ opacity: 0, y: 20 }}

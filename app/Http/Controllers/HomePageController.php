@@ -57,6 +57,8 @@ class HomePageController extends Controller
             ->take(6)
             ->get();
 
+        $mostReadPosts = BlogPost::popularThisWeek();
+
         return Inertia::render('Index', [
             'users' => $users,
             'categories' => CategoryResource::collection($categories),
@@ -64,6 +66,7 @@ class HomePageController extends Controller
             'packagesCount' => Package::count(),
             'stars' => $stars,
             'latestPosts' => BlogPostResource::collection($latestPosts),
+            'mostReadPosts' => BlogPostResource::collection($mostReadPosts),
         ]);
     }
 }

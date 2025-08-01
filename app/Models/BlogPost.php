@@ -106,6 +106,7 @@ class BlogPost extends Model implements HasMedia
             ->groupBy('blog_posts.id')
             ->orderByDesc('views_count')
             ->limit($limit)
+            ->with('categories')
             ->get();
     }
 
