@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import { Check, Mail, User } from 'lucide-react'
+import { Check, Mail, User, AtSign } from 'lucide-react'
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -24,6 +24,7 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            username: user.username,
         })
 
     const submit: FormEventHandler = (e) => {
@@ -75,6 +76,45 @@ export default function UpdateProfileInformation({
                         <InputError
                             className="mt-2"
                             message={errors.name}
+                        />
+                    </div>
+                </div>
+
+                <div className="rounded-lg border border-border bg-white p-4">
+                    <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-2">
+                            <AtSign
+                                size={18}
+                                className="text-primary"
+                            />
+                        </div>
+                        <div>
+                            <Label
+                                htmlFor="username"
+                                className="text-base font-medium text-gray-800"
+                            >
+                                Username
+                            </Label>
+                            <p className="text-xs text-gray-600">
+                                Your username as displayed on your profile
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="mt-4 pl-11">
+                        <Input
+                            id="username"
+                            className="block w-full"
+                            value={data.username}
+                            onChange={(e) =>
+                                setData('username', e.target.value)
+                            }
+                            required
+                            autoComplete="username"
+                        />
+                        <InputError
+                            className="mt-2"
+                            message={errors.username}
                         />
                     </div>
                 </div>
