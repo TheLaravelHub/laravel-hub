@@ -227,7 +227,7 @@ export default function UpdatePasswordForm({
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <div className="flex items-center gap-1 text-sm font-medium text-green-600 dark:text-green-400">
+                        <div className="flex items-center gap-1 text-sm font-medium text-green-600">
                             <Check size={16} />
                             <span>Password updated</span>
                         </div>

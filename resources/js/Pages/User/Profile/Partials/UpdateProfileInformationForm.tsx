@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import { Check, Mail, User } from 'lucide-react'
+import { Check, Mail, User, AtSign } from 'lucide-react'
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -24,6 +24,7 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            username: user.username,
         })
 
     const submit: FormEventHandler = (e) => {
@@ -82,6 +83,45 @@ export default function UpdateProfileInformation({
                 <div className="rounded-lg border border-border bg-white p-4">
                     <div className="flex items-center gap-3">
                         <div className="rounded-full bg-primary/10 p-2">
+                            <AtSign
+                                size={18}
+                                className="text-primary"
+                            />
+                        </div>
+                        <div>
+                            <Label
+                                htmlFor="username"
+                                className="text-base font-medium text-gray-800"
+                            >
+                                Username
+                            </Label>
+                            <p className="text-xs text-gray-600">
+                                Your username as displayed on your profile
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="mt-4 pl-11">
+                        <Input
+                            id="username"
+                            className="block w-full"
+                            value={data.username}
+                            onChange={(e) =>
+                                setData('username', e.target.value)
+                            }
+                            required
+                            autoComplete="username"
+                        />
+                        <InputError
+                            className="mt-2"
+                            message={errors.username}
+                        />
+                    </div>
+                </div>
+
+                <div className="rounded-lg border border-border bg-white p-4">
+                    <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-primary/10 p-2">
                             <Mail
                                 size={18}
                                 className="text-primary"
@@ -119,21 +159,21 @@ export default function UpdateProfileInformation({
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
-                    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-900/30 dark:bg-yellow-900/10">
-                        <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                    <div className="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+                        <p className="text-sm text-yellow-800">
                             Your email address is unverified.
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
-                                className="ml-1 font-medium text-yellow-600 underline hover:text-yellow-700 dark:text-yellow-400 dark:hover:text-yellow-300"
+                                className="ml-1 font-medium text-yellow-600 underline hover:text-yellow-700"
                             >
                                 Click here to re-send the verification email.
                             </Link>
                         </p>
 
                         {status === 'verification-link-sent' && (
-                            <div className="mt-2 text-sm font-medium text-green-600 dark:text-green-400">
+                            <div className="mt-2 text-sm font-medium text-green-600">
                                 A new verification link has been sent to your
                                 email address.
                             </div>
@@ -183,7 +223,7 @@ export default function UpdateProfileInformation({
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <div className="flex items-center gap-1 text-sm font-medium text-green-600 dark:text-green-400">
+                        <div className="flex items-center gap-1 text-sm font-medium text-green-600">
                             <Check size={16} />
                             <span>Saved successfully</span>
                         </div>
