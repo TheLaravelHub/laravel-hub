@@ -35,6 +35,8 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('username')
+                    ->searchable(),
                 Tables\Columns\ImageColumn::make('avatar')
                     ->circular(),
                 Tables\Columns\TextColumn::make('created_at')
