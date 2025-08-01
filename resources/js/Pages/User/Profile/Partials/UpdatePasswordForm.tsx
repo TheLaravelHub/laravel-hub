@@ -191,7 +191,12 @@ export default function UpdatePasswordForm({
                         whileTap={{ scale: 0.98 }}
                     >
                         <Button
-                            disabled={processing}
+                            disabled={
+                                processing ||
+                                !data.password ||
+                                !data.current_password ||
+                                !data.password_confirmation
+                            }
                             type="submit"
                             className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
                         >
