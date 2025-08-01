@@ -43,6 +43,9 @@ class PackageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('user.name')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('slug'),
                 Tables\Columns\TextColumn::make('stars')
                     ->numeric()

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
@@ -67,5 +68,14 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_admin;
+    }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        if (! empty($this->avatar)) {
+            return $this->avatar;
+        }
+
+        return 'https://ui-avatars.com/api/?name='.urlencode(Str::substr($this->name, 0, 1)).'&background=random&color=fff&size=128';
     }
 }
