@@ -15,31 +15,50 @@ import Footer from '@/components/shared/footer'
 import { formatNumber } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
-import StatsSection from '@/components/shared/stats-section'
 import CTASection from '@/components/shared/cta-section'
+import NewsletterSubscription from '@/components/newsletter-subscription'
 import { format } from 'date-fns'
 import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
 
 interface IndexProps {
+    users: {
+        name: string
+        avatar: string
+    }[]
     categories: Category[]
     packages: PackageType[]
     packagesCount: number
     stars: number
     latestPosts?: BlogPostType[]
+    mostReadPosts?: BlogPostType[]
 }
 
 export default function Index({
+    users,
     categories,
     packages,
     packagesCount,
     stars,
     latestPosts,
+    mostReadPosts,
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
     const [packagesData] = useState(packages)
     const packagesRef = useRef<HTMLDivElement>(null)
+
+    // Package data state
+
+    // Format date for blog posts
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString)
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        })
+    }
 
     // Animation variants
     const containerVariants = {
@@ -178,7 +197,115 @@ export default function Index({
                     <Navbar />
 
                     {/*Hero Section*/}
-                    <HeroSection categories={categories} />
+                    <HeroSection users={users} />
+
+                    {/* Latest Blog Posts Section */}
+                    {latestPosts && latestPosts.length > 0 && (
+                        <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16">
+                            <div className="mb-12 flex items-center justify-between">
+                                <div>
+                                    <motion.h2
+                                        className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{
+                                            type: 'spring',
+                                            stiffness: 100,
+                                        }}
+                                    >
+                                        Latest from our Blog
+                                    </motion.h2>
+                                    <motion.p
+                                        className="mt-4 text-lg text-gray-600"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{
+                                            delay: 0.1,
+                                            type: 'spring',
+                                            stiffness: 100,
+                                        }}
+                                    >
+                                        Stay updated with our latest articles
+                                        and insights
+                                    </motion.p>
+                                </div>
+                                <Link
+                                    href={route('blog.index')}
+                                    className="group hidden items-center gap-2 font-semibold text-primary transition-colors hover:text-primary/80 sm:flex"
+                                >
+                                    View all posts
+                                    <ArrowRight
+                                        className="transition-transform group-hover:translate-x-1"
+                                        size={20}
+                                    />
+                                </Link>
+                            </div>
+
+                            <motion.div
+                                className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+                                variants={containerVariants}
+                                initial="hidden"
+                                animate="visible"
+                            >
+                                {latestPosts.map((post) => (
+                                    <motion.div
+                                        key={post.id}
+                                        variants={cardVariants}
+                                        whileHover="hover"
+                                        layout
+                                    >
+                                        <Card className="group h-full overflow-hidden rounded-xl border border-border/50 bg-card/80 backdrop-blur-sm transition-all">
+                                            <Link
+                                                href={route('blog.show', {
+                                                    slug: post.slug,
+                                                })}
+                                            >
+                                                <div className="aspect-w-16 aspect-h-9 relative overflow-hidden">
+                                                    <img
+                                                        src={post.image}
+                                                        alt={post.title}
+                                                        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                    />
+                                                </div>
+                                                <CardContent className="p-6">
+                                                    <div className="mb-2 flex items-center gap-2 text-sm text-muted-foreground">
+                                                        <Calendar size={14} />
+                                                        <span>
+                                                            {formatDate(
+                                                                post.published_at,
+                                                            )}
+                                                        </span>
+                                                    </div>
+                                                    <h3 className="mb-2 line-clamp-2 text-xl font-bold tracking-tight transition-colors group-hover:text-primary">
+                                                        {post.title}
+                                                    </h3>
+                                                    <p className="line-clamp-3 text-muted-foreground">
+                                                        {post.sub_title ||
+                                                            post.meta_description}
+                                                    </p>
+                                                </CardContent>
+                                            </Link>
+                                        </Card>
+                                    </motion.div>
+                                ))}
+                            </motion.div>
+
+                            <div className="mt-8 flex justify-center sm:hidden">
+                                <Link
+                                    href={route('blog.index')}
+                                    className="group flex items-center gap-2 font-semibold text-primary transition-colors hover:text-primary/80"
+                                >
+                                    View all posts
+                                    <ArrowRight
+                                        className="transition-transform group-hover:translate-x-1"
+                                        size={20}
+                                    />
+                                </Link>
+                            </div>
+                        </section>
+                    )}
 
                     {/* Packages */}
                     <section
@@ -384,26 +511,17 @@ export default function Index({
                         </div>
                     </section>
 
-                    {/* Stats Section - Moved below search results */}
-                    <StatsSection
-                        totalPackages={packagesCount}
-                        totalStars={stars}
-                        totalCategories={categories.length}
-                        compact={false}
-                    />
+                    {/* Newsletter Section */}
+                    <NewsletterSubscription />
 
                     {/* Latest Blog Posts Section */}
-                    {latestPosts && latestPosts.length >= 3 && (
+                    {mostReadPosts && mostReadPosts.length >= 3 && (
                         <section className="mx-auto max-w-7xl px-6 py-24">
                             <div className="mb-12 flex items-center justify-between">
                                 <div>
                                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                        Latest from our Blog
+                                        Most Read
                                     </h2>
-                                    <p className="mt-4 text-lg text-gray-600">
-                                        Stay updated with our latest articles
-                                        and insights
-                                    </p>
                                 </div>
                                 <Link
                                     href={route('blog.index')}
@@ -418,7 +536,7 @@ export default function Index({
                             </div>
 
                             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                                {latestPosts.map((post) => (
+                                {mostReadPosts.map((post) => (
                                     <motion.div
                                         key={post.id}
                                         initial={{ opacity: 0, y: 20 }}

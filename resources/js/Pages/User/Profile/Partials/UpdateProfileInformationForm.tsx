@@ -20,12 +20,19 @@ export default function UpdateProfileInformation({
     const user = usePage().props.auth.user
     console.log(user)
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
-        useForm({
-            name: user.name,
-            email: user.email,
-            username: user.username,
-        })
+    const {
+        data,
+        setData,
+        patch,
+        errors,
+        processing,
+        recentlySuccessful,
+        isDirty,
+    } = useForm({
+        name: user.name,
+        email: user.email,
+        username: user.username,
+    })
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault()
@@ -188,7 +195,7 @@ export default function UpdateProfileInformation({
                     >
                         <Button
                             type="submit"
-                            disabled={processing}
+                            disabled={processing || !isDirty}
                             className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90"
                         >
                             <span className="mr-2">Update Profile</span>
