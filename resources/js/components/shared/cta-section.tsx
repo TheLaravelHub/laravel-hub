@@ -78,11 +78,10 @@ const CTASection = () => {
                             asChild
                             variant="default"
                             size="lg"
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 rounded-full"
                         >
                             <a
-                                href="https://github.com/TheLaravelHub/laravel-hub/discussions/new?category=package-submission"
-                                target="_blank"
+                                href={route('user.packages.create')}
                                 rel="noopener noreferrer"
                                 onClick={handlePackageSubmissionLinkClick}
                             >
@@ -100,7 +99,7 @@ const CTASection = () => {
                             asChild
                             variant="outline"
                             size="lg"
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-2 rounded-full"
                         >
                             <a
                                 href="https://github.com/TheLaravelHub/laravel-hub"
