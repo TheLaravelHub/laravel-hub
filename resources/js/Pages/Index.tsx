@@ -23,9 +23,11 @@ import { ThemeProvider } from '@/components/theme-provider'
 
 interface IndexProps {
     users: {
-        name: string
-        avatar: string
-    }[]
+        [id: number]: {
+            name: string
+            avatar: string
+        }
+    }
     categories: Category[]
     packages: PackageType[]
     packagesCount: number
@@ -36,10 +38,7 @@ interface IndexProps {
 
 export default function Index({
     users,
-    categories,
     packages,
-    packagesCount,
-    stars,
     latestPosts,
     mostReadPosts,
 }: IndexProps) {
@@ -47,8 +46,6 @@ export default function Index({
 
     const [packagesData] = useState(packages)
     const packagesRef = useRef<HTMLDivElement>(null)
-
-    // Package data state
 
     // Format date for blog posts
     const formatDate = (dateString: string) => {
