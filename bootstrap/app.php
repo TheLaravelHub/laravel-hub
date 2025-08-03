@@ -29,6 +29,7 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->command('app:publish-scheduled-posts')->hourly();
+        $schedule->command('disposable:update')->weekly();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         Integration::handles($exceptions);
