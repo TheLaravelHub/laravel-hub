@@ -597,11 +597,8 @@ export default function Index({
                                                 <div className="mt-4 flex items-center justify-between text-sm text-gray-500">
                                                     <div className="flex items-center gap-1">
                                                         <Calendar size={14} />
-                                                        {format(
-                                                            new Date(
-                                                                post.published_at,
-                                                            ),
-                                                            'MMM d, yyyy',
+                                                        {formatDate(
+                                                            post.published_at,
                                                         )}
                                                     </div>
                                                     <Link
