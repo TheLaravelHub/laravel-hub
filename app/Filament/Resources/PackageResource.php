@@ -10,12 +10,29 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 
     protected static ?string $navigationGroup = 'Packages';
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Owner' => $record->owner,
+            'Submitted By' => $record->user->name,
+        ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->with('user');
+    }
 
     public static function form(Form $form): Form
     {
