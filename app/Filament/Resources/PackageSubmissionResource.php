@@ -21,6 +21,12 @@ class PackageSubmissionResource extends Resource
         return false;
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->latest('created_at');
+    }
+
     public static function table(Table $table): Table
     {
         return $table
@@ -30,7 +36,11 @@ class PackageSubmissionResource extends Resource
                 Tables\Columns\ImageColumn::make('user.avatar_url')
                     ->label('')
                     ->circular()
-                    ->defaultImageUrl('https://ui-avatars.com/api/name=MM')
+                    ->defaultImageUrl(function ($record) {
+                        $initials = substr($record->name, 0, 2);
+
+                        return 'https://ui-avatars.com/api/?name='.urlencode($initials).'&color=FFFFFF&background=111827';
+                    })
                     ->width(40)
                     ->height(40),
                 Tables\Columns\TextColumn::make('user.name')
@@ -66,6 +76,7 @@ class PackageSubmissionResource extends Resource
                         ReviewStatus::APPROVED->value => 'Approved',
                         ReviewStatus::REJECTED->value => 'Rejected',
                     ])
+                    ->default(ReviewStatus::PENDING->value)
                     ->label('Status'),
             ])
             ->actions([
