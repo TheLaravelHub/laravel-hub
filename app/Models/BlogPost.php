@@ -99,7 +99,7 @@ class BlogPost extends Model implements HasMedia
     public static function popularThisWeek($limit = 6)
     {
         return self::query()
-            ->select('blog_posts.id', 'blog_posts.title', 'blog_posts.slug', DB::raw('COUNT(blog_post_views.id) as views_count'))
+            ->select('blog_posts.id', 'blog_posts.title', 'blog_posts.slug', 'blog_posts.published_at', DB::raw('COUNT(blog_post_views.id) as views_count'))
             ->join('blog_post_views', 'blog_posts.id', '=', 'blog_post_views.blog_post_id')
             ->whereBetween('blog_post_views.created_at', [now()->startOfWeek(), now()->endOfWeek()])
             ->published()

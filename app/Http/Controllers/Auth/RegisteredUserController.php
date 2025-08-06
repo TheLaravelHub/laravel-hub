@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'email' => 'required|string|lowercase|email|max:255|indisposable|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'cf_turnstile_response' => ['required', new TurnstileCheck],
         ], [], [
