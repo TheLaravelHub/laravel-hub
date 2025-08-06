@@ -17,8 +17,6 @@ class PackageCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
-
     protected static ?string $label = 'Package Categories';
 
     protected static ?string $navigationGroup = 'Packages';

@@ -16,8 +16,6 @@ class BlogPostCategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
-
     protected static ?string $label = 'Post Categories';
 
     protected static ?string $navigationGroup = 'Blog';

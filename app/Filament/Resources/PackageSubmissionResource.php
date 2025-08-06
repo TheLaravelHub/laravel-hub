@@ -16,8 +16,6 @@ class PackageSubmissionResource extends Resource
 
     protected static ?string $navigationGroup = 'Packages';
 
-    protected static ?string $navigationIcon = 'heroicon-o-arrow-turn-left-down';
-
     public static function canCreate(): bool
     {
         return false;

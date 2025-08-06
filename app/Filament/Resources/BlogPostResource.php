@@ -15,8 +15,6 @@ class BlogPostResource extends Resource
 
     protected static ?string $navigationGroup = 'Blog';
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-
     public static function form(Form $form): Form
     {
         return $form
