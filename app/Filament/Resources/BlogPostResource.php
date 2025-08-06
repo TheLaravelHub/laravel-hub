@@ -8,12 +8,19 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class BlogPostResource extends Resource
 {
     protected static ?string $model = BlogPost::class;
 
     protected static ?string $navigationGroup = 'Blog';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->latest('published_at');
+    }
 
     public static function form(Form $form): Form
     {
@@ -26,12 +33,22 @@ class BlogPostResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
+                    ->searchable()
+                    ->limit(30)
+                    ->tooltip(function (Tables\Columns\TextColumn $column): ?string {
+                        $state = $column->getState();
+                        if (strlen($state) <= 30) {
+                            return null;
+                        }
+
+                        return $state;
+                    }),
                 Tables\Columns\TextColumn::make('categories.name')
                     ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
@@ -55,7 +72,6 @@ class BlogPostResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-
                 Tables\Filters\SelectFilter::make('category')
                     ->relationship('categories', 'name')
                     ->multiple()
@@ -66,7 +82,8 @@ class BlogPostResource extends Resource
                         'drafted' => 'Drafted',
                         'scheduled' => 'Scheduled',
                         'published' => 'Published',
-                    ]),
+                    ])
+                    ->default('published'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
