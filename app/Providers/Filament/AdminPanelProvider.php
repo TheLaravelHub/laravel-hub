@@ -59,6 +59,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make('Blog')->icon('heroicon-o-clipboard-document-list'),
                 NavigationGroup::make('Packages')->icon('heroicon-o-archive-box-arrow-down'),
                 NavigationGroup::make('Users')->icon('heroicon-o-users'),
+                NavigationGroup::make('Marketing')->icon('heroicon-o-at-symbol'),
             ])
             ->middleware([
                 EncryptCookies::class,
