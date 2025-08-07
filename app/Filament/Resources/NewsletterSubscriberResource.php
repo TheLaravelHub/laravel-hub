@@ -25,6 +25,16 @@ class NewsletterSubscriberResource extends Resource
             ->latest();
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'success';
+    }
+
     public static function table(Table $table): Table
     {
         return $table
