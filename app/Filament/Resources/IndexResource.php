@@ -21,7 +21,7 @@ class IndexResource extends Resource
 {
     protected static ?string $model = Index::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
+    protected static ?string $navigationGroup = 'Packages';
 
     public static function form(Form $form): Form
     {
