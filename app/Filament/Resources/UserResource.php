@@ -46,6 +46,16 @@ class UserResource extends Resource
             ->latest('created_at');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'success';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
