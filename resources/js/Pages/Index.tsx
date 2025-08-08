@@ -28,10 +28,7 @@ interface IndexProps {
             avatar: string
         }
     }
-    categories: Category[]
     packages: PackageType[]
-    packagesCount: number
-    stars: number
     latestPosts?: BlogPostType[]
     mostReadPosts?: BlogPostType[]
 }
