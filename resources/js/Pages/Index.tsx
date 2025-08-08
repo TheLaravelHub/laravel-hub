@@ -4,10 +4,9 @@ import { ExternalLink, Star, ArrowRight, Calendar } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
 import { Link } from '@inertiajs/react'
 import {
-    Category,
-    MetaType,
     Package as PackageType,
     BlogPost as BlogPostType,
+    SocialAccountsSettings as SocialAccountsSettingsType,
 } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import HeroSection from '@/components/shared/hero-section'
@@ -31,6 +30,7 @@ interface IndexProps {
     packages: PackageType[]
     latestPosts?: BlogPostType[]
     mostReadPosts?: BlogPostType[]
+    socialAccountsSettings: SocialAccountsSettingsType
 }
 
 export default function Index({
@@ -38,6 +38,7 @@ export default function Index({
     packages,
     latestPosts,
     mostReadPosts,
+    socialAccountsSettings,
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
@@ -639,7 +640,7 @@ export default function Index({
                     <CTASection />
 
                     {/* Footer */}
-                    <Footer />
+                    <Footer socialAccountsSettings={socialAccountsSettings} />
                 </div>
             </AnimatedGradientBackground>
         </ThemeProvider>
