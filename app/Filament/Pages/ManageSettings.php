@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Pages\Settings\GeneralSettings;
 use App\Filament\Pages\Settings\SeoSettings;
+use App\Filament\Pages\Settings\SocialAccountsSettings;
 use AymanAlhattami\FilamentPageWithSidebar\FilamentPageSidebar;
 use AymanAlhattami\FilamentPageWithSidebar\PageNavigationItem;
 use AymanAlhattami\FilamentPageWithSidebar\Traits\HasPageSidebar;
@@ -30,6 +31,9 @@ class ManageSettings extends Page
                     ->icon('heroicon-o-cog'),
                 PageNavigationItem::make('SEO')
                     ->url(fn () => SeoSettings::getUrl())
+                    ->icon('heroicon-o-presentation-chart-bar'),
+                PageNavigationItem::make('Social Accounts')
+                    ->url(fn () => SocialAccountsSettings::getUrl())
                     ->icon('heroicon-o-at-symbol'),
             ]);
     }

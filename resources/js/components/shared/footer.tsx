@@ -5,16 +5,23 @@ import {
     Twitter,
     Linkedin,
     MessageSquare,
+    Facebook,
 } from 'lucide-react'
+import { SocialAccountsSettings as SocialAccountsSettingsType } from '@/types'
 import { motion } from 'framer-motion'
 import useClickTracker from '@/hooks/use-click-tracker'
 import { Link } from '@inertiajs/react'
 
-const Footer = () => {
+interface FooterProps {
+    socialAccountsSettings: SocialAccountsSettingsType
+}
+
+const Footer = ({ socialAccountsSettings }: FooterProps) => {
     const handleGithubProfileLinkClick = useClickTracker(
         'Github profile link clicked',
         { location: 'Footer' },
     )
+
     const handleXProfileLinkClick = useClickTracker('X profile link clicked', {
         location: 'Footer',
     })
@@ -255,50 +262,71 @@ const Footer = () => {
                         variants={itemVariants}
                         className="flex space-x-4"
                     >
-                        <motion.a
-                            href="https://github.com/thefeqy"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleGithubProfileLinkClick}
-                        >
-                            <Github size={16} />
-                        </motion.a>
-                        <motion.a
-                            href="https://x.com/thelaravelhub"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleXProfileLinkClick}
-                        >
-                            <Twitter size={16} />
-                        </motion.a>
-                        <motion.a
-                            href="https://www.linkedin.com/company/thelaravelhub"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleLinkedinLinkClick}
-                        >
-                            <Linkedin size={16} />
-                        </motion.a>
-                        <motion.a
-                            href="https://t.me/TheLaravelHub"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
-                            variants={socialLinkVariants}
-                            whileHover="hover"
-                            onClick={handleTelegramLinkClick}
-                        >
-                            <MessageSquare size={16} />
-                        </motion.a>
+                        {socialAccountsSettings.github && (
+                            <motion.a
+                                href={socialAccountsSettings.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                                variants={socialLinkVariants}
+                                whileHover="hover"
+                                onClick={handleGithubProfileLinkClick}
+                            >
+                                <Github size={16} />
+                            </motion.a>
+                        )}
+                        {socialAccountsSettings.x && (
+                            <motion.a
+                                href={socialAccountsSettings.x}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                                variants={socialLinkVariants}
+                                whileHover="hover"
+                                onClick={handleXProfileLinkClick}
+                            >
+                                <Twitter size={16} />
+                            </motion.a>
+                        )}
+                        {socialAccountsSettings.facebook && (
+                            <motion.a
+                                href={socialAccountsSettings.facebook}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                                variants={socialLinkVariants}
+                                whileHover="hover"
+                            >
+                                <Facebook size={16} />
+                            </motion.a>
+                        )}
+                        {socialAccountsSettings.telegram && (
+                            <motion.a
+                                href={socialAccountsSettings.telegram}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                                variants={socialLinkVariants}
+                                whileHover="hover"
+                                onClick={handleTelegramLinkClick}
+                            >
+                                <MessageSquare size={16} />
+                            </motion.a>
+                        )}
+                        {/*TODO: Add BlueSky link*/}
+                        {socialAccountsSettings.linkedin && (
+                            <motion.a
+                                href={socialAccountsSettings.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex h-8 w-8 items-center justify-center rounded-full bg-card text-muted-foreground shadow-sm transition-colors hover:text-primary"
+                                variants={socialLinkVariants}
+                                whileHover="hover"
+                                onClick={handleLinkedinLinkClick}
+                            >
+                                <Linkedin size={16} />
+                            </motion.a>
+                        )}
                         <motion.a
                             href="https://github.com/sponsors/thefeqy"
                             target="_blank"
