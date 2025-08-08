@@ -7,6 +7,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
@@ -46,12 +47,19 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('assets/images/logo.png'))
             ->brandLogoHeight('40px')
             ->brandName(env('APP_NAME', 'Laravel'))
+            ->sidebarCollapsibleOnDesktop()
             ->navigationItems([
                 NavigationItem::make('Home')
                     ->icon('heroicon-o-globe-alt')
                     ->url(config('app.url'))
                     ->openUrlInNewTab()
                     ->sort(0),
+            ])
+            ->navigationGroups([
+                NavigationGroup::make('Blog')->icon('heroicon-o-clipboard-document-list'),
+                NavigationGroup::make('Packages')->icon('heroicon-o-archive-box-arrow-down'),
+                NavigationGroup::make('Users')->icon('heroicon-o-users'),
+                NavigationGroup::make('Marketing')->icon('heroicon-o-at-symbol'),
             ])
             ->middleware([
                 EncryptCookies::class,
