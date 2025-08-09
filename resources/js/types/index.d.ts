@@ -139,3 +139,12 @@ export type PackageSubmission = {
     created_at: string
     updated_at: string
 }
+
+export type SocialAccountsSettings = {
+    github: string
+    x: string
+    facebook: string
+    telegram: string
+    bluesky: string
+    linkedin: string
+}
