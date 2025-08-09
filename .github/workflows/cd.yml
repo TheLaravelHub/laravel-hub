@@ -11,15 +11,19 @@ on:
         options: [Production, Development]
         required: true
 
-env:
-  ENVIRONMENT_NAME: ${{ github.ref_name == 'main' && 'Production' || 'Development' }}
-  BRANCH: ${{ github.ref_name }}
-
 jobs:
   create-env:
     name: Generate .env on Server
     runs-on: ubuntu-latest
-    environment: ${{ env.ENVIRONMENT_NAME }}
+    environment: ${{ github.event_name == 'workflow_dispatch'
+      && github.event.inputs.environment
+      || (github.ref_name == 'main' && 'Production' || 'Development') }}
+
+    env:
+      ENVIRONMENT_NAME: ${{ github.event_name == 'workflow_dispatch'
+        && github.event.inputs.environment
+        || (github.ref_name == 'main' && 'Production' || 'Development') }}
+      BRANCH: ${{ github.ref_name }}
 
     steps:
       - name: Generate .env via SSH
@@ -123,7 +127,15 @@ jobs:
     name: Deploy to Server
     runs-on: ubuntu-latest
     needs: create-env
-    environment: ${{ env.ENVIRONMENT_NAME }}
+    environment: ${{ github.event_name == 'workflow_dispatch'
+      && github.event.inputs.environment
+      || (github.ref_name == 'main' && 'Production' || 'Development') }}
+
+    env:
+      ENVIRONMENT_NAME: ${{ github.event_name == 'workflow_dispatch'
+        && github.event.inputs.environment
+        || (github.ref_name == 'main' && 'Production' || 'Development') }}
+      BRANCH: ${{ github.ref_name }}
 
     steps:
       - name: Deploy via SSH
