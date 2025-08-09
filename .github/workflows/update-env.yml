@@ -2,13 +2,18 @@ name: Update environment variables
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select the GitHub Environment to update"
+        type: choice
+        options: [Production, Development]
+        required: true
 
 jobs:
   re-build_env:
     name: Re-Build .env file values
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    environment: production
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
       - name: Generate .env via SSH
@@ -32,7 +37,7 @@ jobs:
             APP_MAINTENANCE_DRIVER=${{ vars.APP_MAINTENANCE_DRIVER }}
 
             PHP_CLI_SERVER_WORKERS=${{ vars.PHP_CLI_SERVER_WORKERS }}
-            BCRYPT_ROUNDS=${{ vars.BCRYPT_ROUNDS }}
+            BCRYPT_ROUNDS=${{ secrets.BCRYPT_ROUNDS }}
 
             LOG_CHANNEL=${{ vars.LOG_CHANNEL }}
             LOG_STACK=${{ vars.LOG_STACK }}
@@ -55,14 +60,14 @@ jobs:
             BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
             FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
             QUEUE_CONNECTION=${{ vars.QUEUE_CONNECTION }}
-            CACHE_STORE=${{ vars.CACHE_STORE }}
+            CACHE_STORE=${{ secrets.CACHE_STORE }}
             CACHE_PREFIX=${{ secrets.CACHE_PREFIX }}
 
             MEMCACHED_HOST=${{ vars.MEMCACHED_HOST }}
             REDIS_CLIENT=${{ vars.REDIS_CLIENT }}
             REDIS_HOST=${{ vars.REDIS_HOST }}
-            REDIS_PASSWORD=${{ vars.REDIS_PASSWORD }}
-            REDIS_PORT=${{ vars.REDIS_PORT }}
+            REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }}
+            REDIS_PORT=${{ secrets.REDIS_PORT }}
 
             MAIL_MAILER=${{ vars.MAIL_MAILER }}
             MAIL_FROM_ADDRESS=${{ vars.MAIL_FROM_ADDRESS }}
@@ -116,7 +121,6 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
-
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
