@@ -127,6 +127,7 @@ jobs:
     name: Deploy to Server
     runs-on: ubuntu-latest
     needs: create-env
+    # Inline the same expression here as well
     environment: ${{ github.event_name == 'workflow_dispatch'
       && github.event.inputs.environment
       || (github.ref_name == 'main' && 'Production' || 'Development') }}
@@ -147,6 +148,7 @@ jobs:
           script: |
             ENVIRONMENT="${{ env.ENVIRONMENT_NAME }}"
             BRANCH="${{ env.BRANCH }}"
+            PM2_NAME="${ENVIRONMENT,,}-ssr"
 
             cd ${{ secrets.DEPLOY_PATH }}
             git reset --hard
@@ -163,10 +165,10 @@ jobs:
             npm ci
             npm run build:ssr
 
-            if pm2 list | grep -q ssr; then
-              pm2 restart ssr
+            if pm2 list | grep -q "$PM2_NAME"; then
+              pm2 restart "$PM2_NAME"
             else
-              pm2 start bootstrap/ssr/ssr.js --name=ssr
+              pm2 start bootstrap/ssr/ssr.js --name="$PM2_NAME"
             fi
 
             php artisan config:cache
