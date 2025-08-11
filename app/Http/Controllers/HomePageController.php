@@ -8,7 +8,6 @@ use App\Queries\AvatarUsersMapQuery;
 use App\Queries\LatestPublishedPostsQuery;
 use App\Queries\MostReadPostsThisWeekQuery;
 use App\Queries\PackagesOrderedByFeaturedQuery;
-use App\Settings\SocialAccountsSettings;
 use Inertia\Inertia;
 
 class HomePageController extends Controller
@@ -20,15 +19,13 @@ class HomePageController extends Controller
         AvatarUsersMapQuery $users,
         PackagesOrderedByFeaturedQuery $packages,
         LatestPublishedPostsQuery $latestPosts,
-        MostReadPostsThisWeekQuery $mostReadPosts,
-        SocialAccountsSettings $socialAccountsSettings
+        MostReadPostsThisWeekQuery $mostReadPosts
     ) {
         return Inertia::render('Index', [
             'users' => $users->get(),
             'packages' => PackageResource::collection($packages->get()),
             'latestPosts' => BlogPostResource::collection($latestPosts->get()),
             'mostReadPosts' => BlogPostResource::collection($mostReadPosts->get()),
-            'socialAccountsSettings' => $socialAccountsSettings->toArray(),
         ]);
     }
 }
