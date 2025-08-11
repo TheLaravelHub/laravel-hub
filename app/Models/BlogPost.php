@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Spatie\FilamentMarkdownEditor\MarkdownEditor;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -138,7 +137,7 @@ class BlogPost extends Model implements HasMedia
                                                 ->required()
                                                 ->live(onBlur: true)
                                                 ->afterStateUpdated(function (Set $set, ?string $state) {
-                                                    $set('slug', Str::slug($state));
+                                                    $set('slug', Category::generateSlug($state));
                                                 }),
                                             TextInput::make('slug')
                                                 ->required(),
@@ -153,12 +152,13 @@ class BlogPost extends Model implements HasMedia
                                         ->required()
                                         ->maxLength(255)
                                         ->afterStateUpdated(function (Set $set, ?string $state) {
-                                            $set('slug', Str::slug($state));
+                                            $set('slug', self::generateSlug($state));
                                         }),
                                     TextInput::make('sub_title')
                                         ->maxLength(255),
                                     TextInput::make('slug')
                                         ->required()
+                                        ->unique(ignoreRecord: true)
                                         ->maxLength(255),
                                     MarkdownEditor::make('content')
                                         ->fileAttachmentsDisk('blog-posts')
