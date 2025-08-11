@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Str;
+
 trait HasSlug
 {
     /**
@@ -10,26 +12,41 @@ trait HasSlug
     public static function bootHasSlug(): void
     {
         static::creating(function ($model) {
-            $model->slug = $model->generateSlug();
+            if (empty($model->slug)) {
+                $sluggableColumn = $model->sluggable ?? 'name';
+                $model->slug = static::generateSlug($model->{$sluggableColumn});
+            }
         });
-
-        //        static::updating(function ($model) {
-        //            $model->slug = $model->generateSlug($model->name);
-        //        });
     }
 
     /**
      * Generate a unique slug for the model.
      */
-    protected function generateSlug(): string
+    public static function generateSlug(?string $name = null): string
     {
-        $sluggableColumn = $this->sluggable ?? 'name';
-        $sluggableValue = $this->{$sluggableColumn};
+        $instance = new static;
+        $sluggableColumn = $instance->sluggable ?? 'name';
+        $sluggableValue = $name ?? $instance->{$sluggableColumn};
 
-        $slug = \Str::slug($sluggableValue);
+        $slug = Str::slug($sluggableValue);
 
-        $count = $this->where('slug', $slug)->where('id', '!=', $this->id)->count();
+        return static::ensureUniqueSlug($slug);
+    }
 
-        return $count ? "{$slug}-{$count}" : $slug;
+    /**
+     * Ensure the slug is unique by appending a number if necessary.
+     */
+    private static function ensureUniqueSlug(string $slug, int $count = 0): string
+    {
+        $instance = new static;
+        $currentSlug = $count ? "{$slug}-{$count}" : $slug;
+
+        $exists = $instance->query()->where('slug', $currentSlug)->exists();
+
+        if ($exists) {
+            return static::ensureUniqueSlug($slug, $count + 1);
+        }
+
+        return $currentSlug;
     }
 }
