@@ -10,13 +10,12 @@ import {
 import { SocialAccountsSettings as SocialAccountsSettingsType } from '@/types'
 import { motion } from 'framer-motion'
 import useClickTracker from '@/hooks/use-click-tracker'
-import { Link } from '@inertiajs/react'
+import { Link, usePage } from '@inertiajs/react'
 
-interface FooterProps {
-    socialAccountsSettings: SocialAccountsSettingsType
-}
+const Footer = () => {
+    const socialAccountsSettings = usePage().props
+        .socialAccountsSettings as SocialAccountsSettingsType
 
-const Footer = ({ socialAccountsSettings }: FooterProps) => {
     const handleGithubProfileLinkClick = useClickTracker(
         'Github profile link clicked',
         { location: 'Footer' },

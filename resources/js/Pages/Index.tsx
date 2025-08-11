@@ -3,11 +3,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card'
 import { ExternalLink, Star, ArrowRight, Calendar } from 'lucide-react'
 import Navbar from '@/components/shared/navbar'
 import { Link } from '@inertiajs/react'
-import {
-    Package as PackageType,
-    BlogPost as BlogPostType,
-    SocialAccountsSettings as SocialAccountsSettingsType,
-} from '@/types'
+import { Package as PackageType, BlogPost as BlogPostType } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import HeroSection from '@/components/shared/hero-section'
 import Footer from '@/components/shared/footer'
@@ -16,7 +12,6 @@ import { motion } from 'framer-motion'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import CTASection from '@/components/shared/cta-section'
 import NewsletterSubscription from '@/components/newsletter-subscription'
-import { format } from 'date-fns'
 import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
 
@@ -30,7 +25,6 @@ interface IndexProps {
     packages: PackageType[]
     latestPosts?: BlogPostType[]
     mostReadPosts?: BlogPostType[]
-    socialAccountsSettings: SocialAccountsSettingsType
 }
 
 export default function Index({
@@ -38,7 +32,6 @@ export default function Index({
     packages,
     latestPosts,
     mostReadPosts,
-    socialAccountsSettings,
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
@@ -640,7 +633,7 @@ export default function Index({
                     <CTASection />
 
                     {/* Footer */}
-                    <Footer socialAccountsSettings={socialAccountsSettings} />
+                    <Footer />
                 </div>
             </AnimatedGradientBackground>
         </ThemeProvider>
