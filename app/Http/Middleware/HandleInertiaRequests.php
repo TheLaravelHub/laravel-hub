@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
+use App\Settings\SocialAccountsSettings;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
@@ -35,6 +36,8 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $socialAccountsSettings = app(SocialAccountsSettings::class);
+
         return [
             ...parent::share($request),
             'auth' => [
@@ -49,6 +52,7 @@ class HandleInertiaRequests extends Middleware
                 'error' => fn () => $request->session()->get('error'),
                 'message' => fn () => $request->session()->get('message'),
             ],
+            'socialAccountsSettings' => $socialAccountsSettings->toArray(),
         ];
     }
 }
