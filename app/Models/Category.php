@@ -16,7 +16,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str;
 use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
@@ -28,14 +27,6 @@ class Category extends Model
     use SoftDeletes;
 
     protected array $cascadeDeactivate = ['packages'];
-
-    protected static function boot()
-    {
-        parent::boot();
-        static::creating(static function ($category) {
-            $category->slug = Str::slug($category->name);
-        });
-    }
 
     //    public function casts()
     //    {
@@ -96,7 +87,7 @@ class Category extends Model
                                         ->required()
                                         ->maxLength(255)
                                         ->afterStateUpdated(function (Set $set, ?string $state) {
-                                            $set('slug', Str::slug($state));
+                                            $set('slug', self::generateSlug($state));
                                         }),
                                     TextInput::make('slug')
                                         ->required()
