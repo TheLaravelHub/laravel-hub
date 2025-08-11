@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
@@ -141,7 +140,7 @@ class Package extends Model
                                                 ->required()
                                                 ->live(onBlur: true)
                                                 ->afterStateUpdated(function (Set $set, ?string $state) {
-                                                    $set('slug', Str::slug($state));
+                                                    $set('slug', Category::generateSlug($state));
                                                 }),
                                             TextInput::make('slug')
                                                 ->required(),
@@ -198,7 +197,7 @@ class Package extends Model
 
                                                         $set('name', $data['name'] ?? '');
                                                         $set('meta_title', $data['name'] ?? '');
-                                                        $set('slug', Str::slug($data['name'] ?? ''));
+                                                        $set('slug', self::generateSlug($data['name'] ?? ''));
                                                         $set('description', $data['description'] ?? '');
                                                         $set('meta_description', $data['description'] ?? '');
                                                         $set('language', $data['language'] ?? '');
@@ -224,11 +223,10 @@ class Package extends Model
                                         ->required()
                                         ->maxLength(255)
                                         ->afterStateUpdated(function (Set $set, ?string $state) {
-                                            $set('slug', Str::slug($state));
+                                            $set('slug', self::generateSlug($state));
                                         }),
                                     TextInput::make('slug')
                                         ->required()
-                                        ->disabled()
                                         ->maxLength(255),
                                     Textarea::make('description')
                                         ->columnSpanFull(),
