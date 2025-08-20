@@ -27,13 +27,34 @@ class GeneratePackageOgImageAction
             $nodePath = exec('which node') ?: '/usr/bin/node';
             $npmPath = exec('which npm') ?: '/usr/bin/npm';
 
-            Browsershot::url($tempUrl)
+            $browserShot = Browsershot::url($tempUrl)
                 ->setNodeBinary($nodePath)
                 ->setNpmBinary($npmPath)
                 ->windowSize(1200, 630)
                 ->waitUntilNetworkIdle()
-                ->setScreenshotType('jpeg', 90)
-                ->save($fullPath);
+                ->setScreenshotType('jpeg', 90);
+
+            if (PHP_OS_FAMILY === 'Linux') {
+                $chromePaths = [
+                    '/usr/bin/google-chrome',
+                    '/usr/bin/google-chrome-stable',
+                    '/usr/bin/chromium',
+                    '/usr/bin/chromium-browser',
+                    '/snap/bin/chromium',
+                ];
+
+                foreach ($chromePaths as $chromePath) {
+                    if (file_exists($chromePath)) {
+                        $browserShot->setChromePath($chromePath);
+                        break;
+                    }
+                }
+
+                // Set no-sandbox flag for running in Docker/CI environments
+                $browserShot->noSandbox();
+            }
+
+            $browserShot->save($fullPath);
 
             if (file_exists($fullPath)) {
                 $media = $package->addMedia($fullPath)
