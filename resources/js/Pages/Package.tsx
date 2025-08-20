@@ -90,7 +90,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                     property="og:image"
                     content={
                         pkg.og_image ||
-                        // pkg.owner_avatar ||
+                        pkg.owner_avatar ||
                         `${appURL}/assets/images/og-image.png`
                     }
                 />
@@ -126,6 +126,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 <meta
                     name="twitter:image"
                     content={
+                        pkg.og_image ||
                         pkg.owner_avatar ||
                         `${appURL}/assets/images/og-image.png`
                     }
