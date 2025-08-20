@@ -124,6 +124,5 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            php artisan optimize:clear
+            php artisan optimize

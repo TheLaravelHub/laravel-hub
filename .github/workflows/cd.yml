@@ -174,8 +174,7 @@ jobs:
               pm2 start bootstrap/ssr/ssr.js --name="$PM2_NAME"
             fi
 
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            php artisan optimize:clear
+            php artisan optimize
 
             systemctl restart laravel-ssr
