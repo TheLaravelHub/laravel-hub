@@ -24,15 +24,18 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rule;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
-class Package extends Model
+class Package extends Model implements HasMedia
 {
     use Filterable;
     use HasActiveScope;
     use HasSlug;
     use HasStatus;
+    use InteractsWithMedia;
     use Searchable;
     use SoftDeletes;
 

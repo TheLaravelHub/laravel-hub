@@ -68,6 +68,7 @@ type Package = {
     stars: number
     owner?: string
     owner_avatar?: string
+    og_image?: string
     // status: { value: 'active' } | { value: 'inactive' }
     status: 'active' | 'inactive'
     created_at: string
