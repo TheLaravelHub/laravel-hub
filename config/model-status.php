@@ -1,5 +1,7 @@
 <?php
 
+use App\Support\AdminDetector;
+
 return [
 
     /*
@@ -69,5 +71,5 @@ return [
     | }
     |
     */
-    'admin_detector' => 'is_admin', // TODO: Fix admin detector in laravel model status package
+    'admin_detector' => [AdminDetector::class, 'check'], // TODO: Fix admin detector in laravel model status package
 ];
