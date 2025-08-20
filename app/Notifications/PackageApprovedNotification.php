@@ -4,10 +4,11 @@ namespace App\Notifications;
 
 use App\Models\PackageSubmission;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PackageApprovedNotification extends Notification
+class PackageApprovedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -41,17 +42,5 @@ class PackageApprovedNotification extends Notification
             ->action('View Your Package', url('/packages'))
             ->line('Thank you for contributing to the Laravel community!')
             ->salutation('The Laravel Hub Team');
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(object $notifiable): array
-    {
-        return [
-            //
-        ];
     }
 }
