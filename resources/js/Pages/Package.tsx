@@ -89,6 +89,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 <meta
                     property="og:image"
                     content={
+                        pkg.og_image ||
                         pkg.owner_avatar ||
                         `${appURL}/assets/images/og-image.png`
                     }

@@ -143,7 +143,7 @@ class PackageResource extends Resource
         return [
             'index' => Pages\ListPackages::route('/'),
             'create' => Pages\CreatePackage::route('/create'),
-            // 'edit' => Pages\EditPackage::route('/{record}/edit'),
+            'edit' => Pages\EditPackage::route('/{record}/edit'),
         ];
     }
 }

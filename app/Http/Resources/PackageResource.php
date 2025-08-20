@@ -31,6 +31,7 @@ class PackageResource extends JsonResource
             'stars' => $this->stars,
             'owner' => $this->owner,
             'owner_avatar' => $this->owner_avatar,
+            'og_image' => $this->getFirstMediaUrl('og-images'),
             'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
