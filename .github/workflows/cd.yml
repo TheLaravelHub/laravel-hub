@@ -66,6 +66,7 @@ jobs:
             SESSION_ENCRYPT=${{ vars.SESSION_ENCRYPT }}
             SESSION_PATH=${{ vars.SESSION_PATH }}
             SESSION_DOMAIN=${{ vars.SESSION_DOMAIN }}
+            SESSION_COOKIE=${{ secrets.SESSION_COOKIE }}
 
             BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
             FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
