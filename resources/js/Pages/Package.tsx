@@ -90,13 +90,13 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                     property="og:image"
                     content={
                         pkg.og_image ||
-                        pkg.owner_avatar ||
+                        // pkg.owner_avatar ||
                         `${appURL}/assets/images/og-image.png`
                     }
                 />
                 <meta
                     property="og:url"
-                    content={`${appURL}/packages/${pkg.slug}`}
+                    content={`${appURL}/package/${pkg.slug}`}
                 />
                 <meta
                     property="og:type"
@@ -138,7 +138,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                 {/* Canonical URL */}
                 <link
                     rel="canonical"
-                    href={`${appURL}/packages/${pkg.slug}`}
+                    href={`${appURL}/package/${pkg.slug}`}
                 />
 
                 {/* JSON-LD Structured Data for SEO */}
@@ -165,7 +165,7 @@ export default function Package({ package: pkg, readme }: PackageProps) {
                                 url: `${appURL}/assets/images/Laravel-Hub-logo.png`,
                             },
                         },
-                        url: `${appURL}/packages/${pkg.slug}`,
+                        url: `${appURL}/package/${pkg.slug}`,
                         image: `${appURL}/assets/images/og-image.png`,
                         dateCreated: pkg.created_at,
                         dateModified: pkg.updated_at,
