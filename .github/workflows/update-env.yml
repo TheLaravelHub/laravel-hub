@@ -111,6 +111,9 @@ jobs:
             TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
             VITE_TURNSTILE_SITE_KEY=${{ secrets.TURNSTILE_SITE_KEY }}
             VITE_TURNSTILE_SECRET_KEY=${{ secrets.TURNSTILE_SECRET_KEY }}
+
+            CHROME_PATH=${{ secrets.CHROME_PATH }}
+            BROWSERSHOT_USER_DATA_DIR=${{ secrets.BROWSERSHOT_USER_DATA_DIR }}
             EOF
 
       - name: Refresh configurations
