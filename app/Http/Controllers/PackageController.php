@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GeneratePackageOgImageAction;
 use App\Http\Resources\Admin\CategoryResource;
 use App\Http\Resources\PackageResource;
+use App\Jobs\GenerateOgImageForPackageJob;
 use App\Models\Category;
 use App\Models\Package;
 use App\Queries\PackageQuery;
 use App\Services\GitHubService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class PackageController extends Controller
@@ -50,16 +49,7 @@ class PackageController extends Controller
             ->firstOrFail();
 
         if (! $package->hasMedia('og-images')) {
-            try {
-                app(GeneratePackageOgImageAction::class)->handle($package);
-
-                $package->load('media');
-            } catch (\Exception $e) {
-                Log::error('Failed to generate OG image in controller', [
-                    'package_id' => $package->id,
-                    'error' => $e->getMessage(),
-                ]);
-            }
+            GenerateOgImageForPackageJob::dispatch($package);
         }
 
         return Inertia::render('Package', [

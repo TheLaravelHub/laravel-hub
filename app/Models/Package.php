@@ -32,6 +32,8 @@ use Thefeqy\ModelStatus\Traits\HasActiveScope;
 class Package extends Model implements HasMedia
 {
     use Filterable;
+
+    // TODO: Fix admin detector in laravel model status package
     use HasActiveScope;
     use HasSlug;
     use HasStatus;

@@ -66,6 +66,7 @@ jobs:
             SESSION_ENCRYPT=${{ vars.SESSION_ENCRYPT }}
             SESSION_PATH=${{ vars.SESSION_PATH }}
             SESSION_DOMAIN=${{ vars.SESSION_DOMAIN }}
+            SESSION_COOKIE=${{ secrets.SESSION_COOKIE }}
 
             BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
             FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
@@ -174,8 +175,8 @@ jobs:
               pm2 start bootstrap/ssr/ssr.js --name="$PM2_NAME"
             fi
 
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            php artisan optimize:clear
+            php artisan optimize
+            php artisan horizon:terminate
 
             systemctl restart laravel-ssr

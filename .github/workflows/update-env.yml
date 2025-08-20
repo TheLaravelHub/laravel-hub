@@ -56,6 +56,7 @@ jobs:
             SESSION_ENCRYPT=${{ vars.SESSION_ENCRYPT }}
             SESSION_PATH=${{ vars.SESSION_PATH }}
             SESSION_DOMAIN=${{ vars.SESSION_DOMAIN }}
+            SESSION_COOKIE=${{ secrets.SESSION_COOKIE }}
 
             BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
             FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}
@@ -124,6 +125,7 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_PATH }}
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            php artisan optimize:clear
+            php artisan optimize
+
+            php artisan horizon:terminate

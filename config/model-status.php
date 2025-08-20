@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
-
 return [
 
     /*
@@ -27,7 +25,7 @@ return [
     | The default is set to 10 characters, which is enough for "active"/"inactive".
     |
     */
-    'column_length' => env('MODEL_STATUS_COLUMN_LENGTH', 'inactive'),
+    'column_length' => env('MODEL_STATUS_COLUMN_LENGTH', 10),
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +69,5 @@ return [
     | }
     |
     */
-    'admin_detector' => function () {
-        return Auth::check() && Auth::user()->is_admin;
-    },
+    'admin_detector' => 'is_admin', // TODO: Fix admin detector in laravel model status package
 ];
