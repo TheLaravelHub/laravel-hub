@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\GetPackageRepoDataController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\NewsletterSubscriptionController;
+use App\Http\Controllers\OgImageController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PackageSubmissionController;
 use App\Http\Controllers\Profile\ProfileInformationController;
@@ -35,6 +36,11 @@ Route::prefix('blog')
 Route::get('get-repository-data', GetPackageRepoDataController::class)
     ->middleware('throttle:5,1')
     ->name('get-repository-data');
+
+// OG Image routes
+Route::get('og-images/package/{package}', [OgImageController::class, 'package'])
+    ->middleware('throttle:60,1')
+    ->name('og-images.package');
 
 Route::middleware(['auth', 'verified'])
     ->prefix('/user')
