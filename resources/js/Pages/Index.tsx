@@ -14,6 +14,7 @@ import CTASection from '@/components/shared/cta-section'
 import NewsletterSubscription from '@/components/newsletter-subscription'
 import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
+import { LazyImage } from '@/components/ui/lazy-image'
 
 interface IndexProps {
     users: {
@@ -251,10 +252,12 @@ export default function Index({
                                                 })}
                                             >
                                                 <div className="aspect-w-16 aspect-h-9 relative overflow-hidden">
-                                                    <img
+                                                    <LazyImage
                                                         src={post.image}
                                                         alt={post.title}
-                                                        className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                                                        className="h-48 w-full"
+                                                        placeholderClassName="animate-pulse"
+                                                        aspectRatio="16/9"
                                                     />
                                                 </div>
                                                 <CardContent className="p-6">
@@ -367,12 +370,7 @@ export default function Index({
                                                                 },
                                                             )}
                                                         >
-                                                            <motion.img
-                                                                src={
-                                                                    pkg.owner_avatar as string
-                                                                }
-                                                                alt={pkg.owner}
-                                                                className="h-14 w-14 rounded-full border-2 border-primary/20"
+                                                            <motion.div
                                                                 initial={{
                                                                     scale: 0.8,
                                                                     opacity: 0,
@@ -386,7 +384,19 @@ export default function Index({
                                                                         index *
                                                                         0.05,
                                                                 }}
-                                                            />
+                                                            >
+                                                                <LazyImage
+                                                                    src={
+                                                                        pkg.owner_avatar as string
+                                                                    }
+                                                                    alt={
+                                                                        pkg.owner
+                                                                    }
+                                                                    className="h-14 w-14 rounded-full border-2 border-primary/20"
+                                                                    placeholderClassName="rounded-full"
+                                                                    aspectRatio="1/1"
+                                                                />
+                                                            </motion.div>
                                                         </Link>
                                                         <div className="ml-4">
                                                             <Link
