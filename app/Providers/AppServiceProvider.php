@@ -7,6 +7,8 @@ use Filament\Tables\Actions\EditAction;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Queue\Events\JobFailed;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
@@ -39,6 +41,10 @@ class AppServiceProvider extends ServiceProvider
         $this->forceSSLOnProduction();
 
         $this->configurePasswordRateLimiting();
+
+        Queue::failing(function (JobFailed $job) {
+            // TODO: Send email
+        });
 
     }
 

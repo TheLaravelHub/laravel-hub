@@ -20,12 +20,12 @@ class GeneratePackageOgImageAction
             $storagePath = storage_path('app/public/package-og-images');
             $this->ensureDir($storagePath);
 
-            $filename = Str::slug($package->name) . '-' . Str::random(8) . '.jpg';
-            $fullPath = $storagePath . '/' . $filename;
+            $filename = Str::slug($package->name).'-'.Str::random(8).'.jpg';
+            $fullPath = $storagePath.'/'.$filename;
 
             // Binaries
             $nodePath = $this->which('node') ?? '/usr/bin/node';
-            $npmPath  = $this->which('npm')  ?? '/usr/bin/npm';
+            $npmPath = $this->which('npm') ?? '/usr/bin/npm';
 
             // Writable Chrome profile/cache dir
             $userDataDir = rtrim((string) env('BROWSERSHOT_USER_DATA_DIR', '/var/www/browsershot-cache'), '/');
@@ -33,7 +33,7 @@ class GeneratePackageOgImageAction
 
             // Ensure the env seen by the child process points to our writable dir
             foreach (['HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'] as $var) {
-                putenv($var . '=' . $userDataDir);
+                putenv($var.'='.$userDataDir);
                 $_ENV[$var] = $userDataDir;
                 $_SERVER[$var] = $userDataDir;
             }
@@ -79,12 +79,12 @@ class GeneratePackageOgImageAction
                     ->usingFileName($filename)
                     ->toMediaCollection('og-images', 'package-og-images');
 
-                Log::info('OG Image Generated: ' . $package->getFirstMediaUrl('og-images'));
+                Log::info('OG Image Generated: '.$package->getFirstMediaUrl('og-images'));
             } else {
                 Log::error('OG image file missing after save', ['path' => $fullPath]);
             }
         } catch (\Throwable $e) {
-            Log::error('OG Image Generation Error: ' . $e->getMessage(), ['exception' => $e]);
+            Log::error('OG Image Generation Error: '.$e->getMessage(), ['exception' => $e]);
             throw $e;
         }
     }
@@ -99,6 +99,7 @@ class GeneratePackageOgImageAction
     private function which(string $bin): ?string
     {
         $path = @exec(sprintf('command -v %s', escapeshellarg($bin)));
+
         return $path ?: null;
     }
 
