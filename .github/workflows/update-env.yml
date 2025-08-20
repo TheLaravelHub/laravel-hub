@@ -126,3 +126,5 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             php artisan optimize:clear
             php artisan optimize
+
+            php artisan horizon:terminate
