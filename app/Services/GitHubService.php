@@ -55,9 +55,11 @@ class GitHubService
 
         $apiUrl = "https://api.github.com/repos/{$owner}/{$repo}/readme";
 
+        $token = config('services.github.token');
+
         $response = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer '.env('GHUB_TOKEN'),
+            'Authorization' => 'Bearer '.$token,
         ])->get($apiUrl);
 
         if ($response->failed()) {

@@ -39,5 +39,6 @@ return [
         'client_id' => env('GHUB_ID'),
         'client_secret' => env('GHUB_SECRET'),
         'redirect' => env('GHUB_URL'),
+        'token' => env('GHUB_TOKEN'),
     ],
 ];
