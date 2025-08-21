@@ -171,10 +171,10 @@ jobs:
             npm ci
             npm run build:ssr
 
-            if pm2 list | grep -q "$PM2_NAME"; then
-              pm2 restart "$PM2_NAME"
+            if pm2 list | grep -q production-ssr; then
+              pm2 restart production-ssr
             else
-              pm2 start bootstrap/ssr/ssr.js --name="$PM2_NAME"
+              pm2 start bootstrap/ssr/ssr.js --name=production-ssr
             fi
 
             php artisan optimize:clear
