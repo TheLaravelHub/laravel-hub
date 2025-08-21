@@ -153,7 +153,7 @@ return [
     |
     */
 
-    'fast_termination' => false,
+    'fast_termination' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,7 @@ return [
     |
     */
 
-    'memory_limit' => 64,
+    'memory_limit' => 128,
 
     /*
     |--------------------------------------------------------------------------
@@ -183,13 +183,13 @@ return [
         'supervisor-1' => [
             'connection' => 'redis',
             'queue' => ['default'],
-            'balance' => 'auto',
+            'balance' => 'simple',
             'autoScalingStrategy' => 'time',
             'maxProcesses' => 1,
             'maxTime' => 0,
             'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 1,
+            'memory' => 256,
+            'tries' => 3,
             'timeout' => 60,
             'nice' => 0,
         ],
@@ -198,7 +198,8 @@ return [
     'environments' => [
         'production' => [
             'supervisor-1' => [
-                'maxProcesses' => 3,
+                'balance' => 'simple',
+                'maxProcesses' => 1,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
@@ -206,7 +207,8 @@ return [
 
         'local' => [
             'supervisor-1' => [
-                'maxProcesses' => 2,
+                'balance' => 'simple',
+                'maxProcesses' => 1,
             ],
         ],
     ],

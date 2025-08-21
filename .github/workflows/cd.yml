@@ -73,6 +73,8 @@ jobs:
             QUEUE_CONNECTION=${{ vars.QUEUE_CONNECTION }}
             CACHE_STORE=${{ secrets.CACHE_STORE }}
             CACHE_PREFIX=${{ secrets.CACHE_PREFIX }}
+            REDIS_DB=${{ secrets.REDIS_DB }}
+            HORIZON_PREFIX=${{ secrets.HORIZON_PREFIX }}
 
             MEMCACHED_HOST=${{ vars.MEMCACHED_HOST }}
             REDIS_CLIENT=${{ vars.REDIS_CLIENT }}
