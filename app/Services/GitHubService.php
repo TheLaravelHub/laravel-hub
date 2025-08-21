@@ -23,10 +23,11 @@ class GitHubService
         [$fullMatch, $owner, $repo] = $matches;
 
         $apiUrl = "https://api.github.com/repos/{$owner}/{$repo}";
+        $token = config('services.github.token');
 
         $response = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer '.env('GHUB_TOKEN'),
+            'Authorization' => "Bearer $token",
         ])->get($apiUrl);
 
         if ($response->failed()) {
@@ -59,7 +60,7 @@ class GitHubService
 
         $response = Http::withHeaders([
             'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => 'Bearer '.$token,
+            'Authorization' => "Bearer $token",
         ])->get($apiUrl);
 
         if ($response->failed()) {
