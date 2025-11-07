@@ -36,8 +36,9 @@ class PackageSubmissionResource extends Resource
                 Tables\Columns\ImageColumn::make('user.avatar_url')
                     ->label('')
                     ->circular()
-                    ->defaultImageUrl(function ($record) {
-                        $initials = substr($record->name, 0, 2);
+                    ->defaultImageUrl(function (PackageSubmission $record) {
+                        $name = $record->user?->name ?? 'User';
+                        $initials = mb_substr(preg_replace('/\s+/', '', $name), 0, 2) ?: 'UH';
 
                         return 'https://ui-avatars.com/api/?name='.urlencode($initials).'&color=FFFFFF&background=111827';
                     })
