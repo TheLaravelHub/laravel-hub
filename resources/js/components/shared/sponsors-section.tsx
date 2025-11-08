@@ -19,6 +19,12 @@ const SponsorsSection = () => {
             url: 'https://sentry.io/for/laravel?utm_source=laravel-hub&utm_medium=referral&utm_campaign=sponsors',
             width: 'w-48',
         },
+        {
+            name: 'DigitalOcean',
+            logo: 'https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg',
+            url: 'https://www.digitalocean.com/?refcode=1e75445fb83c&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge',
+            width: 'w-48',
+        },
         // Add more sponsors here in the future
         // {
         //     name: 'Sponsor Name',
@@ -98,14 +104,14 @@ const SponsorsSection = () => {
 
                 {/* Sponsors grid */}
                 <motion.div
-                    className="mx-auto grid max-w-6xl grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
+                    className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-8"
                     variants={containerVariants}
                 >
                     {sponsors.map((sponsor, index) => (
                         <motion.div
                             key={sponsor.name}
                             variants={itemVariants}
-                            className="relative"
+                            className="relative w-full sm:w-80"
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
