@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\PublishedScope;
 use App\Traits\HasSlug;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Grid;
@@ -28,8 +29,13 @@ class BlogPost extends Model implements HasMedia
 
     protected $sluggable = 'title';
 
+    /**
+     * The "booted" method of the model.
+     */
     protected static function booted(): void
     {
+        static::addGlobalScope(new PublishedScope);
+
         static::creating(function (BlogPost $blogPost) {
             if ($blogPost->status === 'published' && empty($blogPost->published_at)) {
                 $blogPost->published_at = now();
@@ -109,7 +115,7 @@ class BlogPost extends Model implements HasMedia
             ->get();
     }
 
-    public static function getFormSchema(?int $categoryId = null, ?int $indexId = null): array
+    public static function getFormSchema(?int $categoryId = null): array
     {
         return [
             Grid::make(3)
