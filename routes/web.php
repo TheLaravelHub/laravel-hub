@@ -30,7 +30,7 @@ Route::prefix('blog')
     ->controller(BlogController::class)
     ->group(function () {
         Route::get('/', 'index')->name('blog.index');
-        Route::get('/{slug}', 'show')->name('blog.show');
+        Route::get('/{blog_post:slug}', 'show')->name('blog.show');
     });
 
 Route::get('get-repository-data', GetPackageRepoDataController::class)

@@ -11,6 +11,7 @@ import { formatNumber } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import CTASection from '@/components/shared/cta-section'
+import SponsorsSection from '@/components/shared/sponsors-section'
 import NewsletterSubscription from '@/components/newsletter-subscription'
 import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -186,11 +187,11 @@ export default function Index({
                     <Navbar />
 
                     {/*Hero Section*/}
-                    <HeroSection users={users} />
+                    {/* <HeroSection users={users} /> */}
 
                     {/* Latest Blog Posts Section */}
                     {latestPosts && latestPosts.length > 0 && (
-                        <section className="relative z-10 mx-auto w-full max-w-7xl px-6 py-16">
+                        <section className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-36">
                             <div className="mb-12 flex items-center justify-between">
                                 <div>
                                     <motion.h2
@@ -639,8 +640,11 @@ export default function Index({
                         </section>
                     )}
 
+                    {/* Sponsors Section */}
+                    <SponsorsSection />
+
                     {/* CTA Section */}
-                    <CTASection />
+                    {/* <CTASection /> */}
 
                     {/* Footer */}
                     <Footer />
