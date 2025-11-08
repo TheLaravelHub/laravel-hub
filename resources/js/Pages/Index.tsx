@@ -11,6 +11,7 @@ import { formatNumber } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import CTASection from '@/components/shared/cta-section'
+import SponsorsSection from '@/components/shared/sponsors-section'
 import NewsletterSubscription from '@/components/newsletter-subscription'
 import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
@@ -639,8 +640,11 @@ export default function Index({
                         </section>
                     )}
 
+                    {/* Sponsors Section */}
+                    <SponsorsSection />
+
                     {/* CTA Section */}
-                    <CTASection />
+                    {/* <CTASection /> */}
 
                     {/* Footer */}
                     <Footer />
