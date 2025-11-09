@@ -105,6 +105,10 @@ export default function Index({
 
                     {/* Open Graph (Facebook, LinkedIn, etc.) */}
                     <meta
+                        property="og:type"
+                        content="website"
+                    />
+                    <meta
                         property="og:title"
                         content="Laravel Hub – The Central Community for Laravel Developers"
                     />
@@ -121,12 +125,12 @@ export default function Index({
                         content={`${appURL}`}
                     />
                     <meta
-                        property="og:type"
-                        content="website"
-                    />
-                    <meta
                         property="og:site_name"
                         content="Laravel Hub"
+                    />
+                    <meta
+                        property="og:locale"
+                        content="en_US"
                     />
 
                     {/* Twitter Meta Tags */}
@@ -135,26 +139,37 @@ export default function Index({
                         content="summary_large_image"
                     />
                     <meta
+                        name="twitter:site"
+                        content="@thelaravelhub"
+                    />
+                    <meta
                         name="twitter:title"
                         content="Laravel Hub – The Central Community for Laravel Developers"
+                    />
+                    <meta
+                        property="twitter:image"
+                        content={`${appURL}/assets/images/og-image.png`}
                     />
                     <meta
                         name="twitter:description"
                         content="Discover and explore the best Laravel packages, stay updated with curated content, and connect with other professionals in the ecosystem."
                     />
-                    <meta
-                        name="twitter:image"
-                        content={`${appURL}/assets/images/og-image.png`}
-                    />
-                    <meta
-                        name="twitter:site"
-                        content="@thelaravelhub"
-                    />
 
-                    {/* Canonical URL */}
+                    {/* Canonical and Home URLs */}
                     <link
                         rel="canonical"
                         href={`${appURL}`}
+                    />
+                    <link
+                        rel="home"
+                        href={`${appURL}/`}
+                    />
+
+                    {/* Favicon */}
+                    <link
+                        rel="icon"
+                        type="image/x-icon"
+                        href={`${appURL}/assets/images/favicon.ico`}
                     />
 
                     {/* JSON-LD Structured Data for SEO */}
