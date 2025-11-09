@@ -45,8 +45,19 @@ class SeoSettings extends SettingsPage
                 ]),
 
             Forms\Components\Section::make('Open Graph Settings')
-                ->description('Settings for social media sharing via Open Graph protocol')
+                ->description('Settings for social media sharing via Open Graph protocol (Facebook, LinkedIn, etc.)')
                 ->schema([
+                    Forms\Components\Grid::make(2)
+                        ->schema([
+                            Forms\Components\TextInput::make('og_type')
+                                ->label('OG Type')
+                                ->default('website')
+                                ->helperText('The type of content (e.g., website, article)'),
+                            Forms\Components\TextInput::make('og_locale')
+                                ->label('OG Locale')
+                                ->default('en_US')
+                                ->helperText('Language and region (e.g., en_US, fr_FR)'),
+                        ]),
                     Forms\Components\TextInput::make('og_title')
                         ->label('OG Title')
                         ->helperText('Title that appears when shared on social media'),
@@ -54,21 +65,42 @@ class SeoSettings extends SettingsPage
                         ->label('OG Description')
                         ->helperText('Description that appears when shared on social media')
                         ->rows(3),
+                    Forms\Components\TextInput::make('og_image')
+                        ->label('OG Image URL')
+                        ->helperText('Full URL to the image (e.g., https://laravel-hub.com/assets/images/og-image.png)')
+                        ->url(),
                     Forms\Components\Grid::make(2)
                         ->schema([
                             Forms\Components\TextInput::make('og_url')
                                 ->label('OG URL')
-                                ->helperText('The canonical URL for your page'),
-                            Forms\Components\TextInput::make('og_type')
-                                ->label('OG Type')
-                                ->default('website')
-                                ->helperText('The type of content being shared'),
+                                ->helperText('The canonical URL for your page')
+                                ->url(),
+                            Forms\Components\TextInput::make('og_site_name')
+                                ->label('OG Site Name')
+                                ->helperText('Your website name (e.g., Laravel Hub)'),
                         ]),
                 ]),
 
             Forms\Components\Section::make('Twitter Card Settings')
                 ->description('Settings for Twitter card appearance')
                 ->schema([
+                    Forms\Components\Grid::make(2)
+                        ->schema([
+                            Forms\Components\Select::make('twitter_card')
+                                ->label('Twitter Card Type')
+                                ->options([
+                                    'summary' => 'Summary',
+                                    'summary_large_image' => 'Summary Large Image',
+                                    'app' => 'App',
+                                    'player' => 'Player',
+                                ])
+                                ->default('summary_large_image')
+                                ->helperText('Card type for Twitter sharing'),
+                            Forms\Components\TextInput::make('twitter_site')
+                                ->label('Twitter Site Handle')
+                                ->helperText('Your Twitter username (e.g., @thelaravelhub)')
+                                ->prefix('@'),
+                        ]),
                     Forms\Components\TextInput::make('twitter_title')
                         ->label('Twitter Title')
                         ->helperText('Title that appears in Twitter cards'),
@@ -76,6 +108,10 @@ class SeoSettings extends SettingsPage
                         ->label('Twitter Description')
                         ->helperText('Description that appears in Twitter cards')
                         ->rows(3),
+                    Forms\Components\TextInput::make('twitter_image')
+                        ->label('Twitter Image URL')
+                        ->helperText('Full URL to the image for Twitter cards')
+                        ->url(),
                 ]),
         ];
     }

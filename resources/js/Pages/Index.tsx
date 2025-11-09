@@ -17,6 +17,24 @@ import AppHead from '@/components/shared/AppHead'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LazyImage } from '@/components/ui/lazy-image'
 
+interface SeoSettings {
+    title: string
+    description: string
+    keywords: string
+    og_type: string
+    og_title: string
+    og_description: string
+    og_image?: string
+    og_url?: string
+    og_site_name: string
+    og_locale: string
+    twitter_card: string
+    twitter_site: string
+    twitter_title: string
+    twitter_description: string
+    twitter_image?: string
+}
+
 interface IndexProps {
     users: {
         [id: number]: {
@@ -27,6 +45,7 @@ interface IndexProps {
     packages: PackageType[]
     latestPosts?: BlogPostType[]
     mostReadPosts?: BlogPostType[]
+    seoSettings: SeoSettings
 }
 
 export default function Index({
@@ -34,6 +53,7 @@ export default function Index({
     packages,
     latestPosts,
     mostReadPosts,
+    seoSettings,
 }: IndexProps) {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
 
@@ -90,71 +110,92 @@ export default function Index({
             storageKey="vite-ui-theme"
         >
             <AnimatedGradientBackground className="min-h-screen">
-                <AppHead title="Laravel Hub – The Central Community for Laravel Developers">
+                <AppHead title={seoSettings.title}>
                     {/* Meta Description */}
                     <meta
                         name="description"
-                        content="Laravel Hub is an all-in-one platform and community for Laravel developers to discover packages, stay updated with curated content, and connect with other professionals in the ecosystem."
+                        content={seoSettings.description}
                     />
 
                     {/* Keywords */}
                     <meta
                         name="keywords"
-                        content="Laravel Hub, Laravel community, Laravel packages, PHP libraries, Laravel tutorials, Laravel news, Laravel ecosystem, Laravel developers, Laravel blog posts, Laravel podcasts, Laravel videos"
+                        content={seoSettings.keywords}
                     />
 
                     {/* Open Graph (Facebook, LinkedIn, etc.) */}
                     <meta
+                        property="og:type"
+                        content={seoSettings.og_type}
+                    />
+                    <meta
                         property="og:title"
-                        content="Laravel Hub – The Central Community for Laravel Developers"
+                        content={seoSettings.og_title}
                     />
                     <meta
                         property="og:description"
-                        content="An all-in-one platform where Laravel developers can discover packages, stay updated with curated content, and connect with other professionals in the ecosystem."
+                        content={seoSettings.og_description}
                     />
-                    <meta
-                        property="og:image"
-                        content={`${appURL}/assets/images/og-image.png`}
-                    />
-                    <meta
-                        property="og:url"
-                        content={`${appURL}`}
-                    />
-                    <meta
-                        property="og:type"
-                        content="website"
-                    />
+                    {seoSettings.og_image && (
+                        <meta
+                            property="og:image"
+                            content={seoSettings.og_image}
+                        />
+                    )}
+                    {seoSettings.og_url && (
+                        <meta
+                            property="og:url"
+                            content={seoSettings.og_url}
+                        />
+                    )}
                     <meta
                         property="og:site_name"
-                        content="Laravel Hub"
+                        content={seoSettings.og_site_name}
+                    />
+                    <meta
+                        property="og:locale"
+                        content={seoSettings.og_locale}
                     />
 
                     {/* Twitter Meta Tags */}
                     <meta
                         name="twitter:card"
-                        content="summary_large_image"
-                    />
-                    <meta
-                        name="twitter:title"
-                        content="Laravel Hub – The Central Community for Laravel Developers"
-                    />
-                    <meta
-                        name="twitter:description"
-                        content="Discover and explore the best Laravel packages, stay updated with curated content, and connect with other professionals in the ecosystem."
-                    />
-                    <meta
-                        name="twitter:image"
-                        content={`${appURL}/assets/images/og-image.png`}
+                        content={seoSettings.twitter_card}
                     />
                     <meta
                         name="twitter:site"
-                        content="@thelaravelhub"
+                        content={seoSettings.twitter_site}
+                    />
+                    <meta
+                        name="twitter:title"
+                        content={seoSettings.twitter_title}
+                    />
+                    {seoSettings.twitter_image && (
+                        <meta
+                            property="twitter:image"
+                            content={seoSettings.twitter_image}
+                        />
+                    )}
+                    <meta
+                        name="twitter:description"
+                        content={seoSettings.twitter_description}
                     />
 
-                    {/* Canonical URL */}
+                    {/* Canonical and Home URLs */}
                     <link
                         rel="canonical"
-                        href={`${appURL}`}
+                        href={seoSettings.og_url || `${appURL}`}
+                    />
+                    <link
+                        rel="home"
+                        href={`${appURL}/`}
+                    />
+
+                    {/* Favicon */}
+                    <link
+                        rel="icon"
+                        type="image/x-icon"
+                        href={`${appURL}/assets/images/favicon.ico`}
                     />
 
                     {/* JSON-LD Structured Data for SEO */}
