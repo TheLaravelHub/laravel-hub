@@ -28,6 +28,26 @@
             href="{{ asset('assets/images/favicon.ico') }}"
         />
 
+        <!-- RSS Feeds -->
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Blog Posts RSS Feed"
+            href="{{ route('feeds.blog') }}"
+        />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Packages RSS Feed"
+            href="{{ route('feeds.packages') }}"
+        />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Combined RSS Feed"
+            href="{{ route('feeds.combined') }}"
+        />
+
         <!-- Scripts -->
         @routes
         @viteReactRefresh

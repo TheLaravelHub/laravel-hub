@@ -24,12 +24,14 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\Rule;
 use Laravel\Scout\Attributes\SearchUsingFullText;
 use Laravel\Scout\Searchable;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Thefeqy\ModelStatus\Casts\StatusCast;
 use Thefeqy\ModelStatus\Traits\HasActiveScope;
 
-class Package extends Model implements HasMedia
+class Package extends Model implements Feedable, HasMedia
 {
     use Filterable;
 
@@ -291,5 +293,38 @@ class Package extends Model implements HasMedia
         static::updated(function (Package $package) {
             $package->searchable();
         });
+    }
+
+    /**
+     * Get all feed items for RSS feed
+     */
+    public static function getFeedItems()
+    {
+        return static::with(['categories', 'user'])
+            ->where('status', 'active')
+            ->orderByDesc('created_at')
+            ->limit(50)
+            ->get();
+    }
+
+    /**
+     * Convert this model to a feed item
+     */
+    public function toFeedItem(): FeedItem
+    {
+        $feedItem = FeedItem::create()
+            ->id(route('packages.show', $this->slug))
+            ->title($this->name)
+            ->summary($this->description ?? 'No description available')
+            ->updated($this->updated_at)
+            ->link(route('packages.show', $this->slug))
+            ->category(...$this->categories->pluck('name')->toArray());
+
+        if ($this->user) {
+            $feedItem->authorName($this->user->name)
+                ->authorEmail($this->user->email);
+        }
+
+        return $feedItem;
     }
 }

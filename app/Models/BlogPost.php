@@ -17,11 +17,13 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Spatie\FilamentMarkdownEditor\MarkdownEditor;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class BlogPost extends Model implements HasMedia
+class BlogPost extends Model implements Feedable, HasMedia
 {
     use HasSlug;
     use InteractsWithMedia;
@@ -210,5 +212,33 @@ class BlogPost extends Model implements HasMedia
                         ]),
                 ]),
         ];
+    }
+
+    /**
+     * Get all feed items for RSS feed
+     */
+    public static function getFeedItems()
+    {
+        return static::with(['author', 'categories'])
+            ->published()
+            ->orderByDesc('published_at')
+            ->limit(50)
+            ->get();
+    }
+
+    /**
+     * Convert this model to a feed item
+     */
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id(route('blog.show', $this->slug))
+            ->title($this->title)
+            ->summary($this->sub_title ?? strip_tags(substr($this->content, 0, 200)).'...')
+            ->updated($this->updated_at)
+            ->link(route('blog.show', $this->slug))
+            ->authorName($this->author->name)
+            ->authorEmail($this->author->email)
+            ->category(...$this->categories->pluck('name')->toArray());
     }
 }
