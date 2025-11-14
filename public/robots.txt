@@ -1,3 +1,8 @@
 User-agent: *
 Disallow:
 Sitemap: https://laravel-hub.com/sitemap.xml
+
+# RSS Feeds
+# Blog Posts: https://laravel-hub.com/rss/blog
+# Packages: https://laravel-hub.com/rss/packages
+# Combined Feed: https://laravel-hub.com/rss/feed

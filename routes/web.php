@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomePageController::class)->name('homepage');
 Route::get('/sitemap.xml', SitemapGeneratorController::class);
 
+// RSS Feeds - Powered by Spatie Laravel Feed
+Route::feeds();
+
 Route::post('/newsletter/subscribe', NewsletterSubscriptionController::class)
     ->middleware('throttle:1,1')
     ->name('newsletter.subscribe');
