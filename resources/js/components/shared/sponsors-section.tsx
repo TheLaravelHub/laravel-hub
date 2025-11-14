@@ -25,6 +25,12 @@ const SponsorsSection = () => {
             url: 'https://www.digitalocean.com/?refcode=1e75445fb83c&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge',
             width: 'w-48',
         },
+        {
+            name: 'Re-Share',
+            logo: 'https://re-share.com/assets/images/logo-light.png',
+            url: 'https://re-share.com?utm_source=laravel-hub&utm_medium=referral&utm_campaign=sponsors',
+            width: 'w-48',
+        },
         // Add more sponsors here in the future
         // {
         //     name: 'Sponsor Name',
