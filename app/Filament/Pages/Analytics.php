@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\BlogAnalyticsStats;
 use App\Filament\Widgets\BlogViewsChart;
 use Filament\Pages\Page;
 
@@ -22,6 +23,7 @@ class Analytics extends Page
     public function getWidgets(): array
     {
         return [
+            BlogAnalyticsStats::class,
             BlogViewsChart::class,
         ];
     }
