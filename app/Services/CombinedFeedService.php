@@ -36,7 +36,7 @@ class CombinedFeedService
 
                 $feedItem = FeedItem::create()
                     ->id(route('blog.show', $post->slug))
-                    ->title('[Blog Post] '.$post->title)
+                    ->title($post->title)
                     ->summary($description)
                     ->updated($post->updated_at)
                     ->link(route('blog.show', $post->slug))
@@ -72,7 +72,7 @@ class CombinedFeedService
 
                 $feedItem = FeedItem::create()
                     ->id(route('packages.show', $package->slug))
-                    ->title('[Package] '.$package->name)
+                    ->title('Package: '.$package->name)
                     ->summary($description)
                     ->updated($package->updated_at)
                     ->link(route('packages.show', $package->slug))
