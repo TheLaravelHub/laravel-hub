@@ -13,16 +13,31 @@ class CombinedFeedService
      */
     public static function getFeedItems()
     {
-        $blogPosts = BlogPost::with(['author', 'categories'])
+        $blogPosts = BlogPost::with(['author', 'categories', 'media'])
             ->published()
             ->orderByDesc('published_at')
             ->limit(25)
             ->get()
             ->map(function ($post) {
+                // Get blog post image from media library
+                $imageUrl = $post->getFirstMediaUrl();
+
+                // Build description with image if available
+                $description = $post->sub_title ?? strip_tags(substr($post->content, 0, 200)).'...';
+                if ($imageUrl) {
+                    $description = sprintf(
+                        '<p><a href="%s"><img src="%s" alt="%s"></a></p><hr>%s',
+                        route('blog.show', $post->slug),
+                        $imageUrl,
+                        htmlspecialchars($post->title),
+                        $description
+                    );
+                }
+
                 $feedItem = FeedItem::create()
                     ->id(route('blog.show', $post->slug))
                     ->title('[Blog Post] '.$post->title)
-                    ->summary($post->sub_title ?? strip_tags(substr($post->content, 0, 200)).'...')
+                    ->summary($description)
                     ->updated($post->updated_at)
                     ->link(route('blog.show', $post->slug))
                     ->authorName($post->author->name)
@@ -41,10 +56,25 @@ class CombinedFeedService
             ->limit(25)
             ->get()
             ->map(function ($package) {
+                // Get package OG image URL
+                $imageUrl = route('og-images.package', $package);
+
+                // Build description with OG image
+                $description = $package->description ?? 'No description available';
+                if ($imageUrl) {
+                    $description = sprintf(
+                        '<p><a href="%s"><img src="%s" alt="%s"></a></p><hr>%s',
+                        route('packages.show', $package->slug),
+                        $imageUrl,
+                        htmlspecialchars($package->name),
+                        $description
+                    );
+                }
+
                 $feedItem = FeedItem::create()
                     ->id(route('packages.show', $package->slug))
                     ->title('[Package] '.$package->name)
-                    ->summary($package->description ?? 'No description available')
+                    ->summary($description)
                     ->updated($package->updated_at)
                     ->link(route('packages.show', $package->slug))
                     ->category(...$package->categories->pluck('name')->toArray());
