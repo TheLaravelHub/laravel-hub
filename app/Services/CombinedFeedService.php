@@ -50,14 +50,13 @@ class CombinedFeedService
                 ];
             });
 
-        $packages = Package::with(['categories', 'user'])
+        $packages = Package::with(['categories', 'user', 'media'])
             ->where('status', 'active')
             ->orderByDesc('created_at')
             ->limit(25)
             ->get()
             ->map(function ($package) {
-                // Get package OG image URL
-                $imageUrl = route('og-images.package', $package);
+                $imageUrl = $package->getFirstMediaUrl('og-images');
 
                 // Build description with OG image
                 $description = $package->description ?? 'No description available';
