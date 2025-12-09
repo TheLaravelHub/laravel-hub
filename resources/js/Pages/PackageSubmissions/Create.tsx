@@ -44,7 +44,7 @@ export default function Create({
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        post(route('user.packages.store'), {
+        post(route('app.user.packages.store'), {
             onSuccess: () => {
                 // Direct toast call that should work regardless of flash messages
                 toast.success('Your package has been submitted for review!')

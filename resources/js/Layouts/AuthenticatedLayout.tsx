@@ -44,7 +44,7 @@ export default function Authenticated({
                                     <BreadcrumbList>
                                         <BreadcrumbItem className="hidden md:block">
                                             <BreadcrumbLink
-                                                href={route('user.dashboard')}
+                                                href={route('app.feed.home')}
                                             >
                                                 Dashboard
                                             </BreadcrumbLink>

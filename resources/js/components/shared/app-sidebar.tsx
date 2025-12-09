@@ -53,10 +53,10 @@ const data = {
     navMain: [
         {
             title: 'Home',
-            url: route('user.dashboard'),
-            route: 'user.dashboard',
+            url: route('app.feed.home'),
+            route: 'app.feed.home',
             icon: Gauge,
-            isActive: route().current('user.dashboard'),
+            isActive: route().current('app.feed.home'),
         },
     ],
 }

@@ -81,7 +81,7 @@ const CTASection = () => {
                             className="flex items-center gap-2 rounded-full"
                         >
                             <a
-                                href={route('user.packages.create')}
+                                href={route('app.user.packages.create')}
                                 rel="noopener noreferrer"
                                 onClick={handlePackageSubmissionLinkClick}
                             >

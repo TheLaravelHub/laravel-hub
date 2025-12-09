@@ -33,7 +33,7 @@ export function NavUser({ user }: { user: User }) {
     const form = useForm()
 
     const handleLogout = () => {
-        form.post(route('logout'))
+        form.post(route('app.logout'))
     }
 
     return (
@@ -97,7 +97,7 @@ export function NavUser({ user }: { user: User }) {
                             <DropdownMenuItem>
                                 <Link
                                     href={route(
-                                        'user.profile.information.edit',
+                                        'app.user.profile.information.edit',
                                     )}
                                     className="flex items-center gap-2"
                                 >
