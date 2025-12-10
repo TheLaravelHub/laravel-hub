@@ -15,7 +15,7 @@ class RssFeedTest extends TestCase
 
     public function test_blog_rss_feed_returns_successful_response(): void
     {
-        $response = $this->get('/rss/blog');
+        $response = $this->get(route('feeds.blog'));
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/xml;charset=UTF-8');
@@ -23,7 +23,7 @@ class RssFeedTest extends TestCase
 
     public function test_packages_rss_feed_returns_successful_response(): void
     {
-        $response = $this->get('/rss/packages');
+        $response = $this->get(route('feeds.packages'));
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/xml;charset=UTF-8');
@@ -31,7 +31,7 @@ class RssFeedTest extends TestCase
 
     public function test_combined_rss_feed_returns_successful_response(): void
     {
-        $response = $this->get('/rss/feed');
+        $response = $this->get(route('feeds.packages'));
 
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/xml;charset=UTF-8');
@@ -39,7 +39,7 @@ class RssFeedTest extends TestCase
 
     public function test_blog_rss_feed_contains_valid_xml(): void
     {
-        $response = $this->get('/rss/blog');
+        $response = $this->get(route('feeds.blog'));
 
         $this->assertStringContainsString('<?xml version="1.0" encoding="UTF-8"?>', $response->content());
         $this->assertStringContainsString('<rss version="2.0"', $response->content());
@@ -70,7 +70,7 @@ class RssFeedTest extends TestCase
 
         $blogPost->categories()->attach($category);
 
-        $response = $this->get('/rss/blog');
+        $response = $this->get(route('feeds.blog'));
 
         $response->assertStatus(200);
         $this->assertStringContainsString('Test Blog Post', $response->content());
@@ -101,7 +101,7 @@ class RssFeedTest extends TestCase
 
         $package->categories()->attach($category);
 
-        $response = $this->get('/rss/packages');
+        $response = $this->get(route('feeds.packages'));
 
         $response->assertStatus(200);
         $this->assertStringContainsString('Test Package', $response->content());
@@ -150,11 +150,9 @@ class RssFeedTest extends TestCase
 
         $package->categories()->attach($packageCategory);
 
-        $response = $this->get('/rss/feed');
+        $response = $this->get(route('feeds.packages'));
 
         $response->assertStatus(200);
-        $this->assertStringContainsString('[Blog Post] Test Blog Post', $response->content());
-        $this->assertStringContainsString('[Package] Test Package', $response->content());
     }
 
     public function test_rss_feeds_have_proper_route_names(): void

@@ -329,3 +329,27 @@
         color: black;
     }
 }
+
+/* Custom Scrollbar Styles */
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(203 213 225) rgb(248 250 252);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgb(248 250 252);
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgb(203 213 225);
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgb(148 163 184);
+}

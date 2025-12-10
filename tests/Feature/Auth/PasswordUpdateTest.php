@@ -17,7 +17,7 @@ class PasswordUpdateTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->put('/user/profile/security', [
+            ->put(route('app.user.profile.security.update'), [
                 'current_password' => 'password',
                 'password' => 'new-password',
                 'password_confirmation' => 'new-password',
@@ -25,7 +25,7 @@ class PasswordUpdateTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/user/profile/security');
+            ->assertRedirect(route('app.user.profile.security.edit'));
 
         $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
     }
@@ -36,7 +36,7 @@ class PasswordUpdateTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->put('/user/profile/security', [
+            ->put(route('app.user.profile.security.update'), [
                 'current_password' => 'wrong-password',
                 'password' => 'new-password',
                 'password_confirmation' => 'new-password',

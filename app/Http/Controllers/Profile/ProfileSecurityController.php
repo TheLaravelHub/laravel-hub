@@ -25,7 +25,7 @@ class ProfileSecurityController extends Controller
             'password' => $request->get('password'),
         ]);
 
-        return Redirect::route('user.profile.security.edit')
+        return Redirect::route('app.user.profile.security.edit')
             ->with('status', 'password-updated');
     }
 }

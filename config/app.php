@@ -54,6 +54,9 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    'main_domain' => env('MAIN_DOMAIN', 'laravel-hub.test'),
+    'app_domain' => env('APP_DOMAIN', 'app.laravel-hub.test'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

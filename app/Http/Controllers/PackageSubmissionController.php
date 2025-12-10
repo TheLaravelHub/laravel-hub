@@ -41,7 +41,7 @@ class PackageSubmissionController extends Controller
     {
         $action->handle($request->user(), $request->validated());
 
-        return redirect()->route('user.packages.index')
+        return redirect()->route('app.user.packages.index')
             ->with('success', 'Your package has been submitted for review. We will notify you once it has been processed.');
     }
 }

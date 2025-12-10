@@ -16,7 +16,7 @@ class ProfileTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/user/profile/information');
+            ->get(route('app.user.profile.information.edit'));
 
         $response->assertOk();
     }
@@ -27,7 +27,7 @@ class ProfileTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->patch('/user/profile/information', [
+            ->patch(route('app.user.profile.information.update'), [
                 'name' => 'Test User',
                 'email' => 'test@example.com',
                 'username' => 'testuser',
@@ -35,7 +35,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/user/profile/information');
+            ->assertRedirect(route('app.user.profile.information.update'));
 
         $user->refresh();
 
@@ -50,7 +50,7 @@ class ProfileTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->patch('/user/profile/information', [
+            ->patch(route('app.user.profile.information.update'), [
                 'name' => 'Test User',
                 'email' => $user->email,
                 'username' => $user->username,
@@ -58,7 +58,7 @@ class ProfileTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/user/profile/information');
+            ->assertRedirect(route('app.user.profile.information.update'));
 
         $this->assertNotNull($user->refresh()->email_verified_at);
     }

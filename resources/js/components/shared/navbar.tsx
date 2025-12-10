@@ -157,12 +157,12 @@ const Navbar = () => {
                     <nav className="hidden space-x-6 md:flex">
                         {auth?.user ? (
                             <motion.a
-                                href={route('user.dashboard')}
+                                href={route('app.feed.home')}
                                 className="flex items-center space-x-2 text-foreground/80 transition-colors hover:text-foreground"
                                 variants={linkVariants}
                                 whileHover="hover"
                             >
-                                <span className="font-bold">Your Account</span>
+                                <span className="font-bold">Feed</span>
                             </motion.a>
                         ) : (
                             <motion.a
@@ -181,7 +181,7 @@ const Navbar = () => {
                                 className="flex items-center gap-2 rounded-full"
                             >
                                 <a
-                                    href={route('user.packages.create')}
+                                    href={route('app.user.packages.create')}
                                     className="flex items-center space-x-2"
                                     onClick={handlePackageSubmissionLinkClick}
                                 >
@@ -247,7 +247,7 @@ const Navbar = () => {
                                     className="w-full justify-start"
                                 >
                                     <a
-                                        href={route('user.packages.create')}
+                                        href={route('app.user.packages.create')}
                                         target={'_blank'}
                                         className="flex items-center space-x-2"
                                     >
@@ -258,7 +258,7 @@ const Navbar = () => {
                             </motion.div>
                             {auth?.user ? (
                                 <motion.a
-                                    href={route('user.dashboard')}
+                                    href={route('app.feed.home')}
                                     className="flex items-center space-x-4 rounded-lg p-3 hover:bg-gray-100"
                                     variants={menuItemVariants}
                                     onClick={() => setMobileMenuOpen(false)}

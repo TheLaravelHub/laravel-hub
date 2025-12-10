@@ -22,7 +22,7 @@ export default function ProfileSidebar({ activeTab }: ProfileSidebarProps) {
             <div className="p-4">
                 <nav className="space-y-1">
                     <Link
-                        href={route('user.profile.information.edit')}
+                        href={route('app.user.profile.information.edit')}
                         className={cn(
                             'flex items-center gap-2 rounded-md p-2 transition-colors',
                             activeTab === 'information'
@@ -34,7 +34,7 @@ export default function ProfileSidebar({ activeTab }: ProfileSidebarProps) {
                         <span>Personal Information</span>
                     </Link>
                     <Link
-                        href={route('user.profile.security.edit')}
+                        href={route('app.user.profile.security.edit')}
                         className={cn(
                             'flex items-center gap-2 rounded-md p-2 transition-colors',
                             activeTab === 'security'
