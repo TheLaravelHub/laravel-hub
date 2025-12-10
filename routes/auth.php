@@ -20,7 +20,8 @@ Route::domain(config('app.app_domain'))
                 ->name('register');
 
             Route::post('register', [RegisteredUserController::class, 'store'])
-                ->middleware('throttle:2,1');
+                ->middleware('throttle:2,1')
+                ->name('register.store');
 
             Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
@@ -65,7 +66,8 @@ Route::domain(config('app.app_domain'))
             Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
                 ->name('password.confirm');
 
-            Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+            Route::post('confirm-password', [ConfirmablePasswordController::class, 'store'])
+                ->name('password.confirm.store');
 
             //    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 

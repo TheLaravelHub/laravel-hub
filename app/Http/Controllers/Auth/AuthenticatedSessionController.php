@@ -48,10 +48,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        // Use HTTP for local development to avoid certificate issues
-        $homeUrl = app()->environment('local')
-            ? str_replace('https://', 'http://', config('app.url'))
-            : config('app.url');
+        $homeUrl = url(route('homepage'));
 
         // Use Inertia's location method to force external redirect
         return Inertia::location($homeUrl);

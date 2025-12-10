@@ -12,7 +12,7 @@ class RegistrationTest extends TestCase
 
     public function test_registration_screen_can_be_rendered(): void
     {
-        $response = $this->get('/register');
+        $response = $this->get(route('register'));
 
         $response->assertStatus(200);
     }
@@ -23,7 +23,7 @@ class RegistrationTest extends TestCase
             ->once()
             ->andReturn(['success' => true]);
 
-        $response = $this->post('/register', [
+        $response = $this->post(route('register.store'), [
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'password',
@@ -32,6 +32,6 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('app.user.dashboard', absolute: false));
+        $response->assertRedirect(route('app.feed.home', absolute: false));
     }
 }

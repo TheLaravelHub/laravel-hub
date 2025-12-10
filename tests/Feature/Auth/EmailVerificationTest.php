@@ -17,7 +17,9 @@ class EmailVerificationTest extends TestCase
     {
         $user = User::factory()->unverified()->create();
 
-        $response = $this->actingAs($user)->get('/verify-email');
+        $this->actingAs($user);
+
+        $response = $this->get(route('verification.notice'));
 
         $response->assertStatus(200);
     }
@@ -34,11 +36,13 @@ class EmailVerificationTest extends TestCase
             ['id' => $user->id, 'hash' => sha1($user->email)]
         );
 
-        $response = $this->actingAs($user)->get($verificationUrl);
+        $response = $this->withServerVariables(['HTTP_HOST' => config('app.app_domain')])
+            ->actingAs($user)
+            ->get($verificationUrl);
 
         Event::assertDispatched(Verified::class);
         $this->assertTrue($user->fresh()->hasVerifiedEmail());
-        $response->assertRedirect(route('app.user.dashboard', absolute: false).'?verified=1');
+        $response->assertRedirect(route('app.feed.home', absolute: false).'?verified=1');
     }
 
     public function test_email_is_not_verified_with_invalid_hash(): void
@@ -51,7 +55,9 @@ class EmailVerificationTest extends TestCase
             ['id' => $user->id, 'hash' => sha1('wrong-email')]
         );
 
-        $this->actingAs($user)->get($verificationUrl);
+        $this->withServerVariables(['HTTP_HOST' => config('app.app_domain')])
+            ->actingAs($user)
+            ->get($verificationUrl);
 
         $this->assertFalse($user->fresh()->hasVerifiedEmail());
     }
