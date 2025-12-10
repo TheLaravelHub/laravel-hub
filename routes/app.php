@@ -14,8 +14,7 @@ use App\Http\Controllers\Profile\ProfileSecurityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::domain(config('app.app_domain'))->as('app.')->group(function () {
-
+Route::domain(config('app.app_domain'))->middleware('web')->as('app.')->group(function () {
     // Logout route for app subdomain
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->middleware('auth')
