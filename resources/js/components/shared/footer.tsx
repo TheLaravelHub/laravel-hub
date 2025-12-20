@@ -9,7 +9,7 @@ import {
 } from 'lucide-react'
 import { SocialAccountsSettings as SocialAccountsSettingsType } from '@/types'
 import { motion } from 'framer-motion'
-import useClickTracker from '@/hooks/use-click-tracker'
+import useClickTracker from '@/hooks/use-analytics'
 import { Link, usePage } from '@inertiajs/react'
 
 const Footer = () => {

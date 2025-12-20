@@ -16,7 +16,7 @@ import rehypeSanitize from 'rehype-sanitize'
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/prism'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import { Skeleton } from '@/components/ui/skeleton'
-import useClickTracker from '@/hooks/use-click-tracker'
+import useClickTracker from '@/hooks/use-analytics'
 import AppHead from '@/components/shared/AppHead'
 import rehypeRewrite from 'rehype-rewrite'
 

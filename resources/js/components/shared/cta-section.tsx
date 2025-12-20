@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { BookmarkPlus, Github } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import useClickTracker from '@/hooks/use-click-tracker'
+import useClickTracker from '@/hooks/use-analytics'
 
 const CTASection = () => {
     const handleStarOnGithubClick = useClickTracker('Star on github', {

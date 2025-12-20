@@ -15,7 +15,7 @@ import { Link, usePage } from '@inertiajs/react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import Mixpanel from '@/lib/mixpanel'
-import useClickTracker from '@/hooks/use-click-tracker'
+import useClickTracker from '@/hooks/use-analytics'
 
 const Navbar = () => {
     const [showNav, setShowNav] = useState(true)
