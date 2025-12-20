@@ -15,7 +15,7 @@ class FeedSourceResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'logo' => $this->logo_url,
+            'logo' => $this->logo,
             'type' => $this->type,
         ];
     }
