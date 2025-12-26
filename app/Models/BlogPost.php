@@ -176,6 +176,15 @@ class BlogPost extends Model implements Feedable, HasMedia
                                         ->disk('blog-posts')
                                         ->required()
                                         ->imageEditor(),
+                                    TextInput::make('youtube_url')
+                                        ->label('YouTube Video URL')
+                                        ->url()
+                                        ->nullable()
+                                        ->regex('/^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|v\/)|youtu\.be\/)[\w-]+(&[\w=]*)*$/')
+                                        ->helperText('Optional: Enter a YouTube video URL to display instead of the image')
+                                        ->validationMessages([
+                                            'regex' => 'Please enter a valid YouTube video URL',
+                                        ]),
                                 ]),
                             Section::make('SEO Meta Information')
                                 ->schema([
