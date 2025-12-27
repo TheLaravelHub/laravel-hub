@@ -13,7 +13,11 @@ class FetchRssFeedAction
     public function execute(FeedSource $source): array
     {
         try {
-            $response = Http::timeout(30)->get($source->rss_feed_url);
+            $response = Http::timeout(30)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (compatible; LaravelHub/1.0; +https://laravel-hub.com)',
+                ])
+                ->get($source->rss_feed_url);
 
             if (! $response->successful()) {
                 Log::error("Failed to fetch RSS feed for {$source->name}", [
@@ -30,14 +34,32 @@ class FetchRssFeedAction
             // Handle RSS 2.0 format
             if (isset($xml->channel->item)) {
                 foreach ($xml->channel->item as $item) {
-                    $items[] = $this->parseRssItem($item, $source);
+                    try {
+                        $parsedItem = $this->parseRssItem($item, $source);
+                        $items[] = $parsedItem;
+                    } catch (\Exception $e) {
+                        Log::error("Error parsing RSS item for {$source->name}", [
+                            'error' => $e->getMessage(),
+                            'item_title' => (string) ($item->title ?? 'Unknown'),
+                        ]);
+                    }
                 }
             }
             // Handle Atom format
             elseif (isset($xml->entry)) {
                 foreach ($xml->entry as $entry) {
-                    $items[] = $this->parseAtomEntry($entry, $source);
+                    try {
+                        $parsedEntry = $this->parseAtomEntry($entry, $source);
+                        $items[] = $parsedEntry;
+                    } catch (\Exception $e) {
+                        Log::error("Error parsing Atom entry for {$source->name}", [
+                            'error' => $e->getMessage(),
+                            'entry_title' => (string) ($entry->title ?? 'Unknown'),
+                        ]);
+                    }
                 }
+            } else {
+                Log::warning("Unknown feed format for {$source->name}");
             }
 
             $source->update(['last_fetched_at' => now()]);
@@ -72,6 +94,11 @@ class FetchRssFeedAction
         } else {
             // Try to extract image from content or description
             $imageUrl = $this->extractImageFromHtml($content) ?? $this->extractImageFromHtml($description);
+        }
+
+        // If no image found in feed, try to fetch from the article URL
+        if (! $imageUrl && $link) {
+            $imageUrl = $this->fetchImageFromUrl($link);
         }
 
         // Clean up image URL (URL encode spaces and special characters)
@@ -116,6 +143,11 @@ class FetchRssFeedAction
             $imageUrl = $this->extractImageFromHtml($content) ?? $this->extractImageFromHtml($summary);
         }
 
+        // If no image found in feed, try to fetch from the article URL
+        if (! $imageUrl && $link) {
+            $imageUrl = $this->fetchImageFromUrl($link);
+        }
+
         // Clean up image URL
         if ($imageUrl) {
             $imageUrl = $this->cleanImageUrl($imageUrl);
@@ -154,5 +186,55 @@ class FetchRssFeedAction
         // Just encode spaces and other special characters while preserving the structure
         // This handles URLs like: https://picperf.io/https://domain.com/path with spaces.png
         return str_replace(' ', '%20', $url);
+    }
+
+    private function fetchImageFromUrl(string $url): ?string
+    {
+        try {
+            $response = Http::timeout(10)
+                ->withHeaders([
+                    'User-Agent' => 'Mozilla/5.0 (compatible; LaravelHub/1.0; +https://laravel-hub.com)',
+                ])
+                ->get($url);
+
+            if (! $response->successful()) {
+                return null;
+            }
+
+            $html = $response->body();
+
+            // Try to extract Open Graph image
+            if (preg_match('/<meta[^>]+property=["\']og:image["\'][^>]+content=["\'](https?:\/\/[^"\']+)["\']/', $html, $matches)) {
+                return $matches[1];
+            }
+
+            // Try to extract Open Graph image (reversed attributes)
+            if (preg_match('/<meta[^>]+content=["\'](https?:\/\/[^"\']+)["\'][^>]+property=["\']og:image["\']/', $html, $matches)) {
+                return $matches[1];
+            }
+
+            // Try to extract Twitter card image
+            if (preg_match('/<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\'](https?:\/\/[^"\']+)["\']/', $html, $matches)) {
+                return $matches[1];
+            }
+
+            // Try to extract Twitter card image (reversed attributes)
+            if (preg_match('/<meta[^>]+content=["\'](https?:\/\/[^"\']+)["\'][^>]+name=["\']twitter:image["\']/', $html, $matches)) {
+                return $matches[1];
+            }
+
+            // Try to extract first img tag with absolute URL
+            if (preg_match('/<img[^>]+src=["\'](https?:\/\/[^"\']+)["\']/', $html, $matches)) {
+                return $matches[1];
+            }
+
+            return null;
+        } catch (\Exception $e) {
+            Log::warning("Failed to fetch image from URL: {$url}", [
+                'error' => $e->getMessage(),
+            ]);
+
+            return null;
+        }
     }
 }
