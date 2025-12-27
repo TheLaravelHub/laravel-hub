@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { BookmarkPlus, Github } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import useClickTracker from '@/hooks/use-click-tracker'
+import useClickTracker from '@/hooks/use-analytics'
 
 const CTASection = () => {
     const handleStarOnGithubClick = useClickTracker('Star on github', {
@@ -81,7 +81,7 @@ const CTASection = () => {
                             className="flex items-center gap-2 rounded-full"
                         >
                             <a
-                                href={route('user.packages.create')}
+                                href={route('app.user.packages.create')}
                                 rel="noopener noreferrer"
                                 onClick={handlePackageSubmissionLinkClick}
                             >

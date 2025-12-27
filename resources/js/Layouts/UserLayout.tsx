@@ -3,6 +3,7 @@ import { UserNavbar } from '@/components/shared/user-navbar'
 import { ThemeProvider } from '@/components/theme-provider'
 import { CustomToaster, CustomToast } from '@/components/ui/custom-toast'
 import { usePage } from '@inertiajs/react'
+import { FeedNavbar } from '@/components/shared/feed-navbar'
 
 export default function UserLayout({
     header,
@@ -32,7 +33,7 @@ export default function UserLayout({
         >
             <div className="min-h-screen bg-white">
                 <CustomToaster />
-                <UserNavbar />
+                <FeedNavbar />
 
                 {header && (
                     <header className="border-b border-border bg-white">

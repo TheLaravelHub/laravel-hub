@@ -40,6 +40,8 @@ jobs:
             APP_DEBUG=${{ vars.APP_DEBUG }}
             APP_TIMEZONE=${{ vars.APP_TIMEZONE }}
             APP_URL=${{ vars.APP_URL }}
+            MAIN_DOMAIN=${{ vars.MAIN_DOMAIN }}
+            APP_DOMAIN=${{ vars.APP_DOMAIN }}
 
             APP_LOCALE=${{ vars.APP_LOCALE }}
             APP_FALLBACK_LOCALE=${{ vars.APP_FALLBACK_LOCALE }}
@@ -66,7 +68,9 @@ jobs:
             SESSION_ENCRYPT=${{ vars.SESSION_ENCRYPT }}
             SESSION_PATH=${{ vars.SESSION_PATH }}
             SESSION_DOMAIN=${{ vars.SESSION_DOMAIN }}
+            SANCTUM_STATEFUL_DOMAINS=${{ vars.SANCTUM_STATEFUL_DOMAINS }}
             SESSION_COOKIE=${{ secrets.SESSION_COOKIE }}
+            SESSION_SECURE_COOKIE=${{ secrets.SESSION_SECURE_COOKIE }}
 
             BROADCAST_CONNECTION=${{ vars.BROADCAST_CONNECTION }}
             FILESYSTEM_DISK=${{ vars.FILESYSTEM_DISK }}

@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Calendar, Tag } from 'lucide-react'
+import { Calendar, Tag, Play } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -19,6 +19,28 @@ interface BlogPostProps {
 
 const BlogPost = ({ blogPost }: BlogPostProps) => {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
+    const [showVideo, setShowVideo] = useState(false)
+
+    // Extract YouTube video ID from URL
+    const getYouTubeVideoId = (url: string): string | null => {
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\n?#]+)/,
+            /^([a-zA-Z0-9_-]{11})$/,
+        ]
+
+        for (const pattern of patterns) {
+            const match = url.match(pattern)
+            if (match && match[1]) {
+                return match[1]
+            }
+        }
+
+        return null
+    }
+
+    const youtubeVideoId = blogPost.youtube_url
+        ? getYouTubeVideoId(blogPost.youtube_url)
+        : null
 
     // Handle hash navigation when page loads
     useEffect(() => {
@@ -293,19 +315,50 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                 )}
                         </motion.div>
 
-                        {/* Featured Image */}
+                        {/* Featured Image or Video */}
                         {blogPost.image && (
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
-                                className="aspect-w-16 aspect-h-9 relative mb-12 overflow-hidden rounded-xl"
+                                className="relative mb-12 overflow-hidden rounded-xl"
                             >
-                                <img
-                                    src={blogPost.image}
-                                    alt={blogPost.title}
-                                    className="object-cover"
-                                />
+                                {youtubeVideoId && !showVideo ? (
+                                    <div
+                                        className="group relative cursor-pointer"
+                                        onClick={() => setShowVideo(true)}
+                                    >
+                                        <img
+                                            src={blogPost.image}
+                                            alt={blogPost.title}
+                                            className="w-full object-cover transition-opacity group-hover:opacity-75"
+                                        />
+                                        <div className="absolute inset-0 flex items-center justify-center">
+                                            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-red-600 transition-transform group-hover:scale-110">
+                                                <Play
+                                                    size={40}
+                                                    className="ml-1 fill-white text-white"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : youtubeVideoId && showVideo ? (
+                                    <div className="aspect-video">
+                                        <iframe
+                                            className="h-full w-full"
+                                            src={`https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1`}
+                                            title={blogPost.title}
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        />
+                                    </div>
+                                ) : (
+                                    <img
+                                        src={blogPost.image}
+                                        alt={blogPost.title}
+                                        className="w-full object-cover"
+                                    />
+                                )}
                             </motion.div>
                         )}
 
@@ -456,6 +509,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                             <img
                                                 className="my-4 h-auto max-w-full rounded-lg"
                                                 {...props}
+                                                alt={blogPost.title}
                                             />
                                         ),
                                         code({

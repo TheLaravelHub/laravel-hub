@@ -44,7 +44,7 @@ export default function Home({
     const userStats = [
         { label: 'Posts', value: 0, icon: MessageSquare },
         { label: 'Following', value: 0, icon: Users },
-        { label: 'Packages', value: user.packages_count, icon: Package },
+        { label: 'Packages', value: app.user.packages_count, icon: Package },
         { label: 'Reputation', value: 0, icon: Star },
     ]
 

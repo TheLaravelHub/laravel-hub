@@ -29,6 +29,16 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withSchedule(function (Schedule $schedule) {
         $schedule->command('app:publish-scheduled-posts')->everyFiveMinutes();
+        $schedule->command('feed:fetch')
+            ->everyFiveMinutes()
+            ->withoutOverlapping()
+            ->runInBackground()
+            ->onSuccess(function () {
+                info('RSS feeds fetched successfully at '.now());
+            })
+            ->onFailure(function () {
+                logger()->error('RSS feed fetch failed at '.now());
+            });
         $schedule->command('disposable:update')->weekly();
         $schedule->command('horizon:snapshot')->everyFiveMinutes();
     })

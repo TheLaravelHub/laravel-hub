@@ -45,7 +45,7 @@ export default function Index({ auth, submissions }: IndexProps) {
         setIsLoading(true)
         const params: Record<string, any> = { page }
 
-        router.get(route('user.packages.index'), params, {
+        router.get(route('app.user.packages.index'), params, {
             preserveState: true,
             onSuccess: () => {
                 setIsLoading(false)
@@ -65,7 +65,7 @@ export default function Index({ auth, submissions }: IndexProps) {
                     </h2>
                     <div className="flex items-center space-x-2">
                         <Link
-                            href={route('user.packages.create')}
+                            href={route('app.user.packages.create')}
                             className="flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary/90"
                         >
                             <PlusCircle size={16} />
@@ -157,7 +157,7 @@ export default function Index({ auth, submissions }: IndexProps) {
                                 </p>
                                 <p className="mt-4">
                                     <Link
-                                        href={route('user.packages.create')}
+                                        href={route('app.user.packages.create')}
                                         className="mx-auto flex w-fit items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-white transition-all hover:bg-primary/90"
                                     >
                                         <PlusCircle size={16} />

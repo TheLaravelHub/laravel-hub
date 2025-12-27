@@ -31,9 +31,9 @@ export function UserNavbar() {
                         }}
                     >
                         <Image
-                            src={'/assets/images/logo-icon.png'}
+                            src={'/assets/images/logo.png'}
                             alt="Laravel Hub"
-                            width={50}
+                            width={150}
                         />
                     </motion.div>
                 </Link>
@@ -41,11 +41,11 @@ export function UserNavbar() {
                 {/* Navigation Links */}
                 <div className="hidden items-center space-x-6 md:flex">
                     <motion.a
-                        href={route('user.dashboard')}
+                        href={route('app.feed.home')}
                         className="text-gray-700 transition-colors hover:text-gray-900"
                         whileHover={{ scale: 1.05 }}
                     >
-                        <span className="font-medium text-gray-700">Home</span>
+                        <span className="font-medium text-gray-700">Feed</span>
                     </motion.a>
                     <motion.a
                         href={route('packages.index')}
@@ -62,15 +62,6 @@ export function UserNavbar() {
                         whileHover={{ scale: 1.05 }}
                     >
                         <span className="font-medium text-gray-700">Blog</span>
-                    </motion.a>
-                    <motion.a
-                        href="#"
-                        className="text-gray-400 transition-colors hover:text-gray-600"
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        <span className="font-medium text-gray-400">
-                            Forum (Coming soon)
-                        </span>
                     </motion.a>
                 </div>
 
@@ -121,7 +112,7 @@ export function UserNavbar() {
                                     </div>
                                     <div className="mt-2 space-y-1">
                                         <Link
-                                            href={route('user.dashboard')}
+                                            href={route('app.feed.home')}
                                             className="flex items-center gap-2 rounded-md px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         >
                                             <User
@@ -131,7 +122,9 @@ export function UserNavbar() {
                                             <span>Profile</span>
                                         </Link>
                                         <Link
-                                            href={route('user.packages.index')}
+                                            href={route(
+                                                'app.user.packages.index',
+                                            )}
                                             className="flex items-center gap-2 rounded-md px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         >
                                             <Package
@@ -142,7 +135,7 @@ export function UserNavbar() {
                                         </Link>
                                         <Link
                                             href={route(
-                                                'user.profile.information.edit',
+                                                'app.user.profile.information.edit',
                                             )}
                                             className="flex items-center gap-2 rounded-md px-4 py-2 text-gray-800 hover:bg-gray-100"
                                         >
@@ -153,7 +146,7 @@ export function UserNavbar() {
                                             <span>Settings</span>
                                         </Link>
                                         <Link
-                                            href={route('logout')}
+                                            href={route('app.logout')}
                                             method="post"
                                             as="button"
                                             className="flex w-full items-center gap-2 rounded-md px-4 py-2 text-left hover:bg-destructive/10 hover:text-destructive"

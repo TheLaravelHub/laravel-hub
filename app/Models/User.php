@@ -70,6 +70,13 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         return $this->is_admin;
     }
 
+    public function bookmarkedPosts()
+    {
+        return $this->belongsToMany(FeedPost::class, 'feed_post_bookmarks')
+            ->using(FeedPostBookmark::class)
+            ->withTimestamps();
+    }
+
     public function getAvatarUrlAttribute(): string
     {
         if (! empty($this->avatar)) {
