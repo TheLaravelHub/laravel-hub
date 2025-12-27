@@ -31,6 +31,7 @@ class BlogPostResource extends JsonResource
             'updated_at' => $this->updated_at,
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             'image' => $this->getFirstMediaUrl() ?: null,
+            'youtube_url' => $this->youtube_url,
             'views_count' => $this->whenCounted('views'),
         ];
     }
