@@ -100,7 +100,7 @@ class BlogPost extends Model implements Feedable, HasMedia
     public function scopeNeedsPublishing(Builder $query)
     {
         return $query->where('status', 'scheduled')
-            ->where('scheduled_at', '>=', now());
+            ->where('scheduled_at', '<=', now());
     }
 
     public static function popularThisWeek($limit = 6)
@@ -215,7 +215,8 @@ class BlogPost extends Model implements Feedable, HasMedia
                                         ->label('Schedule Publish Time')
                                         ->native(false) // Use Filament's date picker instead of the browser's default
                                         ->seconds(false) // Hide seconds if unnecessary
-                                        ->minDate(now()) // Prevent selecting past dates
+                                        ->timezone('Africa/Cairo') // Display and input in Cairo timezone
+                                        ->minDate(now()->timezone('Africa/Cairo')) // Prevent selecting past dates in Cairo timezone
                                         ->hidden(fn ($get) => $get('status') !== 'scheduled'),
                                 ]),
                         ]),
