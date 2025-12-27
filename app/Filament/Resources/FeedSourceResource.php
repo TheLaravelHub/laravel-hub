@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FeedSourceResource\Pages;
+use App\Filament\Resources\FeedSourceResource\RelationManagers;
 use App\Models\FeedSource;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -210,16 +211,47 @@ class FeedSourceResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->requiresConfirmation()
+                    ->modalHeading('Delete Feed Source')
+                    ->modalDescription('This will also soft delete all posts from this source. You can restore them later.')
+                    ->modalSubmitActionLabel('Yes, delete it')
+                    ->successNotificationTitle('Feed source and all its posts have been deleted'),
+                Tables\Actions\RestoreAction::make()
+                    ->requiresConfirmation()
+                    ->modalHeading('Restore Feed Source')
+                    ->modalDescription('This will also restore all soft-deleted posts from this source.')
+                    ->modalSubmitActionLabel('Yes, restore it')
+                    ->successNotificationTitle('Feed source and all its posts have been restored'),
+                Tables\Actions\ForceDeleteAction::make()
+                    ->requiresConfirmation()
+                    ->modalHeading('Permanently Delete Feed Source')
+                    ->modalDescription('This will permanently delete the feed source and ALL its posts. This action cannot be undone!')
+                    ->modalSubmitActionLabel('Yes, permanently delete')
+                    ->successNotificationTitle('Feed source and all its posts have been permanently deleted'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()
+                        ->requiresConfirmation()
+                        ->modalHeading('Delete Selected Feed Sources')
+                        ->modalDescription('This will also soft delete all posts from these sources. You can restore them later.')
+                        ->modalSubmitActionLabel('Yes, delete them')
+                        ->successNotificationTitle('Feed sources and all their posts have been deleted'),
+                    Tables\Actions\RestoreBulkAction::make()
+                        ->requiresConfirmation()
+                        ->modalHeading('Restore Selected Feed Sources')
+                        ->modalDescription('This will also restore all soft-deleted posts from these sources.')
+                        ->modalSubmitActionLabel('Yes, restore them')
+                        ->successNotificationTitle('Feed sources and all their posts have been restored'),
+                    Tables\Actions\ForceDeleteBulkAction::make()
+                        ->requiresConfirmation()
+                        ->modalHeading('Permanently Delete Selected Feed Sources')
+                        ->modalDescription('This will permanently delete the feed sources and ALL their posts. This action cannot be undone!')
+                        ->modalSubmitActionLabel('Yes, permanently delete')
+                        ->successNotificationTitle('Feed sources and all their posts have been permanently deleted'),
                 ]),
             ])
             ->defaultSort('name');
@@ -228,7 +260,7 @@ class FeedSourceResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\PostsRelationManager::class,
         ];
     }
 
@@ -237,6 +269,7 @@ class FeedSourceResource extends Resource
         return [
             'index' => Pages\ListFeedSources::route('/'),
             'create' => Pages\CreateFeedSource::route('/create'),
+            'view' => Pages\ViewFeedSource::route('/{record}'),
             'edit' => Pages\EditFeedSource::route('/{record}/edit'),
         ];
     }

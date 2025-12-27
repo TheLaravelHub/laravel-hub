@@ -11,7 +11,6 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class FeedSource extends Model implements HasMedia
 {
-    use HasFactory;
     use InteractsWithMedia;
     use SoftDeletes;
 
@@ -34,6 +33,27 @@ class FeedSource extends Model implements HasMedia
         'last_fetched_at' => 'datetime',
         'metadata' => 'array',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Cascade soft delete to posts
+        static::deleting(function ($feedSource) {
+            if ($feedSource->isForceDeleting()) {
+                // Force delete all posts when force deleting the source
+                $feedSource->posts()->forceDelete();
+            } else {
+                // Soft delete all posts when soft deleting the source
+                $feedSource->posts()->delete();
+            }
+        });
+
+        // Cascade restore to posts
+        static::restoring(function ($feedSource) {
+            $feedSource->posts()->onlyTrashed()->restore();
+        });
+    }
 
     public function posts(): HasMany
     {
