@@ -15,15 +15,33 @@ class FetchRssFeedAction
         try {
             $response = Http::timeout(30)
                 ->withHeaders([
-                    'User-Agent' => 'Mozilla/5.0 (compatible; LaravelHub/1.0; +https://laravel-hub.com)',
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Accept-Language' => 'en-US,en;q=0.9',
+                    'Accept-Encoding' => 'gzip, deflate, br',
+                    'DNT' => '1',
+                    'Connection' => 'keep-alive',
+                    'Upgrade-Insecure-Requests' => '1',
                 ])
                 ->get($source->rss_feed_url);
 
             if (! $response->successful()) {
-                Log::error("Failed to fetch RSS feed for {$source->name}", [
+                $logData = [
                     'source_id' => $source->id,
                     'status' => $response->status(),
-                ]);
+                    'url' => $source->rss_feed_url,
+                ];
+
+                // Check if this is a Cloudflare challenge
+                if ($response->status() === 403 && str_contains($response->header('Server') ?? '', 'cloudflare')) {
+                    $cfMitigated = $response->header('cf-mitigated');
+                    if ($cfMitigated === 'challenge') {
+                        $logData['cloudflare_challenge'] = true;
+                        $logData['note'] = 'This feed is protected by Cloudflare bot challenge which requires JavaScript execution. Consider using a headless browser solution or contacting the site owner to whitelist the scraper.';
+                    }
+                }
+
+                Log::error("Failed to fetch RSS feed for {$source->name}", $logData);
 
                 return [];
             }
@@ -193,7 +211,13 @@ class FetchRssFeedAction
         try {
             $response = Http::timeout(10)
                 ->withHeaders([
-                    'User-Agent' => 'Mozilla/5.0 (compatible; LaravelHub/1.0; +https://laravel-hub.com)',
+                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+                    'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Accept-Language' => 'en-US,en;q=0.9',
+                    'Accept-Encoding' => 'gzip, deflate, br',
+                    'DNT' => '1',
+                    'Connection' => 'keep-alive',
+                    'Upgrade-Insecure-Requests' => '1',
                 ])
                 ->get($url);
 
