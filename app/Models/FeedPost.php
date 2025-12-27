@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FeedPost extends Model
 {
     use Filterable;
-    use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
@@ -124,6 +122,10 @@ class FeedPost extends Model
             return false;
         }
 
+        if ($this->relationLoaded('upvotedBy')) {
+            return $this->upvotedBy->contains('id', $userId);
+        }
+
         return $this->upvotedBy()->where('user_id', $userId)->exists();
     }
 
@@ -134,6 +136,10 @@ class FeedPost extends Model
             return false;
         }
 
+        if ($this->relationLoaded('downvotedBy')) {
+            return $this->downvotedBy->contains('id', $userId);
+        }
+
         return $this->downvotedBy()->where('user_id', $userId)->exists();
     }
 
@@ -142,6 +148,10 @@ class FeedPost extends Model
         $userId = $userId ?? auth()->id();
         if (! $userId) {
             return false;
+        }
+
+        if ($this->relationLoaded('bookmarkedBy')) {
+            return $this->bookmarkedBy->contains('id', $userId);
         }
 
         return $this->bookmarkedBy()->where('user_id', $userId)->exists();

@@ -12,8 +12,29 @@ class FeedController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
+        $userId = $request->user()?->id;
+
         $posts = FeedPost::filter($request->all())
-            ->with(['source', 'comments.user', 'comments.replies.user'])
+            ->with([
+                'source',
+                'comments.user',
+                'comments.replies.user',
+                'upvotedBy' => function ($query) use ($userId) {
+                    if ($userId) {
+                        $query->where('user_id', $userId);
+                    }
+                },
+                'downvotedBy' => function ($query) use ($userId) {
+                    if ($userId) {
+                        $query->where('user_id', $userId);
+                    }
+                },
+                'bookmarkedBy' => function ($query) use ($userId) {
+                    if ($userId) {
+                        $query->where('user_id', $userId);
+                    }
+                },
+            ])
             ->latest('published_at')
             ->cursorPaginate(20);
 

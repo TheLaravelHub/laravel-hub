@@ -11,7 +11,27 @@ class FeedPostController extends Controller
 {
     public function index(Request $request)
     {
-        $posts = FeedPost::with('source')
+        $userId = $request->user()?->id;
+
+        $posts = FeedPost::query()
+            ->with([
+                'source',
+                'upvotedBy' => function ($query) use ($userId) {
+                    if ($userId) {
+                        $query->where('user_id', $userId);
+                    }
+                },
+                'downvotedBy' => function ($query) use ($userId) {
+                    if ($userId) {
+                        $query->where('user_id', $userId);
+                    }
+                },
+                'bookmarkedBy' => function ($query) use ($userId) {
+                    if ($userId) {
+                        $query->where('user_id', $userId);
+                    }
+                },
+            ])
             ->when($request->filter === 'trending', fn ($q) => $q->trending())
             ->when($request->filter === 'popular', fn ($q) => $q->popular())
             ->when($request->filter === 'bookmarked', function ($q) use ($request) {
@@ -23,9 +43,31 @@ class FeedPostController extends Controller
         return FeedPostResource::collection($posts);
     }
 
-    public function show(FeedPost $feedPost)
+    public function show(Request $request, FeedPost $feedPost)
     {
-        $feedPost->load(['source', 'comments.user', 'comments.replies.user']);
+        $userId = $request->user()?->id;
+
+        $feedPost->load([
+            'source',
+            'comments.user',
+            'comments.replies.user',
+            // Eager load user votes and bookmarks to prevent N+1 queries
+            'upvotedBy' => function ($query) use ($userId) {
+                if ($userId) {
+                    $query->where('user_id', $userId);
+                }
+            },
+            'downvotedBy' => function ($query) use ($userId) {
+                if ($userId) {
+                    $query->where('user_id', $userId);
+                }
+            },
+            'bookmarkedBy' => function ($query) use ($userId) {
+                if ($userId) {
+                    $query->where('user_id', $userId);
+                }
+            },
+        ]);
         $feedPost->increment('views_count');
 
         return new FeedPostResource($feedPost);
