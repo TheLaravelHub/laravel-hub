@@ -509,7 +509,8 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                             <img
                                                 className="my-4 h-auto max-w-full rounded-lg"
                                                 {...props}
-                                             alt={blogPost.title}/>
+                                                alt={blogPost.title}
+                                            />
                                         ),
                                         code({
                                             node,
