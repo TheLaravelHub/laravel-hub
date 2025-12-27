@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FeedSourceResource extends Resource
@@ -50,6 +51,7 @@ class FeedSourceResource extends Resource
                             ->schema([
                                 SpatieMediaLibraryFileUpload::make('source_logo')
                                     ->label('Upload Logo')
+                                    ->disk('blog-posts')
                                     ->collection('source_logo')
                                     ->image()
                                     ->imageEditor()
@@ -67,7 +69,7 @@ class FeedSourceResource extends Resource
                                         'https://freek.dev/favicon.ico' => 'Freek.dev',
                                         'https://laracasts.com/images/logo/logo-circle.svg' => 'Laracasts',
                                         'https://php.watch/icon.png' => 'PHP Watch',
-                                        asset('assets/images/logo.png') => 'Laravel Hub',
+                                        Storage::url('assets/images/logo.png') => 'Laravel Hub',
                                     ])
                                     ->searchable()
                                     ->helperText('Choose a predefined icon instead of uploading')
@@ -137,7 +139,7 @@ class FeedSourceResource extends Resource
                     ->collection('source_logo')
                     ->label('Logo')
                     ->circular()
-                    ->defaultImageUrl(asset('assets/images/placeholder-logo.png')),
+                    ->defaultImageUrl(Storage::url('assets/images/placeholder-logo.png')),
 
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
