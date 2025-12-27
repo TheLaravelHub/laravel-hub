@@ -54,6 +54,15 @@ class FetchRssFeedAction
                 foreach ($xml->channel->item as $item) {
                     try {
                         $parsedItem = $this->parseRssItem($item, $source);
+
+                        if (empty($parsedItem['image_url'])) {
+                            Log::info("Skipping RSS item without image for {$source->name}", [
+                                'item_title' => $parsedItem['title'] ?? 'Unknown',
+                            ]);
+
+                            continue;
+                        }
+
                         $items[] = $parsedItem;
                     } catch (\Exception $e) {
                         Log::error("Error parsing RSS item for {$source->name}", [
@@ -68,6 +77,16 @@ class FetchRssFeedAction
                 foreach ($xml->entry as $entry) {
                     try {
                         $parsedEntry = $this->parseAtomEntry($entry, $source);
+
+                        // Skip entries without images
+                        if (empty($parsedEntry['image_url'])) {
+                            Log::info("Skipping Atom entry without image for {$source->name}", [
+                                'entry_title' => $parsedEntry['title'] ?? 'Unknown',
+                            ]);
+
+                            continue;
+                        }
+
                         $items[] = $parsedEntry;
                     } catch (\Exception $e) {
                         Log::error("Error parsing Atom entry for {$source->name}", [
