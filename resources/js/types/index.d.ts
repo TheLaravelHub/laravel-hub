@@ -85,6 +85,7 @@ type BlogPost = {
     meta_title?: string
     meta_description?: string
     image?: string
+    youtube_url?: string
     views_count?: number
     status: 'draft' | 'published' | 'scheduled'
     published_at: string
