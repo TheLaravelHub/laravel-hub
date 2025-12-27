@@ -26,7 +26,7 @@ class PublishScheduledPosts extends Command
      */
     public function handle()
     {
-        $posts = BlogPost::needsPublishing()->get();
+        $posts = BlogPost::withoutGlobalScopes()->needsPublishing()->get();
 
         foreach ($posts as $post) {
             $post->update([
@@ -36,5 +36,7 @@ class PublishScheduledPosts extends Command
 
             $this->info("Published: {$post->title}");
         }
+
+        $this->info("Total posts published: {$posts->count()}");
     }
 }
