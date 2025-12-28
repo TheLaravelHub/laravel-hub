@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Calendar, Tag, Play } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/prism'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
@@ -514,21 +514,76 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                         ),
                                         code({
                                             node,
-                                            inline,
                                             className,
                                             children,
                                             ...props
-                                        }) {
+                                        }: any) {
                                             const match = /language-(\w+)/.exec(
                                                 className || '',
                                             )
+                                            const inline = !match
                                             return !inline && match ? (
-                                                <div className="my-6 overflow-hidden rounded-lg">
+                                                <div className="overflow-hidden rounded-md">
+                                                    <div className="bg-slate-800 px-4 py-2 font-mono text-xs text-white">
+                                                        {match[1]}
+                                                    </div>
                                                     <SyntaxHighlighter
-                                                        style={oneDark}
+                                                        style={{
+                                                            ...vscDarkPlus,
+                                                            'pre[class*="language-"]':
+                                                                {
+                                                                    background:
+                                                                        '#1e293b', // slate-800
+                                                                    color: '#f8fafc', // slate-50
+                                                                    margin: 0,
+                                                                    padding:
+                                                                        '0.75rem',
+                                                                    borderRadius:
+                                                                        '0',
+                                                                    overflow:
+                                                                        'auto',
+                                                                },
+                                                            'code[class*="language-"]':
+                                                                {
+                                                                    background:
+                                                                        'transparent',
+                                                                    color: '#f8fafc', // slate-50
+                                                                    textShadow:
+                                                                        'none',
+                                                                },
+                                                            // Improve token colors for better visibility
+                                                            'token.comment': {
+                                                                color: '#94a3b8',
+                                                            }, // slate-400
+                                                            'token.string': {
+                                                                color: '#86efac',
+                                                            }, // green-300
+                                                            'token.number': {
+                                                                color: '#fda4af',
+                                                            }, // rose-300
+                                                            'token.keyword': {
+                                                                color: '#c4b5fd',
+                                                            }, // violet-300
+                                                            'token.function': {
+                                                                color: '#93c5fd',
+                                                            }, // blue-300
+                                                            'token.operator': {
+                                                                color: '#e2e8f0',
+                                                            }, // slate-200
+                                                            'token.punctuation':
+                                                                {
+                                                                    color: '#e2e8f0',
+                                                                }, // slate-200
+                                                        }}
                                                         language={match[1]}
                                                         PreTag="div"
-                                                        className="rounded-lg border border-gray-200 bg-gray-800 text-white"
+                                                        customStyle={{
+                                                            background:
+                                                                '#1e293b', // slate-800
+                                                            borderRadius: '0',
+                                                            padding: '0.75rem',
+                                                            margin: 0,
+                                                        }}
                                                         {...props}
                                                     >
                                                         {String(
@@ -538,7 +593,7 @@ const BlogPost = ({ blogPost }: BlogPostProps) => {
                                                 </div>
                                             ) : (
                                                 <code
-                                                    className="rounded bg-gray-200 px-1 py-0.5 text-gray-800"
+                                                    className="rounded-md bg-slate-700 px-1.5 py-0.5 text-sm text-slate-50"
                                                     {...props}
                                                 >
                                                     {children}
