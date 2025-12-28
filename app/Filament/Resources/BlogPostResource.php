@@ -19,7 +19,7 @@ class BlogPostResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
-            ->latest('published_at');
+            ->withCount('views');
     }
 
     public static function form(Form $form): Form
@@ -31,6 +31,7 @@ class BlogPostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('published_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('title')
                     ->searchable()
@@ -52,12 +53,11 @@ class BlogPostResource extends Resource
                 Tables\Columns\SpatieMediaLibraryImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('status')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('unique_views_count')
+                Tables\Columns\TextColumn::make('views_count')
                     ->label('Views')
                     ->badge()
                     ->color('success')
-                    ->sortable()
-                    ->getStateUsing(fn (BlogPost $record) => $record->unique_views_count),
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('published_at')
                     ->dateTime()
                     ->sortable()
