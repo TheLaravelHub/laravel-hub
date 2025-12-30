@@ -58,7 +58,7 @@ class PackageController extends Controller
 
             $package->categories()->sync($request->category_ids);
 
-            $package->get()->searchable();
+            $package->searchable();
 
             DB::commit();
 
