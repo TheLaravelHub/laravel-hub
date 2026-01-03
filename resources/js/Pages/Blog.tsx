@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, router } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import {
@@ -58,8 +58,15 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
         filters?.categories?.map((slug) => String(slug)) || [],
     )
 
+    const isInitialMount = useRef(true)
+
     // Debounce search input
     useEffect(() => {
+        if (isInitialMount.current) {
+            isInitialMount.current = false
+            return
+        }
+
         const timeoutId = setTimeout(() => {
             handleFilterChange()
         }, 500)
@@ -618,6 +625,15 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
                                         meta.current_page > 1
                                             ? route('blog.index', {
                                                   page: meta.current_page - 1,
+                                                  ...(filters.search && {
+                                                      search: filters.search,
+                                                  }),
+                                                  ...(filters.categories &&
+                                                      filters.categories.length >
+                                                          0 && {
+                                                          categories:
+                                                              filters.categories,
+                                                      }),
                                               })
                                             : '#'
                                     }
@@ -651,6 +667,15 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
                                                 key={`page-${page}`}
                                                 href={route('blog.index', {
                                                     page,
+                                                    ...(filters.search && {
+                                                        search: filters.search,
+                                                    }),
+                                                    ...(filters.categories &&
+                                                        filters.categories.length >
+                                                            0 && {
+                                                            categories:
+                                                                filters.categories,
+                                                        }),
                                                 })}
                                                 className={`inline-flex h-9 w-9 items-center justify-center rounded-md text-sm font-medium ${
                                                     meta.current_page === page
@@ -675,6 +700,15 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
                                         meta.current_page < meta.last_page
                                             ? route('blog.index', {
                                                   page: meta.current_page + 1,
+                                                  ...(filters.search && {
+                                                      search: filters.search,
+                                                  }),
+                                                  ...(filters.categories &&
+                                                      filters.categories.length >
+                                                          0 && {
+                                                          categories:
+                                                              filters.categories,
+                                                      }),
                                               })
                                             : '#'
                                     }
