@@ -1,5 +1,5 @@
-import React from 'react'
-import { Head, Link } from '@inertiajs/react'
+import React, { useState, useEffect } from 'react'
+import { Link, router } from '@inertiajs/react'
 import { motion } from 'framer-motion'
 import {
     Calendar,
@@ -7,16 +7,26 @@ import {
     Tag,
     ChevronLeft,
     ChevronRight as ChevronRightIcon,
+    Search,
+    X,
+    ChevronDown,
+    Check,
 } from 'lucide-react'
 import AnimatedGradientBackground from '@/components/ui/animated-gradient-background'
 import Navbar from '@/components/shared/navbar'
 import Footer from '@/components/shared/footer'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { BlogPost, Category, MetaType, LinkType } from '@/types'
+import { BlogPost, Category, MetaType } from '@/types'
 import { format } from 'date-fns'
 import AppHead from '@/components/shared/AppHead'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
 
 interface BlogProps {
     blogPosts: {
@@ -29,13 +39,76 @@ interface BlogProps {
             next: string | null
         }
     }
+    categories: Category[]
+    filters: {
+        search?: string
+        categories?: string[]
+    }
 }
 
-const Blog = ({ blogPosts }: BlogProps) => {
+const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
     const appURL = import.meta.env.VITE_APP_URL || 'https://laravel-hub.com'
     // Ensure we have valid data
     const posts = blogPosts?.data || []
     const meta = blogPosts?.meta || { current_page: 1, last_page: 1 }
+
+    // State for filters
+    const [search, setSearch] = useState(filters?.search || '')
+    const [selectedCategories, setSelectedCategories] = useState<string[]>(
+        filters?.categories?.map((slug) => String(slug)) || [],
+    )
+
+    // Debounce search input
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            handleFilterChange()
+        }, 500)
+
+        return () => clearTimeout(timeoutId)
+    }, [search, selectedCategories])
+
+    // Handle filter changes and update URL
+    const handleFilterChange = () => {
+        const params: any = {}
+
+        if (search) {
+            params.search = search
+        }
+
+        if (selectedCategories.length > 0) {
+            params.categories = selectedCategories
+        }
+
+        router.get(route('blog.index'), params, {
+            preserveState: true,
+            preserveScroll: true,
+            replace: true,
+        })
+    }
+
+    // Toggle category selection
+    const toggleCategory = (categorySlug: string) => {
+        setSelectedCategories((prev) =>
+            prev.includes(categorySlug)
+                ? prev.filter((slug) => slug !== categorySlug)
+                : [...prev, categorySlug],
+        )
+    }
+
+    // Clear all filters
+    const clearFilters = () => {
+        setSearch('')
+        setSelectedCategories([])
+        router.get(
+            route('blog.index'),
+            {},
+            {
+                preserveState: true,
+                preserveScroll: false,
+                replace: true,
+            },
+        )
+    }
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -214,6 +287,201 @@ const Blog = ({ blogPosts }: BlogProps) => {
                             from the Laravel ecosystem
                         </motion.p>
                     </div>
+
+                    {/* Search and Filter Section */}
+                    <motion.div
+                        className="mt-12"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        <div className="mx-auto max-w-4xl">
+                            {/* Search Bar and Category Filter - Side by Side */}
+                            <div className="flex flex-col gap-3 md:flex-row md:items-center">
+                                {/* Search Bar */}
+                                <div className="relative flex-1">
+                                    <Search
+                                        className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                                        size={18}
+                                    />
+                                    <Input
+                                        type="text"
+                                        placeholder="Search articles..."
+                                        value={search}
+                                        onChange={(e) =>
+                                            setSearch(e.target.value)
+                                        }
+                                        className="h-12 w-full rounded-lg border-gray-300 pl-11 pr-4 text-sm shadow-sm transition-shadow focus:border-primary focus:shadow-md focus:ring-2 focus:ring-primary/20"
+                                    />
+                                </div>
+
+                                {/* Category Multi-Select */}
+                                {categories && categories.length > 0 && (
+                                    <Popover>
+                                        <PopoverTrigger asChild>
+                                            <Button
+                                                variant="outline"
+                                                className="h-12 w-full justify-between gap-2 rounded-lg border-gray-300 px-4 shadow-sm transition-shadow hover:shadow-md md:w-72"
+                                            >
+                                                <div className="flex flex-wrap items-center gap-1">
+                                                    {selectedCategories.length >
+                                                    0 ? (
+                                                        <>
+                                                            <Tag
+                                                                size={16}
+                                                                className="mr-1 flex-shrink-0"
+                                                            />
+                                                            <span className="text-sm">
+                                                                {selectedCategories.length ===
+                                                                1
+                                                                    ? categories.find(
+                                                                          (c) =>
+                                                                              c.slug ===
+                                                                              selectedCategories[0],
+                                                                      )?.name
+                                                                    : `${selectedCategories.length} categories`}
+                                                            </span>
+                                                        </>
+                                                    ) : (
+                                                        <>
+                                                            <Tag
+                                                                size={16}
+                                                                className="mr-1"
+                                                            />
+                                                            <span className="text-sm text-gray-500">
+                                                                All Categories
+                                                            </span>
+                                                        </>
+                                                    )}
+                                                </div>
+                                                <ChevronDown
+                                                    size={16}
+                                                    className="ml-2 flex-shrink-0 opacity-50"
+                                                />
+                                            </Button>
+                                        </PopoverTrigger>
+                                        <PopoverContent
+                                            className="w-64 p-0"
+                                            align="end"
+                                        >
+                                            <div className="max-h-80 overflow-y-auto p-1">
+                                                {categories.map((category) => (
+                                                    <div
+                                                        key={category.id}
+                                                        className={`flex cursor-pointer items-center rounded-md px-3 py-2 text-sm transition-colors hover:bg-gray-100 ${
+                                                            selectedCategories.includes(
+                                                                category.slug,
+                                                            )
+                                                                ? 'bg-primary/10'
+                                                                : ''
+                                                        }`}
+                                                        onClick={() =>
+                                                            toggleCategory(
+                                                                category.slug,
+                                                            )
+                                                        }
+                                                    >
+                                                        <div
+                                                            className={`mr-2 flex h-4 w-4 items-center justify-center rounded border ${
+                                                                selectedCategories.includes(
+                                                                    category.slug,
+                                                                )
+                                                                    ? 'border-primary bg-primary'
+                                                                    : 'border-gray-300'
+                                                            }`}
+                                                        >
+                                                            {selectedCategories.includes(
+                                                                category.slug,
+                                                            ) && (
+                                                                <Check
+                                                                    size={12}
+                                                                    className="text-white"
+                                                                />
+                                                            )}
+                                                        </div>
+                                                        <span className="flex-1">
+                                                            {category.name}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            {selectedCategories.length > 0 && (
+                                                <div className="border-t p-2">
+                                                    <Button
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        className="w-full text-xs"
+                                                        onClick={() =>
+                                                            setSelectedCategories(
+                                                                [],
+                                                            )
+                                                        }
+                                                    >
+                                                        Clear Selection
+                                                    </Button>
+                                                </div>
+                                            )}
+                                        </PopoverContent>
+                                    </Popover>
+                                )}
+                            </div>
+
+                            {/* Active Filters Display */}
+                            {(search || selectedCategories.length > 0) && (
+                                <div className="mt-4 flex flex-wrap items-center gap-2">
+                                    <span className="text-sm text-gray-500">
+                                        Active filters:
+                                    </span>
+                                    {search && (
+                                        <Badge
+                                            variant="secondary"
+                                            className="bg-primary/10 text-primary"
+                                        >
+                                            Search: {search}
+                                            <X
+                                                size={14}
+                                                className="ml-1 cursor-pointer"
+                                                onClick={() => setSearch('')}
+                                            />
+                                        </Badge>
+                                    )}
+                                    {selectedCategories.map((catSlug) => {
+                                        const category = categories?.find(
+                                            (c) => c.slug === catSlug,
+                                        )
+                                        return category ? (
+                                            <Badge
+                                                key={catSlug}
+                                                variant="secondary"
+                                                className="bg-primary/10 text-primary"
+                                            >
+                                                <Tag
+                                                    size={12}
+                                                    className="mr-1"
+                                                />
+                                                {category.name}
+                                                <X
+                                                    size={14}
+                                                    className="ml-1 cursor-pointer"
+                                                    onClick={() =>
+                                                        toggleCategory(catSlug)
+                                                    }
+                                                />
+                                            </Badge>
+                                        ) : null
+                                    })}
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={clearFilters}
+                                        className="h-6 px-2 text-xs text-gray-600 hover:text-gray-900"
+                                    >
+                                        Clear All
+                                    </Button>
+                                </div>
+                            )}
+                        </div>
+                    </motion.div>
 
                     {posts.length > 0 ? (
                         <motion.div
