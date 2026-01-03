@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Scopes\PublishedScope;
 use App\Traits\HasSlug;
+use EloquentFilter\Filterable;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
@@ -25,6 +26,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class BlogPost extends Model implements Feedable, HasMedia
 {
+    use Filterable;
     use HasSlug;
     use InteractsWithMedia;
     use SoftDeletes;

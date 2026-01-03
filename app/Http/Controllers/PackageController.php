@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\Admin\CategoryResource;
 use App\Http\Resources\PackageResource;
 use App\Jobs\GenerateOgImageForPackageJob;
+use App\Jobs\RecordPackageViewsJob;
 use App\Models\Category;
 use App\Models\Package;
 use App\Queries\PackageQuery;
@@ -47,6 +48,13 @@ class PackageController extends Controller
             ->with(['categories', 'indexes', 'media'])
             ->where('slug', $slug)
             ->firstOrFail();
+
+        RecordPackageViewsJob::dispatch(
+            $package->id,
+            request()->ip(),
+            request()->userAgent(),
+            request()->session()->getId()
+        );
 
         if (! $package->hasMedia('og-images')) {
             GenerateOgImageForPackageJob::dispatch($package);

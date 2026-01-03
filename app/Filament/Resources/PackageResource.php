@@ -31,7 +31,9 @@ class PackageResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->with('user');
+        return parent::getEloquentQuery()
+            ->with('user')
+            ->withCount('views');
     }
 
     public static function form(Form $form): Form
@@ -60,10 +62,17 @@ class PackageResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('slug'),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('slug')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('stars')
                     ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('views_count')
+                    ->label('Views')
+                    ->badge()
+                    ->color('success')
                     ->sortable(),
                 Tables\Columns\ImageColumn::make('owner_avatar')
                     ->circular(),

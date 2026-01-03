@@ -52,24 +52,39 @@ class GitHubService
      */
     public static function fetchReadmeContent(string $repoUrl): ?string
     {
-        ['owner' => $owner, 'name' => $repo] = self::getGithubRepositoryData($repoUrl) ?? throw new NotFoundHttpException('Invalid repository URL');
+        try {
+            $repoData = self::getGithubRepositoryData($repoUrl);
 
-        $apiUrl = "https://api.github.com/repos/{$owner}/{$repo}/readme";
+            if (! $repoData) {
+                return null;
+            }
 
-        $token = config('services.github.token');
+            ['owner' => $owner, 'name' => $repo] = $repoData;
 
-        $response = Http::withHeaders([
-            'Accept' => 'application/vnd.github.v3+json',
-            'Authorization' => "Bearer $token",
-        ])->get($apiUrl);
+            $apiUrl = "https://api.github.com/repos/{$owner}/{$repo}/readme";
 
-        if ($response->failed()) {
-            throw new NotFoundHttpException('README file not found');
+            $token = config('services.github.token');
+
+            $response = Http::withHeaders([
+                'Accept' => 'application/vnd.github.v3+json',
+                'Authorization' => "Bearer $token",
+            ])->get($apiUrl);
+
+            if ($response->failed()) {
+                return null;
+            }
+
+            $readmeData = $response->json();
+
+            return isset($readmeData['content']) ? base64_decode($readmeData['content']) : null;
+        } catch (\Exception $e) {
+            // Log the error but don't break the page
+            \Log::warning('Failed to fetch README for repository: '.$repoUrl, [
+                'error' => $e->getMessage(),
+            ]);
+
+            return null;
         }
-
-        $readmeData = $response->json();
-
-        return isset($readmeData['content']) ? base64_decode($readmeData['content']) : null;
     }
 
     private static function getGithubRepositoryData(string $repoUrl): ?array
