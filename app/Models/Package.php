@@ -78,6 +78,14 @@ class Package extends Model implements Feedable, HasMedia
         return $this->belongsToMany(Category::class, 'category_package');
     }
 
+    /**
+     * Get the views for this package.
+     */
+    public function views()
+    {
+        return $this->hasMany(PackageView::class);
+    }
+
     public function searchableAs(): string
     {
         return 'packages_index_'.env('APP_ENV');
