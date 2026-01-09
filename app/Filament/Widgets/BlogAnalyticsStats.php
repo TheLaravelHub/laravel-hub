@@ -10,13 +10,22 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class BlogAnalyticsStats extends BaseWidget
 {
-    protected static ?int $sort = 0;
+    protected static ?int $sort = null;
 
     protected static string $view = 'filament.widgets.blog-analytics-stats';
 
     public ?string $filter = 'all';
 
     protected static ?string $pollingInterval = null;
+
+    public static function canView(): bool
+    {
+        // Only show on specific pages, not on dashboard
+        $currentPath = request()->path();
+
+        // Show only on Analytics page
+        return str_contains($currentPath, 'analytics');
+    }
 
     protected function getStats(): array
     {

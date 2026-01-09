@@ -13,13 +13,22 @@ class BlogViewsChart extends ChartWidget
 
     protected static ?string $heading = 'Blog Views';
 
-    protected static ?int $sort = 1;
+    protected static ?int $sort = null;
 
     protected int|string|array $columnSpan = 'full';
 
     public ?string $filter = 'week';
 
     protected static ?string $description = null;
+
+    public static function canView(): bool
+    {
+        // Only show on specific pages, not on dashboard
+        $currentPath = request()->path();
+
+        // Show only on Analytics page
+        return str_contains($currentPath, 'analytics');
+    }
 
     protected function getData(): array
     {

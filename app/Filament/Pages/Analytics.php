@@ -20,21 +20,11 @@ class Analytics extends Page
 
     protected static ?string $navigationLabel = 'Analytics';
 
-    public function getWidgets(): array
+    protected function getHeaderWidgets(): array
     {
         return [
             BlogAnalyticsStats::class,
             BlogViewsChart::class,
         ];
-    }
-
-    public function getVisibleWidgets(): array
-    {
-        return $this->filterVisibleWidgets($this->getWidgets());
-    }
-
-    public function getHeaderWidgetsColumns(): int|array
-    {
-        return 1;
     }
 }
