@@ -629,8 +629,8 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
                                                       search: filters.search,
                                                   }),
                                                   ...(filters.categories &&
-                                                      filters.categories.length >
-                                                          0 && {
+                                                      filters.categories
+                                                          .length > 0 && {
                                                           categories:
                                                               filters.categories,
                                                       }),
@@ -671,8 +671,8 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
                                                         search: filters.search,
                                                     }),
                                                     ...(filters.categories &&
-                                                        filters.categories.length >
-                                                            0 && {
+                                                        filters.categories
+                                                            .length > 0 && {
                                                             categories:
                                                                 filters.categories,
                                                         }),
@@ -704,8 +704,8 @@ const Blog = ({ blogPosts, categories, filters }: BlogProps) => {
                                                       search: filters.search,
                                                   }),
                                                   ...(filters.categories &&
-                                                      filters.categories.length >
-                                                          0 && {
+                                                      filters.categories
+                                                          .length > 0 && {
                                                           categories:
                                                               filters.categories,
                                                       }),
