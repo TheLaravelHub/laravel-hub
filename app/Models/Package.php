@@ -210,9 +210,13 @@ class Package extends Model implements Feedable, HasMedia
 
                                                         $data = $response->json();
 
-                                                        $set('name', $data['name'] ?? '');
-                                                        $set('meta_title', $data['name'] ?? '');
-                                                        $set('slug', self::generateSlug($data['name'] ?? ''));
+                                                        // Convert slug format to title case (e.g., "laravel-hub" -> "Laravel Hub")
+                                                        $rawName = $data['name'] ?? '';
+                                                        $titleCaseName = ucwords(str_replace(['-', '_'], ' ', $rawName));
+
+                                                        $set('name', $titleCaseName);
+                                                        $set('meta_title', $titleCaseName);
+                                                        $set('slug', self::generateSlug($rawName));
                                                         $set('description', $data['description'] ?? '');
                                                         $set('meta_description', $data['description'] ?? '');
                                                         $set('language', $data['language'] ?? '');
