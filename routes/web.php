@@ -6,11 +6,13 @@ use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\NewsletterSubscriptionController;
 use App\Http\Controllers\OgImageController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\RoadmapController;
 use App\Http\Controllers\SitemapGeneratorController;
 use Illuminate\Support\Facades\Route;
 
 Route::domain(config('app.main_domain'))->group(function () {
     Route::get('/', HomePageController::class)->name('homepage');
+    Route::get('/roadmap', RoadmapController::class)->name('roadmap');
     Route::get('/sitemap.xml', SitemapGeneratorController::class);
 
     // RSS Feeds - Powered by Spatie Laravel Feed
