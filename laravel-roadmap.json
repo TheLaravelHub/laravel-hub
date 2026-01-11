@@ -1,0 +1,556 @@
+{
+    "title": "Laravel Developer Roadmap",
+    "description": "A comprehensive guide to becoming a proficient Laravel PHP developer. This roadmap covers everything from prerequisites to advanced topics.",
+    "lastUpdated": "2026-01-11",
+    "phases": [
+        {
+            "id": "prerequisites",
+            "title": "Prerequisites",
+            "description": "Essential foundations before diving into Laravel",
+            "order": 1,
+            "topics": [
+                {
+                    "id": "php-basics",
+                    "title": "PHP Fundamentals",
+                    "description": "Master PHP basics including syntax, variables, functions, arrays, and control structures",
+                    "resources": [
+                        {
+                            "title": "PHP Official Documentation",
+                            "url": "https://www.php.net/manual/en/",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "PHP The Right Way",
+                            "url": "https://phptherightway.com/",
+                            "type": "guide"
+                        },
+                        {
+                            "title": "Laracasts - PHP for Beginners",
+                            "url": "https://laracasts.com/series/php-for-beginners",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "oop",
+                    "title": "Object-Oriented Programming",
+                    "description": "Understand classes, objects, inheritance, interfaces, traits, and SOLID principles",
+                    "resources": [
+                        {
+                            "title": "PHP OOP - Official Documentation",
+                            "url": "https://www.php.net/manual/en/language.oop5.php",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laracasts - Object-Oriented Principles in PHP",
+                            "url": "https://laracasts.com/series/object-oriented-principles-in-php",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "composer",
+                    "title": "Composer & Dependency Management",
+                    "description": "Learn to manage PHP dependencies and autoloading with Composer",
+                    "resources": [
+                        {
+                            "title": "Composer Official Documentation",
+                            "url": "https://getcomposer.org/doc/",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Composer: The Basics",
+                            "url": "https://laracasts.com/series/how-to-be-awesome-in-phpstorm/episodes/2",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "databases",
+                    "title": "Database Fundamentals",
+                    "description": "Understand relational databases, SQL, and database design principles",
+                    "resources": [
+                        {
+                            "title": "MySQL Documentation",
+                            "url": "https://dev.mysql.com/doc/",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "SQL Tutorial - W3Schools",
+                            "url": "https://www.w3schools.com/sql/",
+                            "type": "tutorial"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "beginner",
+            "title": "Beginner Level",
+            "description": "Get started with Laravel fundamentals",
+            "order": 2,
+            "topics": [
+                {
+                    "id": "installation",
+                    "title": "Installation & Setup",
+                    "description": "Set up your Laravel development environment and create your first project",
+                    "resources": [
+                        {
+                            "title": "Laravel Official Documentation - Installation",
+                            "url": "https://laravel.com/docs/installation",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laracasts - Laravel From Scratch",
+                            "url": "https://laracasts.com/series/laravel-from-scratch",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "routing",
+                    "title": "Routing",
+                    "description": "Master Laravel routing including basic routes, route parameters, named routes, and route groups",
+                    "resources": [
+                        {
+                            "title": "Laravel Routing Documentation",
+                            "url": "https://laravel.com/docs/routing",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "controllers",
+                    "title": "Controllers",
+                    "description": "Learn to organize application logic using controllers and resource controllers",
+                    "resources": [
+                        {
+                            "title": "Laravel Controllers Documentation",
+                            "url": "https://laravel.com/docs/controllers",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "views-blade",
+                    "title": "Views & Blade Templates",
+                    "description": "Create dynamic views using Blade templating engine",
+                    "resources": [
+                        {
+                            "title": "Laravel Blade Documentation",
+                            "url": "https://laravel.com/docs/blade",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Blade Templating - Laracasts",
+                            "url": "https://laracasts.com/series/laravel-from-scratch/episodes/7",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "migrations",
+                    "title": "Database Migrations",
+                    "description": "Version control your database schema with migrations",
+                    "resources": [
+                        {
+                            "title": "Laravel Migrations Documentation",
+                            "url": "https://laravel.com/docs/migrations",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "eloquent-basics",
+                    "title": "Eloquent ORM Basics",
+                    "description": "Work with databases using Laravel's elegant ORM",
+                    "resources": [
+                        {
+                            "title": "Laravel Eloquent Documentation",
+                            "url": "https://laravel.com/docs/eloquent",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Eloquent ORM - Laracasts",
+                            "url": "https://laracasts.com/series/laravel-from-scratch/episodes/8",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "validation",
+                    "title": "Form Validation",
+                    "description": "Validate user input and handle validation errors",
+                    "resources": [
+                        {
+                            "title": "Laravel Validation Documentation",
+                            "url": "https://laravel.com/docs/validation",
+                            "type": "documentation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "intermediate",
+            "title": "Intermediate Level",
+            "description": "Build robust applications with advanced features",
+            "order": 3,
+            "topics": [
+                {
+                    "id": "authentication",
+                    "title": "Authentication & Authorization",
+                    "description": "Implement user authentication, registration, and role-based access control",
+                    "resources": [
+                        {
+                            "title": "Laravel Authentication Documentation",
+                            "url": "https://laravel.com/docs/authentication",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Authorization Documentation",
+                            "url": "https://laravel.com/docs/authorization",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Breeze",
+                            "url": "https://laravel.com/docs/starter-kits#laravel-breeze",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "eloquent-relationships",
+                    "title": "Eloquent Relationships",
+                    "description": "Master one-to-one, one-to-many, many-to-many, and polymorphic relationships",
+                    "resources": [
+                        {
+                            "title": "Laravel Eloquent Relationships",
+                            "url": "https://laravel.com/docs/eloquent-relationships",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Eloquent Relationships - Laracasts",
+                            "url": "https://laracasts.com/series/laravel-from-scratch/episodes/15",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "middleware",
+                    "title": "Middleware",
+                    "description": "Filter HTTP requests entering your application",
+                    "resources": [
+                        {
+                            "title": "Laravel Middleware Documentation",
+                            "url": "https://laravel.com/docs/middleware",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "file-storage",
+                    "title": "File Storage & Uploads",
+                    "description": "Handle file uploads and work with local and cloud storage",
+                    "resources": [
+                        {
+                            "title": "Laravel File Storage Documentation",
+                            "url": "https://laravel.com/docs/filesystem",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "mail",
+                    "title": "Email & Notifications",
+                    "description": "Send emails and multi-channel notifications",
+                    "resources": [
+                        {
+                            "title": "Laravel Mail Documentation",
+                            "url": "https://laravel.com/docs/mail",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Notifications Documentation",
+                            "url": "https://laravel.com/docs/notifications",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "api-development",
+                    "title": "API Development",
+                    "description": "Build RESTful APIs with Laravel",
+                    "resources": [
+                        {
+                            "title": "Laravel API Resources",
+                            "url": "https://laravel.com/docs/eloquent-resources",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Sanctum (API Authentication)",
+                            "url": "https://laravel.com/docs/sanctum",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Build an API with Laravel - Laracasts",
+                            "url": "https://laracasts.com/series/build-an-api-with-laravel",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "testing",
+                    "title": "Testing",
+                    "description": "Write unit and feature tests with PHPUnit and Pest",
+                    "resources": [
+                        {
+                            "title": "Laravel Testing Documentation",
+                            "url": "https://laravel.com/docs/testing",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Testing - Laracasts",
+                            "url": "https://laracasts.com/series/build-a-laravel-app-with-tdd",
+                            "type": "video"
+                        },
+                        {
+                            "title": "Pest PHP Testing Framework",
+                            "url": "https://pestphp.com/",
+                            "type": "documentation"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "advanced",
+            "title": "Advanced Level",
+            "description": "Master advanced Laravel concepts and patterns",
+            "order": 4,
+            "topics": [
+                {
+                    "id": "queues-jobs",
+                    "title": "Queues & Background Jobs",
+                    "description": "Process long-running tasks asynchronously",
+                    "resources": [
+                        {
+                            "title": "Laravel Queues Documentation",
+                            "url": "https://laravel.com/docs/queues",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Queueing in Laravel - Laracasts",
+                            "url": "https://laracasts.com/series/laravel-from-scratch/episodes/28",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "events-listeners",
+                    "title": "Events & Listeners",
+                    "description": "Implement event-driven architecture",
+                    "resources": [
+                        {
+                            "title": "Laravel Events Documentation",
+                            "url": "https://laravel.com/docs/events",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "broadcasting",
+                    "title": "Broadcasting & WebSockets",
+                    "description": "Build real-time applications with Laravel Echo and WebSockets",
+                    "resources": [
+                        {
+                            "title": "Laravel Broadcasting Documentation",
+                            "url": "https://laravel.com/docs/broadcasting",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Real-Time Laravel with Socket.io",
+                            "url": "https://laracasts.com/series/real-time-laravel-with-socket-io",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "caching",
+                    "title": "Caching Strategies",
+                    "description": "Optimize application performance with caching",
+                    "resources": [
+                        {
+                            "title": "Laravel Cache Documentation",
+                            "url": "https://laravel.com/docs/cache",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "packages",
+                    "title": "Package Development",
+                    "description": "Create and publish reusable Laravel packages",
+                    "resources": [
+                        {
+                            "title": "Laravel Package Development",
+                            "url": "https://laravel.com/docs/packages",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Package Development - Laracasts",
+                            "url": "https://laracasts.com/series/laravel-package-development",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "performance",
+                    "title": "Performance Optimization",
+                    "description": "Optimize database queries, implement caching, and use Laravel Octane",
+                    "resources": [
+                        {
+                            "title": "Laravel Octane Documentation",
+                            "url": "https://laravel.com/docs/octane",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Performance Tips",
+                            "url": "https://laravel-news.com/laravel-performance-tips",
+                            "type": "article"
+                        }
+                    ]
+                },
+                {
+                    "id": "design-patterns",
+                    "title": "Design Patterns & Architecture",
+                    "description": "Apply repository pattern, service layer, and clean architecture principles",
+                    "resources": [
+                        {
+                            "title": "SOLID Principles in Laravel",
+                            "url": "https://laracasts.com/series/solid-principles-in-php",
+                            "type": "video"
+                        },
+                        {
+                            "title": "Laravel Design Patterns",
+                            "url": "https://refactoring.guru/design-patterns/php",
+                            "type": "guide"
+                        }
+                    ]
+                },
+                {
+                    "id": "deployment",
+                    "title": "Deployment & DevOps",
+                    "description": "Deploy Laravel applications using Laravel Forge, Envoyer, Docker, and CI/CD",
+                    "resources": [
+                        {
+                            "title": "Laravel Deployment Documentation",
+                            "url": "https://laravel.com/docs/deployment",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Laravel Forge",
+                            "url": "https://forge.laravel.com/",
+                            "type": "service"
+                        },
+                        {
+                            "title": "Deploying Laravel Apps - Laracasts",
+                            "url": "https://laracasts.com/series/learn-laravel-forge",
+                            "type": "video"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ecosystem",
+            "title": "Laravel Ecosystem",
+            "description": "Explore the rich Laravel ecosystem and official packages",
+            "order": 5,
+            "topics": [
+                {
+                    "id": "livewire",
+                    "title": "Laravel Livewire",
+                    "description": "Build dynamic interfaces without leaving PHP",
+                    "resources": [
+                        {
+                            "title": "Livewire Official Documentation",
+                            "url": "https://livewire.laravel.com/",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Livewire Screencasts - Laracasts",
+                            "url": "https://laracasts.com/series/livewire-uncovered",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "inertia",
+                    "title": "Inertia.js",
+                    "description": "Build modern single-page apps using classic server-side routing",
+                    "resources": [
+                        {
+                            "title": "Inertia.js Documentation",
+                            "url": "https://inertiajs.com/",
+                            "type": "documentation"
+                        },
+                        {
+                            "title": "Build Modern Laravel Apps Using Inertia.js",
+                            "url": "https://laracasts.com/series/build-modern-laravel-apps-using-inertia-js",
+                            "type": "video"
+                        }
+                    ]
+                },
+                {
+                    "id": "filament",
+                    "title": "Filament",
+                    "description": "Rapidly build beautiful admin panels",
+                    "resources": [
+                        {
+                            "title": "Filament Official Documentation",
+                            "url": "https://filamentphp.com/",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "nova",
+                    "title": "Laravel Nova",
+                    "description": "Build admin panels with Laravel's official administration panel",
+                    "resources": [
+                        {
+                            "title": "Laravel Nova Documentation",
+                            "url": "https://nova.laravel.com/",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "horizon",
+                    "title": "Laravel Horizon",
+                    "description": "Monitor and configure Laravel queues",
+                    "resources": [
+                        {
+                            "title": "Laravel Horizon Documentation",
+                            "url": "https://laravel.com/docs/horizon",
+                            "type": "documentation"
+                        }
+                    ]
+                },
+                {
+                    "id": "telescope",
+                    "title": "Laravel Telescope",
+                    "description": "Debug and monitor your Laravel application",
+                    "resources": [
+                        {
+                            "title": "Laravel Telescope Documentation",
+                            "url": "https://laravel.com/docs/telescope",
+                            "type": "documentation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

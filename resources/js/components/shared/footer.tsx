@@ -91,6 +91,7 @@ const Footer = () => {
             links: [
                 { name: 'Blog', href: '/blog' },
                 { name: 'Packages', href: '/packages' },
+                { name: 'Laravel Roadmap', href: '/roadmap' },
                 {
                     name: 'Report Bug',
                     href: 'https://github.com/TheLaravelHub/laravel-hub/issues/new',
