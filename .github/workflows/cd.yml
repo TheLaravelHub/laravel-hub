@@ -173,7 +173,7 @@ jobs:
             php artisan migrate --force
 
             npm ci
-            npm run build:ssr
+            NODE_OPTIONS="--max-old-space-size=1024" npm run build:ssr
 
             if pm2 list | grep -q production-ssr; then
               pm2 restart production-ssr
