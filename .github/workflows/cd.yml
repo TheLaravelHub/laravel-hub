@@ -181,8 +181,13 @@ jobs:
               pm2 start bootstrap/ssr/ssr.js --name=production-ssr
             fi
 
+            php artisan livewire:publish --assets
+
             php artisan optimize:clear
             php artisan optimize
             php artisan horizon:terminate
+
+            chown -R www-data:www-data storage bootstrap/cache
+            chmod -R 775 storage bootstrap/cache
 
             systemctl restart laravel-ssr
